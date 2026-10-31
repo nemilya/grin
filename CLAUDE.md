@@ -8,7 +8,7 @@ format — README.md (most detailed: README.ru.md); the paper-theatre treatment 
   narration) — English; visual descriptions in bible.json — English and style-free (style — styles/*.json).
 - **Media** (pictures, narration) are in the second repository nemilya/grin-media, laid over this folder:
   start with `make media-pull`; after generating — `make media-push`, then commit the JSON together with the staged
-  `media.rev`. Never commit media files here (.gitignore and CI stop it), never bypass the media check to
+  `media.rev` (how it works — docs/media.md). Never commit media files here (.gitignore and CI stop it), never bypass the media check to
   regenerate files that are merely not pulled.
 - Stage order and checks: `make status`. After editing a storyboard/bible — `make timeline` (cue/camera/asset errors
   are printed and fail the command), then look at frames: `node tools/capture.mjs stills <story> --scale 0.3`

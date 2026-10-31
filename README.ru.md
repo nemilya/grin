@@ -11,6 +11,7 @@ WebGL-сцене (three.js): слои по глубине, свет, глуби�
 
 | | |
 |---|---|
+| [`docs/media.ru.md`](docs/media.ru.md) | медиа: как связаны `grin` и `grin-media` (`media.rev`, `make media-pull` / `media-push`) |
 | [`docs/pipeline.md`](docs/pipeline.md) | пайплайн ролика по этапам (вход, выход, проверка, цена, кто решает) и план автоматизации |
 | [`docs/new-style.md`](docs/new-style.md) | как добавить новый стиль видео (стиль, режиссёр, постановка → сайт) |
 | [`docs/site.md`](docs/site.md) | сайт: страницы, видео в браузере, `site.json`, устройство `dist/`; деплой — [`deploy/README.ru.md`](deploy/README.ru.md) |
@@ -172,6 +173,8 @@ make preview S=mate-in-3-tarkovsky L=ru
 режим без перегрева (низкий приоритет ffmpeg, 2 потока, паузы между кадрами).
 
 ## Медиа: второй репозиторий
+
+Как связаны два репозитория, пример и правило на каждый день — **[docs/media.ru.md](docs/media.ru.md)**.
 
 Код, тексты, переводы, библии, раскадровки и манифесты — здесь; картинки и озвучка (`stories/**/*.webp|jpg|opus`) —
 в [nemilya/grin-media](https://github.com/nemilya/grin-media), по тем же путям. Его git-папка — `.media.git/`,

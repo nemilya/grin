@@ -68,6 +68,8 @@ generated on a flat chroma key and keyed with a soft edge; they are stored as lo
 
 ## Media: a second repository
 
+How the two repositories work together, with an example and the everyday rule — **[docs/media.md](docs/media.md)**.
+
 Code, texts, translations, bibles, storyboards and manifests live here. Pictures and narration
 (`stories/**/*.webp|jpg|opus`) live in **[nemilya/grin-media](https://github.com/nemilya/grin-media)** at the same
 paths. Its git dir is `.media.git/` and its work tree is this folder, so the files sit exactly where the engine
