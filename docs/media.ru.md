@@ -82,8 +82,12 @@ make media-push            # закоммитить и запушить изме
 make media-status          # скачаны ли, что изменено локально, что не запушено
 ```
 
-Код — `engine/media.py`, тесты — `tests/test_media.py`, хук — `tools/hooks/pre-push`. Адрес хранилища медиа можно
-поменять через `MEDIA_REMOTE` в `local.mk` (например, на зеркало на своём сервере).
+Код — `engine/media.py`, тесты — `tests/test_media.py`, хук — `tools/hooks/pre-push`.
+
+**Откуда берутся медиа.** Адрес `grin-media` повторяет адрес `grin`: склонировали `grin` по ssh
+(`git@github.com:nemilya/grin.git`) — медиа тоже по ssh (`git@github.com:nemilya/grin-media.git`), теми же ключами;
+по https — по https. Пока репозитории приватные, https спрашивает логин GitHub (и токен, а не пароль) — лучше
+клонировать по ssh. `MEDIA_REMOTE` в `local.mk` задаёт адрес явно (например, зеркало на своём сервере).
 
 ## Чего делать не нужно
 

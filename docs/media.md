@@ -81,8 +81,12 @@ make media-push            # commit and push changed media, write and stage medi
 make media-status          # pulled? changed locally? pushed?
 ```
 
-Code — `engine/media.py`, tests — `tests/test_media.py`, hook — `tools/hooks/pre-push`. The media remote can be
-changed with `MEDIA_REMOTE` in `local.mk` (e.g. a mirror on your own server).
+Code — `engine/media.py`, tests — `tests/test_media.py`, hook — `tools/hooks/pre-push`.
+
+**Where media come from.** The media remote follows the code repository's: `grin` cloned over ssh
+(`git@github.com:nemilya/grin.git`) → media over ssh (`git@github.com:nemilya/grin-media.git`) with the same keys;
+over https → https. While the repositories are private, https asks for a GitHub login (a token, not the password) —
+clone over ssh instead. `MEDIA_REMOTE` in `local.mk` overrides it (e.g. a mirror on your own server).
 
 ## What not to do
 

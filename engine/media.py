@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -46,7 +47,13 @@ def rev_file() -> Path:
 
 
 def remote_url() -> str:
-    return os.environ.get('MEDIA_REMOTE') or REMOTE
+    """MEDIA_REMOTE, else the code repository's own remote with grin → grin-media: cloned over ssh
+    (git@github.com:nemilya/grin.git) — media go over ssh too, with the same keys; https — https."""
+    if os.environ.get('MEDIA_REMOTE'):
+        return os.environ['MEDIA_REMOTE']
+    r = subprocess.run(['git', '-C', str(ROOT), 'config', '--get', 'remote.origin.url'], capture_output=True, text=True)
+    m = re.fullmatch(r'(.+[/:])grin(?:\.git)?/?', r.stdout.strip()) if r.returncode == 0 else None
+    return f'{m.group(1)}grin-media.git' if m else REMOTE
 
 
 def git(*args: str, input: str | None = None, check: bool = True) -> str:
@@ -90,6 +97,9 @@ def code_branch() -> str:
 
 def init() -> None:
     if git_dir().exists():
+        url = remote_url()  # follow the code repository (switched to ssh, MEDIA_REMOTE changed)
+        if git('config', '--get', 'remote.origin.url', check=False).strip() != url:
+            git('remote', 'set-url', 'origin', url)
         return
     subprocess.run(['git', 'init', '-q', '--bare', str(git_dir())], check=True)
     git('config', 'core.bare', 'false')

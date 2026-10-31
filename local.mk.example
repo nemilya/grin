@@ -15,4 +15,4 @@ OPENROUTER_API_KEY = sk-or-...
 # SITE_URL = https://grin.nemilya.me
 
 # media (pictures, narration) — the repository laid over stories/ (make media-pull / media-push); default:
-# MEDIA_REMOTE = https://github.com/nemilya/grin-media.git
+# MEDIA_REMOTE = git@github.com:nemilya/grin-media.git   (by default — like grin's own origin, grin → grin-media)

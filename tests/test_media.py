@@ -132,5 +132,21 @@ class MediaTest(unittest.TestCase):
         self.assertIn('README.md', sh('git', '--git-dir', str(self.remote), 'ls-tree', '--name-only', r).split())
 
 
+    def test_remote_follows_code_repository(self):
+        a = self.at(self.a)
+        a.mkdir()
+        os.environ.pop('MEDIA_REMOTE')
+        sh('git', 'init', '-q', str(a))
+        self.assertEqual(media.remote_url(), media.REMOTE)  # no origin
+        for code, want in [('git@github.com:nemilya/grin.git', 'git@github.com:nemilya/grin-media.git'),
+                           ('https://github.com/nemilya/grin', 'https://github.com/nemilya/grin-media.git'),
+                           ('http://proxy@127.0.0.1:9/git/nemilya/grin', 'http://proxy@127.0.0.1:9/git/nemilya/grin-media.git')]:
+            sh('git', '-C', str(a), 'remote', 'remove', 'origin') if code != 'git@github.com:nemilya/grin.git' else None
+            sh('git', '-C', str(a), 'remote', 'add', 'origin', code)
+            self.assertEqual(media.remote_url(), want)
+        os.environ['MEDIA_REMOTE'] = str(self.remote)
+        self.assertEqual(media.remote_url(), str(self.remote))
+
+
 if __name__ == '__main__':
     unittest.main()
