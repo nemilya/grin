@@ -112,7 +112,7 @@ make stills F=horizontal         # стоп-кадры для проверки �
 ```
 
 Предпросмотр формата: `http://127.0.0.1:8720/stage/?story=mate-in-3&tl=horizontal` (после `make timeline F=horizontal`).
-Для YouTube можно не вшивать субтитры, а загрузить `.srt`: `"subtitles": {"burn": false}` в `formats.horizontal`.
+Для YouTube можно не вшивать субтитры, а загрузить `.srt`: `make video … SUBS=0` (→ `…-nosubs.mp4`) и `make youtube` — см. [docs/video.ru.md](docs/video.ru.md).
 
 ## Языки ролика
 

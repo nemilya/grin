@@ -81,11 +81,11 @@ preview: sound  ## собрать таймлайн и звук [F=…] и отк
 stills: timeline  ## стоп-кадр каждого кадра раскадровки + лист → out/<история>/[F-]stills/
 	node tools/capture.mjs stills $(S) --scale 0.5 $(if $(TL),--tl $(TL))
 
-video: sound  ## 8) ролик целиком → out/<история>/<история>[-F].mp4 (+ -share.mp4)
-	node tools/capture.mjs video $(S) --scale $(SCALE) $(if $(TL),--tl $(TL))
+video: sound  ## 8) ролик целиком → out/<история>/<история>[-F].mp4 (+ -share.mp4); SUBS=0 — без вшитых субтитров (YouTube + .srt) → …-nosubs.mp4
+	node tools/capture.mjs video $(S) --scale $(SCALE) $(if $(TL),--tl $(TL)) $(if $(filter 0,$(SUBS)),--no-subs)
 
-video-demo: demo  ## ролик-отрезок → out/<история>/<история>[-F]-demo.mp4
-	node tools/capture.mjs video $(S) --tl $(TLDEMO) --scale $(SCALE)
+video-demo: demo  ## ролик-отрезок → out/<история>/<история>[-F]-demo.mp4 (SUBS=0 — без субтитров)
+	node tools/capture.mjs video $(S) --tl $(TLDEMO) --scale $(SCALE) $(if $(filter 0,$(SUBS)),--no-subs)
 
 youtube:  ## субтитры .srt и главы для описания из собранного таймлайна (после make timeline F=horizontal)
 	$(PY) -m engine youtube $(S) $(FMT)

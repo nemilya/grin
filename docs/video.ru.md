@@ -24,13 +24,14 @@ make media-pull                                       # картинки и оз
 make video-demo S=mate-in-3 F=horizontal START=s12a   # проба: от кадра s12a до конца, пара минут
 make video S=mate-in-3 F=horizontal                   # фильм целиком; таймлайн и звук соберутся сами
 make youtube S=mate-in-3 F=horizontal                 # субтитры .srt и главы для описания
+# для YouTube — без вшитых субтитров: make video … SUBS=0 (см. «Субтитры» ниже)
 ```
 
 Результаты — в `out/<история>/`:
 
 | файл | что это | куда |
 |---|---|---|
-| `<история>-<F>[-<L>].mp4` | мастер: 1080p, H.264 High, ≈ 16 Мбит/с на маке (videotoolbox; иначе x264 CRF 17), AAC 160k | **YouTube** |
+| `<история>-<F>[-<L>][-nosubs].mp4` | мастер (`-nosubs` — `SUBS=0`, без вшитых субтитров): 1080p, H.264 High, ≈ 16 Мбит/с на маке (videotoolbox; иначе x264 CRF 17), AAC 160k | **YouTube** |
 | `<история>-<F>[-<L>]-share.mp4` | 720p, ≈ 3,5 Мбит/с, AAC 128k, faststart — делается сразу после мастера (`--no-share` — не делать) | Telegram, Reels, TikTok |
 | `<история>-<F>[-<L>].srt` | субтитры (`make youtube`) | YouTube Studio → Субтитры |
 | `<история>-<F>[-<L>]-chapters.txt` | главы по сценам, `0:00 …` (`make youtube`) | в описание ролика как есть |
@@ -41,11 +42,21 @@ make youtube S=mate-in-3 F=horizontal                 # субтитры .srt и
 
 ## Субтитры: вшитые или отдельным файлом
 
-По умолчанию субтитры вшиты в картинку — ролик можно загружать как есть. Для YouTube лучше отдельный `.srt`
-(зритель может их выключить, YouTube их индексирует, можно несколько языков): `"subtitles": {"burn": false}` в
-`story.json` — в `formats.horizontal` для `mate-in-3` / `mate-in-3-tarkovsky`, в `film` для `sila-nepost` / `leaf-story`
-(у них горизонталь — основной формат), затем заново `make video` и `make youtube`. К английскому ролику можно
-загрузить и английские, и русские субтитры: русский `.srt` — `make youtube … L=ru`.
+По умолчанию субтитры **вшиты в картинку** — так нужно для Shorts, Reels, Telegram, где отдельной дорожки субтитров нет.
+Для YouTube лучше рендерить без них и загрузить `.srt` (зритель может их выключить, YouTube их индексирует, можно
+несколько языков):
+
+```bash
+make video S=mate-in-3 F=horizontal SUBS=0     # → out/mate-in-3/mate-in-3-horizontal-nosubs.mp4 (+ -share)
+make youtube S=mate-in-3 F=horizontal          # → mate-in-3-horizontal.srt и -chapters.txt
+make youtube S=mate-in-3 F=horizontal L=ru     # → русский .srt к тому же английскому ролику
+```
+
+В YouTube Studio: загрузить `…-nosubs.mp4`, потом «Субтитры» → добавить язык → «Загрузить файл» → `.srt` (английский;
+и русский — из запуска с `L=ru`). `SUBS=0` меняет только этот рендер; на сайте субтитры остаются (кнопка CC).
+Интертитры немого кино (`sila-nepost`) — часть картинки, а не субтитры: они остаются.
+
+Не ставьте для этого `"subtitles": {"burn": false}` в `story.json`: так субтитры пропадут и в плеере на сайте.
 
 ## Время и железо
 
@@ -66,13 +77,13 @@ make youtube S=mate-in-3 F=horizontal                 # субтитры .srt и
 ## Все фильмы сразу
 
 ```bash
-# горизонталь, по-английски — для YouTube
-make video S=mate-in-3 F=horizontal           && make youtube S=mate-in-3 F=horizontal
-make video S=mate-in-3-tarkovsky F=horizontal && make youtube S=mate-in-3-tarkovsky F=horizontal
-make video S=sila-nepost                      && make youtube S=sila-nepost
-make video S=leaf-story                       && make youtube S=leaf-story
+# горизонталь, по-английски, субтитры отдельным .srt — для YouTube
+make video S=mate-in-3 F=horizontal SUBS=0           && make youtube S=mate-in-3 F=horizontal
+make video S=mate-in-3-tarkovsky F=horizontal SUBS=0 && make youtube S=mate-in-3-tarkovsky F=horizontal
+make video S=sila-nepost SUBS=0                      && make youtube S=sila-nepost
+make video S=leaf-story SUBS=0                       && make youtube S=leaf-story
 
-# вертикаль — для Shorts / Reels
+# вертикаль, субтитры вшиты — для Shorts / Reels
 make video S=mate-in-3
 make video S=mate-in-3-tarkovsky
 make video S=leaf-story F=vertical

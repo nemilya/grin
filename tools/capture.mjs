@@ -2,7 +2,8 @@
 //
 //   node tools/capture.mjs stills [story] [--scale 0.5] [--shots s01a,s05g] [--at 0.5]
 //        → out/<story>/stills/<кадр>.jpg + contact.jpg (лист всех кадров)
-//   node tools/capture.mjs video  [story] [--scale 1] [--from 0] [--to 30] [--fps 24] [--tl demo] [--no-share]
+//   node tools/capture.mjs video  [story] [--scale 1] [--from 0] [--to 30] [--fps 24] [--tl demo] [--no-share] [--no-subs]
+//        --no-subs — without burnt-in subtitles (YouTube: upload the .srt of make youtube) → …-nosubs.mp4
 //        → out/<story>/<story>[-demo].mp4 + …-share.mp4 (облегчённая для соцсетей); звук — build/sound[-demo].wav
 //   node tools/capture.mjs share <файл.mp4>   → <файл>-share.mp4
 //
@@ -179,7 +180,8 @@ async function video() {
   const dir = path.join(ROOT, 'out', story);
   fs.mkdirSync(dir, { recursive: true });
   const tlName = opt('tl', '');
-  const name = opt('out', (tlName ? `${story}-${tlName}` : story) + (from > 0 || to < info.duration ? `-${from}-${to}` : '') + '.mp4');
+  const name = opt('out', (tlName ? `${story}-${tlName}` : story) + (from > 0 || to < info.duration ? `-${from}-${to}` : '')
+    + (args.includes('--no-subs') ? '-nosubs' : '') + '.mp4');  // without burnt-in subtitles: for YouTube + .srt
   const voice = path.join(ROOT, 'stories', story, 'build', tlName ? `sound-${tlName}.wav` : 'sound.wav');
   const audio = fs.existsSync(voice) ? ['-ss', String(from), '-t', String(to - from), '-i', voice] : [];
   const enc = videoArgs({ w: info.w, h: info.h, master: true });
