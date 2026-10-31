@@ -40,6 +40,8 @@ make site && make serve                  # the website → http://127.0.0.1:8730
 make admin                               # read-only admin: assets, character sheets, storyboard, narration
 ```
 
+The whole cycle — new machine → work → build → deploy to the server — [below](#full-cycle-from-a-clone-to-the-live-site).
+
 `OPENROUTER_API_KEY` in `local.mk` is needed only to generate (translation, images, narration) — all generated
 media are already in the media repository.
 
@@ -83,6 +85,48 @@ make media-status    # pulled? changed locally? pushed?
   a fresh clone + `make assets` would pay to redraw the whole film (`MEDIA_CHECK=0` overrides);
 - the `pre-push` hook (`tools/hooks`, installed by `make setup` and `make media-pull`) stops code whose
   `media.rev` is not pushed yet.
+
+## Full cycle: from a clone to the live site
+
+**1. A new machine (once).**
+
+```bash
+git clone https://github.com/nemilya/grin && cd grin
+make setup            # checks python/numpy/pillow/ffmpeg/node, npm install, Chromium, creates local.mk, installs the git hook
+make media-pull       # pictures and narration of media.rev (≈ 0.3 GB, a few seconds to a minute)
+make status S=mate-in-3
+```
+
+In `local.mk` (not in git; can be copied from the old checkout): `OPENROUTER_API_KEY` — only to generate;
+`DEPLOY` and `SITE_URL` — only to publish (step 4).
+
+**2. A server for the site (once).** nginx serving a folder, https via certbot, DNS — [deploy/README.md](deploy/README.md)
+(a ready `deploy/nginx.conf`). The site is static: everything it needs is in `dist/`.
+
+**3. Work: a new story or changes** (on your machine or in a Claude Code cloud session):
+
+```bash
+git pull && make media-pull                    # the current code and the media it pins
+# … text → translation → bible → storyboard → make assets-used / make voice (paid) → make timeline → stills
+make media-push                                # pictures and narration → grin-media; media.rev is staged
+git add -A stories/<story> && git commit -m "…" && git push      # the hook checks the media are pushed
+```
+
+A new story appears on the site once it is listed in `site.json` (`stories`, its `voicings` and `videos`).
+
+**4. Publish** (on your machine — deploy goes over ssh, which a cloud session doesn't have):
+
+```bash
+git pull && make media-pull     # exactly what is in main
+make site                       # → dist/; the first build ≈ 30 min (video sound for every production and language),
+                                #   then only what changed
+make serve                      # look at it: http://127.0.0.1:8730/
+make deploy-dry                 # what would be uploaded
+make deploy                     # upload → https://grin.nemilya.me
+```
+
+`make deploy` uploads exactly the build you have seen and refuses a stale one (texts, narration, storyboards, assets,
+`site.json`, the scene changed after `make site`). Details — [deploy/README.md](deploy/README.md).
 
 ## Layout
 

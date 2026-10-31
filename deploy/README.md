@@ -1,44 +1,48 @@
-# Деплой сайта grin.nemilya.me
+# Deploying grin.nemilya.me
 
-Как в mountain-rock: `make deploy` записывает собранный сайт в папку на сервере — и всё.
+**English** · [Русский](README.ru.md) · the whole cycle (clone → build → live site) — [README](../README.md#full-cycle-from-a-clone-to-the-live-site)
 
-## Один раз
+As in mountain-rock: `make deploy` writes the built site into a folder on the server — that's all. It runs from
+your own machine over ssh (rsync); a Claude Code cloud session can build the site but can't deploy it (no ssh).
 
-В `local.mk` (или `.env`) — папка на сервере, которую раздаёт веб-сервер (ssh-алиас из `~/.ssh/config` подходит):
+## Once per machine
+
+In `local.mk` (or `.env`) — the server folder the web server serves (an ssh alias from `~/.ssh/config` works):
 
 ```
 DEPLOY = ssh://nemilya-me/var/www/grin
 SITE_URL = https://grin.nemilya.me
 ```
 
-## Каждый раз — два шага
+## Every time — two steps
 
 ```bash
-make site           # 1) собрать сайт → dist/  (посмотреть: make serve → http://127.0.0.1:8730/)
-make deploy-dry     #    что уйдёт на сервер — ничего не меняет
-make deploy         # 2) залить; пароль ssh спросят один раз
+make media-pull     # 0) the media of media.rev (make site refuses to run without them)
+make site           # 1) build the site → dist/  (look at it: make serve → http://127.0.0.1:8730/)
+make deploy-dry     #    what would be uploaded — changes nothing
+make deploy         # 2) upload; the ssh password is asked once
 ```
 
-`make deploy` заливает **ровно собранный сайт** — не пересобирает его. Если сайт не собран или после сборки
-поменялись озвучка, текст, раскадровки, ассеты, `site.json` или сцена (`stage/js`), он остановится и попросит
-сначала `make site`: на сервер уходит то, что вы видели. По порядку:
+`make deploy` uploads **exactly the built site** — it doesn't rebuild it. If the site isn't built, or the narration,
+texts, storyboards, assets, `site.json` or the scene (`stage/js`) changed after the build, it stops and asks for
+`make site` first: the server gets what you have seen. In order:
 
-1. подключается к серверу один раз (пароль — здесь, в консоли);
-2. дописывает медиа (слои webp, таймлайны, звук видео, постеры), озвучку и ресурсы — без удаления, старые страницы
-   продолжают работать;
-3. записывает страницы и удаляет всё, чего больше нет в `dist/`.
+1. connects to the server once (the password — here, in the console);
+2. adds media (webp layers, timelines, video sound, posters), narration and resources — without deleting, so pages
+   being viewed keep working;
+3. writes the pages and deletes everything that is no longer in `dist/`.
 
-В папке на сервере должен лежать только этот сайт: лишние файлы в ней удаляются.
+The server folder must hold only this site: anything else in it is deleted.
 
-## Кеш
+## Cache
 
-Ссылки на стили, скрипты, шрифты, медиа и звук — со штампом `?v=<хеш содержимого>`, сцена (stage.js и three.js) —
-в папке `assets/stage-<хеш>/`: поменялся файл — поменялась ссылка. Поэтому их можно кешировать навсегда
-(`immutable`), а страницы — минуту: новая сборка видна сразу и не смешивается со старым кешем.
+Links to styles, scripts, fonts, media and sound carry a `?v=<content hash>` stamp; the scene (stage.js and three.js)
+lives in `assets/stage-<hash>/`: a changed file gets a new link. So they can be cached forever (`immutable`), and
+pages for a minute: a new build shows up right away and never mixes with the old cache.
 
-## Если для адреса ещё нет веб-сервера
+## If the address has no web server yet
 
-Только если `grin.nemilya.me` ещё ничего не раздаёт — готовый [`nginx.conf`](nginx.conf):
+Only if `grin.nemilya.me` serves nothing yet — a ready [`nginx.conf`](nginx.conf):
 
 ```bash
 scp deploy/nginx.conf nemilya-me:/tmp/grin.conf
@@ -50,7 +54,11 @@ sudo nginx -t && sudo systemctl reload nginx
 sudo certbot --nginx -d grin.nemilya.me      # https
 ```
 
-(и A-запись `grin.nemilya.me` в DNS на IP сервера). Путь в `nginx.conf` (`root`) — тот же, что в `DEPLOY`.
+(plus a DNS A record for `grin.nemilya.me` pointing at the server). The path in `nginx.conf` (`root`) is the same as in
+`DEPLOY`. If another nginx config already serves the address, it's enough that its `root` points at the `DEPLOY`
+folder; nginx usually knows the `m4a` (audio/mp4) and `webp` types (mime.types).
 
-Если адрес уже раздаёт другой конфиг nginx — достаточно, чтобы его `root` указывал на папку из `DEPLOY`;
-типы `m4a` (audio/mp4) и `webp` nginx обычно знает (mime.types).
+## Moving to another server
+
+Set up nginx there as above, change `DEPLOY` (and DNS), `make deploy` — the site is fully contained in `dist/`,
+nothing else lives on the server.

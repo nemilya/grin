@@ -13,7 +13,7 @@ WebGL-сцене (three.js): слои по глубине, свет, глуби�
 |---|---|
 | [`docs/pipeline.md`](docs/pipeline.md) | пайплайн ролика по этапам (вход, выход, проверка, цена, кто решает) и план автоматизации |
 | [`docs/new-style.md`](docs/new-style.md) | как добавить новый стиль видео (стиль, режиссёр, постановка → сайт) |
-| [`docs/site.md`](docs/site.md) | сайт: страницы, видео в браузере, `site.json`, устройство `dist/`; деплой — [`deploy/README.md`](deploy/README.md) |
+| [`docs/site.md`](docs/site.md) | сайт: страницы, видео в браузере, `site.json`, устройство `dist/`; деплой — [`deploy/README.ru.md`](deploy/README.ru.md) |
 | [`docs/director-style.md`](docs/director-style.md) | постановка по Тарковскому: киноязык, что добавлено в движок |
 | [`docs/treatment.md`](docs/treatment.md) | режиссёрская разработка бумажного театра; задание — [`brief.md`](brief.md) |
 
@@ -22,6 +22,8 @@ make site && make serve     # сайт → http://127.0.0.1:8730/  (make deploy 
 make admin                  # админка (просмотр): ассеты, листы героев, раскадровка, озвучка → http://127.0.0.1:8740/admin/
 make preview S=mate-in-3-tarkovsky F=horizontal L=ru   # плеер постановки: 16:9, на русском
 ```
+
+Весь цикл — новая машина → работа → сборка → деплой на сервер — [ниже](#полный-цикл-от-клона-до-сайта).
 
 Движок продолжает `nemilya/mountain-rock` (текст, перевод, озвучка, сайт с чтением и подсветкой) — модули
 оттуда перенесены и приспособлены.
@@ -186,6 +188,48 @@ make media-status    # скачаны ли, что изменено локаль
 - пока медиа из `media.rev` не скачаны, `make assets`, `make voice`, `make site` не запускаются (иначе свежий клон +
   `make assets` = перегенерация всего фильма за деньги); обойти — `MEDIA_CHECK=0`;
 - хук `pre-push` (`tools/hooks`, ставят `make setup` и `make media-pull`) не пускает код, чей `media.rev` не запушен.
+
+## Полный цикл: от клона до сайта
+
+**1. Новая машина (один раз).**
+
+```bash
+git clone https://github.com/nemilya/grin && cd grin
+make setup            # проверит python/numpy/pillow/ffmpeg/node, npm install, Chromium, создаст local.mk, поставит git-хук
+make media-pull       # картинки и озвучка из media.rev (≈ 0,3 ГБ, от секунд до минуты)
+make status S=mate-in-3
+```
+
+В `local.mk` (не в git; можно перенести из старой папки): `OPENROUTER_API_KEY` — только для генерации;
+`DEPLOY` и `SITE_URL` — только для публикации (шаг 4).
+
+**2. Сервер для сайта (один раз).** nginx раздаёт папку, https через certbot, DNS — [deploy/README.ru.md](deploy/README.ru.md)
+(готовый `deploy/nginx.conf`). Сайт статический: всё, что ему нужно, — в `dist/`.
+
+**3. Работа: новый рассказ или правки** (на маке или в облачной сессии Claude Code):
+
+```bash
+git pull && make media-pull                    # свежий код и медиа той версии, что в нём записана
+# … текст → перевод → библия → раскадровка → make assets-used / make voice (платно) → make timeline → стоп-кадры
+make media-push                                # картинки и озвучка → grin-media; media.rev добавлен в коммит
+git add -A stories/<рассказ> && git commit -m "…" && git push   # хук проверит, что медиа запушены
+```
+
+На сайте рассказ появляется, когда он записан в `site.json` (`stories`: его `voicings` и `videos`).
+
+**4. Публикация** (на маке — деплой идёт по ssh, которого в облачной сессии нет):
+
+```bash
+git pull && make media-pull     # ровно то, что в main
+make site                       # → dist/; первая сборка ≈ 30 мин (звук видео для каждой постановки и языка),
+                                #   дальше — только изменившееся
+make serve                      # посмотреть: http://127.0.0.1:8730/
+make deploy-dry                 # что уйдёт на сервер
+make deploy                     # залить → https://grin.nemilya.me
+```
+
+`make deploy` заливает ровно ту сборку, что вы видели, и не зальёт устаревшую (после `make site` поменялись тексты,
+озвучка, раскадровки, ассеты, `site.json`, сцена). Подробности — [deploy/README.ru.md](deploy/README.ru.md).
 
 ## Устройство
 
