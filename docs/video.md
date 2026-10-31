@@ -24,6 +24,7 @@ make media-pull                                       # pictures and narration (
 make video-demo S=mate-in-3 F=horizontal START=s12a   # a try-out: from shot s12a to the end, a couple of minutes
 make video S=mate-in-3 F=horizontal                   # the whole film; timeline and sound are built by itself
 make youtube S=mate-in-3 F=horizontal                 # .srt subtitles and chapters for the description
+make thumbnail S=mate-in-3 F=horizontal SHOT=s01a     # a thumbnail: the shot + the title
 ```
 
 Results in `out/<story>/`:
@@ -33,6 +34,7 @@ Results in `out/<story>/`:
 | `<story>-<F>[-<L>][-subs].mp4` | master, without subtitles (`-subs` — `SUBS=1`, burnt in): 1080p, H.264 High, ≈ 16 Mbit/s on a Mac (videotoolbox; elsewhere x264 CRF 17), AAC 160k | **YouTube** |
 | `<story>-<F>[-<L>]-share.mp4` | 720p, ≈ 3.5 Mbit/s, AAC 128k, faststart — made right after the master, gently: hardware decoding/encoding on a Mac, low priority, 2 threads (`--no-share` — skip) | Telegram, Reels, TikTok |
 | `<story>-<F>[-<L>].srt` | subtitles (`make youtube`) | YouTube Studio → Subtitles |
+| `<story>-<F>[-<L>]-thumb-<shot>.jpg` | a thumbnail (`make thumbnail`, below) | YouTube Studio → Thumbnail |
 | `<story>-<F>[-<L>]-chapters.txt` | chapters by scene, `0:00 …` (`make youtube`) | the video description as is |
 
 E.g. `make video S=mate-in-3 F=horizontal L=ru` → `out/mate-in-3/mate-in-3-horizontal-ru.mp4`.
@@ -54,6 +56,28 @@ make video S=mate-in-3 SUBS=1     # → out/mate-in-3/mate-in-3-subs.mp4 (+ -sub
 This is only about the rendered film: the site's player keeps its subtitles (the CC button), and stills show them
 (`--no-subs` — without). Intertitles of the silent film (`sila-nepost`) are part of the picture — they stay.
 Don't use `"subtitles": {"burn": false}` in `story.json`: it removes subtitles from the site's player too.
+
+## Thumbnail
+
+```bash
+make thumbnail S=mate-in-3 F=horizontal SHOT=s01a SUB="a paper theatre film"   # the one on YouTube
+# → out/mate-in-3/mate-in-3-horizontal-thumb-s01a.jpg (1280×720) + -raw.jpg (the same frame without text)
+```
+
+One shot of the storyboard without subtitles, 1280 px on the long side, with the title, author and year from
+`story.json` and a line under them (by default — the video's name in `site.json`), in the site's fonts.
+
+| option | default | |
+|---|---|---|
+| `SHOT=` | the production's poster in `site.json` | which shot (ids — the stills sheet: `make stills F=…`) |
+| `AT=` | poster's fraction, else 0.5 | the moment within the shot, 0…1 |
+| `POS=` | `top` | text: `top` (centred, over the dark top), `left`, `right` — on the side with dark space |
+| `TITLE=` / `SUB=` | from `story.json` / `site.json` | override the title / the line under it |
+| `L=ru` | English | Russian title and author (and the Russian timeline: `make timeline F=… L=ru` first) |
+
+What works on YouTube: one clear subject that reads at phone size (a face, a lit figure on a dark stage), the text
+on the darker side of the frame. Upload: YouTube Studio → the video → Thumbnail → Upload file (≤ 2 MB). Test &
+Compare in Studio can A/B-test two or three thumbnails.
 
 ## Time and hardware
 

@@ -11,7 +11,7 @@ WebGL-сцене (three.js): слои по глубине, свет, глуби�
 
 | | |
 |---|---|
-| [`docs/video.ru.md`](docs/video.ru.md) | рендер фильма для YouTube, Shorts, соцсетей: форматы постановок, субтитры, главы, время |
+| [`docs/video.ru.md`](docs/video.ru.md) | рендер фильма для YouTube, Shorts, соцсетей: форматы постановок, субтитры, главы, обложки, время |
 | [`docs/media.ru.md`](docs/media.ru.md) | медиа: как связаны `grin` и `grin-media` (`media.rev`, `make media-pull` / `media-push`) |
 | [`docs/pipeline.md`](docs/pipeline.md) | пайплайн ролика по этапам (вход, выход, проверка, цена, кто решает) и план автоматизации |
 | [`docs/new-style.md`](docs/new-style.md) | как добавить новый стиль видео (стиль, режиссёр, постановка → сайт) |

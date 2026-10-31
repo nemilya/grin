@@ -24,6 +24,6 @@ format — README.md (most detailed: README.ru.md); the paper-theatre treatment 
 - Productions (docs/director-style.md): `stories/mate-in-3-tarkovsky` — `"base": "mate-in-3"` (text and voice from
   there), its own bible/storyboard/assets; all targets with `S=mate-in-3-tarkovsky`. Engine prompt edits must not
   change other productions' prompts (all their assets would go stale) — compare `assets.plan(<story>)` before/after.
-- Rendering films (YouTube/Shorts: formats, subtitles, chapters) — docs/video.md; renders run on the maintainer's Mac
+- Rendering films (YouTube/Shorts: formats, subtitles, chapters, thumbnails) — docs/video.md; renders run on the maintainer's Mac
   (GPU), not in a cloud session.
 - Tests: `make check`.

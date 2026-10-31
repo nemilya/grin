@@ -24,6 +24,7 @@ make media-pull                                       # картинки и оз
 make video-demo S=mate-in-3 F=horizontal START=s12a   # проба: от кадра s12a до конца, пара минут
 make video S=mate-in-3 F=horizontal                   # фильм целиком; таймлайн и звук соберутся сами
 make youtube S=mate-in-3 F=horizontal                 # субтитры .srt и главы для описания
+make thumbnail S=mate-in-3 F=horizontal SHOT=s01a     # обложка: кадр + название
 ```
 
 Результаты — в `out/<история>/`:
@@ -33,6 +34,7 @@ make youtube S=mate-in-3 F=horizontal                 # субтитры .srt и
 | `<история>-<F>[-<L>][-subs].mp4` | мастер, без субтитров (`-subs` — `SUBS=1`, вшиты): 1080p, H.264 High, ≈ 16 Мбит/с на маке (videotoolbox; иначе x264 CRF 17), AAC 160k | **YouTube** |
 | `<история>-<F>[-<L>]-share.mp4` | 720p, ≈ 3,5 Мбит/с, AAC 128k, faststart — делается сразу после мастера, бережно: на маке аппаратное декодирование и кодирование, низкий приоритет, 2 потока (`--no-share` — не делать) | Telegram, Reels, TikTok |
 | `<история>-<F>[-<L>].srt` | субтитры (`make youtube`) | YouTube Studio → Субтитры |
+| `<история>-<F>[-<L>]-thumb-<кадр>.jpg` | обложка (`make thumbnail`, ниже) | YouTube Studio → «Значок» |
 | `<история>-<F>[-<L>]-chapters.txt` | главы по сценам, `0:00 …` (`make youtube`) | в описание ролика как есть |
 
 Например, `make video S=mate-in-3 F=horizontal L=ru` → `out/mate-in-3/mate-in-3-horizontal-ru.mp4`.
@@ -54,6 +56,28 @@ make video S=mate-in-3 SUBS=1     # → out/mate-in-3/mate-in-3-subs.mp4 (+ -sub
 Это касается только рендера фильма: в плеере на сайте субтитры остаются (кнопка CC), на стоп-кадрах тоже
 (`--no-subs` — без них). Интертитры немого кино (`sila-nepost`) — часть картинки, они остаются.
 Не ставьте `"subtitles": {"burn": false}` в `story.json`: так субтитры пропадут и в плеере на сайте.
+
+## Обложка (thumbnail)
+
+```bash
+make thumbnail S=mate-in-3 F=horizontal SHOT=s01a SUB="a paper theatre film"   # та, что на YouTube
+# → out/mate-in-3/mate-in-3-horizontal-thumb-s01a.jpg (1280×720) + -raw.jpg (тот же кадр без текста)
+```
+
+Один кадр раскадровки без субтитров, 1280 px по длинной стороне, поверх — название, автор и год из `story.json`
+и строка под ними (по умолчанию — название видео в `site.json`), шрифтами сайта.
+
+| параметр | по умолчанию | |
+|---|---|---|
+| `SHOT=` | постер постановки в `site.json` | какой кадр (id — по листу стоп-кадров: `make stills F=…`) |
+| `AT=` | доля из постера, иначе 0.5 | момент внутри кадра, 0…1 |
+| `POS=` | `top` | текст: `top` (по центру, на тёмном верху), `left`, `right` — там, где в кадре темно |
+| `TITLE=` / `SUB=` | из `story.json` / `site.json` | заменить название / строку под ним |
+| `L=ru` | английский | русские название и автор (и русский таймлайн: сначала `make timeline F=… L=ru`) |
+
+Что работает на YouTube: один ясный предмет, который читается в маленьком превью на телефоне (лицо, освещённая
+фигура на тёмной сцене), текст — на тёмной стороне кадра. Загрузка: YouTube Studio → ролик → «Значок» →
+«Загрузить файл» (≤ 2 МБ). «Test & Compare» в Studio сравнит две-три обложки на зрителях.
 
 ## Время и железо
 

@@ -17,7 +17,7 @@ empty :=
 space := $(empty) $(empty)
 TL = $(subst $(space),-,$(strip $(F) $(L)))
 TLDEMO = $(if $(TL),$(TL)-demo,demo)
-.PHONY: admin site serve deploy deploy-dry help setup share youtube preview status media-pull media-push media-status prepare translate assets assets-used voice timeline demo sound stage stills video video-demo test check
+.PHONY: admin site serve deploy deploy-dry help setup share thumbnail youtube preview status media-pull media-push media-status prepare translate assets assets-used voice timeline demo sound stage stills video video-demo test check
 
 help:  ## список целей
 	@grep -hE '^[a-z-]+:.*##' $(MAKEFILE_LIST) | sed 's/:.*## /\t/'
@@ -89,6 +89,9 @@ video-demo: demo  ## ролик-отрезок → out/<история>/<ист�
 
 youtube:  ## субтитры .srt и главы для описания из собранного таймлайна (после make timeline F=horizontal)
 	$(PY) -m engine youtube $(S) $(FMT)
+
+thumbnail: timeline  ## обложка для YouTube: кадр без субтитров + название → out/<история>/<история>[-F]-thumb-<кадр>.jpg (SHOT=s01a AT=0.5 POS=top|left|right TITLE=… SUB=…, L=ru)
+	node tools/capture.mjs thumbnail $(S) $(if $(TL),--tl $(TL)) $(if $(SHOT),--shot $(SHOT)) $(if $(AT),--at $(AT)) $(if $(POS),--pos $(POS)) $(if $(L),--lang $(L)) $(if $(TITLE),--title "$(TITLE)") $(if $(SUB),--sub "$(SUB)")
 
 share:  ## версия для соцсетей из готового ролика: make share FILE=out/mate-in-3/mate-in-3-demo.mp4 (после video — сама)
 	node tools/capture.mjs share $(or $(FILE),out/$(S)/$(S).mp4)

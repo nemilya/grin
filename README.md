@@ -41,7 +41,7 @@ make admin                               # read-only admin: assets, character sh
 ```
 
 The whole cycle — new machine → work → build → deploy to the server — [below](#full-cycle-from-a-clone-to-the-live-site).
-Rendering films for YouTube, Shorts and social media (formats, subtitles, chapters, timing) — [docs/video.md](docs/video.md).
+Rendering films for YouTube, Shorts and social media (formats, subtitles, chapters, thumbnails, timing) — [docs/video.md](docs/video.md).
 
 `OPENROUTER_API_KEY` in `local.mk` is needed only to generate (translation, images, narration) — all generated
 media are already in the media repository.

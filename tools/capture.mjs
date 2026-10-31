@@ -7,6 +7,7 @@
 //        (Shorts, Reels, Telegram); stills show subtitles unless --no-subs
 //        → out/<story>/<story>[-demo].mp4 + …-share.mp4 (облегчённая для соцсетей); звук — build/sound[-demo].wav
 //   node tools/capture.mjs share <файл.mp4>   → <файл>-share.mp4
+//   node tools/capture.mjs thumbnail <story> [--tl horizontal] [--shot s01a] …   → a YouTube thumbnail (see thumbnail())
 //
 // Сервер статики — свой (корень репозитория), браузер — Playwright Chromium (видеокарта, если есть, иначе SwiftShader). Каждый кадр рисуется из времени t, поэтому любой отрезок можно перерисовать отдельно.
 import http from 'node:http';
@@ -230,5 +231,67 @@ function share(src) {
   console.log(`✓ для соцсетей → ${path.relative(ROOT, dst)} (${mb(dst)} МБ; мастер ${mb(src)} МБ)`);
 }
 
-const run = { video, stills, share: async () => share(path.resolve(args[1] || '')) }[mode] || stills;
+// YouTube thumbnail: one shot without subtitles, 1280 px on the long side, with the title over it (site fonts).
+//   node tools/capture.mjs thumbnail <story> [--tl horizontal] [--shot s01a] [--at 0.5] [--lang en] [--pos top|left|right]
+//        [--title "…"] [--sub "…"] [--no-text]   → out/<story>/<story>[-tl]-thumb-<shot>.jpg (+ -raw.jpg, the clean frame)
+// Defaults: the shot — the production's poster in site.json; the title, author and year — story.json; the line under
+// them — the video's name in site.json.
+async function thumbnail() {
+  const readJSON = f => JSON.parse(fs.readFileSync(f, 'utf8'));
+  const tlName = opt('tl', '');
+  const tlFile = path.join(ROOT, 'stories', story, 'build', tlName ? `timeline-${tlName}.json` : 'timeline.json');
+  if (!fs.existsSync(tlFile)) throw new Error(`нет ${path.relative(ROOT, tlFile)} — сначала make timeline`);
+  const tl = readJSON(tlFile);
+  let st = readJSON(path.join(ROOT, 'stories', story, 'story.json'));
+  if (st.base) st = { ...readJSON(path.join(ROOT, 'stories', st.base, 'story.json')), ...st };
+  const site = fs.existsSync(path.join(ROOT, 'site.json')) ? readJSON(path.join(ROOT, 'site.json')) : {};
+  const video = (site.stories || []).flatMap(x => x.videos || []).find(v => v.production === story) || {};
+  const lang = opt('lang', 'en');
+  const pick = o => (o && typeof o === 'object' ? o[lang] || o.en || Object.values(o)[0] : o) || '';
+  const shotId = opt('shot', (video.poster || [])[0]);
+  const at = parseFloat(opt('at', String((video.poster || [])[0] === shotId && video.poster ? video.poster[1] : 0.5)));
+  const scale = 1280 / Math.max(tl.width, tl.height);
+  const { browser, srv, page, info } = await open(scale, opt('samples', '96'), false);
+  const shot = info.shots.find(x => x.id === shotId);
+  if (!shot) { await browser.close(); srv.close(); throw new Error(`нет кадра ${shotId}; есть: ${info.shots.map(x => x.id).join(' ')}`); }
+  const raw = await frame(page, shot.t0 + (shot.t1 - shot.t0) * at);
+  const base = path.join(ROOT, 'out', story, `${tlName ? `${story}-${tlName}` : story}-thumb-${shotId}`);
+  fs.mkdirSync(path.dirname(base), { recursive: true });
+  fs.writeFileSync(`${base}-raw.jpg`, raw);
+  const data = (buf, type) => `data:${type};base64,${buf.toString('base64')}`;
+  const font = (family, weight, style, file) => ['lat', 'cyr'].map(sub => {
+    const f = path.join(ROOT, 'site', 'fonts', `${file}-${sub}.woff2`);
+    return fs.existsSync(f) ? `@font-face { font-family: ${family}; font-weight: ${weight}; font-style: ${style};
+      src: url(${data(fs.readFileSync(f), 'font/woff2')});${sub === 'cyr' ? ' unicode-range: U+0400-045F, U+0490-0491, U+2116;' : ''} }` : '';
+  }).join('\n');
+  const title = opt('title', pick(st.title)), by = [pick(st.author), st.year].filter(Boolean).join(' · ');
+  const sub = opt('sub', pick(video.name));
+  const pos = opt('pos', 'top');
+  const box = { top: 'left: 0; right: 0; top: 7%; text-align: center',
+                left: 'left: 5%; top: 9%; width: 55%', right: 'right: 4%; top: 12%; width: 42%; text-align: right' }[pos];
+  const shade = { top: 'linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,0) 45%)',
+                  left: 'linear-gradient(90deg, rgba(0,0,0,.65) 0%, rgba(0,0,0,0) 60%)',
+                  right: 'linear-gradient(270deg, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 60%)' }[pos];
+  if (!box) throw new Error('--pos top | left | right');
+  const k = info.w / 1280;  // text scales with the frame (vertical frames are 720 wide)
+  const html = `<html><head><style>
+    ${font('S', 600, 'normal', 'serif-600')} ${font('S', 400, 'italic', 'serif-400i')} ${font('G', 600, 'normal', 'golos-600')}
+    html, body { margin: 0; width: ${info.w}px; height: ${info.h}px; overflow: hidden; background: #000; }
+    .bg, .shade { position: absolute; inset: 0; } .bg { background: url(${data(raw, 'image/jpeg')}) center / cover; }
+    .shade { background: ${shade}; }
+    .t { position: absolute; ${box}; color: #f6ead2; text-shadow: 0 3px 18px rgba(0,0,0,.85), 0 1px 3px rgba(0,0,0,.9); }
+    h1 { font: 600 ${Math.round(100 * k)}px/0.98 S; margin: 0; letter-spacing: -0.5px; }
+    .by { font: 600 ${Math.round(30 * k)}px G; letter-spacing: .14em; text-transform: uppercase; color: #e8b45a; margin-top: ${Math.round(22 * k)}px; }
+    .sub { font: italic 400 ${Math.round(34 * k)}px S; margin-top: ${Math.round(10 * k)}px; color: #f1e3c8; }
+  </style></head><body><div class="bg"></div>${args.includes('--no-text') ? '' : `<div class="shade"></div>
+    <div class="t"><h1>${title}</h1><div class="by">${by}</div>${sub ? `<div class="sub">${sub}</div>` : ''}</div>`}</body></html>`;
+  const card = await browser.newPage({ viewport: { width: info.w, height: info.h } });
+  await card.setContent(html, { waitUntil: 'load' });
+  await card.evaluate(() => document.fonts.ready);
+  await card.screenshot({ path: `${base}.jpg`, type: 'jpeg', quality: 92 });
+  await browser.close(); srv.close();
+  console.log(`✓ обложка → ${path.relative(ROOT, base)}.jpg (${info.w}×${info.h}; кадр ${shotId} @ ${at}; без текста — -raw.jpg)`);
+}
+
+const run = { video, stills, thumbnail, share: async () => share(path.resolve(args[1] || '')) }[mode] || stills;
 run().catch(e => { console.error(e); process.exit(1); });
