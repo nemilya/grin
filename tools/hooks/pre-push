@@ -1,0 +1,4 @@
+#!/bin/sh
+# Installed by `make media-pull` / `make setup` (git config core.hooksPath tools/hooks):
+# the media commit pinned in media.rev must be pushed to the media repository before the code that uses it.
+cd "$(git rev-parse --show-toplevel)" && exec "${PYTHON:-python3}" -m engine.media prepush

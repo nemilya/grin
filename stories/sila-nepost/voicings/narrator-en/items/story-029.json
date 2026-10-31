@@ -1,0 +1,220 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "4eb50d980703",
+   "file": "story-029-1.opus",
+   "dur": 23.672,
+   "chars": 316,
+   "speech": "After the brief conversation that followed Roumier’s words, Duplay, apologising in confusion, thanked him and went out into the street. There, within his first few steps, a stranger, decently dressed, overtook and stopped him; the man was extremely agitated; glancing at Duplay’s violin and bowing hastily, he asked:",
+   "words": [
+    [
+     0.1,
+     0.3
+    ],
+    [
+     0.3,
+     0.4
+    ],
+    [
+     0.4,
+     0.7
+    ],
+    [
+     0.7,
+     1.6
+    ],
+    [
+     1.6,
+     1.8
+    ],
+    [
+     1.8,
+     2.2
+    ],
+    [
+     2.2,
+     2.8
+    ],
+    [
+     2.8,
+     3.3
+    ],
+    [
+     3.7,
+     4.5
+    ],
+    [
+     4.6,
+     5.6
+    ],
+    [
+     5.6,
+     5.7
+    ],
+    [
+     5.7,
+     6.7
+    ],
+    [
+     6.9,
+     7.2
+    ],
+    [
+     7.2,
+     7.5
+    ],
+    [
+     7.7,
+     8.0
+    ],
+    [
+     8.0,
+     8.2
+    ],
+    [
+     8.2,
+     8.4
+    ],
+    [
+     8.4,
+     8.6
+    ],
+    [
+     8.6,
+     8.7
+    ],
+    [
+     8.7,
+     9.1
+    ],
+    [
+     10.2,
+     10.7
+    ],
+    [
+     11.0,
+     11.3
+    ],
+    [
+     11.3,
+     11.5
+    ],
+    [
+     11.5,
+     11.9
+    ],
+    [
+     11.9,
+     12.1
+    ],
+    [
+     12.1,
+     12.7
+    ],
+    [
+     13.1,
+     13.2
+    ],
+    [
+     13.2,
+     13.9
+    ],
+    [
+     14.1,
+     14.5
+    ],
+    [
+     14.5,
+     15.2
+    ],
+    [
+     15.3,
+     16.0
+    ],
+    [
+     16.0,
+     16.1
+    ],
+    [
+     16.1,
+     16.5
+    ],
+    [
+     16.5,
+     16.7
+    ],
+    [
+     17.5,
+     17.6
+    ],
+    [
+     17.6,
+     17.9
+    ],
+    [
+     17.9,
+     18.1
+    ],
+    [
+     18.1,
+     18.7
+    ],
+    [
+     18.7,
+     19.3
+    ],
+    [
+     19.9,
+     20.3
+    ],
+    [
+     20.3,
+     20.4
+    ],
+    [
+     20.4,
+     20.8
+    ],
+    [
+     20.8,
+     21.5
+    ],
+    [
+     21.5,
+     21.7
+    ],
+    [
+     21.7,
+     22.1
+    ],
+    [
+     22.1,
+     22.8
+    ],
+    [
+     23.1,
+     23.3
+    ],
+    [
+     23.3,
+     23.6
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "After the brief conversation that followed Roumier's words, Duplay, apologizing in confusion, thanked him and went out into the street. There, within his first few steps, a stranger, decently dressed, overtook and stopped him. The man was extremely agitated. Glancing at Duplay's violin and bowing hastily, he asked",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00372,
+    "verify": 0.00199
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:00:37"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

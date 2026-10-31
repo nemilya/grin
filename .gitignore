@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+local.mk
+node_modules/
+*.tmp
+out/
+stories/*/build/
+stories/*/assets/raw/
+stories/*/assets/takes/
+dist/
+
+# media — in the media repository (nemilya/grin-media), laid over this folder: make media-pull / media-push
+.media.git/
+stories/**/*.webp
+stories/**/*.png
+stories/**/*.jpg
+stories/**/*.jpeg
+stories/**/*.opus
+stories/**/*.wav
+stories/**/*.mp3
+stories/**/*.m4a

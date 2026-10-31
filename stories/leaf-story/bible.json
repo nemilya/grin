@@ -1,0 +1,4420 @@
+{
+ "_": "Библия «Преступления Отпавшего Листа» (стиль styles/avant-garde-1918.json, разбор — docs/stories/leaf-story.md): описания — по-английски и без стиля. Три слоя изображения: внешний мир — пёстрая живопись (декорации, толпа, лётчик); внутренний мир Ранума — белое поле и супрематическая геометрия, которую рисует движок (props: shape, trace — stage/js/geometry.js); лист — единственный натуральный предмет (technique, фон-маджента). Ранум — своя манера (technique): белый халат без цветных лучей — единственная белая неподвижная фигура в пёстром мире. Прохожие толпы — по одной картинке без листа героя (ref: false).",
+ "world": "A large Russian city in the summer of 1918, war and revolution (the city is not named): public square gardens with sand paths and broad maple trees, plastered six-storey houses with tall chimneys, church domes, trams, a river embankment, a great cobbled square. Crowds in the motley clothes of the revolutionary year: soldiers' greatcoats, sailors, workers' caps, ladies in summer hats, clerks, street vendors.",
+ "characters": {
+  "ranum": {
+   "name": "Ranum Nuzarget",
+   "name_src": "Ранум Нузаргет",
+   "role": "йог, изгнанный из приюта Великого Посвящения",
+   "age": "about thirty",
+   "color": "#e8e2d4",
+   "look": "a thin, sad Indian man of about thirty: a narrow, delicate, dark brown face, clean-shaven, motionless black eyes with an intense gaze that stays in the memory, a calm, sorrowful mouth; a turban of fine white muslin; a long loose white robe over white trousers, simple leather sandals; long thin brown hands; a thin plain walking cane",
+   "technique": "Painted as a figure in a Russian avant-garde painting of 1912–1918 — in the manner of Natalia Goncharova's paintings and Alexandra Exter's gouache costume designs for Tairov's Kamerny Theatre: the body and clothes built of bold angular faceted planes with crisp edges, strong dark brushed contours; the face simplified and mask-like yet clearly readable and dignified, not a caricature. His white clothes are painted pure, calm white with only soft pale blue-grey and ochre shadow planes — no coloured streaks, no rays of colour on him: he is the one still white figure in a motley world. Gouache with visible brushstrokes, matte paper texture. Natural painted edges: no outline around the whole figure, no white border, no paper margin, not a sticker. The whole subject fully visible, nothing cropped.",
+   "poses": {
+    "bench": {
+     "desc": "seated on a plain wooden park bench, shown in three-quarter view facing right, straight-backed and perfectly still, drawing figures in the sand at his feet with the tip of the thin cane held loosely in his right hand, his left hand resting on his knee; gaze lowered, the face sorrowful and deeply concentrated. The whole bench is visible under him",
+     "h": 17,
+     "aspect": 0.8,
+     "facing": "right",
+     "cut": [
+      [
+       0.5,
+       0.7,
+       0.72,
+       0.95
+      ]
+     ]
+    },
+    "waiting": {
+     "desc": "seated on the same plain wooden park bench in three-quarter view facing right, upright and still, the cane resting against his knee, his head raised, looking straight ahead into the distance, waiting for an answer: the face calm, sad and attentive. The whole bench is visible under him",
+     "h": 17,
+     "aspect": 0.8,
+     "facing": "right"
+    },
+    "looking-up": {
+     "desc": "seated on the same plain wooden park bench in three-quarter view facing right, without rising, his head thrown back, looking up into the sky with intense, motionless black eyes; hands on his knees, the cane leaning against the bench. The whole bench is visible under him",
+     "h": 17,
+     "aspect": 0.8,
+     "facing": "right"
+    },
+    "folded": {
+     "desc": "seated bolt upright on the same plain wooden park bench, almost frontal, calmly folding his long thin hands on his knees, the cane laid beside him on the bench; eyes open, gazing ahead, the face serene and resigned, awaiting his execution. The whole bench is visible under him",
+     "h": 17,
+     "aspect": 0.8,
+     "facing": "front"
+    },
+    "kiss": {
+     "desc": "seated on the same plain wooden park bench, almost frontal, raising both cupped hands to his lips as if holding something tiny and precious and kissing it (the hands are empty: nothing in them), eyes half-closed, a quiet smile of relief. The whole bench is visible under him",
+     "h": 17,
+     "aspect": 0.8,
+     "facing": "front"
+    },
+    "face": {
+     "desc": "a close-up portrait: ONLY his head and shoulders, cropped at the chest, the face large and filling most of the image, seen almost frontally, the motionless black eyes looking straight out with intense, piercing calm; the muslin turban, the collar of the white robe",
+     "h": 16,
+     "aspect": 0.8,
+     "facing": "front"
+    },
+    "lotus": {
+     "desc": "seated cross-legged on the ground in a strict meditation posture, seen frontally, back perfectly straight, hands resting on his knees, eyes closed, the face still and concentrated; no cane, no bench, nothing under him",
+     "h": 12,
+     "aspect": 1.0,
+     "facing": "front"
+    },
+    "walking": {
+     "desc": "walking away with a light, easy step, seen in three-quarter view from behind, going to the right, the thin cane in his right hand swinging lightly, his head raised",
+     "h": 22,
+     "aspect": 0.45,
+     "facing": "right",
+     "cut": [
+      [
+       0.25,
+       0.3,
+       0.5,
+       0.55
+      ]
+     ]
+    }
+   }
+  },
+  "passerby": {
+   "name": "the passer-by",
+   "name_src": "прохожий с мёртвой душой",
+   "role": "обречённый — погибнет от бомбы на углу Красной и Чёрной",
+   "age": "about thirty",
+   "color": "#6a6258",
+   "look": "an ordinary healthy man of about thirty, of medium height, with a pleasant, easy, clean-shaven face, lively keen eyes and short brown hair; a modest dark-grey jacket over a waistcoat, a white shirt with a soft collar, dark trousers, worn but clean boots, a soft grey cap; a paper parcel of bread under his arm",
+   "poses": {
+    "walking": {
+     "desc": "walking briskly to the right with a firm step, seen in profile, preoccupied, his lively glance fixed ahead, the parcel of bread under his left arm",
+     "h": 22,
+     "aspect": 0.45,
+     "facing": "right"
+    },
+    "face": {
+     "desc": "a close-up portrait: ONLY his head and shoulders, cropped at the chest, the face large and filling most of the image, three-quarter view facing right: a pleasant, lively face with a keen glance, and yet strangely flat and empty behind the eyes, like a mask",
+     "h": 16,
+     "aspect": 0.8,
+     "facing": "right"
+    }
+   }
+  },
+  "pilot": {
+   "name": "the bandit pilot",
+   "name_src": "бандит-лётчик",
+   "role": "лётчик с шестью бомбами",
+   "age": "about thirty-five",
+   "color": "#4a3a2a",
+   "look": "a strong, healthy, well-built, well-fed man of about thirty-five with a hard, heavy-jawed face, its features tense and swollen with evil will, small cold eyes; a brown leather flying helmet with the goggles pushed up on the forehead, a leather flying coat with a fur collar, leather gauntlets",
+   "poses": {
+    "face": {
+     "desc": "a close-up: ONLY his head and shoulders above the rim of an open cockpit of a 1910s biplane (a little of the cockpit rim and a wing strut at the bottom edge), the face large, tense and flushed, drunk with air and speed, staring down over the side with fierce exhilaration and dread",
+     "h": 16,
+     "aspect": 0.8,
+     "facing": "front"
+    },
+    "slump": {
+     "desc": "a close-up: ONLY his head and shoulders above the rim of an open cockpit of a 1910s biplane (a little of the cockpit rim at the bottom edge), NOT the whole figure, the face large and filling most of the image: his head sagging, the heavy face gone slack and grey, eyes dimmed and half-closed, as if in a will-less dream",
+     "h": 16,
+     "aspect": 0.8,
+     "facing": "front"
+    }
+   }
+  },
+  "crowd": {
+   "name": "A passer-by",
+   "name_src": "прохожие (толпа)",
+   "role": "пёстрая смена одежд и лиц — каждый по одной картинке",
+   "age": "",
+   "color": "#8a5a4a",
+   "look": "a passer-by in the streets of a big Russian city in the revolutionary summer of 1918",
+   "poses": {
+    "soldier": {
+     "desc": "a soldier in a long grey greatcoat and a cap, a rifle slung on his shoulder, walking to the left with a heavy tired step, seen in profile",
+     "h": 23,
+     "aspect": 0.45,
+     "facing": "left",
+     "ref": false
+    },
+    "lady": {
+     "desc": "a lady in a white summer dress and a wide hat with flowers, holding a parasol, walking to the right, seen in profile, haughty",
+     "h": 22,
+     "aspect": 0.5,
+     "facing": "right",
+     "ref": false
+    },
+    "worker": {
+     "desc": "a worker in a cap and a dark belted blouse, a bundle under his arm, walking to the left, seen in profile, sullen",
+     "h": 22,
+     "aspect": 0.45,
+     "facing": "left",
+     "ref": false
+    },
+    "sailor": {
+     "desc": "a sailor in a striped vest and a black peakless cap with ribbons, cartridge belts across his chest, swaggering to the right, seen in profile, insolent",
+     "h": 23,
+     "aspect": 0.45,
+     "facing": "right",
+     "ref": false
+    },
+    "clerk": {
+     "desc": "a thin clerk in a bowler hat and a shabby frock coat with a briefcase, hurrying to the left, seen in profile, frightened and cunning",
+     "h": 22,
+     "aspect": 0.45,
+     "facing": "left",
+     "ref": false
+    },
+    "vendor": {
+     "desc": "a stout woman street vendor in a headscarf with a tray of apples hung from her neck, walking to the right, seen in profile, greedy and loud",
+     "h": 21,
+     "aspect": 0.55,
+     "facing": "right",
+     "ref": false,
+     "keep": [
+      [
+       0.25,
+       0.3,
+       0.8,
+       0.45
+      ]
+     ]
+    },
+    "looking-up": {
+     "desc": "a small group of four people standing close together — a soldier, a woman in a headscarf, a boy and an old man — all looking up into the sky in alarm, the boy pointing upwards",
+     "h": 22,
+     "aspect": 1.1,
+     "facing": "front",
+     "ref": false
+    }
+   }
+  }
+ },
+ "sets": {
+  "titles": {
+   "name": "Титры",
+   "light": "titles",
+   "look": "title cards",
+   "pieces": {}
+  },
+  "square": {
+   "name": "Сквер",
+   "light": "summer",
+   "look": "a public square garden in a large Russian city on a hot summer day in 1918",
+   "pieces": {
+    "floor": {
+     "kind": "floor",
+     "size": [
+      150,
+      95
+     ],
+     "pos": [
+      0,
+      0,
+      -18
+     ],
+     "desc": "seen straight down from directly above, perfectly flat: the plain sandy ground of a park path — fine warm yellow-ochre sand, a few small pebbles and faint footprints, cool blue patches of leaf shade; no tiles, no paving, no pattern of stones, no horizon"
+    },
+    "garden": {
+     "kind": "backdrop",
+     "size": [
+      175,
+      98.5
+     ],
+     "pos": [
+      0,
+      -15,
+      -70
+     ],
+     "desc": "a public square garden on a hot bright summer day: sunlit yellow sand paths, broad maple trees with dense green crowns casting cool blue shadows, a low iron railing; beyond the garden — tall plastered six-storey houses with chimneys, a white church with a dome, a strip of deep blue sky; slanting beams of sunlight cut across everything. Empty: no benches in the foreground, no people"
+    }
+   }
+  },
+  "street": {
+   "name": "Город",
+   "light": "street",
+   "look": "a crowded city street beside the square garden in the revolutionary summer of 1918",
+   "pieces": {
+    "houses": {
+     "kind": "backdrop",
+     "size": [
+      140,
+      79
+     ],
+     "pos": [
+      0,
+      -27,
+      -70
+     ],
+     "desc": "a city street seething with life and unrest: six-storey plastered houses with shop fronts and striped awnings (blank, without lettering), a tram with an open trailer, tram wires, red flags and torn posters on the walls (blank, without any lettering), a cobbled roadway in the foreground, a church dome far away, smoke from chimneys, a pale hot sky; everything broken into colliding, jostling planes. Empty of people"
+    }
+   }
+  },
+  "abode": {
+   "name": "Приют Посвящения",
+   "light": "abode",
+   "look": "the Great Initiation: an endless white space with the holy tree far away",
+   "pieces": {
+    "field": {
+     "card": "prop/field-abode",
+     "pos": [
+      0,
+      60,
+      -120
+     ]
+    }
+   }
+  },
+  "inner": {
+   "name": "Внутренний мир",
+   "light": "white",
+   "look": "white field: suprematist geometry",
+   "pieces": {
+    "field": {
+     "card": "prop/field",
+     "pos": [
+      0,
+      35,
+      -70
+     ]
+    }
+   }
+  },
+  "desert": {
+   "name": "Пустыня",
+   "light": "desert",
+   "look": "the desert of the last concentration",
+   "pieces": {
+    "dunes": {
+     "kind": "backdrop",
+     "size": [
+      140,
+      79
+     ],
+     "pos": [
+      0,
+      -35,
+      -75
+     ],
+     "world": false,
+     "desc": "an endless empty desert at noon, far from any city: pale sand dunes under a white-hot sky, the horizon low, a single small flat rock in the middle distance, heat shimmering; empty and silent — no people, no buildings, no town, no trees, only sand and sky"
+    }
+   }
+  },
+  "sky": {
+   "name": "Небо над городом",
+   "light": "sky",
+   "look": "the sky over the roofs of the city",
+   "pieces": {
+    "sky": {
+     "kind": "backdrop",
+     "size": [
+      200,
+      112
+     ],
+     "pos": [
+      0,
+      -24,
+      -95
+     ],
+     "desc": "the sky over the roofs of a big city on a hot summer day, seen from below: deep blue sky with a few white clouds and beams of sunlight filling most of the image; along the bottom edge — roofs, chimneys, a church dome and the tops of maple trees. No aeroplane, no birds"
+    },
+    "chimney": {
+     "kind": "cutout",
+     "h": 46,
+     "aspect": 0.38,
+     "pos": [
+      -12,
+      -14,
+      -30
+     ],
+     "desc": "a tall brick chimney stack of a six-storey house with a strip of iron roof at its foot, seen from below, rising upward"
+    }
+   }
+  },
+  "map": {
+   "name": "Город — план",
+   "light": "white",
+   "look": "the city as a suprematist plan",
+   "pieces": {
+    "field": {
+     "card": "prop/field",
+     "pos": [
+      0,
+      20,
+      -70
+     ]
+    },
+    "red": {
+     "card": "prop/red-street",
+     "pos": [
+      6,
+      16,
+      -60
+     ],
+     "rot": [
+      0,
+      0,
+      -22
+     ]
+    },
+    "black": {
+     "card": "prop/black-street",
+     "pos": [
+      0,
+      12,
+      -58
+     ],
+     "rot": [
+      0,
+      0,
+      6
+     ]
+    }
+   }
+  },
+  "whirlpool": {
+   "name": "Водоворот",
+   "light": "street",
+   "look": "a metaphor: a plank in a whirlpool",
+   "pieces": {
+    "sea": {
+     "kind": "backdrop",
+     "size": [
+      140,
+      79
+     ],
+     "pos": [
+      0,
+      -27,
+      -70
+     ],
+     "desc": "a whirlpool in a dark green sea: boiling, churning waves spiralling round a deep vortex, spray and foam; in the middle a single flat wooden plank floating perfectly level on the surface, carried round and round, lifeless"
+    }
+   }
+  },
+  "crash": {
+   "name": "Река и площадь",
+   "light": "sky",
+   "look": "the river embankment and the huge empty square",
+   "pieces": {
+    "square": {
+     "kind": "backdrop",
+     "size": [
+      170,
+      95.6
+     ],
+     "pos": [
+      0,
+      -34,
+      -80
+     ],
+     "world": false,
+     "desc": "a deserted river embankment with a granite parapet, and beyond it a huge empty cobbled city square in the summer sun, with heaps of cobblestones piled for paving in the middle; the opposite side of the square lined with tall houses, a strip of hot sky. Completely deserted: no people, no trams, no carriages, no animals"
+    }
+   }
+  }
+ },
+ "props": {
+  "title-main": {
+   "kind": "procedural",
+   "draw": "title",
+   "story_title": true,
+   "size": [
+    48,
+    27
+   ],
+   "look": "suprematist"
+  },
+  "title-1": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "I",
+   "big": true,
+   "size": [
+    48,
+    27
+   ],
+   "look": "suprematist"
+  },
+  "title-2": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "II",
+   "big": true,
+   "size": [
+    48,
+    27
+   ],
+   "look": "suprematist"
+  },
+  "title-3": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "III",
+   "big": true,
+   "size": [
+    48,
+    27
+   ],
+   "look": "suprematist"
+  },
+  "aeroplane": {
+   "kind": "cutout",
+   "aspect": 1.78,
+   "desc": "a 1910s single-engine biplane in fast flight over a city, seen from below and from the side: white canvas wings and tail, a spinning propeller drawn as a blur of rays, a pilot in a leather helmet and goggles in the open cockpit; under the fuselage EXACTLY SIX small bombs hang in one straight row, evenly spaced — six, not five; streaks of speed behind it",
+   "erase": [
+    [
+     0,
+     0,
+     0.04,
+     0.06
+    ],
+    [
+     0.96,
+     0,
+     1,
+     0.06
+    ],
+    [
+     0,
+     0.94,
+     0.04,
+     1
+    ],
+    [
+     0.96,
+     0.94,
+     1,
+     1
+    ]
+   ],
+   "cut": [
+    [
+     0.08,
+     0.2,
+     0.46,
+     0.8
+    ]
+   ]
+  },
+  "leaf": {
+   "kind": "cutout",
+   "aspect": 1,
+   "technique": "A real, natural, freshly fallen green maple leaf, photographed close up as a botanical specimen in soft daylight: true-to-life living green, fine branching veins, a slight natural curl, sharp detail; not painted, not stylised, not a drawing.",
+   "key": "magenta",
+   "desc": "one single leaf of a Norway maple (Acer platanoides): broad and rounded, as wide as it is long, five wide shallow lobes with a few large, widely spaced pointed teeth, smooth edges between the teeth, wide rounded gaps between the lobes, a long thin stalk; fresh and juicy green, a small torn notch at its stalk end where a bird pecked it off the branch; seen from above, whole. Not a Japanese maple, not a narrow serrated leaf",
+   "h": 3
+  },
+  "clock": {
+   "kind": "cutout",
+   "h": 10,
+   "aspect": 1.0,
+   "desc": "an open pocket watch lying face down with its back case open: the fine brass mechanism of wheels, springs and jewels exposed, perfectly made and working"
+  },
+  "rose": {
+   "kind": "cutout",
+   "h": 12,
+   "aspect": 0.6,
+   "desc": "a single rose in full bloom on a long stem with two leaves: perfect in shape but lifeless, its red petals dull and greyish at the edges, as if made of painted tin"
+  },
+  "holy-tree": {
+   "kind": "cutout",
+   "h": 70,
+   "aspect": 1.4,
+   "technique": "Painted like a radiant vision in a Russian icon: gleaming gold leaf and burnished gold, glowing warm white light, fine radiant lines of light; the tree shines from within as if made of light and gold, majestic and solemn, rich and luminous — not pale, not faded. Natural painted edges — no outline around it, no border.",
+   "desc": "a single immense sacred tree (a banyan) made of light and gold: a broad golden trunk, a vast spreading dome of countless small leaves of gold and white light, hanging aerial roots like shining threads, a soft golden radiance around the whole crown"
+  },
+  "bench": {
+   "kind": "cutout",
+   "h": 11,
+   "aspect": 1.5,
+   "desc": "an empty plain wooden park bench with a back, seen in three-quarter view facing right, standing on a little patch of sand with faint traces of drawings in it"
+  },
+  "maple": {
+   "kind": "cutout",
+   "h": 26,
+   "aspect": 2.2,
+   "key": "magenta",
+   "desc": "the lower boughs of a broad maple tree reaching in from above, seen from below: a heavy branch with dense clusters of broad green maple leaves hanging down, sunlight through them"
+  },
+  "field": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    300,
+    170
+   ],
+   "color": "#f3efe4",
+   "_": "белое поле внутреннего мира"
+  },
+  "field-abode": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    340,
+    280
+   ],
+   "color": "#14205a",
+   "_": "поле приюта Посвящения — глубокий ультрамарин: золото на нём горит"
+  },
+  "burst": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "burst",
+   "size": [
+    150,
+    150
+   ],
+   "color": "#ffd978",
+   "rays": 32,
+   "width": 0.22,
+   "add": true,
+   "_": "супрематическое солнце за святым деревом (spin z — медленно)"
+  },
+  "arabesque": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     2.24,
+     0.0
+    ],
+    [
+     2.359,
+     0.158
+    ],
+    [
+     2.469,
+     0.328
+    ],
+    [
+     2.566,
+     0.508
+    ],
+    [
+     2.646,
+     0.693
+    ],
+    [
+     2.707,
+     0.879
+    ],
+    [
+     2.748,
+     1.06
+    ],
+    [
+     2.765,
+     1.232
+    ],
+    [
+     2.759,
+     1.388
+    ],
+    [
+     2.73,
+     1.525
+    ],
+    [
+     2.677,
+     1.637
+    ],
+    [
+     2.602,
+     1.722
+    ],
+    [
+     2.508,
+     1.777
+    ],
+    [
+     2.396,
+     1.801
+    ],
+    [
+     2.269,
+     1.794
+    ],
+    [
+     2.13,
+     1.758
+    ],
+    [
+     1.984,
+     1.695
+    ],
+    [
+     1.832,
+     1.608
+    ],
+    [
+     1.679,
+     1.502
+    ],
+    [
+     1.528,
+     1.38
+    ],
+    [
+     1.382,
+     1.247
+    ],
+    [
+     1.242,
+     1.108
+    ],
+    [
+     1.111,
+     0.967
+    ],
+    [
+     0.99,
+     0.827
+    ],
+    [
+     0.879,
+     0.691
+    ],
+    [
+     0.779,
+     0.561
+    ],
+    [
+     0.688,
+     0.438
+    ],
+    [
+     0.606,
+     0.321
+    ],
+    [
+     0.531,
+     0.21
+    ],
+    [
+     0.461,
+     0.104
+    ],
+    [
+     0.393,
+     0.0
+    ],
+    [
+     0.325,
+     -0.104
+    ],
+    [
+     0.254,
+     -0.21
+    ],
+    [
+     0.179,
+     -0.321
+    ],
+    [
+     0.097,
+     -0.438
+    ],
+    [
+     0.007,
+     -0.561
+    ],
+    [
+     -0.094,
+     -0.691
+    ],
+    [
+     -0.205,
+     -0.827
+    ],
+    [
+     -0.326,
+     -0.967
+    ],
+    [
+     -0.457,
+     -1.108
+    ],
+    [
+     -0.596,
+     -1.247
+    ],
+    [
+     -0.743,
+     -1.38
+    ],
+    [
+     -0.894,
+     -1.502
+    ],
+    [
+     -1.047,
+     -1.608
+    ],
+    [
+     -1.198,
+     -1.695
+    ],
+    [
+     -1.345,
+     -1.758
+    ],
+    [
+     -1.483,
+     -1.794
+    ],
+    [
+     -1.61,
+     -1.801
+    ],
+    [
+     -1.722,
+     -1.777
+    ],
+    [
+     -1.817,
+     -1.722
+    ],
+    [
+     -1.892,
+     -1.637
+    ],
+    [
+     -1.944,
+     -1.525
+    ],
+    [
+     -1.974,
+     -1.388
+    ],
+    [
+     -1.98,
+     -1.232
+    ],
+    [
+     -1.962,
+     -1.06
+    ],
+    [
+     -1.922,
+     -0.879
+    ],
+    [
+     -1.86,
+     -0.693
+    ],
+    [
+     -1.78,
+     -0.508
+    ],
+    [
+     -1.684,
+     -0.328
+    ],
+    [
+     -1.574,
+     -0.158
+    ],
+    [
+     -1.455,
+     -0.0
+    ],
+    [
+     -1.329,
+     0.143
+    ],
+    [
+     -1.201,
+     0.27
+    ],
+    [
+     -1.074,
+     0.382
+    ],
+    [
+     -0.951,
+     0.478
+    ],
+    [
+     -0.835,
+     0.561
+    ],
+    [
+     -0.728,
+     0.632
+    ],
+    [
+     -0.632,
+     0.695
+    ],
+    [
+     -0.548,
+     0.752
+    ],
+    [
+     -0.477,
+     0.805
+    ],
+    [
+     -0.417,
+     0.857
+    ],
+    [
+     -0.369,
+     0.909
+    ],
+    [
+     -0.331,
+     0.962
+    ],
+    [
+     -0.301,
+     1.016
+    ],
+    [
+     -0.275,
+     1.07
+    ],
+    [
+     -0.252,
+     1.122
+    ],
+    [
+     -0.229,
+     1.169
+    ],
+    [
+     -0.202,
+     1.209
+    ],
+    [
+     -0.168,
+     1.237
+    ],
+    [
+     -0.126,
+     1.251
+    ],
+    [
+     -0.073,
+     1.247
+    ],
+    [
+     -0.006,
+     1.222
+    ],
+    [
+     0.074,
+     1.173
+    ],
+    [
+     0.17,
+     1.1
+    ],
+    [
+     0.28,
+     1.002
+    ],
+    [
+     0.405,
+     0.879
+    ],
+    [
+     0.542,
+     0.734
+    ],
+    [
+     0.691,
+     0.569
+    ],
+    [
+     0.848,
+     0.388
+    ],
+    [
+     1.012,
+     0.197
+    ],
+    [
+     1.178,
+     0.0
+    ],
+    [
+     1.345,
+     -0.197
+    ],
+    [
+     1.508,
+     -0.388
+    ],
+    [
+     1.665,
+     -0.569
+    ],
+    [
+     1.814,
+     -0.734
+    ],
+    [
+     1.951,
+     -0.879
+    ],
+    [
+     2.076,
+     -1.002
+    ],
+    [
+     2.186,
+     -1.1
+    ],
+    [
+     2.282,
+     -1.173
+    ],
+    [
+     2.363,
+     -1.222
+    ],
+    [
+     2.429,
+     -1.247
+    ],
+    [
+     2.482,
+     -1.251
+    ],
+    [
+     2.525,
+     -1.237
+    ],
+    [
+     2.558,
+     -1.209
+    ],
+    [
+     2.585,
+     -1.169
+    ],
+    [
+     2.608,
+     -1.122
+    ],
+    [
+     2.631,
+     -1.07
+    ],
+    [
+     2.657,
+     -1.016
+    ],
+    [
+     2.687,
+     -0.962
+    ],
+    [
+     2.726,
+     -0.909
+    ],
+    [
+     2.774,
+     -0.857
+    ],
+    [
+     2.833,
+     -0.805
+    ],
+    [
+     2.904,
+     -0.752
+    ],
+    [
+     2.988,
+     -0.695
+    ],
+    [
+     3.084,
+     -0.632
+    ],
+    [
+     3.191,
+     -0.561
+    ],
+    [
+     3.307,
+     -0.478
+    ],
+    [
+     3.43,
+     -0.382
+    ],
+    [
+     3.557,
+     -0.27
+    ],
+    [
+     3.685,
+     -0.143
+    ],
+    [
+     3.811,
+     -0.0
+    ],
+    [
+     3.93,
+     0.158
+    ],
+    [
+     4.04,
+     0.328
+    ],
+    [
+     4.136,
+     0.508
+    ],
+    [
+     4.217,
+     0.693
+    ],
+    [
+     4.278,
+     0.879
+    ],
+    [
+     4.318,
+     1.06
+    ],
+    [
+     4.336,
+     1.232
+    ],
+    [
+     4.33,
+     1.388
+    ],
+    [
+     4.3,
+     1.525
+    ],
+    [
+     4.248,
+     1.637
+    ],
+    [
+     4.173,
+     1.722
+    ],
+    [
+     4.079,
+     1.777
+    ],
+    [
+     3.966,
+     1.801
+    ],
+    [
+     3.84,
+     1.794
+    ],
+    [
+     3.701,
+     1.758
+    ],
+    [
+     3.554,
+     1.695
+    ],
+    [
+     3.403,
+     1.608
+    ],
+    [
+     3.25,
+     1.502
+    ],
+    [
+     3.099,
+     1.38
+    ],
+    [
+     2.953,
+     1.247
+    ],
+    [
+     2.813,
+     1.108
+    ],
+    [
+     2.682,
+     0.967
+    ],
+    [
+     2.561,
+     0.827
+    ],
+    [
+     2.45,
+     0.691
+    ],
+    [
+     2.35,
+     0.561
+    ],
+    [
+     2.259,
+     0.438
+    ],
+    [
+     2.177,
+     0.321
+    ],
+    [
+     2.102,
+     0.21
+    ],
+    [
+     2.031,
+     0.104
+    ],
+    [
+     1.963,
+     0.0
+    ],
+    [
+     1.896,
+     -0.104
+    ],
+    [
+     1.825,
+     -0.21
+    ],
+    [
+     1.75,
+     -0.321
+    ],
+    [
+     1.668,
+     -0.438
+    ],
+    [
+     1.577,
+     -0.561
+    ],
+    [
+     1.477,
+     -0.691
+    ],
+    [
+     1.366,
+     -0.827
+    ],
+    [
+     1.245,
+     -0.967
+    ],
+    [
+     1.114,
+     -1.108
+    ],
+    [
+     0.974,
+     -1.247
+    ],
+    [
+     0.828,
+     -1.38
+    ],
+    [
+     0.677,
+     -1.502
+    ],
+    [
+     0.524,
+     -1.608
+    ],
+    [
+     0.373,
+     -1.695
+    ],
+    [
+     0.226,
+     -1.758
+    ],
+    [
+     0.087,
+     -1.794
+    ],
+    [
+     -0.039,
+     -1.801
+    ],
+    [
+     -0.152,
+     -1.777
+    ],
+    [
+     -0.246,
+     -1.722
+    ],
+    [
+     -0.321,
+     -1.637
+    ],
+    [
+     -0.373,
+     -1.525
+    ],
+    [
+     -0.403,
+     -1.388
+    ],
+    [
+     -0.409,
+     -1.232
+    ],
+    [
+     -0.391,
+     -1.06
+    ],
+    [
+     -0.351,
+     -0.879
+    ],
+    [
+     -0.29,
+     -0.693
+    ],
+    [
+     -0.209,
+     -0.508
+    ],
+    [
+     -0.113,
+     -0.328
+    ],
+    [
+     -0.003,
+     -0.158
+    ],
+    [
+     0.116,
+     -0.0
+    ]
+   ],
+   "color": "#5a3d1e",
+   "width": 0.28,
+   "_": "арабеска тростью на песке (на землю: rot [-90, 0, 0])"
+  },
+  "arabesque-2": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     -0.378,
+     1.871
+    ],
+    [
+     -0.507,
+     1.82
+    ],
+    [
+     -0.626,
+     1.737
+    ],
+    [
+     -0.73,
+     1.626
+    ],
+    [
+     -0.818,
+     1.494
+    ],
+    [
+     -0.888,
+     1.346
+    ],
+    [
+     -0.941,
+     1.191
+    ],
+    [
+     -0.979,
+     1.035
+    ],
+    [
+     -1.004,
+     0.884
+    ],
+    [
+     -1.021,
+     0.742
+    ],
+    [
+     -1.035,
+     0.612
+    ],
+    [
+     -1.05,
+     0.497
+    ],
+    [
+     -1.073,
+     0.394
+    ],
+    [
+     -1.108,
+     0.301
+    ],
+    [
+     -1.161,
+     0.216
+    ],
+    [
+     -1.235,
+     0.133
+    ],
+    [
+     -1.331,
+     0.047
+    ],
+    [
+     -1.451,
+     -0.046
+    ],
+    [
+     -1.593,
+     -0.15
+    ],
+    [
+     -1.756,
+     -0.268
+    ],
+    [
+     -1.933,
+     -0.401
+    ],
+    [
+     -2.12,
+     -0.549
+    ],
+    [
+     -2.31,
+     -0.707
+    ],
+    [
+     -2.496,
+     -0.873
+    ],
+    [
+     -2.67,
+     -1.041
+    ],
+    [
+     -2.825,
+     -1.203
+    ],
+    [
+     -2.953,
+     -1.354
+    ],
+    [
+     -3.051,
+     -1.485
+    ],
+    [
+     -3.113,
+     -1.592
+    ],
+    [
+     -3.137,
+     -1.669
+    ],
+    [
+     -3.124,
+     -1.714
+    ],
+    [
+     -3.073,
+     -1.724
+    ],
+    [
+     -2.99,
+     -1.703
+    ],
+    [
+     -2.879,
+     -1.651
+    ],
+    [
+     -2.746,
+     -1.574
+    ],
+    [
+     -2.599,
+     -1.479
+    ],
+    [
+     -2.446,
+     -1.371
+    ],
+    [
+     -2.295,
+     -1.257
+    ],
+    [
+     -2.153,
+     -1.144
+    ],
+    [
+     -2.027,
+     -1.038
+    ],
+    [
+     -1.924,
+     -0.942
+    ],
+    [
+     -1.846,
+     -0.859
+    ],
+    [
+     -1.796,
+     -0.79
+    ],
+    [
+     -1.774,
+     -0.732
+    ],
+    [
+     -1.78,
+     -0.684
+    ],
+    [
+     -1.808,
+     -0.641
+    ],
+    [
+     -1.856,
+     -0.597
+    ],
+    [
+     -1.917,
+     -0.547
+    ],
+    [
+     -1.985,
+     -0.487
+    ],
+    [
+     -2.052,
+     -0.411
+    ],
+    [
+     -2.112,
+     -0.318
+    ],
+    [
+     -2.159,
+     -0.206
+    ],
+    [
+     -2.188,
+     -0.075
+    ],
+    [
+     -2.194,
+     0.072
+    ],
+    [
+     -2.176,
+     0.231
+    ],
+    [
+     -2.132,
+     0.397
+    ],
+    [
+     -2.063,
+     0.562
+    ],
+    [
+     -1.972,
+     0.72
+    ],
+    [
+     -1.861,
+     0.865
+    ],
+    [
+     -1.734,
+     0.99
+    ],
+    [
+     -1.598,
+     1.092
+    ],
+    [
+     -1.457,
+     1.166
+    ],
+    [
+     -1.316,
+     1.213
+    ],
+    [
+     -1.181,
+     1.234
+    ],
+    [
+     -1.054,
+     1.23
+    ],
+    [
+     -0.939,
+     1.208
+    ],
+    [
+     -0.837,
+     1.171
+    ],
+    [
+     -0.748,
+     1.127
+    ],
+    [
+     -0.672,
+     1.082
+    ],
+    [
+     -0.605,
+     1.041
+    ],
+    [
+     -0.545,
+     1.01
+    ],
+    [
+     -0.488,
+     0.991
+    ],
+    [
+     -0.429,
+     0.985
+    ],
+    [
+     -0.365,
+     0.993
+    ],
+    [
+     -0.292,
+     1.012
+    ],
+    [
+     -0.206,
+     1.037
+    ],
+    [
+     -0.106,
+     1.063
+    ],
+    [
+     0.009,
+     1.085
+    ],
+    [
+     0.138,
+     1.097
+    ],
+    [
+     0.279,
+     1.092
+    ],
+    [
+     0.429,
+     1.066
+    ],
+    [
+     0.584,
+     1.015
+    ],
+    [
+     0.738,
+     0.939
+    ],
+    [
+     0.885,
+     0.838
+    ],
+    [
+     1.02,
+     0.713
+    ],
+    [
+     1.137,
+     0.569
+    ],
+    [
+     1.232,
+     0.412
+    ],
+    [
+     1.3,
+     0.248
+    ],
+    [
+     1.338,
+     0.083
+    ],
+    [
+     1.348,
+     -0.075
+    ],
+    [
+     1.328,
+     -0.221
+    ],
+    [
+     1.282,
+     -0.35
+    ],
+    [
+     1.213,
+     -0.46
+    ],
+    [
+     1.127,
+     -0.549
+    ],
+    [
+     1.032,
+     -0.618
+    ],
+    [
+     0.933,
+     -0.67
+    ],
+    [
+     0.838,
+     -0.709
+    ],
+    [
+     0.754,
+     -0.739
+    ],
+    [
+     0.689,
+     -0.766
+    ],
+    [
+     0.646,
+     -0.797
+    ],
+    [
+     0.631,
+     -0.834
+    ],
+    [
+     0.645,
+     -0.883
+    ],
+    [
+     0.689,
+     -0.945
+    ],
+    [
+     0.76,
+     -1.021
+    ],
+    [
+     0.857,
+     -1.108
+    ],
+    [
+     0.973,
+     -1.204
+    ],
+    [
+     1.102,
+     -1.303
+    ],
+    [
+     1.236,
+     -1.399
+    ],
+    [
+     1.368,
+     -1.485
+    ],
+    [
+     1.49,
+     -1.556
+    ],
+    [
+     1.594,
+     -1.604
+    ],
+    [
+     1.674,
+     -1.625
+    ],
+    [
+     1.723,
+     -1.615
+    ],
+    [
+     1.738,
+     -1.573
+    ],
+    [
+     1.718,
+     -1.498
+    ],
+    [
+     1.661,
+     -1.394
+    ],
+    [
+     1.569,
+     -1.265
+    ],
+    [
+     1.447,
+     -1.117
+    ],
+    [
+     1.298,
+     -0.955
+    ],
+    [
+     1.129,
+     -0.787
+    ],
+    [
+     0.946,
+     -0.62
+    ],
+    [
+     0.757,
+     -0.459
+    ],
+    [
+     0.568,
+     -0.31
+    ],
+    [
+     0.386,
+     -0.175
+    ],
+    [
+     0.216,
+     -0.056
+    ],
+    [
+     0.063,
+     0.048
+    ],
+    [
+     -0.071,
+     0.14
+    ],
+    [
+     -0.185,
+     0.222
+    ],
+    [
+     -0.278,
+     0.299
+    ],
+    [
+     -0.353,
+     0.377
+    ],
+    [
+     -0.413,
+     0.46
+    ],
+    [
+     -0.462,
+     0.553
+    ],
+    [
+     -0.505,
+     0.658
+    ],
+    [
+     -0.546,
+     0.776
+    ],
+    [
+     -0.59,
+     0.907
+    ],
+    [
+     -0.642,
+     1.048
+    ],
+    [
+     -0.705,
+     1.196
+    ],
+    [
+     -0.782,
+     1.345
+    ],
+    [
+     -0.873,
+     1.488
+    ],
+    [
+     -0.978,
+     1.618
+    ],
+    [
+     -1.097,
+     1.729
+    ],
+    [
+     -1.226,
+     1.813
+    ],
+    [
+     -1.361,
+     1.867
+    ],
+    [
+     -1.499,
+     1.887
+    ],
+    [
+     -1.635,
+     1.871
+    ],
+    [
+     -1.764,
+     1.82
+    ],
+    [
+     -1.882,
+     1.737
+    ],
+    [
+     -1.986,
+     1.626
+    ],
+    [
+     -2.074,
+     1.494
+    ],
+    [
+     -2.145,
+     1.346
+    ],
+    [
+     -2.198,
+     1.191
+    ],
+    [
+     -2.236,
+     1.035
+    ],
+    [
+     -2.261,
+     0.884
+    ],
+    [
+     -2.278,
+     0.742
+    ],
+    [
+     -2.291,
+     0.612
+    ],
+    [
+     -2.307,
+     0.497
+    ],
+    [
+     -2.329,
+     0.394
+    ],
+    [
+     -2.365,
+     0.301
+    ],
+    [
+     -2.418,
+     0.216
+    ],
+    [
+     -2.491,
+     0.133
+    ],
+    [
+     -2.588,
+     0.047
+    ],
+    [
+     -2.708,
+     -0.046
+    ],
+    [
+     -2.85,
+     -0.15
+    ],
+    [
+     -3.012,
+     -0.268
+    ],
+    [
+     -3.19,
+     -0.401
+    ],
+    [
+     -3.377,
+     -0.549
+    ],
+    [
+     -3.567,
+     -0.707
+    ],
+    [
+     -3.753,
+     -0.873
+    ],
+    [
+     -3.927,
+     -1.041
+    ],
+    [
+     -4.081,
+     -1.203
+    ],
+    [
+     -4.21,
+     -1.354
+    ],
+    [
+     -4.307,
+     -1.485
+    ],
+    [
+     -4.37,
+     -1.592
+    ],
+    [
+     -4.394,
+     -1.669
+    ],
+    [
+     -4.38,
+     -1.714
+    ],
+    [
+     -4.33,
+     -1.724
+    ],
+    [
+     -4.247,
+     -1.703
+    ],
+    [
+     -4.136,
+     -1.651
+    ],
+    [
+     -4.003,
+     -1.574
+    ],
+    [
+     -3.856,
+     -1.479
+    ],
+    [
+     -3.703,
+     -1.371
+    ]
+   ],
+   "color": "#5a3d1e",
+   "width": 0.24
+  },
+  "arabesque-3": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     -1.781,
+     0.061
+    ],
+    [
+     -1.736,
+     -0.04
+    ],
+    [
+     -1.688,
+     -0.137
+    ],
+    [
+     -1.639,
+     -0.228
+    ],
+    [
+     -1.588,
+     -0.314
+    ],
+    [
+     -1.536,
+     -0.395
+    ],
+    [
+     -1.483,
+     -0.469
+    ],
+    [
+     -1.43,
+     -0.538
+    ],
+    [
+     -1.377,
+     -0.602
+    ],
+    [
+     -1.323,
+     -0.659
+    ],
+    [
+     -1.27,
+     -0.711
+    ],
+    [
+     -1.218,
+     -0.758
+    ],
+    [
+     -1.166,
+     -0.799
+    ],
+    [
+     -1.115,
+     -0.836
+    ],
+    [
+     -1.066,
+     -0.868
+    ],
+    [
+     -1.017,
+     -0.895
+    ],
+    [
+     -0.97,
+     -0.919
+    ],
+    [
+     -0.924,
+     -0.938
+    ],
+    [
+     -0.879,
+     -0.954
+    ],
+    [
+     -0.836,
+     -0.967
+    ],
+    [
+     -0.794,
+     -0.977
+    ],
+    [
+     -0.753,
+     -0.984
+    ],
+    [
+     -0.714,
+     -0.988
+    ],
+    [
+     -0.675,
+     -0.99
+    ],
+    [
+     -0.638,
+     -0.989
+    ],
+    [
+     -0.601,
+     -0.985
+    ],
+    [
+     -0.564,
+     -0.979
+    ],
+    [
+     -0.528,
+     -0.969
+    ],
+    [
+     -0.492,
+     -0.957
+    ],
+    [
+     -0.456,
+     -0.942
+    ],
+    [
+     -0.42,
+     -0.923
+    ],
+    [
+     -0.383,
+     -0.9
+    ],
+    [
+     -0.345,
+     -0.873
+    ],
+    [
+     -0.306,
+     -0.842
+    ],
+    [
+     -0.266,
+     -0.807
+    ],
+    [
+     -0.224,
+     -0.766
+    ],
+    [
+     -0.18,
+     -0.721
+    ],
+    [
+     -0.134,
+     -0.67
+    ],
+    [
+     -0.086,
+     -0.613
+    ],
+    [
+     -0.036,
+     -0.551
+    ],
+    [
+     0.017,
+     -0.483
+    ],
+    [
+     0.072,
+     -0.409
+    ],
+    [
+     0.13,
+     -0.33
+    ],
+    [
+     0.191,
+     -0.245
+    ],
+    [
+     0.254,
+     -0.155
+    ],
+    [
+     0.32,
+     -0.059
+    ],
+    [
+     0.39,
+     0.041
+    ],
+    [
+     0.461,
+     0.145
+    ],
+    [
+     0.536,
+     0.253
+    ],
+    [
+     0.613,
+     0.364
+    ],
+    [
+     0.692,
+     0.477
+    ],
+    [
+     0.773,
+     0.592
+    ],
+    [
+     0.856,
+     0.707
+    ],
+    [
+     0.941,
+     0.822
+    ],
+    [
+     1.027,
+     0.935
+    ],
+    [
+     1.114,
+     1.047
+    ],
+    [
+     1.202,
+     1.155
+    ],
+    [
+     1.291,
+     1.259
+    ],
+    [
+     1.379,
+     1.358
+    ],
+    [
+     1.467,
+     1.451
+    ],
+    [
+     1.555,
+     1.537
+    ],
+    [
+     1.641,
+     1.615
+    ],
+    [
+     1.726,
+     1.685
+    ],
+    [
+     1.81,
+     1.745
+    ],
+    [
+     1.891,
+     1.796
+    ],
+    [
+     1.969,
+     1.836
+    ],
+    [
+     2.045,
+     1.865
+    ],
+    [
+     2.118,
+     1.883
+    ],
+    [
+     2.187,
+     1.89
+    ],
+    [
+     2.252,
+     1.885
+    ],
+    [
+     2.314,
+     1.869
+    ],
+    [
+     2.371,
+     1.842
+    ],
+    [
+     2.423,
+     1.804
+    ],
+    [
+     2.471,
+     1.756
+    ],
+    [
+     2.514,
+     1.697
+    ],
+    [
+     2.552,
+     1.629
+    ],
+    [
+     2.586,
+     1.553
+    ],
+    [
+     2.614,
+     1.468
+    ],
+    [
+     2.637,
+     1.376
+    ],
+    [
+     2.655,
+     1.278
+    ],
+    [
+     2.668,
+     1.175
+    ],
+    [
+     2.677,
+     1.068
+    ],
+    [
+     2.681,
+     0.957
+    ],
+    [
+     2.68,
+     0.843
+    ],
+    [
+     2.675,
+     0.729
+    ],
+    [
+     2.665,
+     0.614
+    ],
+    [
+     2.652,
+     0.499
+    ],
+    [
+     2.636,
+     0.385
+    ],
+    [
+     2.616,
+     0.274
+    ],
+    [
+     2.592,
+     0.166
+    ],
+    [
+     2.567,
+     0.061
+    ],
+    [
+     2.539,
+     -0.04
+    ],
+    [
+     2.508,
+     -0.137
+    ],
+    [
+     2.476,
+     -0.228
+    ],
+    [
+     2.443,
+     -0.314
+    ],
+    [
+     2.409,
+     -0.395
+    ],
+    [
+     2.373,
+     -0.469
+    ],
+    [
+     2.338,
+     -0.538
+    ],
+    [
+     2.302,
+     -0.602
+    ],
+    [
+     2.266,
+     -0.659
+    ],
+    [
+     2.23,
+     -0.711
+    ],
+    [
+     2.195,
+     -0.758
+    ],
+    [
+     2.161,
+     -0.799
+    ],
+    [
+     2.128,
+     -0.836
+    ],
+    [
+     2.095,
+     -0.868
+    ],
+    [
+     2.064,
+     -0.895
+    ],
+    [
+     2.034,
+     -0.919
+    ],
+    [
+     2.006,
+     -0.938
+    ],
+    [
+     1.979,
+     -0.954
+    ],
+    [
+     1.953,
+     -0.967
+    ],
+    [
+     1.929,
+     -0.977
+    ],
+    [
+     1.905,
+     -0.984
+    ],
+    [
+     1.883,
+     -0.988
+    ],
+    [
+     1.862,
+     -0.99
+    ],
+    [
+     1.842,
+     -0.989
+    ],
+    [
+     1.822,
+     -0.985
+    ],
+    [
+     1.804,
+     -0.979
+    ],
+    [
+     1.785,
+     -0.969
+    ],
+    [
+     1.766,
+     -0.957
+    ],
+    [
+     1.748,
+     -0.942
+    ],
+    [
+     1.729,
+     -0.923
+    ],
+    [
+     1.709,
+     -0.9
+    ],
+    [
+     1.689,
+     -0.873
+    ],
+    [
+     1.667,
+     -0.842
+    ],
+    [
+     1.644,
+     -0.807
+    ],
+    [
+     1.62,
+     -0.766
+    ],
+    [
+     1.594,
+     -0.721
+    ],
+    [
+     1.565,
+     -0.67
+    ],
+    [
+     1.535,
+     -0.613
+    ],
+    [
+     1.502,
+     -0.551
+    ],
+    [
+     1.467,
+     -0.483
+    ],
+    [
+     1.429,
+     -0.409
+    ],
+    [
+     1.389,
+     -0.33
+    ],
+    [
+     1.345,
+     -0.245
+    ],
+    [
+     1.299,
+     -0.155
+    ],
+    [
+     1.25,
+     -0.059
+    ],
+    [
+     1.199,
+     0.041
+    ],
+    [
+     1.144,
+     0.145
+    ],
+    [
+     1.087,
+     0.253
+    ],
+    [
+     1.028,
+     0.364
+    ],
+    [
+     0.966,
+     0.477
+    ],
+    [
+     0.903,
+     0.592
+    ],
+    [
+     0.837,
+     0.707
+    ],
+    [
+     0.77,
+     0.822
+    ],
+    [
+     0.701,
+     0.935
+    ],
+    [
+     0.631,
+     1.047
+    ],
+    [
+     0.561,
+     1.155
+    ],
+    [
+     0.49,
+     1.259
+    ],
+    [
+     0.419,
+     1.358
+    ],
+    [
+     0.348,
+     1.451
+    ],
+    [
+     0.278,
+     1.537
+    ],
+    [
+     0.209,
+     1.615
+    ],
+    [
+     0.141,
+     1.685
+    ],
+    [
+     0.075,
+     1.745
+    ],
+    [
+     0.012,
+     1.796
+    ],
+    [
+     -0.05,
+     1.836
+    ],
+    [
+     -0.108,
+     1.865
+    ],
+    [
+     -0.163,
+     1.883
+    ],
+    [
+     -0.215,
+     1.89
+    ],
+    [
+     -0.263,
+     1.885
+    ],
+    [
+     -0.306,
+     1.869
+    ],
+    [
+     -0.346,
+     1.842
+    ],
+    [
+     -0.381,
+     1.804
+    ],
+    [
+     -0.412,
+     1.756
+    ],
+    [
+     -0.437,
+     1.697
+    ],
+    [
+     -0.458,
+     1.629
+    ],
+    [
+     -0.474,
+     1.553
+    ],
+    [
+     -0.484,
+     1.468
+    ],
+    [
+     -0.49,
+     1.376
+    ],
+    [
+     -0.491,
+     1.278
+    ],
+    [
+     -0.487,
+     1.175
+    ],
+    [
+     -0.478,
+     1.068
+    ],
+    [
+     -0.464,
+     0.957
+    ],
+    [
+     -0.446,
+     0.843
+    ],
+    [
+     -0.423,
+     0.729
+    ],
+    [
+     -0.396,
+     0.614
+    ],
+    [
+     -0.366,
+     0.499
+    ],
+    [
+     -0.332,
+     0.385
+    ],
+    [
+     -0.294,
+     0.274
+    ],
+    [
+     -0.254,
+     0.166
+    ],
+    [
+     -0.211,
+     0.061
+    ]
+   ],
+   "color": "#5a3d1e",
+   "width": 0.24
+  },
+  "string": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     -0.5,
+     1.678,
+     0.083
+    ],
+    [
+     -1.0,
+     3.351,
+     0.167
+    ],
+    [
+     -1.5,
+     5.015,
+     0.25
+    ],
+    [
+     -2.0,
+     6.667,
+     0.333
+    ],
+    [
+     -2.5,
+     8.301,
+     0.417
+    ],
+    [
+     -3.0,
+     9.914,
+     0.5
+    ],
+    [
+     -3.5,
+     11.503,
+     0.583
+    ],
+    [
+     -4.0,
+     13.065,
+     0.667
+    ],
+    [
+     -4.5,
+     14.598,
+     0.75
+    ],
+    [
+     -5.0,
+     16.099,
+     0.833
+    ],
+    [
+     -5.5,
+     17.566,
+     0.917
+    ],
+    [
+     -6.0,
+     19.0,
+     1.0
+    ],
+    [
+     -6.5,
+     20.4,
+     1.083
+    ],
+    [
+     -7.0,
+     21.765,
+     1.167
+    ],
+    [
+     -7.5,
+     23.098,
+     1.25
+    ],
+    [
+     -8.0,
+     24.399,
+     1.333
+    ],
+    [
+     -8.5,
+     25.67,
+     1.417
+    ],
+    [
+     -9.0,
+     26.914,
+     1.5
+    ],
+    [
+     -9.5,
+     28.134,
+     1.583
+    ],
+    [
+     -10.0,
+     29.333,
+     1.667
+    ],
+    [
+     -10.5,
+     30.515,
+     1.75
+    ],
+    [
+     -11.0,
+     31.684,
+     1.833
+    ],
+    [
+     -11.5,
+     32.844,
+     1.917
+    ],
+    [
+     -12.0,
+     34.0,
+     2.0
+    ]
+   ],
+   "color": "#ffd56b",
+   "width": 0.45,
+   "soft": 0.5,
+   "add": true
+  },
+  "string-2": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.375,
+     1.239,
+     0.042
+    ],
+    [
+     0.75,
+     2.482,
+     0.083
+    ],
+    [
+     1.125,
+     3.735,
+     0.125
+    ],
+    [
+     1.5,
+     5.0,
+     0.167
+    ],
+    [
+     1.875,
+     6.282,
+     0.208
+    ],
+    [
+     2.25,
+     7.586,
+     0.25
+    ],
+    [
+     2.625,
+     8.913,
+     0.292
+    ],
+    [
+     3.0,
+     10.268,
+     0.333
+    ],
+    [
+     3.375,
+     11.652,
+     0.375
+    ],
+    [
+     3.75,
+     13.068,
+     0.417
+    ],
+    [
+     4.125,
+     14.517,
+     0.458
+    ],
+    [
+     4.5,
+     16.0,
+     0.5
+    ],
+    [
+     4.875,
+     17.517,
+     0.542
+    ],
+    [
+     5.25,
+     19.068,
+     0.583
+    ],
+    [
+     5.625,
+     20.652,
+     0.625
+    ],
+    [
+     6.0,
+     22.268,
+     0.667
+    ],
+    [
+     6.375,
+     23.913,
+     0.708
+    ],
+    [
+     6.75,
+     25.586,
+     0.75
+    ],
+    [
+     7.125,
+     27.282,
+     0.792
+    ],
+    [
+     7.5,
+     29.0,
+     0.833
+    ],
+    [
+     7.875,
+     30.735,
+     0.875
+    ],
+    [
+     8.25,
+     32.482,
+     0.917
+    ],
+    [
+     8.625,
+     34.239,
+     0.958
+    ],
+    [
+     9.0,
+     36.0,
+     1.0
+    ]
+   ],
+   "color": "#ffc94a",
+   "width": 0.35,
+   "soft": 0.5,
+   "add": true
+  },
+  "string-3": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     -1.167,
+     1.321,
+     0.0
+    ],
+    [
+     -2.333,
+     2.638,
+     0.0
+    ],
+    [
+     -3.5,
+     3.949,
+     0.0
+    ],
+    [
+     -4.667,
+     5.25,
+     0.0
+    ],
+    [
+     -5.833,
+     6.538,
+     0.0
+    ],
+    [
+     -7.0,
+     7.811,
+     0.0
+    ],
+    [
+     -8.167,
+     9.065,
+     0.0
+    ],
+    [
+     -9.333,
+     10.299,
+     0.0
+    ],
+    [
+     -10.5,
+     11.511,
+     0.0
+    ],
+    [
+     -11.667,
+     12.699,
+     0.0
+    ],
+    [
+     -12.833,
+     13.862,
+     0.0
+    ],
+    [
+     -14.0,
+     15.0,
+     0.0
+    ],
+    [
+     -15.167,
+     16.112,
+     0.0
+    ],
+    [
+     -16.333,
+     17.199,
+     0.0
+    ],
+    [
+     -17.5,
+     18.261,
+     0.0
+    ],
+    [
+     -18.667,
+     19.299,
+     0.0
+    ],
+    [
+     -19.833,
+     20.315,
+     0.0
+    ],
+    [
+     -21.0,
+     21.311,
+     0.0
+    ],
+    [
+     -22.167,
+     22.288,
+     0.0
+    ],
+    [
+     -23.333,
+     23.25,
+     0.0
+    ],
+    [
+     -24.5,
+     24.199,
+     0.0
+    ],
+    [
+     -25.667,
+     25.138,
+     0.0
+    ],
+    [
+     -26.833,
+     26.071,
+     0.0
+    ],
+    [
+     -28.0,
+     27.0,
+     0.0
+    ]
+   ],
+   "color": "#ffcf5a",
+   "width": 0.35,
+   "soft": 0.5,
+   "add": true
+  },
+  "string-h": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     -0.5,
+     1.678,
+     0.083
+    ],
+    [
+     -1.0,
+     3.351,
+     0.167
+    ],
+    [
+     -1.5,
+     5.015,
+     0.25
+    ],
+    [
+     -2.0,
+     6.667,
+     0.333
+    ],
+    [
+     -2.5,
+     8.301,
+     0.417
+    ],
+    [
+     -3.0,
+     9.914,
+     0.5
+    ],
+    [
+     -3.5,
+     11.503,
+     0.583
+    ],
+    [
+     -4.0,
+     13.065,
+     0.667
+    ],
+    [
+     -4.5,
+     14.598,
+     0.75
+    ],
+    [
+     -5.0,
+     16.099,
+     0.833
+    ],
+    [
+     -5.5,
+     17.566,
+     0.917
+    ],
+    [
+     -6.0,
+     19.0,
+     1.0
+    ],
+    [
+     -6.5,
+     20.4,
+     1.083
+    ],
+    [
+     -7.0,
+     21.765,
+     1.167
+    ],
+    [
+     -7.5,
+     23.098,
+     1.25
+    ],
+    [
+     -8.0,
+     24.399,
+     1.333
+    ],
+    [
+     -8.5,
+     25.67,
+     1.417
+    ],
+    [
+     -9.0,
+     26.914,
+     1.5
+    ],
+    [
+     -9.5,
+     28.134,
+     1.583
+    ],
+    [
+     -10.0,
+     29.333,
+     1.667
+    ],
+    [
+     -10.5,
+     30.515,
+     1.75
+    ],
+    [
+     -11.0,
+     31.684,
+     1.833
+    ],
+    [
+     -11.5,
+     32.844,
+     1.917
+    ],
+    [
+     -12.0,
+     34.0,
+     2.0
+    ]
+   ],
+   "color": "#f29a1a",
+   "width": 2.6,
+   "soft": 1.0
+  },
+  "string-2h": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.375,
+     1.239,
+     0.042
+    ],
+    [
+     0.75,
+     2.482,
+     0.083
+    ],
+    [
+     1.125,
+     3.735,
+     0.125
+    ],
+    [
+     1.5,
+     5.0,
+     0.167
+    ],
+    [
+     1.875,
+     6.282,
+     0.208
+    ],
+    [
+     2.25,
+     7.586,
+     0.25
+    ],
+    [
+     2.625,
+     8.913,
+     0.292
+    ],
+    [
+     3.0,
+     10.268,
+     0.333
+    ],
+    [
+     3.375,
+     11.652,
+     0.375
+    ],
+    [
+     3.75,
+     13.068,
+     0.417
+    ],
+    [
+     4.125,
+     14.517,
+     0.458
+    ],
+    [
+     4.5,
+     16.0,
+     0.5
+    ],
+    [
+     4.875,
+     17.517,
+     0.542
+    ],
+    [
+     5.25,
+     19.068,
+     0.583
+    ],
+    [
+     5.625,
+     20.652,
+     0.625
+    ],
+    [
+     6.0,
+     22.268,
+     0.667
+    ],
+    [
+     6.375,
+     23.913,
+     0.708
+    ],
+    [
+     6.75,
+     25.586,
+     0.75
+    ],
+    [
+     7.125,
+     27.282,
+     0.792
+    ],
+    [
+     7.5,
+     29.0,
+     0.833
+    ],
+    [
+     7.875,
+     30.735,
+     0.875
+    ],
+    [
+     8.25,
+     32.482,
+     0.917
+    ],
+    [
+     8.625,
+     34.239,
+     0.958
+    ],
+    [
+     9.0,
+     36.0,
+     1.0
+    ]
+   ],
+   "color": "#ef8f12",
+   "width": 2.2,
+   "soft": 1.0
+  },
+  "string-3h": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     -1.167,
+     1.321,
+     0.0
+    ],
+    [
+     -2.333,
+     2.638,
+     0.0
+    ],
+    [
+     -3.5,
+     3.949,
+     0.0
+    ],
+    [
+     -4.667,
+     5.25,
+     0.0
+    ],
+    [
+     -5.833,
+     6.538,
+     0.0
+    ],
+    [
+     -7.0,
+     7.811,
+     0.0
+    ],
+    [
+     -8.167,
+     9.065,
+     0.0
+    ],
+    [
+     -9.333,
+     10.299,
+     0.0
+    ],
+    [
+     -10.5,
+     11.511,
+     0.0
+    ],
+    [
+     -11.667,
+     12.699,
+     0.0
+    ],
+    [
+     -12.833,
+     13.862,
+     0.0
+    ],
+    [
+     -14.0,
+     15.0,
+     0.0
+    ],
+    [
+     -15.167,
+     16.112,
+     0.0
+    ],
+    [
+     -16.333,
+     17.199,
+     0.0
+    ],
+    [
+     -17.5,
+     18.261,
+     0.0
+    ],
+    [
+     -18.667,
+     19.299,
+     0.0
+    ],
+    [
+     -19.833,
+     20.315,
+     0.0
+    ],
+    [
+     -21.0,
+     21.311,
+     0.0
+    ],
+    [
+     -22.167,
+     22.288,
+     0.0
+    ],
+    [
+     -23.333,
+     23.25,
+     0.0
+    ],
+    [
+     -24.5,
+     24.199,
+     0.0
+    ],
+    [
+     -25.667,
+     25.138,
+     0.0
+    ],
+    [
+     -26.833,
+     26.071,
+     0.0
+    ],
+    [
+     -28.0,
+     27.0,
+     0.0
+    ]
+   ],
+   "color": "#f2a01e",
+   "width": 2.2,
+   "soft": 1.0
+  },
+  "point": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    1.4,
+    1.4
+   ],
+   "color": "#ff6a20",
+   "soft": 0.7,
+   "_": "точка на темени"
+  },
+  "spark": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    2.4,
+    2.4
+   ],
+   "color": "#ff3b1c",
+   "soft": 0.7,
+   "_": "луч дошёл: вспышка в кабине лётчика"
+  },
+  "coal": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    3.2,
+    3.2
+   ],
+   "color": "#ff5a14",
+   "soft": 0.6,
+   "_": "пламенный уголь"
+  },
+  "fire-circle": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0.0,
+     9.0
+    ],
+    [
+     0.589,
+     8.981
+    ],
+    [
+     1.175,
+     8.923
+    ],
+    [
+     1.756,
+     8.827
+    ],
+    [
+     2.329,
+     8.693
+    ],
+    [
+     2.893,
+     8.522
+    ],
+    [
+     3.444,
+     8.315
+    ],
+    [
+     3.981,
+     8.072
+    ],
+    [
+     4.5,
+     7.794
+    ],
+    [
+     5.0,
+     7.483
+    ],
+    [
+     5.479,
+     7.14
+    ],
+    [
+     5.934,
+     6.767
+    ],
+    [
+     6.364,
+     6.364
+    ],
+    [
+     6.767,
+     5.934
+    ],
+    [
+     7.14,
+     5.479
+    ],
+    [
+     7.483,
+     5.0
+    ],
+    [
+     7.794,
+     4.5
+    ],
+    [
+     8.072,
+     3.981
+    ],
+    [
+     8.315,
+     3.444
+    ],
+    [
+     8.522,
+     2.893
+    ],
+    [
+     8.693,
+     2.329
+    ],
+    [
+     8.827,
+     1.756
+    ],
+    [
+     8.923,
+     1.175
+    ],
+    [
+     8.981,
+     0.589
+    ],
+    [
+     9.0,
+     0.0
+    ],
+    [
+     8.981,
+     -0.589
+    ],
+    [
+     8.923,
+     -1.175
+    ],
+    [
+     8.827,
+     -1.756
+    ],
+    [
+     8.693,
+     -2.329
+    ],
+    [
+     8.522,
+     -2.893
+    ],
+    [
+     8.315,
+     -3.444
+    ],
+    [
+     8.072,
+     -3.981
+    ],
+    [
+     7.794,
+     -4.5
+    ],
+    [
+     7.483,
+     -5.0
+    ],
+    [
+     7.14,
+     -5.479
+    ],
+    [
+     6.767,
+     -5.934
+    ],
+    [
+     6.364,
+     -6.364
+    ],
+    [
+     5.934,
+     -6.767
+    ],
+    [
+     5.479,
+     -7.14
+    ],
+    [
+     5.0,
+     -7.483
+    ],
+    [
+     4.5,
+     -7.794
+    ],
+    [
+     3.981,
+     -8.072
+    ],
+    [
+     3.444,
+     -8.315
+    ],
+    [
+     2.893,
+     -8.522
+    ],
+    [
+     2.329,
+     -8.693
+    ],
+    [
+     1.756,
+     -8.827
+    ],
+    [
+     1.175,
+     -8.923
+    ],
+    [
+     0.589,
+     -8.981
+    ],
+    [
+     0.0,
+     -9.0
+    ],
+    [
+     -0.589,
+     -8.981
+    ],
+    [
+     -1.175,
+     -8.923
+    ],
+    [
+     -1.756,
+     -8.827
+    ],
+    [
+     -2.329,
+     -8.693
+    ],
+    [
+     -2.893,
+     -8.522
+    ],
+    [
+     -3.444,
+     -8.315
+    ],
+    [
+     -3.981,
+     -8.072
+    ],
+    [
+     -4.5,
+     -7.794
+    ],
+    [
+     -5.0,
+     -7.483
+    ],
+    [
+     -5.479,
+     -7.14
+    ],
+    [
+     -5.934,
+     -6.767
+    ],
+    [
+     -6.364,
+     -6.364
+    ],
+    [
+     -6.767,
+     -5.934
+    ],
+    [
+     -7.14,
+     -5.479
+    ],
+    [
+     -7.483,
+     -5.0
+    ],
+    [
+     -7.794,
+     -4.5
+    ],
+    [
+     -8.072,
+     -3.981
+    ],
+    [
+     -8.315,
+     -3.444
+    ],
+    [
+     -8.522,
+     -2.893
+    ],
+    [
+     -8.693,
+     -2.329
+    ],
+    [
+     -8.827,
+     -1.756
+    ],
+    [
+     -8.923,
+     -1.175
+    ],
+    [
+     -8.981,
+     -0.589
+    ],
+    [
+     -9.0,
+     -0.0
+    ],
+    [
+     -8.981,
+     0.589
+    ],
+    [
+     -8.923,
+     1.175
+    ],
+    [
+     -8.827,
+     1.756
+    ],
+    [
+     -8.693,
+     2.329
+    ],
+    [
+     -8.522,
+     2.893
+    ],
+    [
+     -8.315,
+     3.444
+    ],
+    [
+     -8.072,
+     3.981
+    ],
+    [
+     -7.794,
+     4.5
+    ],
+    [
+     -7.483,
+     5.0
+    ],
+    [
+     -7.14,
+     5.479
+    ],
+    [
+     -6.767,
+     5.934
+    ],
+    [
+     -6.364,
+     6.364
+    ],
+    [
+     -5.934,
+     6.767
+    ],
+    [
+     -5.479,
+     7.14
+    ],
+    [
+     -5.0,
+     7.483
+    ],
+    [
+     -4.5,
+     7.794
+    ],
+    [
+     -3.981,
+     8.072
+    ],
+    [
+     -3.444,
+     8.315
+    ],
+    [
+     -2.893,
+     8.522
+    ],
+    [
+     -2.329,
+     8.693
+    ],
+    [
+     -1.756,
+     8.827
+    ],
+    [
+     -1.175,
+     8.923
+    ],
+    [
+     -0.589,
+     8.981
+    ],
+    [
+     -0.0,
+     9.0
+    ]
+   ],
+   "color": "#e0381c",
+   "width": 0.45,
+   "_": "уголь описывает круг (grow)"
+  },
+  "fire-ring": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "ring",
+   "size": [
+    18,
+    18
+   ],
+   "color": "#e0381c",
+   "width": 0.024,
+   "_": "огненный круг; spin + trail — сфера"
+  },
+  "perfection": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "ring",
+   "size": [
+    40,
+    40
+   ],
+   "color": "#151413",
+   "width": 0.012,
+   "_": "круг совершенствования"
+  },
+  "mini-point": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    1.2,
+    1.2
+   ],
+   "color": "#151413"
+  },
+  "mini-coal": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    3,
+    3
+   ],
+   "color": "#e0381c"
+  },
+  "mini-ring": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "ring",
+   "size": [
+    5,
+    5
+   ],
+   "color": "#e0381c",
+   "width": 0.08
+  },
+  "red-street": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    7,
+    150
+   ],
+   "color": "#c8281e"
+  },
+  "black-street": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    170,
+    5
+   ],
+   "color": "#151413"
+  },
+  "man-dot": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    2.2,
+    2.2
+   ],
+   "color": "#151413",
+   "_": "прохожий на карте"
+  },
+  "route": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     -48,
+     -20
+    ],
+    [
+     -30,
+     -14
+    ],
+    [
+     -22,
+     2
+    ],
+    [
+     -6,
+     6
+    ],
+    [
+     4,
+     -1
+    ]
+   ],
+   "color": "#151413",
+   "width": 0.9,
+   "dash": [
+    2.4,
+    1.4
+   ],
+   "_": "путь прохожего"
+  },
+  "link": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -11,
+     -4
+    ],
+    [
+     -26,
+     -13
+    ],
+    [
+     -42,
+     -25
+    ],
+    [
+     -56,
+     -38
+    ]
+   ],
+   "color": "#c8281e",
+   "width": 0.8,
+   "_": "связь бандита и прохожего: от аэроплана до точки прохожего"
+  },
+  "bomb-curve": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     -5,
+     -1.6
+    ],
+    [
+     -11,
+     -5.5
+    ],
+    [
+     -17,
+     -12.5
+    ],
+    [
+     -21.6,
+     -22.5
+    ]
+   ],
+   "color": "#151413",
+   "width": 0.8,
+   "dash": [
+    1.8,
+    1.4
+   ],
+   "_": "пустая кривая воздуха — от аэроплана до угла"
+  },
+  "flight-line": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     9.5,
+     6.1
+    ],
+    [
+     22.9,
+     16.3
+    ],
+    [
+     38.1,
+     30.6
+    ],
+    [
+     53.8,
+     47.0
+    ],
+    [
+     67.2,
+     63.2
+    ]
+   ],
+   "color": "#c8281e",
+   "width": 0.5,
+   "_": "переход «внутренно» со скамьи — в кабину лётчика"
+  },
+  "fate-line": {
+   "kind": "procedural",
+   "draw": "trace",
+   "points": [
+    [
+     0,
+     0
+    ],
+    [
+     20,
+     0
+    ],
+    [
+     36,
+     1
+    ],
+    [
+     48,
+     0
+    ]
+   ],
+   "color": "#151413",
+   "width": 0.4,
+   "_": "путь обречённого: обрывается"
+  },
+  "shadow": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "wedge",
+   "size": [
+    30,
+    22
+   ],
+   "color": "#151413",
+   "_": "чёрная тень убийства за лётчиком"
+  },
+  "bar-black": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    3,
+    16
+   ],
+   "color": "#151413"
+  },
+  "bar-red": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    3,
+    16
+   ],
+   "color": "#c8281e"
+  },
+  "flame": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "wedge",
+   "size": [
+    10,
+    4
+   ],
+   "color": "#ff5a14",
+   "soft": 0.3
+  },
+  "flame-red": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "wedge",
+   "size": [
+    12,
+    5
+   ],
+   "color": "#c8281e",
+   "soft": 0.3
+  },
+  "p-yellow": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    12,
+    7
+   ],
+   "color": "#f2c21b"
+  },
+  "p-blue": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    6,
+    14
+   ],
+   "color": "#1d4fa8"
+  },
+  "p-green": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    7,
+    7
+   ],
+   "color": "#2f8f4e"
+  },
+  "p-pink": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "wedge",
+   "size": [
+    14,
+    7
+   ],
+   "color": "#e46a8e"
+  },
+  "p-violet": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "rect",
+   "size": [
+    9,
+    9
+   ],
+   "color": "#6b3fa0"
+  },
+  "p-orange": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "disc",
+   "size": [
+    5,
+    5
+   ],
+   "color": "#f07a1e"
+  },
+  "p-cross": {
+   "kind": "procedural",
+   "draw": "shape",
+   "shape": "cross",
+   "size": [
+    9,
+    9
+   ],
+   "color": "#151413",
+   "width": 0.18
+  },
+  "title-main-v": {
+   "kind": "procedural",
+   "draw": "title",
+   "story_title": true,
+   "size": [
+    27,
+    48
+   ],
+   "look": "suprematist"
+  },
+  "title-1-v": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "I",
+   "big": true,
+   "size": [
+    27,
+    48
+   ],
+   "look": "suprematist"
+  },
+  "title-2-v": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "II",
+   "big": true,
+   "size": [
+    27,
+    48
+   ],
+   "look": "suprematist"
+  },
+  "title-3-v": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "III",
+   "big": true,
+   "size": [
+    27,
+    48
+   ],
+   "look": "suprematist"
+  }
+ }
+}

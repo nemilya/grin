@@ -1,0 +1,48 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "ef5e621d22da",
+   "file": "story-011-1.opus",
+   "dur": 3.151,
+   "chars": 28,
+   "speech": "Еще не кончен срок очищения.",
+   "words": [
+    [
+     0.1,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     1.5
+    ],
+    [
+     1.5,
+     2.0
+    ],
+    [
+     2.0,
+     3.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Ещё не кончен срок очищения.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00064,
+    "verify": 0.00027
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:18:37"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

@@ -1,0 +1,116 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "af2abbd48b1d",
+   "file": "story-026-1.opus",
+   "dur": 10.034,
+   "chars": 133,
+   "speech": "“Duplay! You heard nothing and played nothing. You have entirely forgotten all that took place during your sleep. Sit down and wake!”",
+   "words": [
+    [
+     0.1,
+     0.6
+    ],
+    [
+     1.0,
+     1.2
+    ],
+    [
+     1.2,
+     1.5
+    ],
+    [
+     1.5,
+     2.2
+    ],
+    [
+     2.3,
+     2.5
+    ],
+    [
+     2.5,
+     2.9
+    ],
+    [
+     2.9,
+     3.2
+    ],
+    [
+     4.0,
+     4.1
+    ],
+    [
+     4.1,
+     4.2
+    ],
+    [
+     4.2,
+     4.9
+    ],
+    [
+     4.9,
+     5.5
+    ],
+    [
+     5.5,
+     5.8
+    ],
+    [
+     5.8,
+     6.0
+    ],
+    [
+     6.0,
+     6.2
+    ],
+    [
+     6.2,
+     6.8
+    ],
+    [
+     6.8,
+     7.1
+    ],
+    [
+     7.1,
+     7.2
+    ],
+    [
+     7.2,
+     7.7
+    ],
+    [
+     8.4,
+     8.6
+    ],
+    [
+     8.6,
+     9.2
+    ],
+    [
+     9.5,
+     9.7
+    ],
+    [
+     9.7,
+     10.0
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "you play. You heard nothing and played nothing. You have entirely forgotten all that took place during your sleep. Sit down and wake.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00166,
+    "verify": 0.00083
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:00:17"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

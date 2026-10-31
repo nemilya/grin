@@ -1,0 +1,52 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "fd09990535d5",
+   "file": "story-009-1.opus",
+   "dur": 1.593,
+   "chars": 28,
+   "speech": "— Почему же я вам не поверю?",
+   "words": [
+    [
+     0.1,
+     0.5
+    ],
+    [
+     0.5,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     1.0
+    ],
+    [
+     1.0,
+     1.1
+    ],
+    [
+     1.1,
+     1.5
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Почему же я вам не поверю?",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00035,
+    "verify": 0.00018
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-29 22:43:43"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

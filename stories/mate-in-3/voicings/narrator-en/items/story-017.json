@@ -1,0 +1,116 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "a8984dd82e3d",
+   "file": "story-017-1.opus",
+   "dur": 11.194,
+   "chars": 138,
+   "speech": "Before I had even managed to turn myself into an enormous question mark, his words came pouring out again — passionate, persuasive, quiet:",
+   "words": [
+    [
+     0.3,
+     0.8
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     0.9,
+     1.0
+    ],
+    [
+     1.0,
+     1.3
+    ],
+    [
+     1.3,
+     1.8
+    ],
+    [
+     1.8,
+     1.9
+    ],
+    [
+     1.9,
+     2.2
+    ],
+    [
+     2.2,
+     2.8
+    ],
+    [
+     2.8,
+     3.1
+    ],
+    [
+     3.1,
+     3.2
+    ],
+    [
+     3.2,
+     3.8
+    ],
+    [
+     3.8,
+     4.3
+    ],
+    [
+     4.3,
+     4.6
+    ],
+    [
+     5.2,
+     5.3
+    ],
+    [
+     5.3,
+     5.8
+    ],
+    [
+     5.8,
+     6.1
+    ],
+    [
+     6.1,
+     6.7
+    ],
+    [
+     6.7,
+     6.8
+    ],
+    [
+     6.8,
+     7.2
+    ],
+    [
+     8.0,
+     8.6
+    ],
+    [
+     9.2,
+     9.9
+    ],
+    [
+     10.7,
+     11.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Before I had even managed to turn myself into an enormous question mark, his words came pouring out again. Passionate, persuasive, quiet.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.0018,
+    "verify": 0.0009
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:58:00"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

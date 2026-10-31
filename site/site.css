@@ -1,0 +1,224 @@
+/* Сайт grin.nemilya.me: об авторе, рассказы, чтение с озвучкой, видео в браузере. Шрифты — Source Serif 4, Golos Text (OFL). */
+@font-face { font-family: Serif; font-weight: 400; font-display: swap; src: url(fonts/serif-400-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: Serif; font-weight: 400; font-display: swap; src: url(fonts/serif-400-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: Serif; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/serif-400i-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: Serif; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/serif-400i-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: Serif; font-weight: 600; font-display: swap; src: url(fonts/serif-600-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: Serif; font-weight: 600; font-display: swap; src: url(fonts/serif-600-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: Sans; font-weight: 400; font-display: swap; src: url(fonts/golos-400-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: Sans; font-weight: 400; font-display: swap; src: url(fonts/golos-400-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: Sans; font-weight: 600; font-display: swap; src: url(fonts/golos-600-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: Sans; font-weight: 600; font-display: swap; src: url(fonts/golos-600-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+
+:root {
+  --bg: #F4EFE6; --paper: #FBF8F2; --ink: #2A2420; --muted: #7A6E62; --line: #E2D8C8;
+  --accent: #9C2A22; --accent-ink: #FFF8F0;
+  --hl-s: #F1E2C4; --hl-w: #E7B66B; --hl-w-ink: #2A2420;
+  --serif: Serif, 'Iowan Old Style', 'PT Serif', Georgia, serif;
+  --sans: Sans, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --fs: clamp(17px, 1rem + 0.45vw, 21px);
+  color-scheme: light;
+}
+/* ночная схема: по системе, если читатель не выбрал сам (кнопка ☀/☾ → data-theme на <html>) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme=light]) {
+    --bg: #17140F; --paper: #1E1A15; --ink: #E9E1D4; --muted: #A2968A; --line: #3A3229;
+    --accent: #E8826A; --accent-ink: #1A140F;
+    --hl-s: #3A2F20; --hl-w: #C98B3E; --hl-w-ink: #17140F;
+    color-scheme: dark;
+  }
+}
+:root[data-theme=dark] {
+  --bg: #17140F; --paper: #1E1A15; --ink: #E9E1D4; --muted: #A2968A; --line: #3A3229;
+  --accent: #E8826A; --accent-ink: #1A140F;
+  --hl-s: #3A2F20; --hl-w: #C98B3E; --hl-w-ink: #17140F;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 var(--fs)/1.6 var(--serif); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+button { font: inherit; color: inherit; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 16px;
+  font: 600 14px/1.2 var(--sans); border-bottom: 1px solid var(--line); background: var(--paper); }
+.top .brand { color: var(--ink); text-decoration: none; letter-spacing: .02em; }
+.langs { display: flex; gap: 2px; }
+.langs a { padding: 4px 8px; border-radius: 6px; text-decoration: none; color: var(--muted); }
+.langs a.on { background: var(--ink); color: var(--paper); }
+.tools { display: flex; align-items: center; gap: 10px; }
+.tools button, .tools select { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; cursor: pointer; font: 600 14px/1.2 var(--sans); color: var(--ink); }
+.tools select { font-weight: 400; background: var(--paper); }
+.tools .theme { width: 34px; }
+
+/* субтитры сцены (stage.js рисует их шрифтом «Paper Serif») */
+@font-face { font-family: "Paper Serif"; font-weight: 400; src: url(fonts/serif-400-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Paper Serif"; font-weight: 400; src: url(fonts/serif-400-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: "Paper Serif"; font-weight: 400; font-style: italic; src: url(fonts/serif-400i-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Paper Serif"; font-weight: 400; font-style: italic; src: url(fonts/serif-400i-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+/* интертитры «авангарда» (paper.js: look suprematist) — рубленый шрифт */
+@font-face { font-family: "Stage Sans"; font-weight: 600; src: url(fonts/golos-600-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Stage Sans"; font-weight: 600; src: url(fonts/golos-600-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+/* чтение: страница без прокрутки, плеер внизу */
+body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+.reader { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.reader .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px;
+  font: 14px/1.2 var(--sans); max-width: 46rem; width: 100%; margin: 0 auto; }
+.reader .book-link { color: var(--muted); text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chapters { font: 14px var(--sans); background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 4px 8px; max-width: 50%; }
+.reader .stage { flex: 1; min-height: 0; display: flex; flex-direction: column; width: 100%; }
+.page { flex: 1; min-height: 0; overflow: hidden; width: 100%; max-width: 42rem; margin: 0 auto; padding: 4px 16px 0; outline: none; }
+.page.overflow { overflow-y: auto; }
+.page h1 { font-size: 1.7em; line-height: 1.2; margin: .4em 0 .8em; font-weight: 600; text-align: center; }
+.page h2 { font-size: 1.2em; margin: 1em 0 .5em; }
+.page p { margin: 0 0 .7em; text-indent: 1.4em; hyphens: auto; -webkit-hyphens: auto; text-align: justify; }
+.page p.it { font-style: italic; text-align: right; text-indent: 0; color: var(--muted); }
+/* подсветка за голосом: предложение — лёгкая тёплая подложка, слово — плашкой. День — плашка светлая
+   (цвет подсветки стиля наполовину с бумагой), текст обычный; ночь — насыщенная плашка, текст тёмный. */
+:root {
+  --hl-s-bg: color-mix(in srgb, var(--hl-s) 60%, transparent);
+  --hl-w-color: var(--ink);
+  --hl-w-bg: color-mix(in srgb, var(--hl-w) 48%, var(--paper));
+  --hl-w-ring: color-mix(in srgb, var(--hl-w) 48%, var(--paper));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme=light]) { --hl-s-bg: var(--hl-s); --hl-w-color: var(--hl-w-ink); --hl-w-bg: var(--hl-w); --hl-w-ring: var(--hl-w); }
+}
+:root[data-theme=dark] { --hl-s-bg: var(--hl-s); --hl-w-color: var(--hl-w-ink); --hl-w-bg: var(--hl-w); --hl-w-ring: var(--hl-w); }
+.page .s { border-radius: 3px; transition: background-color .25s; cursor: pointer; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.page .s.on { background: var(--hl-s-bg); box-shadow: 0 0 0 2px var(--hl-s-bg); }
+.page .w { border-radius: 2px; transition: color .12s, background-color .12s, box-shadow .12s; }
+.page .w.on { background: var(--hl-w-bg); color: var(--hl-w-color); box-shadow: 0 0 0 1px var(--hl-w-ring); }
+.page [hidden] { display: none; }
+
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 16px;
+  font: 13px/1.2 var(--sans); color: var(--muted); max-width: 46rem; width: 100%; margin: 0 auto; }
+.pager .nav { color: var(--muted); text-decoration: none; max-width: 30%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pager .pages { display: flex; align-items: center; gap: 6px; }
+.pager button { background: none; border: 1px solid var(--line); border-radius: 8px; padding: 4px 10px; cursor: pointer; }
+.pager button:disabled { opacity: .35; cursor: default; }
+
+.player { display: flex; align-items: center; gap: 12px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--paper); border-top: 1px solid var(--line); font: 13px/1 var(--sans); }
+.player > * { flex: none; }
+.player .pp { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-ink); font-size: 18px; cursor: pointer; }
+/* шкала по центру круглой кнопки: время слева и справа от неё, в одну линию */
+.player .track { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.player input[type=range] { flex: 1; min-width: 0; margin: 0; accent-color: var(--accent); }
+.player .tm { flex: none; min-width: 3.2em; color: var(--muted); font-variant-numeric: tabular-nums; }
+.player .tm.cur { text-align: right; }
+.player .sp, .player .fl { border: 1px solid var(--line); background: none; border-radius: 8px; padding: 6px 8px; cursor: pointer; }
+.player .dl { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; color: var(--muted); }
+.player .dl:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.player .dl svg { width: 20px; height: 20px; }
+.player .fl[hidden] { display: none; }
+@media (max-width: 520px) { .pager .nav { display: none; } .pager { justify-content: center; } }
+
+/* поделиться местом: кнопка в плеере и подсказка «Ссылка скопирована» */
+.player button.dl { border: 0; background: none; padding: 0; cursor: pointer; position: relative; }
+.player .share.tip::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); right: 0; white-space: nowrap;
+  font: 12px/1 var(--sans); padding: 6px 10px; border-radius: 6px; background: var(--ink); color: var(--paper); }
+
+/* подсказка «нажмите, чтобы слушать»: мягкий пульс вокруг кнопки; первому слушателю — плашка над ней */
+.player { position: relative; }
+.player .pp { position: relative; }
+.player .pp.hint { animation: pp-breathe 2.4s ease-out infinite; }
+@keyframes pp-breathe {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70% { box-shadow: 0 0 0 16px color-mix(in srgb, var(--accent) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .player .pp.hint { animation: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+}
+.player .pp-tip { position: absolute; left: 10px; bottom: calc(100% + 6px); padding: 7px 12px; border-radius: 8px;
+  background: var(--ink); color: var(--paper); font: 13px/1.2 var(--sans); white-space: nowrap; pointer-events: none;
+  animation: pp-tip-in .4s ease-out both .6s; }
+.player .pp-tip::after { content: ''; position: absolute; left: 18px; top: 100%; border: 6px solid transparent; border-top-color: var(--ink); }
+@keyframes pp-tip-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+
+/* витрина: рассказ за рассказом — и сразу все его видеоверсии (по две в ряд: одна не растягивается на всю ширину) */
+.landing { max-width: 60rem; margin: 0 auto; padding: 36px 20px 80px; }
+.hero { max-width: 46rem; margin-bottom: 8px; }
+.hero .years, .story .year, .show .year { font: 400 13px/1.3 var(--sans); color: var(--muted); letter-spacing: .12em; margin: 0; }
+.hero h1 { font-size: clamp(2.2em, 1.4em + 3.6vw, 3.4em); line-height: 1.05; margin: 6px 0 8px; font-weight: 600; }
+.hero .lead { font-size: 1.1em; font-style: italic; color: var(--muted); margin: 0; }
+.hero .lead a { font: 600 14px var(--sans); font-style: normal; text-decoration: none; white-space: nowrap; margin-left: 6px; }
+.show { border-top: 1px solid var(--line); margin-top: 36px; padding-top: 28px; }
+.show-head { max-width: 46rem; }
+.show h2 { font-size: clamp(1.8em, 1.2em + 2.4vw, 2.6em); line-height: 1.08; margin: 4px 0 10px; font-weight: 600; }
+.show h2 a { color: var(--ink); text-decoration: none; }
+.show h2 a:hover { color: var(--accent); }
+.acts { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 22px; }
+.acts .dur { font: 13px var(--sans); color: var(--muted); }
+.btn.small { padding: 8px 14px 8px 12px; font-size: 14px; }
+.vgrid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 26px 24px; }
+.vcard .pic { position: relative; display: block; border-radius: 10px; overflow: hidden; background: #000; }
+.vcard .pic img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .8s cubic-bezier(.25, .1, .25, 1); }
+.vcard .pic:hover img { transform: scale(1.03); }
+.vcard .play { position: absolute; inset: 0; margin: auto; width: 58px; height: 58px; display: grid; place-items: center; border-radius: 50%;
+  background: color-mix(in srgb, #000 45%, transparent); color: #fff; backdrop-filter: blur(2px); transition: background-color .2s; }
+.vcard .pic:hover .play { background: color-mix(in srgb, var(--accent) 85%, transparent); }
+.vcard .play svg { width: 26px; height: 26px; margin-left: 3px; }
+.vcard h3 { margin: 12px 0 4px; font-size: 1.25em; }
+.vcard h3 a { color: var(--ink); text-decoration: none; }
+.vcard h3 a:hover { color: var(--accent); }
+.vcard p { margin: 0 0 4px; font-size: .95em; }
+.vcard .vmeta { font: 13px/1.4 var(--sans); color: var(--muted); }
+/* телефон, портретный экран: одна колонка, постер — вертикальный кадр в 4:5 (видео там тоже вертикальное) */
+@media (max-width: 700px), (orientation: portrait) {
+  .vgrid, .story .vgrid { grid-template-columns: 1fr; gap: 28px; }
+  .vcard .pic img { aspect-ratio: 4 / 5; object-position: 50% 40%; }
+}
+
+/* страница рассказа и «Об авторе» */
+.story { max-width: 46rem; margin: 0 auto; padding: 40px 16px 72px; }
+.story .back { font: 14px var(--sans); margin: 0 0 24px; }
+.story .back a { text-decoration: none; }
+.story h1 { font-size: clamp(2.2em, 1.5em + 3vw, 3.2em); line-height: 1.08; margin: 6px 0 12px; }
+.story .note { margin: 10px 0 0; font: 13px/1.4 var(--sans); color: var(--muted); }
+.story h2 { font: 600 14px/1.2 var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 44px 0 16px; }
+.story .vgrid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.bio p { margin: 0 0 .8em; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px 11px 16px; border-radius: 999px;
+  border: 1.5px solid var(--accent); font: 600 15px/1 var(--sans); text-decoration: none; transition: background-color .15s, color .15s; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.ghost { color: var(--accent); background: transparent; }
+.btn.ghost:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+/* видео в браузере: экран во всю высоту, кадр вписан (contain), управление снизу */
+body.watching { background: #050505; color: #e9e1d4; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+body.watching .top { background: #0c0b0a; border-color: #1f1c18; }
+body.watching .top .brand, body.watching .tools button { color: #e9e1d4; border-color: #2a2621; }
+body.watching .langs a.on { background: #e9e1d4; color: #0c0b0a; }
+.watch { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.watch .screen { flex: 1; min-height: 0; display: grid; place-items: center; padding: 8px; }
+.watch .frame { position: relative; height: 100%; max-width: 100%; max-height: 100%; background: #000; border-radius: 6px; overflow: hidden; }
+.watch[data-orient=horizontal] .frame { width: 100%; height: auto; }
+.watch .frame canvas.scene, .watch .frame .poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: contain; }
+.watch .frame .poster[hidden] { display: none; }
+.watch .big-play { position: absolute; inset: 0; margin: auto; width: 76px; height: 76px; border-radius: 50%; border: 0; cursor: pointer;
+  background: color-mix(in srgb, #9C2A22 85%, transparent); color: #fff; display: grid; place-items: center; z-index: 2; }
+.watch .big-play[hidden] { display: none; }
+.watch .big-play svg { width: 34px; height: 34px; margin-left: 4px; }
+.watch .loading { position: absolute; left: 0; right: 0; bottom: 14%; text-align: center; font: 14px var(--sans); color: #cfc6b8; z-index: 2; }
+.watch .controls { display: flex; align-items: center; gap: 10px; padding: 8px 14px calc(8px + env(safe-area-inset-bottom));
+  background: #0c0b0a; border-top: 1px solid #1f1c18; font: 13px/1 var(--sans); }
+.watch .controls button, .watch .controls .back { flex: none; background: none; border: 1px solid #2a2621; color: #e9e1d4; border-radius: 8px;
+  padding: 6px 9px; cursor: pointer; font: 600 13px/1 var(--sans); text-decoration: none; }
+.watch .controls .pp { width: 40px; height: 40px; border-radius: 50%; border: 0; background: #9C2A22; color: #fff; font-size: 15px; }
+.watch .controls .cc:not(.on) { opacity: .45; }
+.watch .controls input[type=range] { flex: 1; min-width: 0; accent-color: #E8826A; }
+.watch .controls .tm { color: #a2968a; font-variant-numeric: tabular-nums; min-width: 3em; }
+.watch .caption { margin: 0; padding: 0 14px 10px; font: 13px/1.4 var(--sans); color: #8d8276; background: #0c0b0a; }
+.watch .caption .keys { margin-left: 8px; opacity: .7; }
+@media (pointer: coarse) { .watch .caption .keys { display: none; } }
+.watch.full .caption { display: none; }
+.watch.full .screen { padding: 0; }
+.watch.full .frame { border-radius: 0; }
+@media (max-width: 520px) { .watch .controls { gap: 6px; padding-left: 8px; padding-right: 8px; } .watch .controls .tm:last-of-type { display: none; } }
+@media (max-width: 520px) { .bio p { text-align: left; } }

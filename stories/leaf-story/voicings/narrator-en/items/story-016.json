@@ -1,0 +1,188 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "087345f433e8",
+   "file": "story-016-1.opus",
+   "dur": 18.843,
+   "chars": 226,
+   "speech": "The average duration of these attainments, each taken separately, is as follows: the point, from one to seven days; the coal, from three months to one year; the circle, from three to five years; the sphere, from five to seven.",
+   "words": [
+    [
+     0.2,
+     0.4
+    ],
+    [
+     0.4,
+     0.9
+    ],
+    [
+     0.9,
+     1.6
+    ],
+    [
+     1.6,
+     1.7
+    ],
+    [
+     1.7,
+     1.8
+    ],
+    [
+     1.8,
+     2.8
+    ],
+    [
+     2.9,
+     3.3
+    ],
+    [
+     3.3,
+     3.7
+    ],
+    [
+     3.7,
+     4.5
+    ],
+    [
+     4.6,
+     4.8
+    ],
+    [
+     4.8,
+     5.0
+    ],
+    [
+     5.0,
+     5.6
+    ],
+    [
+     6.3,
+     6.4
+    ],
+    [
+     6.4,
+     7.2
+    ],
+    [
+     7.2,
+     7.4
+    ],
+    [
+     7.4,
+     7.8
+    ],
+    [
+     7.8,
+     7.9
+    ],
+    [
+     7.9,
+     8.3
+    ],
+    [
+     8.3,
+     8.8
+    ],
+    [
+     9.5,
+     9.6
+    ],
+    [
+     9.6,
+     10.2
+    ],
+    [
+     10.2,
+     10.5
+    ],
+    [
+     10.5,
+     10.8
+    ],
+    [
+     10.8,
+     11.2
+    ],
+    [
+     11.2,
+     11.4
+    ],
+    [
+     11.4,
+     11.6
+    ],
+    [
+     11.6,
+     12.1
+    ],
+    [
+     13.0,
+     13.1
+    ],
+    [
+     13.1,
+     13.8
+    ],
+    [
+     13.9,
+     14.1
+    ],
+    [
+     14.1,
+     14.6
+    ],
+    [
+     14.6,
+     14.7
+    ],
+    [
+     14.7,
+     15.1
+    ],
+    [
+     15.1,
+     15.7
+    ],
+    [
+     16.3,
+     16.4
+    ],
+    [
+     16.4,
+     17.1
+    ],
+    [
+     17.3,
+     17.6
+    ],
+    [
+     17.6,
+     18.2
+    ],
+    [
+     18.3,
+     18.4
+    ],
+    [
+     18.4,
+     18.9
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "The average duration of these attainments, each taken separately, is as follows. The point from one to seven days, the cold from three months to one year, the circle from three to five years, the sphere from five to seven.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00301,
+    "verify": 0.00152
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:19:18"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

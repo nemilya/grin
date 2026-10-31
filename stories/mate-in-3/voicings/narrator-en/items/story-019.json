@@ -1,0 +1,184 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "ac146f136e03",
+   "file": "story-019-1.opus",
+   "dur": 17.313,
+   "chars": 230,
+   "speech": "I looked at his hands with curiosity: they were trembling, quickly and finely, unbuttoning and buttoning a button of his frock coat. In what he was telling me there evidently lay, for him, a whole chain of frightening conclusions.",
+   "words": [
+    [
+     0.0,
+     0.2
+    ],
+    [
+     0.2,
+     0.5
+    ],
+    [
+     0.5,
+     0.6
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     0.8,
+     1.3
+    ],
+    [
+     1.3,
+     1.4
+    ],
+    [
+     1.4,
+     2.4
+    ],
+    [
+     3.4,
+     3.5
+    ],
+    [
+     3.5,
+     3.6
+    ],
+    [
+     3.6,
+     4.3
+    ],
+    [
+     4.8,
+     5.5
+    ],
+    [
+     5.6,
+     5.8
+    ],
+    [
+     5.8,
+     6.5
+    ],
+    [
+     7.1,
+     7.8
+    ],
+    [
+     7.8,
+     8.0
+    ],
+    [
+     8.0,
+     8.4
+    ],
+    [
+     8.4,
+     8.5
+    ],
+    [
+     8.5,
+     9.0
+    ],
+    [
+     9.0,
+     9.1
+    ],
+    [
+     9.1,
+     9.2
+    ],
+    [
+     9.2,
+     9.6
+    ],
+    [
+     9.6,
+     9.9
+    ],
+    [
+     11.0,
+     11.2
+    ],
+    [
+     11.2,
+     11.4
+    ],
+    [
+     11.4,
+     11.5
+    ],
+    [
+     11.5,
+     11.7
+    ],
+    [
+     11.7,
+     12.0
+    ],
+    [
+     12.0,
+     12.2
+    ],
+    [
+     12.2,
+     12.5
+    ],
+    [
+     12.5,
+     13.2
+    ],
+    [
+     13.2,
+     13.6
+    ],
+    [
+     13.6,
+     13.8
+    ],
+    [
+     13.8,
+     14.2
+    ],
+    [
+     14.2,
+     14.3
+    ],
+    [
+     14.3,
+     14.8
+    ],
+    [
+     14.8,
+     15.5
+    ],
+    [
+     15.5,
+     15.8
+    ],
+    [
+     15.8,
+     16.5
+    ],
+    [
+     16.5,
+     17.3
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "I looked at his hands with curiosity. They were trembling quickly and finely, unbuttoning and buttoning a button of his frock coat. In what he was telling me, there evidently lay for him a whole chain of frightening conclusions.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00274,
+    "verify": 0.00143
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:58:32"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

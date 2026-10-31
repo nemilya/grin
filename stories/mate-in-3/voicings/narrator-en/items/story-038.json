@@ -1,0 +1,60 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "30b3fb65c915",
+   "file": "story-038-1.opus",
+   "dur": 4.189,
+   "chars": 48,
+   "speech": "“Possibly,” I said. “But I cannot even imagine…”",
+   "words": [
+    [
+     0.1,
+     0.7
+    ],
+    [
+     1.3,
+     1.4
+    ],
+    [
+     1.4,
+     1.6
+    ],
+    [
+     2.4,
+     2.6
+    ],
+    [
+     2.9,
+     3.0
+    ],
+    [
+     3.0,
+     3.4
+    ],
+    [
+     3.4,
+     3.6
+    ],
+    [
+     3.6,
+     4.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Possibly, I said, but I cannot even imagine",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00074,
+    "verify": 0.00033
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 07:00:46"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

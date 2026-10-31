@@ -1,0 +1,92 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "ff6d97b8ee11",
+   "file": "story-032-1.opus",
+   "dur": 7.062,
+   "chars": 90,
+   "speech": "Ranum kissed the fragrant little maple leaf and with a light heart left the square garden.",
+   "words": [
+    [
+     0.2,
+     1.0
+    ],
+    [
+     1.0,
+     1.4
+    ],
+    [
+     1.4,
+     1.5
+    ],
+    [
+     1.5,
+     2.2
+    ],
+    [
+     2.2,
+     2.5
+    ],
+    [
+     2.5,
+     3.0
+    ],
+    [
+     3.0,
+     3.5
+    ],
+    [
+     4.0,
+     4.3
+    ],
+    [
+     4.3,
+     4.4
+    ],
+    [
+     4.4,
+     4.5
+    ],
+    [
+     4.5,
+     4.8
+    ],
+    [
+     4.8,
+     5.6
+    ],
+    [
+     5.6,
+     6.1
+    ],
+    [
+     6.1,
+     6.2
+    ],
+    [
+     6.2,
+     6.6
+    ],
+    [
+     6.6,
+     7.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Ranum kissed the fragrant little maple leaf, and with a light heart left the square garden.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00122,
+    "verify": 0.00058
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:21:34"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

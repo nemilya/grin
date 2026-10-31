@@ -1,0 +1,120 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "d1d61c96a1e3",
+   "file": "story-008-1.opus",
+   "dur": 14.322,
+   "chars": 150,
+   "speech": "Intrigued, I looked at him closely; he was breathing slowly, with difficulty, his eyes lowered, evidently trying to concentrate on his own sensations.",
+   "words": [
+    [
+     0.0,
+     0.8
+    ],
+    [
+     1.5,
+     1.6
+    ],
+    [
+     1.6,
+     2.0
+    ],
+    [
+     2.0,
+     2.1
+    ],
+    [
+     2.1,
+     2.2
+    ],
+    [
+     2.2,
+     2.8
+    ],
+    [
+     4.4,
+     4.5
+    ],
+    [
+     4.5,
+     4.7
+    ],
+    [
+     4.7,
+     5.2
+    ],
+    [
+     5.2,
+     5.9
+    ],
+    [
+     6.6,
+     7.1
+    ],
+    [
+     7.1,
+     7.8
+    ],
+    [
+     8.7,
+     8.8
+    ],
+    [
+     8.8,
+     9.4
+    ],
+    [
+     9.4,
+     9.9
+    ],
+    [
+     10.7,
+     11.1
+    ],
+    [
+     11.1,
+     11.6
+    ],
+    [
+     11.6,
+     11.7
+    ],
+    [
+     11.7,
+     12.7
+    ],
+    [
+     12.8,
+     12.9
+    ],
+    [
+     12.9,
+     13.1
+    ],
+    [
+     13.1,
+     13.4
+    ],
+    [
+     13.4,
+     14.3
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "intrigued. I looked at him closely. He was breathing slowly, with difficulty. His eyes lowered, evidently trying to concentrate on his own sensations.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00227,
+    "verify": 0.00109
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:57:03"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

@@ -1,0 +1,32 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "b3305f33678e",
+   "file": "story-001-1.opus",
+   "dur": 1.235,
+   "chars": 13,
+   "speech": "Глава первая.",
+   "words": [
+    [
+     0.0,
+     1.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Глава первая.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00033,
+    "verify": 0.00011
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:14:47"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

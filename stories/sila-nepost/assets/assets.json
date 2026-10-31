@@ -1,0 +1,579 @@
+{
+ "items": {
+  "study/wall": {
+   "file": "study/wall.webp",
+   "hash": "2365d7733127",
+   "seed": 275588500,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 02:00"
+  },
+  "refs/roumier": {
+   "file": "refs/roumier.jpg",
+   "hash": "a12189f51bdb",
+   "seed": 263060614,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 01:59"
+  },
+  "refs/duplay": {
+   "file": "refs/duplay.jpg",
+   "hash": "934019472d87",
+   "seed": 1155641575,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 01:59"
+  },
+  "duplay/playing": {
+   "file": "duplay/playing.webp",
+   "hash": "727e153051c5",
+   "seed": 405720841,
+   "cost": 0.018,
+   "w": 543,
+   "h": 1561,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 02:04"
+  },
+  "roumier/command": {
+   "file": "roumier/command.webp",
+   "hash": "4731ee206b66",
+   "seed": 1072488356,
+   "cost": 0.018,
+   "w": 761,
+   "h": 1552,
+   "refs": [
+    "refs/roumier"
+   ],
+   "at": "2026-10-30 02:00"
+  },
+  "study/lane": {
+   "file": "study/lane.jpg",
+   "hash": "07862e674fab",
+   "seed": 2029573528,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1200,
+   "refs": [],
+   "at": "2026-10-30 02:01"
+  },
+  "duplay/trance": {
+   "file": "duplay/trance.webp",
+   "hash": "0dc335e8c6e6",
+   "seed": 709300094,
+   "cost": 0.018,
+   "w": 1188,
+   "h": 1599,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 02:00"
+  },
+  "study/floor": {
+   "file": "study/floor.jpg",
+   "hash": "2060406ad882",
+   "seed": 287471891,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 02:00"
+  },
+  "study/camera": {
+   "file": "study/camera.webp",
+   "hash": "bcc9bc0e0e51",
+   "seed": 1010866990,
+   "cost": 0.018,
+   "w": 900,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-30 02:01"
+  },
+  "study/armchair": {
+   "file": "study/armchair.webp",
+   "hash": "6b47df6c662f",
+   "seed": 1527284149,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-30 02:01"
+  },
+  "refs/officer": {
+   "file": "refs/officer.jpg",
+   "hash": "404313c3c12e",
+   "seed": 944208322,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 08:16"
+  },
+  "refs/servant": {
+   "file": "refs/servant.jpg",
+   "hash": "972864f4f127",
+   "seed": 213115931,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 08:16"
+  },
+  "duplay/visitor": {
+   "file": "duplay/visitor.webp",
+   "hash": "635bf47b8b2b",
+   "seed": 2137883451,
+   "cost": 0.018,
+   "w": 610,
+   "h": 1542,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:16"
+  },
+  "duplay/walking": {
+   "file": "duplay/walking.webp",
+   "hash": "ce7a15e56769",
+   "seed": 593277076,
+   "cost": 0.018,
+   "w": 733,
+   "h": 1543,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:16"
+  },
+  "duplay/watching": {
+   "file": "duplay/watching.webp",
+   "hash": "f2f40fc3f21e",
+   "seed": 142315179,
+   "cost": 0.018,
+   "w": 860,
+   "h": 1561,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/face": {
+   "file": "duplay/face.webp",
+   "hash": "521a6756da8b",
+   "seed": 1561087391,
+   "cost": 0.018,
+   "w": 1281,
+   "h": 1518,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:24"
+  },
+  "duplay/realize": {
+   "file": "duplay/realize.webp",
+   "hash": "d1aa9b090bbe",
+   "seed": 309972436,
+   "cost": 0.018,
+   "w": 691,
+   "h": 1539,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/awake": {
+   "file": "duplay/awake.webp",
+   "hash": "3a0ecceb1ed3",
+   "seed": 2004148061,
+   "cost": 0.018,
+   "w": 1033,
+   "h": 1502,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/talk": {
+   "file": "duplay/talk.webp",
+   "hash": "491c60c0a83e",
+   "seed": 1343271857,
+   "cost": 0.018,
+   "w": 1017,
+   "h": 1553,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/attack": {
+   "file": "duplay/attack.webp",
+   "hash": "ed759cb83eef",
+   "seed": 1884213261,
+   "cost": 0.018,
+   "w": 1207,
+   "h": 1572,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/sleeping": {
+   "file": "duplay/sleeping.webp",
+   "hash": "dc342b506d61",
+   "seed": 631883906,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/dying": {
+   "file": "duplay/dying.webp",
+   "hash": "d937f3eb06f3",
+   "seed": 511444838,
+   "cost": 0.018,
+   "w": 1538,
+   "h": 482,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 09:09"
+  },
+  "duplay/asylum": {
+   "file": "duplay/asylum.webp",
+   "hash": "972229f98ba8",
+   "seed": 2036100222,
+   "cost": 0.018,
+   "w": 582,
+   "h": 1535,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "duplay/writing": {
+   "file": "duplay/writing.webp",
+   "hash": "ca30a8b19bfe",
+   "seed": 1594128216,
+   "cost": 0.018,
+   "w": 1122,
+   "h": 1572,
+   "refs": [
+    "refs/duplay"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "roumier/plate": {
+   "file": "roumier/plate.webp",
+   "hash": "27e93a357da7",
+   "seed": 2014178479,
+   "cost": 0.018,
+   "w": 567,
+   "h": 1533,
+   "refs": [
+    "refs/roumier"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "roumier/desk": {
+   "file": "roumier/desk.webp",
+   "hash": "de3fed7bc82a",
+   "seed": 1134109206,
+   "cost": 0.018,
+   "w": 733,
+   "h": 1551,
+   "refs": [
+    "refs/roumier"
+   ],
+   "at": "2026-10-30 08:24"
+  },
+  "roumier/violin": {
+   "file": "roumier/violin.webp",
+   "hash": "df68c4c8ae80",
+   "seed": 370956488,
+   "cost": 0.018,
+   "w": 806,
+   "h": 1472,
+   "refs": [
+    "refs/roumier"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "roumier/back": {
+   "file": "roumier/back.webp",
+   "hash": "3b48ffa5dc59",
+   "seed": 289957046,
+   "cost": 0.018,
+   "w": 477,
+   "h": 1509,
+   "refs": [
+    "refs/roumier"
+   ],
+   "at": "2026-10-30 08:17"
+  },
+  "roumier/fallen": {
+   "file": "roumier/fallen.webp",
+   "hash": "5e263bda56e6",
+   "seed": 1006355170,
+   "cost": 0.018,
+   "w": 1305,
+   "h": 565,
+   "refs": [
+    "refs/roumier"
+   ],
+   "at": "2026-10-30 08:18"
+  },
+  "servant/announce": {
+   "file": "servant/announce.webp",
+   "hash": "40550057071f",
+   "seed": 1695986123,
+   "cost": 0.018,
+   "w": 804,
+   "h": 1586,
+   "refs": [
+    "refs/servant"
+   ],
+   "at": "2026-10-30 08:18"
+  },
+  "officer/asking": {
+   "file": "officer/asking.webp",
+   "hash": "20b6f9959d45",
+   "seed": 1869885708,
+   "cost": 0.018,
+   "w": 745,
+   "h": 1531,
+   "refs": [
+    "refs/officer"
+   ],
+   "at": "2026-10-30 08:18"
+  },
+  "study/desk": {
+   "file": "study/desk.webp",
+   "hash": "14a47151c4f8",
+   "seed": 1365443173,
+   "cost": 0.018,
+   "w": 1006,
+   "h": 862,
+   "refs": [],
+   "at": "2026-10-30 08:18"
+  },
+  "mill/falls": {
+   "file": "mill/falls.jpg",
+   "hash": "0825881c1282",
+   "seed": 621078055,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:24"
+  },
+  "study/struggle": {
+   "file": "study/struggle.webp",
+   "hash": "a36539ebce0d",
+   "seed": 1242990718,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1200,
+   "refs": [],
+   "at": "2026-10-30 08:24"
+  },
+  "cinema/film": {
+   "file": "cinema/film.jpg",
+   "hash": "e4978001d0db",
+   "seed": 531052945,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:24"
+  },
+  "cinema/wall": {
+   "file": "cinema/wall.webp",
+   "hash": "ffd1923d5980",
+   "seed": 263228419,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:18"
+  },
+  "cinema/pit": {
+   "file": "cinema/pit.webp",
+   "hash": "4d781316cc6f",
+   "seed": 2130101396,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-30 08:18"
+  },
+  "cinema/audience": {
+   "file": "cinema/audience.webp",
+   "hash": "42e72d02a609",
+   "seed": 1723617828,
+   "cost": 0.018,
+   "w": 1474,
+   "h": 418,
+   "refs": [],
+   "at": "2026-10-30 08:24"
+  },
+  "street/houses": {
+   "file": "street/houses.jpg",
+   "hash": "9478e3c63f1f",
+   "seed": 172426836,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:18"
+  },
+  "street/orchestra": {
+   "file": "street/orchestra.webp",
+   "hash": "1e4a98e87f43",
+   "seed": 161419299,
+   "cost": 0.018,
+   "w": 1537,
+   "h": 604,
+   "refs": [],
+   "at": "2026-10-30 08:24"
+  },
+  "street/floor": {
+   "file": "street/floor.jpg",
+   "hash": "c8fa701d4b92",
+   "seed": 1100751733,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 08:18"
+  },
+  "room/roofs": {
+   "file": "room/roofs.jpg",
+   "hash": "cd4cac92fbb2",
+   "seed": 1200835124,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:27"
+  },
+  "room/wall": {
+   "file": "room/wall.webp",
+   "hash": "e7847fbc9b24",
+   "seed": 311024482,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:18"
+  },
+  "room/bed": {
+   "file": "room/bed.webp",
+   "hash": "c90bac532201",
+   "seed": 1487447704,
+   "cost": 0.018,
+   "w": 1496,
+   "h": 640,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  },
+  "room/floor": {
+   "file": "room/floor.jpg",
+   "hash": "fccd101c72cb",
+   "seed": 2007563024,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  },
+  "room/table": {
+   "file": "room/table.webp",
+   "hash": "36b649596312",
+   "seed": 1568350274,
+   "cost": 0.018,
+   "w": 1079,
+   "h": 1452,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  },
+  "lane/facade": {
+   "file": "lane/facade.webp",
+   "hash": "908fad247673",
+   "seed": 1404150715,
+   "cost": 0.018,
+   "w": 1200,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  },
+  "ward/wall": {
+   "file": "ward/wall.webp",
+   "hash": "142ba62481e2",
+   "seed": 65820935,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  },
+  "ward/bed": {
+   "file": "ward/bed.webp",
+   "hash": "02999a5c68a5",
+   "seed": 1415385844,
+   "cost": 0.018,
+   "w": 1540,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  },
+  "ward/sky": {
+   "file": "ward/sky.jpg",
+   "hash": "d839238f1e35",
+   "seed": 2052934790,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:27"
+  },
+  "ward/doctors": {
+   "file": "ward/doctors.webp",
+   "hash": "f38d914346cd",
+   "seed": 239787871,
+   "cost": 0.018,
+   "w": 741,
+   "h": 1408,
+   "refs": [],
+   "at": "2026-10-30 08:27"
+  },
+  "curtain/curtain": {
+   "file": "curtain/curtain.jpg",
+   "hash": "4a57b80791c0",
+   "seed": 933594561,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-30 08:27"
+  },
+  "prop/violin": {
+   "file": "prop/violin.webp",
+   "hash": "fb408e7701fe",
+   "seed": 274140190,
+   "cost": 0.018,
+   "w": 899,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-30 08:19"
+  }
+ },
+ "cost": 1.26
+}

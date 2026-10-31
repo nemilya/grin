@@ -1,0 +1,156 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "d66792f22b04",
+   "file": "story-025-1.opus",
+   "dur": 17.093,
+   "chars": 185,
+   "speech": "A pitiful smile froze on his convulsively intent, sweating face. Pulling out a handkerchief and blowing his nose, he went on looking me in the face with the same fixed, petrified stare.",
+   "words": [
+    [
+     0.2,
+     0.2
+    ],
+    [
+     0.2,
+     1.0
+    ],
+    [
+     1.0,
+     1.6
+    ],
+    [
+     1.6,
+     2.4
+    ],
+    [
+     2.4,
+     2.5
+    ],
+    [
+     2.5,
+     2.8
+    ],
+    [
+     2.8,
+     3.8
+    ],
+    [
+     3.8,
+     4.6
+    ],
+    [
+     4.9,
+     5.6
+    ],
+    [
+     5.6,
+     6.3
+    ],
+    [
+     7.5,
+     7.8
+    ],
+    [
+     7.8,
+     8.0
+    ],
+    [
+     8.0,
+     8.0
+    ],
+    [
+     8.0,
+     8.9
+    ],
+    [
+     8.9,
+     9.1
+    ],
+    [
+     9.1,
+     9.5
+    ],
+    [
+     9.5,
+     9.6
+    ],
+    [
+     9.6,
+     10.1
+    ],
+    [
+     11.0,
+     11.0
+    ],
+    [
+     11.0,
+     11.2
+    ],
+    [
+     11.2,
+     11.4
+    ],
+    [
+     11.4,
+     11.7
+    ],
+    [
+     11.7,
+     11.8
+    ],
+    [
+     11.8,
+     11.9
+    ],
+    [
+     11.9,
+     12.0
+    ],
+    [
+     12.0,
+     12.7
+    ],
+    [
+     12.8,
+     12.9
+    ],
+    [
+     12.9,
+     13.0
+    ],
+    [
+     13.0,
+     13.6
+    ],
+    [
+     14.3,
+     15.2
+    ],
+    [
+     15.7,
+     16.5
+    ],
+    [
+     16.5,
+     17.0
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "A pitiful smile froze on his convulsively intent sweating face. Pulling out a handkerchief and blowing his nose, he went on looking me in the face with the same fixed, petrified stare.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.0027,
+    "verify": 0.00133
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:59:11"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

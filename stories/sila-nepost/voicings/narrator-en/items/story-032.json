@@ -1,0 +1,132 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "e13eba35918a",
+   "file": "story-032-1.opus",
+   "dur": 13.597,
+   "chars": 144,
+   "speech": "“You hid it!… Hid it!… Scoundrel! Do you know what you have taken from me?! Worse than murder! There is no forgiveness! Death!… Death for this!”",
+   "words": [
+    [
+     0.1,
+     0.2
+    ],
+    [
+     0.2,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     1.6,
+     1.9
+    ],
+    [
+     1.9,
+     2.0
+    ],
+    [
+     2.6,
+     3.4
+    ],
+    [
+     4.1,
+     4.2
+    ],
+    [
+     4.2,
+     4.3
+    ],
+    [
+     4.3,
+     4.5
+    ],
+    [
+     4.5,
+     4.7
+    ],
+    [
+     4.7,
+     4.8
+    ],
+    [
+     4.8,
+     5.0
+    ],
+    [
+     5.0,
+     5.5
+    ],
+    [
+     5.5,
+     5.8
+    ],
+    [
+     5.8,
+     6.0
+    ],
+    [
+     7.1,
+     7.5
+    ],
+    [
+     7.5,
+     7.7
+    ],
+    [
+     7.7,
+     8.3
+    ],
+    [
+     9.2,
+     9.4
+    ],
+    [
+     9.4,
+     9.6
+    ],
+    [
+     9.6,
+     9.8
+    ],
+    [
+     9.8,
+     10.6
+    ],
+    [
+     11.2,
+     11.8
+    ],
+    [
+     12.6,
+     13.0
+    ],
+    [
+     13.0,
+     13.2
+    ],
+    [
+     13.2,
+     13.6
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "You hit it. Hit it. Scoundrel. Do you know what you have taken from me? Worse than murder. There is no forgiveness. Death. Death for this.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.0022,
+    "verify": 0.00111
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:01:19"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

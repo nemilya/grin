@@ -1,0 +1,168 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "75a50213d8de",
+   "file": "story-043-1.opus",
+   "dur": 17.929,
+   "chars": 186,
+   "speech": "The hand was coming down. Lazily it bent, first at the wrist, then at the elbow, then at the shoulder; it swayed, and quietly fell, its palm softly slapping against the bend of his knee.",
+   "words": [
+    [
+     0.1,
+     0.1
+    ],
+    [
+     0.1,
+     1.1
+    ],
+    [
+     1.2,
+     1.4
+    ],
+    [
+     1.4,
+     1.8
+    ],
+    [
+     1.8,
+     2.5
+    ],
+    [
+     3.2,
+     4.1
+    ],
+    [
+     4.1,
+     4.2
+    ],
+    [
+     4.2,
+     4.6
+    ],
+    [
+     5.2,
+     5.6
+    ],
+    [
+     5.6,
+     5.7
+    ],
+    [
+     5.7,
+     5.8
+    ],
+    [
+     5.8,
+     6.5
+    ],
+    [
+     6.6,
+     6.7
+    ],
+    [
+     6.7,
+     6.8
+    ],
+    [
+     6.8,
+     7.0
+    ],
+    [
+     7.0,
+     7.8
+    ],
+    [
+     8.1,
+     8.3
+    ],
+    [
+     8.3,
+     8.4
+    ],
+    [
+     8.4,
+     8.5
+    ],
+    [
+     8.5,
+     9.5
+    ],
+    [
+     9.7,
+     9.9
+    ],
+    [
+     9.9,
+     10.7
+    ],
+    [
+     11.3,
+     11.4
+    ],
+    [
+     11.4,
+     12.1
+    ],
+    [
+     12.1,
+     12.7
+    ],
+    [
+     13.5,
+     13.7
+    ],
+    [
+     13.7,
+     14.4
+    ],
+    [
+     14.5,
+     15.2
+    ],
+    [
+     15.2,
+     16.2
+    ],
+    [
+     16.3,
+     16.6
+    ],
+    [
+     16.6,
+     16.7
+    ],
+    [
+     16.7,
+     17.3
+    ],
+    [
+     17.3,
+     17.4
+    ],
+    [
+     17.4,
+     17.6
+    ],
+    [
+     17.6,
+     17.9
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "The hand was coming down. Lazily it bent, first at the wrist, then at the elbow, then at the shoulder. It swayed and quietly fell, its palm softly slapping against the bend of his knee.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00283,
+    "verify": 0.00142
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-27 21:45:41"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

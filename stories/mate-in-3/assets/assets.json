@@ -1,0 +1,805 @@
+{
+ "items": {
+  "refs/patient": {
+   "file": "refs/patient.jpg",
+   "hash": "06e1b6d82874",
+   "seed": 738730322,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-27 21:43"
+  },
+  "refs/doctor": {
+   "file": "refs/doctor.jpg",
+   "hash": "2b0bd71b6ff6",
+   "seed": 1576323070,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-27 21:44"
+  },
+  "doctor/seated": {
+   "file": "doctor/seated.webp",
+   "hash": "a7ba9940aba8",
+   "seed": 1580217383,
+   "cost": 0.018,
+   "w": 744,
+   "h": 1420,
+   "refs": [
+    "refs/doctor"
+   ],
+   "at": "2026-10-27 21:44"
+  },
+  "doctor/standing-shout": {
+   "file": "doctor/standing-shout.webp",
+   "hash": "cf54137e1c5f",
+   "seed": 1225082801,
+   "cost": 0.018,
+   "w": 722,
+   "h": 1478,
+   "refs": [
+    "refs/doctor"
+   ],
+   "at": "2026-10-27 21:44"
+  },
+  "patient/seated": {
+   "file": "patient/seated.webp",
+   "hash": "3ca38cfe4bb1",
+   "seed": 1681765456,
+   "cost": 0.018,
+   "w": 1030,
+   "h": 1479,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-27 21:44"
+  },
+  "doctor/seated-frozen": {
+   "file": "doctor/seated-frozen.webp",
+   "hash": "3186409071d3",
+   "seed": 1858551363,
+   "cost": 0.018,
+   "w": 784,
+   "h": 1444,
+   "refs": [
+    "refs/doctor"
+   ],
+   "at": "2026-10-28 21:00"
+  },
+  "patient/arm-fore": {
+   "file": "patient/arm-fore.webp",
+   "hash": "07c787ace046",
+   "seed": 630359684,
+   "cost": 0.018,
+   "w": 386,
+   "h": 1325,
+   "refs": [],
+   "at": "2026-10-27 21:50"
+  },
+  "patient/seated-talking": {
+   "file": "patient/seated-talking.webp",
+   "hash": "2879bed23249",
+   "seed": 263513416,
+   "cost": 0.018,
+   "w": 1058,
+   "h": 1462,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-27 21:45"
+  },
+  "patient/arm-upper": {
+   "file": "patient/arm-upper.webp",
+   "hash": "c9ab267746fd",
+   "seed": 432439560,
+   "cost": 0.018,
+   "w": 354,
+   "h": 1341,
+   "refs": [],
+   "at": "2026-10-27 21:50"
+  },
+  "patient/seated-pale": {
+   "file": "patient/seated-pale.webp",
+   "hash": "743b6641a791",
+   "seed": 203195605,
+   "cost": 0.018,
+   "w": 966,
+   "h": 1466,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-27 21:45"
+  },
+  "patient/arm-hand": {
+   "file": "patient/arm-hand.webp",
+   "hash": "4db11b1710cd",
+   "seed": 409719124,
+   "cost": 0.018,
+   "w": 648,
+   "h": 1455,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-27 21:45"
+  },
+  "patient/seated-dead": {
+   "file": "patient/seated-dead.webp",
+   "hash": "6af5ade09ab3",
+   "seed": 1462704895,
+   "cost": 0.018,
+   "w": 957,
+   "h": 1523,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-27 21:45"
+  },
+  "patient/head-abyss": {
+   "file": "patient/head-abyss.webp",
+   "hash": "6748ec61cd0d",
+   "seed": 634722334,
+   "cost": 0.018,
+   "w": 936,
+   "h": 1466,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-27 21:47"
+  },
+  "office/wall": {
+   "file": "office/wall.jpg",
+   "hash": "12772098690b",
+   "seed": 1680346073,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1200,
+   "refs": [],
+   "at": "2026-10-27 21:45"
+  },
+  "office/floor": {
+   "file": "office/floor.jpg",
+   "hash": "1fe6cc15ed15",
+   "seed": 311730390,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-27 21:45"
+  },
+  "office/wall-left": {
+   "file": "office/wall-left.jpg",
+   "hash": "c1cc4b53c48f",
+   "seed": 359862944,
+   "cost": 0.018,
+   "w": 1068,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-27 21:45"
+  },
+  "office/wall-right": {
+   "file": "office/wall-right.jpg",
+   "hash": "209646ea7cac",
+   "seed": 357242413,
+   "cost": 0.018,
+   "w": 1068,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-27 21:45"
+  },
+  "office/portiere": {
+   "file": "office/portiere.webp",
+   "hash": "30fd10c39e38",
+   "seed": 2131571481,
+   "cost": 0.018,
+   "w": 790,
+   "h": 1491,
+   "refs": [],
+   "at": "2026-10-27 21:47"
+  },
+  "office/armchair": {
+   "file": "office/armchair.webp",
+   "hash": "99b08c2cd764",
+   "seed": 538609085,
+   "cost": 0.018,
+   "w": 1075,
+   "h": 1285,
+   "refs": [],
+   "at": "2026-10-28 20:32"
+  },
+  "office/desk": {
+   "file": "office/desk.webp",
+   "hash": "2f0564baea7d",
+   "seed": 1035663331,
+   "cost": 0.018,
+   "w": 1516,
+   "h": 650,
+   "refs": [],
+   "at": "2026-10-28 20:54"
+  },
+  "office/lamp": {
+   "file": "office/lamp.webp",
+   "hash": "3522ab066329",
+   "seed": 406133075,
+   "cost": 0.018,
+   "w": 676,
+   "h": 1124,
+   "refs": [],
+   "at": "2026-10-27 21:47"
+  },
+  "dark/floor": {
+   "file": "dark/floor.jpg",
+   "hash": "d9a38695be1d",
+   "seed": 683928809,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-27 21:46"
+  },
+  "office/desk-set": {
+   "file": "office/desk-set.webp",
+   "hash": "629b1b14d13f",
+   "seed": 572104346,
+   "cost": 0.018,
+   "w": 1006,
+   "h": 823,
+   "refs": [],
+   "at": "2026-10-27 21:47"
+  },
+  "office/bulb": {
+   "file": "office/bulb.webp",
+   "hash": "1114ac2d38ca",
+   "seed": 934124835,
+   "cost": 0.018,
+   "w": 534,
+   "h": 1550,
+   "refs": [],
+   "at": "2026-10-27 21:47"
+  },
+  "refs/woman-baby": {
+   "file": "refs/woman-baby.jpg",
+   "hash": "9528e9d7edfd",
+   "seed": 1098934699,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 06:56"
+  },
+  "patient/in-bed": {
+   "file": "patient/in-bed.webp",
+   "hash": "c5bac0547b93",
+   "seed": 938052931,
+   "cost": 0.018,
+   "w": 1516,
+   "h": 613,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 06:56"
+  },
+  "wife/doorway": {
+   "file": "wife/doorway.webp",
+   "hash": "a021af0c37d4",
+   "seed": 123656184,
+   "cost": 0.018,
+   "w": 900,
+   "h": 1505,
+   "refs": [],
+   "at": "2026-10-28 06:56"
+  },
+  "woman-baby/walking": {
+   "file": "woman-baby/walking.webp",
+   "hash": "093b834b1c43",
+   "seed": 1082928731,
+   "cost": 0.018,
+   "w": 588,
+   "h": 1476,
+   "refs": [
+    "refs/woman-baby"
+   ],
+   "at": "2026-10-28 06:56"
+  },
+  "funeral/hearse": {
+   "file": "funeral/hearse.webp",
+   "hash": "4d991f78f85c",
+   "seed": 1974006829,
+   "cost": 0.018,
+   "w": 1490,
+   "h": 659,
+   "refs": [],
+   "at": "2026-10-28 06:56"
+  },
+  "garden/house": {
+   "file": "garden/house.webp",
+   "hash": "8aa2105ee998",
+   "seed": 1419917524,
+   "cost": 0.018,
+   "w": 1281,
+   "h": 1600,
+   "refs": [],
+   "at": "2026-10-28 06:57"
+  },
+  "window/room-wall": {
+   "file": "window/room-wall.webp",
+   "hash": "a5c7fe52e8fa",
+   "seed": 715136310,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1067,
+   "refs": [],
+   "at": "2026-10-28 06:57"
+  },
+  "refs/lady": {
+   "file": "refs/lady.jpg",
+   "hash": "9ab67dbe5a97",
+   "seed": 1043272721,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 06:59"
+  },
+  "refs/girl": {
+   "file": "refs/girl.jpg",
+   "hash": "394541b46618",
+   "seed": 1866216519,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 06:59"
+  },
+  "refs/schoolgirl": {
+   "file": "refs/schoolgirl.jpg",
+   "hash": "38ce41275fb6",
+   "seed": 1773994487,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 06:59"
+  },
+  "refs/old-woman": {
+   "file": "refs/old-woman.jpg",
+   "hash": "98e7dc632bfa",
+   "seed": 904602706,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 06:59"
+  },
+  "refs/stranger": {
+   "file": "refs/stranger.jpg",
+   "hash": "bf7343ed41e0",
+   "seed": 1189628607,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 06:59"
+  },
+  "refs/yard-keeper": {
+   "file": "refs/yard-keeper.jpg",
+   "hash": "b7f05fd40e05",
+   "seed": 116759640,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1068,
+   "refs": [],
+   "at": "2026-10-28 07:00"
+  },
+  "doctor/pacing": {
+   "file": "doctor/pacing.webp",
+   "hash": "a6bfeca52c5a",
+   "seed": 1402694093,
+   "cost": 0.018,
+   "w": 612,
+   "h": 1460,
+   "refs": [
+    "refs/doctor"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/standing": {
+   "file": "patient/standing.webp",
+   "hash": "320a2b3761de",
+   "seed": 1180533458,
+   "cost": 0.018,
+   "w": 588,
+   "h": 1572,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:10"
+  },
+  "doctor/seated-pencil": {
+   "file": "doctor/seated-pencil.webp",
+   "hash": "3fbcd30f04f3",
+   "seed": 1099643994,
+   "cost": 0.018,
+   "w": 1050,
+   "h": 1328,
+   "refs": [
+    "refs/doctor"
+   ],
+   "at": "2026-10-28 21:00"
+  },
+  "patient/seated-up": {
+   "file": "patient/seated-up.webp",
+   "hash": "3eccf79cd205",
+   "seed": 406255637,
+   "cost": 0.018,
+   "w": 958,
+   "h": 1534,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/seated-beard": {
+   "file": "patient/seated-beard.webp",
+   "hash": "80eec5e5033a",
+   "seed": 1469984239,
+   "cost": 0.018,
+   "w": 806,
+   "h": 1425,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/seated-handkerchief": {
+   "file": "patient/seated-handkerchief.webp",
+   "hash": "3a8250cfb95a",
+   "seed": 436982695,
+   "cost": 0.018,
+   "w": 888,
+   "h": 1544,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/seated-wipe": {
+   "file": "patient/seated-wipe.webp",
+   "hash": "a35debcb71db",
+   "seed": 393860899,
+   "cost": 0.018,
+   "w": 846,
+   "h": 1440,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/seated-fist": {
+   "file": "patient/seated-fist.webp",
+   "hash": "ff1c5a1cbd7b",
+   "seed": 1492863391,
+   "cost": 0.018,
+   "w": 886,
+   "h": 1465,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/head": {
+   "file": "patient/head.webp",
+   "hash": "5bba54496870",
+   "seed": 1510745278,
+   "cost": 0.018,
+   "w": 991,
+   "h": 1391,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:00"
+  },
+  "patient/hands-cobweb": {
+   "file": "patient/hands-cobweb.webp",
+   "hash": "99bd93788194",
+   "seed": 1090651969,
+   "cost": 0.018,
+   "w": 1432,
+   "h": 939,
+   "refs": [],
+   "at": "2026-10-28 07:10"
+  },
+  "patient/hands-button": {
+   "file": "patient/hands-button.webp",
+   "hash": "335ec33bc228",
+   "seed": 454265068,
+   "cost": 0.018,
+   "w": 1422,
+   "h": 1091,
+   "refs": [],
+   "at": "2026-10-28 07:10"
+  },
+  "patient/at-window": {
+   "file": "patient/at-window.webp",
+   "hash": "227b9ecd4b5f",
+   "seed": 1868852323,
+   "cost": 0.018,
+   "w": 812,
+   "h": 1426,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:10"
+  },
+  "patient/in-hammock": {
+   "file": "patient/in-hammock.webp",
+   "hash": "d7879a058833",
+   "seed": 546988645,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 887,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "girl/running": {
+   "file": "girl/running.webp",
+   "hash": "0c86b2f6a239",
+   "seed": 1285188111,
+   "cost": 0.018,
+   "w": 888,
+   "h": 1440,
+   "refs": [
+    "refs/girl"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "schoolgirl/walking": {
+   "file": "schoolgirl/walking.webp",
+   "hash": "985186a4d2bb",
+   "seed": 1903073225,
+   "cost": 0.018,
+   "w": 540,
+   "h": 1475,
+   "refs": [
+    "refs/schoolgirl"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "patient/on-bench": {
+   "file": "patient/on-bench.webp",
+   "hash": "0d0466a78e44",
+   "seed": 966310553,
+   "cost": 0.018,
+   "w": 1154,
+   "h": 1418,
+   "refs": [
+    "refs/patient"
+   ],
+   "at": "2026-10-28 07:10"
+  },
+  "old-woman/walking": {
+   "file": "old-woman/walking.webp",
+   "hash": "b466b8c00e7f",
+   "seed": 492701167,
+   "cost": 0.018,
+   "w": 570,
+   "h": 1411,
+   "refs": [
+    "refs/old-woman"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "lady/walking": {
+   "file": "lady/walking.webp",
+   "hash": "59eac206e220",
+   "seed": 1625225738,
+   "cost": 0.018,
+   "w": 596,
+   "h": 1528,
+   "refs": [
+    "refs/lady"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "old-woman/facing": {
+   "file": "old-woman/facing.webp",
+   "hash": "7bf7b6891636",
+   "seed": 1244624195,
+   "cost": 0.018,
+   "w": 584,
+   "h": 1396,
+   "refs": [
+    "refs/old-woman"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "yard-keeper/walking": {
+   "file": "yard-keeper/walking.webp",
+   "hash": "adb7432086ce",
+   "seed": 286911198,
+   "cost": 0.018,
+   "w": 776,
+   "h": 1408,
+   "refs": [
+    "refs/yard-keeper"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "stranger/walking": {
+   "file": "stranger/walking.webp",
+   "hash": "87d9b4d7fea9",
+   "seed": 68218888,
+   "cost": 0.018,
+   "w": 692,
+   "h": 1490,
+   "refs": [
+    "refs/stranger"
+   ],
+   "at": "2026-10-28 07:01"
+  },
+  "dogs/running": {
+   "file": "dogs/running.webp",
+   "hash": "8a15c0e04d78",
+   "seed": 1369775340,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "window/street": {
+   "file": "window/street.jpg",
+   "hash": "8a76dbef5a1e",
+   "seed": 1667781744,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-28 07:10"
+  },
+  "funeral/mourners": {
+   "file": "funeral/mourners.webp",
+   "hash": "f361e2927ac8",
+   "seed": 447985256,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 1200,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "window/road": {
+   "file": "window/road.jpg",
+   "hash": "680fee3dce13",
+   "seed": 2934080,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "window/fence": {
+   "file": "window/fence.webp",
+   "hash": "ab55510bf54d",
+   "seed": 57973986,
+   "cost": 0.018,
+   "w": 1486,
+   "h": 442,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "window/geranium": {
+   "file": "window/geranium.webp",
+   "hash": "3a5db619f564",
+   "seed": 1832702401,
+   "cost": 0.018,
+   "w": 987,
+   "h": 1491,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "window/floor": {
+   "file": "window/floor.jpg",
+   "hash": "953e2a69dde8",
+   "seed": 94921622,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "garden/trees": {
+   "file": "garden/trees.webp",
+   "hash": "6d0002476b09",
+   "seed": 530552859,
+   "cost": 0.018,
+   "w": 1490,
+   "h": 613,
+   "refs": [],
+   "at": "2026-10-28 07:01"
+  },
+  "garden/fence": {
+   "file": "garden/fence.webp",
+   "hash": "4fc8e3881717",
+   "seed": 1768173486,
+   "cost": 0.018,
+   "w": 1546,
+   "h": 520,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "garden/floor": {
+   "file": "garden/floor.jpg",
+   "hash": "6bdf5133046e",
+   "seed": 1321120535,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "garden/grass": {
+   "file": "garden/grass.webp",
+   "hash": "f7e7c3b05635",
+   "seed": 1246257177,
+   "cost": 0.018,
+   "w": 1564,
+   "h": 651,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "bedroom/floor": {
+   "file": "bedroom/floor.jpg",
+   "hash": "3e54577de6c8",
+   "seed": 1344199282,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 686,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "bedroom/wall": {
+   "file": "bedroom/wall.jpg",
+   "hash": "371fafc0b6e3",
+   "seed": 1956881590,
+   "cost": 0.018,
+   "w": 1600,
+   "h": 900,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "prop/pencil": {
+   "file": "prop/pencil.webp",
+   "hash": "72d2e726b2f5",
+   "seed": 932564182,
+   "cost": 0.018,
+   "w": 181,
+   "h": 634,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "prop/eraser": {
+   "file": "prop/eraser.webp",
+   "hash": "4c7770f76d20",
+   "seed": 878405132,
+   "cost": 0.018,
+   "w": 1228,
+   "h": 623,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  },
+  "prop/apples": {
+   "file": "prop/apples.webp",
+   "hash": "b392ca31bb1c",
+   "seed": 697445574,
+   "cost": 0.018,
+   "w": 1474,
+   "h": 972,
+   "refs": [],
+   "at": "2026-10-28 07:02"
+  }
+ },
+ "cost": 1.71
+}

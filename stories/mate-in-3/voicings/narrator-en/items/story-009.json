@@ -1,0 +1,56 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "1c105f06e232",
+   "file": "story-009-1.opus",
+   "dur": 2.032,
+   "chars": 35,
+   "speech": "“And why should I not believe you?”",
+   "words": [
+    [
+     0.1,
+     0.4
+    ],
+    [
+     0.4,
+     0.7
+    ],
+    [
+     0.7,
+     1.0
+    ],
+    [
+     1.0,
+     1.1
+    ],
+    [
+     1.1,
+     1.4
+    ],
+    [
+     1.4,
+     1.8
+    ],
+    [
+     1.8,
+     2.0
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "And why should I not believe you?",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00041,
+    "verify": 0.0002
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:57:07"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

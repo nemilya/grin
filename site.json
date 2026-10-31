@@ -1,0 +1,99 @@
+{
+ "_": "Сайт (make site → dist/, make serve, make deploy). url — адрес; langs — языки, default_lang — корень сайта. author — тексты об авторе (site/author.json). stories — рассказы на сайте по порядку: story — история (stories/<id>), voicings — озвучка по языкам (чтение с подсветкой и MP3), videos — видеоверсии: production — постановка (stories/<id>: бумажный театр, Тарковский…), name/about — подпись на сайте (стиль, коротко; без пересказа — никаких спойлеров), poster — кадр для обложки (id кадра раскадровки, доля кадра). Форматы видео — вертикаль (film) и formats.horizontal постановки; языки — film.voicings (видео на языке страницы, иначе — на языке раскадровки).",
+ "url": "https://grin.nemilya.me",
+ "langs": [
+  "en",
+  "ru"
+ ],
+ "default_lang": "en",
+ "author": "site/author.json",
+ "stories": [
+  {
+   "story": "mate-in-3",
+   "voicings": {
+    "en": "narrator-en",
+    "ru": "narrator-ru"
+   },
+   "videos": [
+    {
+     "production": "mate-in-3",
+     "name": {
+      "en": "Paper theatre",
+      "ru": "Бумажный театр"
+     },
+     "about": {
+      "en": "A toy paper theatre: cut-out figures under a desk lamp, the puppeteer's hands.",
+      "ru": "Игрушечный бумажный театр: фигурки под настольной лампой, руки кукловода."
+     },
+     "poster": [
+      "s03a",
+      0.5
+     ]
+    },
+    {
+     "production": "mate-in-3-tarkovsky",
+     "name": {
+      "en": "In the manner of Tarkovsky",
+      "ru": "В духе Тарковского"
+     },
+     "about": {
+      "en": "Long takes, rain, fog and silence between the words.",
+      "ru": "Длинные планы, дождь, туман и тишина между словами."
+     },
+     "poster": [
+      "t05b",
+      0.1
+     ]
+    }
+   ]
+  },
+  {
+   "story": "sila-nepost",
+   "voicings": {
+    "en": "narrator-en",
+    "ru": "narrator-ru"
+   },
+   "videos": [
+    {
+     "production": "sila-nepost",
+     "name": {
+      "en": "Silent film → autochrome",
+      "ru": "Немое кино → автохром"
+     },
+     "about": {
+      "en": "A 1910s silent film: painted sets, tinted black and white, intertitles and a pianist.",
+      "ru": "Немое кино 1910-х: расписанные декорации, тонированный ч/б, интертитры и тапёр."
+     },
+     "poster": [
+      "h07",
+      0.8
+     ]
+    }
+   ]
+  },
+  {
+   "story": "leaf-story",
+   "voicings": {
+    "en": "narrator-en",
+    "ru": "narrator-ru"
+   },
+   "videos": [
+    {
+     "production": "leaf-story",
+     "name": {
+      "en": "Avant-garde 1918",
+      "ru": "Авангард 1918"
+     },
+     "about": {
+      "en": "The Russian avant-garde of 1918: cubo-futurist painting and suprematist geometry.",
+      "ru": "Русский авангард 1918 года: кубофутуристическая живопись и супрематическая геометрия."
+     },
+     "poster": [
+      "f05",
+      0.75
+     ]
+    }
+   ]
+  }
+ ]
+}

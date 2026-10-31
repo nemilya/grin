@@ -1,0 +1,56 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "611a1cefe6d3",
+   "file": "story-045-1.opus",
+   "dur": 5.656,
+   "chars": 57,
+   "speech": "“Leipzig! International Tournament! Mate in three moves!”",
+   "words": [
+    [
+     0.3,
+     0.8
+    ],
+    [
+     1.8,
+     2.8
+    ],
+    [
+     2.8,
+     3.4
+    ],
+    [
+     4.2,
+     4.6
+    ],
+    [
+     4.7,
+     5.0
+    ],
+    [
+     5.0,
+     5.2
+    ],
+    [
+     5.2,
+     5.7
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Leipzig, international tournament, mate in three moves.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00098,
+    "verify": 0.00042
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-27 21:45:50"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

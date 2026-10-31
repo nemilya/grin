@@ -1,0 +1,64 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "1894f3a84c3e",
+   "file": "story-020-1.opus",
+   "dur": 5.197,
+   "chars": 46,
+   "speech": "“No, I don’t understand,” I said, “but go on.”",
+   "words": [
+    [
+     0.1,
+     0.6
+    ],
+    [
+     1.2,
+     1.3
+    ],
+    [
+     1.3,
+     1.5
+    ],
+    [
+     1.5,
+     2.4
+    ],
+    [
+     2.9,
+     3.0
+    ],
+    [
+     3.0,
+     3.4
+    ],
+    [
+     4.0,
+     4.3
+    ],
+    [
+     4.6,
+     4.9
+    ],
+    [
+     4.9,
+     5.2
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "No, I don't understand, I said, but go on.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00089,
+    "verify": 0.00044
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:58:36"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

@@ -1,0 +1,60 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "4f7b368767de",
+   "file": "story-011-1.opus",
+   "dur": 3.786,
+   "chars": 42,
+   "speech": "The term of purification is not yet ended.",
+   "words": [
+    [
+     0.2,
+     0.4
+    ],
+    [
+     0.4,
+     1.0
+    ],
+    [
+     1.0,
+     1.1
+    ],
+    [
+     1.1,
+     2.4
+    ],
+    [
+     2.4,
+     2.6
+    ],
+    [
+     2.6,
+     3.0
+    ],
+    [
+     3.0,
+     3.3
+    ],
+    [
+     3.3,
+     3.8
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "The term of purification is not yet ended.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00074,
+    "verify": 0.0003
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:18:39"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

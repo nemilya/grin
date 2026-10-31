@@ -1,0 +1,72 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "ad0890c2d001",
+   "file": "story-035-1.opus",
+   "dur": 6.254,
+   "chars": 65,
+   "speech": "“If one thinks about it without stopping, without fear of death.”",
+   "words": [
+    [
+     0.2,
+     0.6
+    ],
+    [
+     0.6,
+     1.0
+    ],
+    [
+     1.0,
+     1.4
+    ],
+    [
+     1.4,
+     1.7
+    ],
+    [
+     1.7,
+     2.2
+    ],
+    [
+     2.3,
+     2.9
+    ],
+    [
+     2.9,
+     3.6
+    ],
+    [
+     4.5,
+     5.1
+    ],
+    [
+     5.1,
+     5.7
+    ],
+    [
+     5.7,
+     5.9
+    ],
+    [
+     5.9,
+     6.3
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "if one thinks about it without stopping, without fear of death,",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00106,
+    "verify": 0.00047
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 07:00:22"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

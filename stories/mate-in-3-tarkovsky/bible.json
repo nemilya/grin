@@ -1,0 +1,780 @@
+{
+ "_": "Библия постановки mate-in-3-tarkovsky: герои — канон базовой истории (лица и костюмы те же), позы — в формулировках «кадра»; декорации — слои по глубине (backdrop draw:screen — светящаяся даль за окном, card — чужая карточка без генерации). Стиль изображения — styles/tarkovsky-film.json.",
+ "world": "A provincial Russian town around 1908. Summer heat and dust by day, wooden one-storey houses with carved window frames, grey plank fences, birches, unpaved streets. Indoors: striped wallpaper, heavy portières, green baize desks, the first electric lamps beside kerosene ones. Clothing of the late Russian Empire: frock coats, high starched collars, pince-nez, bowler hats, calico kerchiefs, gymnasium uniforms (brown dress, black apron), lace and parasols for ladies, shawls for old women. Seen as in a Tarkovsky film: rainy summer evenings, damp walls, overcast light, still air, mist; memories in faded sepia.",
+ "characters": {
+  "doctor": {
+   "name": "The Doctor",
+   "name_src": "доктор",
+   "role": "рассказчик: молодой врач, у которого почти нет пациентов",
+   "age": "about 27",
+   "color": "#5b6470",
+   "look": "a young provincial doctor of about twenty-seven, slim and narrow-shouldered, clean-shaven except for a thin dark moustache he is clearly still growing, dark hair parted in the middle and smoothed with pomade, round steel-rimmed pince-nez on a black cord, an earnest boyish face trying hard to look stern and experienced; dark charcoal-grey three-piece suit, high starched white collar, narrow black necktie, a thin watch chain across the waistcoat, polished black boots",
+   "poses": {
+    "seated": {
+     "desc": "seated in strict profile facing right on an invisible seat, upright and stiff, hands folded on his knee, face set in cold attentive composure. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the armchair is a separate image).",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "right"
+    },
+    "seated-pencil": {
+     "desc": "seated in profile facing right, legs crossed, leaning back with an affected relaxed air, tapping a pencil against the fingertips of his other hand. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the armchair is a separate image).",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "right"
+    },
+    "seated-frozen": {
+     "desc": "seated in profile facing right, rigid with panic, hands gripping the knees, eyes wide behind the pince-nez, mouth slightly open, about to leap up. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the armchair is a separate image).",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "right"
+    },
+    "standing-shout": {
+     "desc": "standing upright in profile facing right, having just leapt up, one arm stretched forward with an open palm, mouth open, shouting firmly",
+     "h": 20,
+     "aspect": 0.6,
+     "facing": "right"
+    }
+   }
+  },
+  "patient": {
+   "name": "The Patient (Misha)",
+   "name_src": "пациент",
+   "role": "третий пациент; жена зовёт его Мишей",
+   "age": "about 45",
+   "color": "#8a6a4a",
+   "look": "a man of about forty-five, of middle height, inclined to stoutness, bald crown with a thin fringe of fair hair, a curly fair little beard, a sharp pointed nose, short-sighted pale blue eyes with twitching eyelids, an important yet slightly absent gaze, restless fingers; dark brown frock coat buttoned over a waistcoat, white shirt with a high starched collar and starched cuffs fastened with bronzed cufflinks, grey striped trousers, worn black boots",
+   "home_look": "the same man at home in summer: shirtsleeves with the cuffs rolled once, an unbuttoned waistcoat, braces, no frock coat, no collar",
+   "poses": {
+    "standing": {
+     "desc": "standing in three-quarter view facing left, holding a bowler hat against his stomach with both hands, embarrassed, blinking; only the figure, no door, no doorway, no wall drawn",
+     "h": 19,
+     "aspect": 0.5,
+     "facing": "left"
+    },
+    "seated": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), hunched forward on the edge of the seat, eyes lowered, fingers of both hands bending and unbending in his lap",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "left"
+    },
+    "seated-up": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), suddenly raising short-sighted, bewildered, smiling eyes, eyebrows lifted",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "left"
+    },
+    "seated-beard": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), left hand raised to his face plucking at his curly little beard, troubled thinking face",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "left"
+    },
+    "seated-talking": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), leaning forward, both palms open in a pleading gesture, speaking quietly and passionately",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "left"
+    },
+    "seated-handkerchief": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), blowing his nose into a large white handkerchief held with both hands, eyes still fixed and staring over it",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "left"
+    },
+    "seated-wipe": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), wiping drops of sweat from his bald skull with his sleeve, exhausted",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "left"
+    },
+    "seated-fist": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), striking his chest with his fist, morbid triumph on his face",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "left"
+    },
+    "seated-pale": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), white as lime, glassy bulging eyes fixed on someone in front of him, his near hand resting on his knee",
+     "h": 15,
+     "aspect": 0.7,
+     "facing": "left"
+    },
+    "seated-dead": {
+     "desc": "seated in profile facing left on a bentwood Thonet chair (the chair is part of the same image), dead, the face calm and stern, eyes open and gazing straight ahead slightly upward, the near arm resting with the palm on the bend of the knee",
+     "h": 15,
+     "aspect": 0.7,
+     "facing": "left"
+    },
+    "head": {
+     "desc": "a large close-up of ONLY his head, neck and the top of his shoulders (a bust, no body, no legs), in profile facing left, filling the whole picture: bald skull with drops of sweat, curly fair beard, sharp nose, twitching eyelid, frightened short-sighted eye",
+     "h": 14,
+     "aspect": 0.85,
+     "facing": "left"
+    },
+    "head-abyss": {
+     "desc": "a large close-up of ONLY his head, neck and the top of his shoulders (a bust, no body, no legs), in profile facing left, filling the whole picture: white as lime, sweat on the bald skull, and the eye has sunk deep into the socket and become a small round empty black hole",
+     "h": 14,
+     "aspect": 0.85,
+     "facing": "left"
+    },
+    "hands-cobweb": {
+     "desc": "a close-up of ONLY two hands (no body, no face): plump pale hands with starched white shirt cuffs and bronzed cufflinks, the fingers bent and tangled in fine white cobweb threads stretched between them",
+     "h": 9,
+     "aspect": 1.4,
+     "facing": "front",
+     "ref": false
+    },
+    "hands-button": {
+     "desc": "an extreme close-up photograph of ONLY two trembling hands cropped at the wrists, starched white cuffs, the fingers unbuttoning a single brass button on a small piece of dark brown frock-coat cloth; no face, no head, no shoulders, no body in the picture — only the hands and the cloth",
+     "h": 9,
+     "aspect": 1.2,
+     "facing": "front",
+     "ref": false
+    },
+    "at-window": {
+     "desc": "at home: seated on a bentwood chair in three-quarter back view facing right, an open book in his lap, not reading, looking up and to the right as if out of a window; only the man and the chair, no window, no wall drawn",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "right",
+     "outfit": "home_look"
+    },
+    "on-bench": {
+     "desc": "at home at night: seated on a simple low wooden garden bench without a back (two legs and a plank), face lifted to the sky, a cigarette between his fingers; only the man and the bench",
+     "h": 13,
+     "aspect": 1.1,
+     "facing": "right",
+     "outfit": "home_look"
+    },
+    "in-bed": {
+     "desc": "at night: lying on his back in a narrow iron bed with a white pillow and a patchwork blanket pulled to the chest, eyes wide open; the bed and the man together, seen from the side",
+     "h": 12,
+     "aspect": 2.4,
+     "facing": "right",
+     "outfit": "home_look"
+    },
+    "in-hammock": {
+     "desc": "after dinner: lying contentedly in a rope hammock, hands on his belly, eyes half closed; only the man in the hammock with its ropes running up to the left and right edges, no trees",
+     "h": 7,
+     "aspect": 2.4,
+     "facing": "front",
+     "outfit": "home_look"
+    },
+    "hand-raised": {
+     "h": 12,
+     "aspect": 0.45,
+     "facing": "front",
+     "ref": false,
+     "closeup": true,
+     "desc": "an insert close-up of a single human forearm and hand raised upright, seen from the palm side: the dark brown cloth sleeve of a frock coat with a starched white shirt cuff and a bronzed cufflink at the bottom edge of the picture, the pale open hand at the top with long spread fingers; only the forearm and the hand — no face, no head, no body, no shoulder"
+    }
+   }
+  },
+  "woman-baby": {
+   "name": "Woman with a baby",
+   "name_src": "женщина с грудным младенцем",
+   "role": "процессия, 1 — младенчество",
+   "color": "#c0392b",
+   "look": "a young townswoman carrying a swaddled baby in her arms, a vivid bright red calico kerchief tied under her chin, a simple white blouse, a long dark blue skirt and apron; the most saturated, warm colors of the whole procession",
+   "poses": {
+    "walking": {
+     "desc": "walking in profile to the right, carrying the baby",
+     "h": 17,
+     "aspect": 0.5,
+     "facing": "right"
+    }
+   }
+  },
+  "girl": {
+   "name": "Girl of seven",
+   "name_src": "девочка лет семи",
+   "role": "процессия, 2 — детство",
+   "color": "#d9822b",
+   "look": "a skinny girl of about seven, barefoot, freckles, a single ginger pigtail sticking straight out behind her head like a piglet's tail, a faded yellow cotton dress; bright but slightly less saturated colors than the woman with the baby",
+   "poses": {
+    "running": {
+     "desc": "running in profile to the right, one foot off the ground, pigtail flying",
+     "h": 11,
+     "aspect": 0.7,
+     "facing": "right"
+    }
+   }
+  },
+  "schoolgirl": {
+   "name": "Gymnasium schoolgirl",
+   "name_src": "гимназистка",
+   "role": "процессия, 3 — юность",
+   "color": "#7a5236",
+   "look": "a gymnasium schoolgirl of about fifteen in the brown wool uniform dress with a black apron and a small white collar, a long braid, a satchel of books on a strap; muted brown and black colors",
+   "poses": {
+    "walking": {
+     "desc": "walking in profile to the right, eyes down, carrying the satchel",
+     "h": 16,
+     "aspect": 0.45,
+     "facing": "right"
+    }
+   }
+  },
+  "lady": {
+   "name": "Proper lady",
+   "name_src": "чинная дама",
+   "role": "процессия, 4 — зрелость",
+   "color": "#8e8299",
+   "look": "a very well-dressed, very proper lady of about forty in a lilac-grey walking dress with a high lace collar and a narrow waist, a wide hat with a veil and grey feathers, gloves, a closed parasol; faded, almost colorless lilac-grey",
+   "poses": {
+    "walking": {
+     "desc": "walking in profile to the right with a stately step",
+     "h": 18,
+     "aspect": 0.5,
+     "facing": "right"
+    }
+   }
+  },
+  "old-woman": {
+   "name": "Old woman",
+   "name_src": "старушка",
+   "role": "процессия, 5 — старость",
+   "color": "#9a9a95",
+   "look": "a small bent old woman with a deeply wrinkled face, a grey woollen shawl over her head and shoulders, a dark grey dress, walking slowly with a stick; nearly monochrome grey, the palest figure of the procession",
+   "poses": {
+    "walking": {
+     "desc": "walking slowly in profile to the right, bent over her stick",
+     "h": 14,
+     "aspect": 0.55,
+     "facing": "right"
+    },
+    "facing": {
+     "desc": "standing still in the middle of a dusty street and turned straight toward the viewer, looking directly out with calm, knowing eyes",
+     "h": 14,
+     "aspect": 0.55,
+     "facing": "front"
+    }
+   }
+  },
+  "wife": {
+   "name": "The wife",
+   "name_src": "жена",
+   "role": "зовёт «Миша!» с крылечка; видна только силуэтом в освещённой двери",
+   "color": "#111111",
+   "look": "a young woman of about thirty in a long dark skirt and a pale blouse with puffed sleeves, hair in a loose bun, a shawl over her shoulders",
+   "poses": {
+    "doorway": {
+     "desc": "standing in a doorway lit from behind by warm lamplight, one hand on the door frame, leaning forward to call out into the dark garden; only the woman, no door, no house",
+     "h": 17,
+     "aspect": 0.45,
+     "facing": "left"
+    }
+   }
+  },
+  "funeral": {
+   "name": "Funeral procession (imagined)",
+   "name_src": "похоронная процессия",
+   "role": "то, чего «не хватает» в процессии — только тенью",
+   "color": "#000000",
+   "look": "a horse-drawn funeral hearse of the 1900s with tall black plumes and a canopy, a horse in a black caparison, followed by mourners with bowed heads",
+   "poses": {
+    "hearse": {
+     "desc": "the hearse and horse moving to the right, in profile",
+     "h": 15,
+     "aspect": 1.9,
+     "facing": "right",
+     "kind": "silhouette"
+    },
+    "mourners": {
+     "desc": "a small group of mourners walking to the right with bowed heads, one holding a wreath",
+     "h": 14,
+     "aspect": 1.4,
+     "facing": "right",
+     "kind": "silhouette"
+    }
+   }
+  }
+ },
+ "sets": {
+  "office": {
+   "name": "Кабинет (дождливый вечер)",
+   "light": "office",
+   "look": "a young doctor's modest consulting room in a provincial town, 1908, on a rainy summer evening",
+   "pieces": {
+    "garden": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      100,
+      75
+     ],
+     "pos": [
+      20,
+      -10,
+      -100
+     ],
+     "desc": "an overgrown garden behind a provincial house in steady summer rain at dusk, seen through a window: wet birches and old apple trees, tall rain-soaked grass, a weathered plank fence, one lit window of a neighbouring house far away, grey-blue dusk sky, mist"
+    },
+    "rain": {
+     "kind": "procedural",
+     "draw": "rain",
+     "pos": [
+      20,
+      18,
+      -35
+     ],
+     "box": [
+      14,
+      30,
+      3
+     ],
+     "n": 1800,
+     "len": 1.2,
+     "gain": 0.22
+    },
+    "corridor": {
+     "kind": "backdrop",
+     "size": [
+      18,
+      40
+     ],
+     "pos": [
+      -20.5,
+      -6,
+      -40
+     ],
+     "desc": "a dim narrow hallway of an old wooden house seen straight on: a coat rack with a coat, a dark door at the far end, faint grey light from somewhere, bare floorboards"
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      64,
+      48
+     ],
+     "pos": [
+      0,
+      -8,
+      -32
+     ],
+     "desc": "the back wall of a young doctor's modest consulting room, about 1908, seen straight on: faded striped olive wallpaper with damp stains; on the left a tall open doorway with a heavy faded portière drawn aside (the doorway opening is filled with flat pure chroma green); on the right a tall old wooden window with peeling white paint (all its panes are filled with flat pure chroma green); a framed anatomical chart between them"
+    },
+    "floor": {
+     "kind": "floor",
+     "size": [
+      90,
+      70
+     ],
+     "pos": [
+      0,
+      0,
+      -8
+     ],
+     "desc": "old worn painted floorboards with a faded woven runner rug, seen straight from above"
+    },
+    "desk": {
+     "kind": "cutout",
+     "h": 11,
+     "aspect": 1.9,
+     "pos": [
+      -6,
+      0,
+      -20
+     ],
+     "desc": "a heavy old writing desk with a worn green baize top seen from the front, a few papers and an inkwell on it"
+    },
+    "lamp": {
+     "kind": "cutout",
+     "h": 10,
+     "aspect": 0.7,
+     "pos": [
+      -9.5,
+      10.6,
+      -20.3
+     ],
+     "cast": false,
+     "desc": "an electric table lamp of 1908 with a green glass shade and a brass stem, switched on, its shade glowing"
+    },
+    "carafe": {
+     "kind": "cutout",
+     "h": 5,
+     "aspect": 0.8,
+     "pos": [
+      -2,
+      10.6,
+      -19.8
+     ],
+     "desc": "a glass carafe of water and a faceted drinking glass standing next to it"
+    },
+    "armchair": {
+     "kind": "cutout",
+     "h": 15,
+     "aspect": 0.9,
+     "pos": [
+      4,
+      0,
+      -11.8
+     ],
+     "desc": "an old leather armchair seen in profile facing right, worn brown leather, carved wooden legs"
+    }
+   }
+  },
+  "window": {
+   "name": "Окно (воспоминание, жаркий день)",
+   "light": "memory",
+   "look": "a small sunlit room in a wooden house and the dusty summer street outside its window",
+   "pieces": {
+    "street": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      110,
+      82
+     ],
+     "pos": [
+      0,
+      -16,
+      -95
+     ],
+     "desc": "a dusty unpaved street of a provincial town on a hot still summer day seen from a window: a grey plank fence, wooden one-storey houses with carved window frames across the street, birches, white dust, hazy sun"
+    },
+    "apples": {
+     "kind": "cutout",
+     "h": 16,
+     "aspect": 1.3,
+     "pos": [
+      11,
+      16,
+      -44
+     ],
+     "desc": "an apple-tree bough with leaves and four ripening green apples hanging from it"
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      60,
+      45
+     ],
+     "pos": [
+      0,
+      -6,
+      -30
+     ],
+     "desc": "the wall of a small sunlit room in a wooden house seen straight on from inside: whitewashed log wall, a wide window in the middle with white muslin curtains tied back, a windowsill with a geranium in a clay pot (the window panes are filled with flat pure chroma green)"
+    },
+    "floor": {
+     "kind": "floor",
+     "card": "office/floor",
+     "size": [
+      80,
+      60
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ]
+    },
+    "fluff": {
+     "kind": "procedural",
+     "draw": "dust",
+     "pos": [
+      0,
+      14,
+      -12
+     ],
+     "box": [
+      30,
+      26,
+      24
+     ]
+    }
+   }
+  },
+  "street-fog": {
+   "name": "Улица в тумане (мысли)",
+   "light": "fog",
+   "look": "the same street dissolved in thick grey fog",
+   "pieces": {
+    "street": {
+     "kind": "backdrop",
+     "card": "window/street",
+     "draw": "screen",
+     "size": [
+      110,
+      82
+     ],
+     "pos": [
+      0,
+      -16,
+      -95
+     ]
+    }
+   }
+  },
+  "orchard": {
+   "name": "Сад после обеда",
+   "light": "orchard",
+   "look": "a small overgrown orchard behind a wooden house on a warm summer evening",
+   "pieces": {
+    "plate": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      100,
+      75
+     ],
+     "pos": [
+      0,
+      -14,
+      -80
+     ],
+     "desc": "a small overgrown orchard behind a wooden house on a warm summer evening after dinner: two young birches in the middle with space between them, old apple trees, long grass, low golden sun through the leaves, haze"
+    },
+    "grass": {
+     "kind": "cutout",
+     "h": 9,
+     "aspect": 3.5,
+     "pos": [
+      2,
+      -1,
+      8
+     ],
+     "desc": "a long low strip of tall summer grass, wild flowers and burdock leaves"
+    }
+   }
+  },
+  "garden": {
+   "name": "Сад ночью",
+   "light": "night",
+   "look": "a tiny garden behind a wooden house at night under a starry sky",
+   "pieces": {
+    "sky": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      110,
+      82
+     ],
+     "pos": [
+      0,
+      -14,
+      -95
+     ],
+     "desc": "a small overgrown garden behind a wooden house at night under a vast starry sky: black silhouettes of birches and apple trees against a deep blue night sky full of stars, the Milky Way, a faint mist lying over the grass"
+    },
+    "stars": {
+     "kind": "procedural",
+     "draw": "stars",
+     "size": [
+      110,
+      60
+     ],
+     "pos": [
+      0,
+      22,
+      -90
+     ],
+     "backing": false,
+     "density": 0.12
+    },
+    "house": {
+     "kind": "cutout",
+     "h": 30,
+     "aspect": 0.9,
+     "pos": [
+      -16,
+      0,
+      -42
+     ],
+     "desc": "the back porch of a dark wooden one-storey house at night: three wooden steps, a carved porch post, an open door with warm yellow lamplight inside"
+    },
+    "ground": {
+     "kind": "floor",
+     "size": [
+      100,
+      80
+     ],
+     "pos": [
+      0,
+      0,
+      -20
+     ],
+     "desc": "short wild grass, clover and dark earth of a garden, seen straight from above"
+    },
+    "grass": {
+     "kind": "cutout",
+     "h": 9,
+     "aspect": 3.5,
+     "pos": [
+      0,
+      -1,
+      8
+     ],
+     "desc": "a long low strip of tall wild grass and burdock leaves, dark, wet with dew"
+    }
+   }
+  },
+  "bedroom": {
+   "name": "Спальня ночью",
+   "light": "bedroom",
+   "look": "a dark small bedroom in a wooden house at night",
+   "pieces": {
+    "night": {
+     "kind": "backdrop",
+     "card": "garden/sky",
+     "draw": "screen",
+     "size": [
+      90,
+      67
+     ],
+     "pos": [
+      0,
+      -10,
+      -80
+     ]
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      56,
+      42
+     ],
+     "pos": [
+      0,
+      -6,
+      -26
+     ],
+     "desc": "the wall of a dark small bedroom in a wooden house at night seen straight on: dark patterned wallpaper, a small window with a moonlit night outside (the window panes are filled with flat pure chroma green), an icon in the corner with a tiny red icon-lamp"
+    },
+    "floor": {
+     "kind": "floor",
+     "card": "office/floor",
+     "size": [
+      70,
+      50
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ]
+    },
+    "curtain": {
+     "kind": "cutout",
+     "h": 40,
+     "aspect": 0.35,
+     "pos": [
+      -13,
+      -4,
+      12
+     ],
+     "desc": "a long sheer white muslin curtain hanging straight down, slightly stirred by a draught"
+    }
+   }
+  },
+  "void": {
+   "name": "Пустота",
+   "light": "void",
+   "look": "infinite black space pierced with stars",
+   "pieces": {
+    "stars": {
+     "kind": "procedural",
+     "draw": "stars",
+     "size": [
+      200,
+      150
+     ],
+     "pos": [
+      0,
+      -40,
+      -100
+     ]
+    },
+    "stars-near": {
+     "kind": "procedural",
+     "draw": "stars",
+     "size": [
+      150,
+      110
+     ],
+     "pos": [
+      0,
+      -25,
+      -48
+     ],
+     "backing": false,
+     "density": 0.22
+    },
+    "armchair": {
+     "kind": "cutout",
+     "card": "office/armchair",
+     "h": 15,
+     "pos": [
+      -6,
+      0,
+      -15.6
+     ]
+    }
+   }
+  },
+  "table": {
+   "name": "Стол (1 и 0)",
+   "light": "table",
+   "look": "a dark wooden tabletop at night, one sheet of paper lit by a lamp",
+   "pieces": {
+    "top": {
+     "kind": "floor",
+     "size": [
+      60,
+      40
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ],
+     "desc": "a dark worn wooden tabletop, old varnish, scratches and an ink stain, seen straight from above"
+    }
+   }
+  },
+  "dark": {
+   "name": "Крупный план (темнота)",
+   "light": "portrait",
+   "look": "darkness, one face or hands lit from the window",
+   "pieces": {}
+  }
+ },
+ "props": {
+  "sheet": {
+   "kind": "procedural",
+   "draw": "sheet",
+   "text": "",
+   "h": 7,
+   "aspect": 0.72
+  },
+  "sheet-10": {
+   "kind": "procedural",
+   "draw": "sheet",
+   "text": "10",
+   "h": 7,
+   "aspect": 0.72
+  },
+  "sheet-erased": {
+   "kind": "procedural",
+   "draw": "sheet",
+   "text": "",
+   "crumbs": true,
+   "h": 7,
+   "aspect": 0.72
+  },
+  "pencil": {
+   "kind": "cutout",
+   "desc": "a long sharpened yellow wooden pencil, vertical",
+   "h": 4.6,
+   "aspect": 0.29
+  },
+  "eraser": {
+   "kind": "cutout",
+   "desc": "a worn grey-pink rubber eraser",
+   "h": 2.2,
+   "aspect": 1.8
+  }
+ }
+}

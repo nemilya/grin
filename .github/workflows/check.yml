@@ -1,0 +1,19 @@
+name: check
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: No media in this repository (they live in nemilya/grin-media)
+        run: |
+          bad=$(git ls-files 'stories/**' | grep -Ei '\.(webp|png|jpe?g|opus|wav|mp3|m4a)$' || true)
+          big=$(git ls-files -z | xargs -0 -I{} find {} -maxdepth 0 -size +2M | grep -v '^stage/vendor/' || true)
+          if [ -n "$bad$big" ]; then echo "::error::media or large files committed:"; echo "$bad"; echo "$big"; exit 1; fi
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - uses: actions/setup-node@v4
+        with: {node-version: '20'}
+      - run: sudo apt-get update -q && sudo apt-get install -y -q ffmpeg
+      - run: python -m pip install numpy pillow
+      - run: make check

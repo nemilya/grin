@@ -1,0 +1,42 @@
+{
+ "_": "«Преступление Отпавшего Листа» (Грин, 1918). Разбор и план — docs/stories/leaf-story.md. Каждая строка исходника — абзац с отступом (format libru); первые два — автор и название; главы I–III — заголовки; ответы Посвящения — строки в кавычках.",
+ "title": {
+  "ru": "Преступление Отпавшего Листа",
+  "en": "The Crime of the Fallen Leaf"
+ },
+ "author": {
+  "ru": "Александр Грин",
+  "en": "Alexander Grin"
+ },
+ "source": {
+  "lang": "ru",
+  "file": "content/leaf-story.txt",
+  "format": "libru",
+  "skip": 2
+ },
+ "film": {
+  "lang": "en",
+  "voicing": "narrator-en",
+  "style": "avant-garde-1918",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "speak_title": false,
+  "voicings": {
+   "en": "narrator-en",
+   "ru": "narrator-ru"
+  }
+ },
+ "art_context": "a parable written in 1918: Ranum Nuzarget, an Indian yogi exiled from the abode of the Great Initiation into a huge European-Russian city of war and revolution, sits in a summer square garden, converses telepathically with his far-away teachers, foresees the death of a passer-by whose soul is dead, and — though forbidden to use his power on pain of destruction — turns aside a bomber aeroplane by will alone; a fallen maple leaf brings him forgiveness. The narrator's voice is elevated, theosophical (Initiation, incarnations, Nirvana, the Highest of the High), with long periodic sentences, a touch of Grin's irony and pseudo-scientific precision (a table of durations of the exercises). The answers of the Great Initiation are solemn, scriptural, set out line by line. Setting: a large Russian city in the summer of 1918 (unnamed): a square garden with sand paths and maple trees, crowds in motley clothes, six-storey houses, a church, a river, a great empty cobbled square, trams; a 1910s biplane.",
+ "speech_replacements": [],
+ "year": 1918,
+ "formats": {
+  "vertical": {
+   "width": 1080,
+   "height": 1920,
+   "fps": 24,
+   "storyboard": "storyboard-9x16.json",
+   "_": "вертикаль 9:16 (телефон): те же реплики, свет, звук, ассеты; камеры и правки кадров под узкий кадр — storyboard-9x16.json"
+  }
+ }
+}

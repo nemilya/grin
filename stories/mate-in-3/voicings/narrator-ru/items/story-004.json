@@ -1,0 +1,48 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "bf9556153a65",
+   "file": "story-004-1.opus",
+   "dur": 2.771,
+   "chars": 29,
+   "speech": "— Чем вы больны? — спросил я.",
+   "words": [
+    [
+     0.4,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     1.4
+    ],
+    [
+     2.1,
+     2.5
+    ],
+    [
+     2.5,
+     2.7
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Чем вы больны? Спросил я.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00052,
+    "verify": 0.00026
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-29 22:42:37"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

@@ -1,0 +1,220 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "b7be47dbb7e0",
+   "file": "story-014-1.opus",
+   "dur": 19.927,
+   "chars": 274,
+   "speech": "Ranum was a victim of the power of imagination. What other pupils of the yogis laboured over for years came to him with great ease. The beginning of training, the starting points for the concentration of inner force, consists in exercises, some of which may be related here.",
+   "words": [
+    [
+     0.0,
+     0.6
+    ],
+    [
+     0.6,
+     0.8
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     0.9,
+     1.5
+    ],
+    [
+     1.5,
+     1.6
+    ],
+    [
+     1.6,
+     1.8
+    ],
+    [
+     1.8,
+     2.4
+    ],
+    [
+     2.4,
+     2.5
+    ],
+    [
+     2.5,
+     3.4
+    ],
+    [
+     4.6,
+     4.8
+    ],
+    [
+     4.8,
+     5.0
+    ],
+    [
+     5.0,
+     5.6
+    ],
+    [
+     5.6,
+     5.7
+    ],
+    [
+     5.7,
+     5.8
+    ],
+    [
+     5.8,
+     6.3
+    ],
+    [
+     6.3,
+     6.7
+    ],
+    [
+     6.7,
+     7.0
+    ],
+    [
+     7.0,
+     7.2
+    ],
+    [
+     7.2,
+     7.8
+    ],
+    [
+     7.8,
+     8.1
+    ],
+    [
+     8.1,
+     8.2
+    ],
+    [
+     8.2,
+     8.6
+    ],
+    [
+     8.6,
+     8.8
+    ],
+    [
+     8.8,
+     9.2
+    ],
+    [
+     9.2,
+     9.6
+    ],
+    [
+     10.9,
+     11.0
+    ],
+    [
+     11.0,
+     11.3
+    ],
+    [
+     11.3,
+     11.4
+    ],
+    [
+     11.4,
+     11.9
+    ],
+    [
+     12.5,
+     12.6
+    ],
+    [
+     12.6,
+     13.0
+    ],
+    [
+     13.0,
+     13.5
+    ],
+    [
+     13.5,
+     13.6
+    ],
+    [
+     13.6,
+     13.7
+    ],
+    [
+     13.7,
+     14.6
+    ],
+    [
+     14.6,
+     14.8
+    ],
+    [
+     14.8,
+     15.1
+    ],
+    [
+     15.1,
+     15.6
+    ],
+    [
+     16.1,
+     16.6
+    ],
+    [
+     16.6,
+     16.8
+    ],
+    [
+     16.8,
+     17.8
+    ],
+    [
+     18.1,
+     18.4
+    ],
+    [
+     18.4,
+     18.5
+    ],
+    [
+     18.5,
+     18.9
+    ],
+    [
+     18.9,
+     19.1
+    ],
+    [
+     19.1,
+     19.2
+    ],
+    [
+     19.2,
+     19.7
+    ],
+    [
+     19.7,
+     19.9
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Raneham was a victim of the power of imagination. What other pupils of the yogis labored over for years came to him with great ease. The beginning of training, the starting points for the concentration of inner force consists in exercises, some of which may be related here.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00316,
+    "verify": 0.00167
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:18:57"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

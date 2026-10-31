@@ -1,0 +1,676 @@
+{
+ "_": "Библия «Силы непостижимого» (стиль styles/silent-autochrome.json): описания — по-английски и без стиля; декорации — слои по глубине (задник z −34…−95, стена с проёмом hole, пол, предметы). Тени-силуэты (зрители, призрачный оркестр, драка, врачи) — куски декораций, не герои: без листа героя. Интертитры — процедурные карточки props/title-* (текст — из абзаца на языке ролика).",
+ "world": "A European city in the mid-1910s (French names; the country is not named). Narrow cobbled lanes, plastered houses with shutters, gas street lamps, picture palaces with an orchestra pit. Indoors: dark patterned wallpaper, heavy curtains, bookshelves of leather folios, upholstered armchairs, the first electric lamps beside gas ones. Clothing of the 1910s: frock coats and lounge suits, high starched collars, cravats, bowler hats; the poor in shabby, ill-fitting jackets.",
+ "characters": {
+  "duplay": {
+   "name": "Gratien Duplay",
+   "name_src": "Грациан Дюплэ",
+   "role": "скрипач, слышащий во сне непостижимую музыку",
+   "age": "a little over thirty",
+   "color": "#4a4038",
+   "look": "a short, dreadfully thin man of a little over thirty with the look of a market-place hustler: a gaunt, nervous face, sunken eyes full of dull suffering, a high forehead hidden under unkempt strands of black hair; a shabby, ill-fitting dark jacket worn shiny at the elbows, a crumpled soft collar and a loosely knotted dark tie, baggy trousers, scuffed boots",
+   "poses": {
+    "trance": {
+     "desc": "seated upright in profile facing left, deep in hypnotic sleep: eyes closed, head slightly thrown back, face pale and motionless, glistening with large drops of sweat; a violin resting upright on his knee in his left hand, the bow hanging loosely from his right hand. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the armchair is a separate image).",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "left"
+    },
+    "playing": {
+     "desc": "standing in three-quarter view facing left, playing the violin in a trance of ecstasy: the violin tucked under his chin, the bow sweeping sharply across the strings, eyes wide open, staring and unseeing, lips parted, no smile, the face transfigured with awe and rapture, hair fallen over the forehead",
+     "h": 18,
+     "aspect": 0.6,
+     "facing": "left"
+    },
+    "face": {
+     "desc": "a close-up portrait: ONLY his head and shoulders, cropped at the chest, the face large and filling most of the image, turned three-quarters to the left, eyes wide and staring into space, the whole face shuddering in a terrible, alluring presentiment, lips parted",
+     "h": 14,
+     "aspect": 0.8,
+     "ref": true
+    },
+    "watching": {
+     "desc": "seated in strict profile facing left, perfectly still, gazing ahead at something far away with rapt attention, his face lit from the front, hands folded on his knee. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the seat is a separate image).",
+     "h": 15,
+     "aspect": 0.75,
+     "facing": "left"
+    },
+    "walking": {
+     "desc": "walking in profile facing right, head slightly raised as if listening to distant music only he can hear, a battered violin case in his left hand, a faint absent smile",
+     "h": 18,
+     "aspect": 0.6,
+     "facing": "right"
+    },
+    "visitor": {
+     "desc": "standing in three-quarter view facing left, a battered violin case clutched in one hand and a crumpled soft hat in the other, tense and stubborn, staring ahead with sunken eyes",
+     "h": 18,
+     "aspect": 0.55,
+     "facing": "left"
+    },
+    "talk": {
+     "desc": "seated in profile facing left, leaning forward, speaking passionately with a vigorous, fluent gesture of one raised hand, a battered violin case resting against his knee. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the seat is a separate image).",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "left"
+    },
+    "awake": {
+     "desc": "seated in profile facing left, slumped, just woken from a trance, dazed and empty, one hand pressed to his forehead, the other hand lying limp on his knee. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the seat is a separate image).",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "left"
+    },
+    "realize": {
+     "desc": "standing in three-quarter view facing right, frozen, eyes widening with sudden terrible understanding, the face beginning to twist with fury, the violin case slipping from his fingers",
+     "h": 18,
+     "aspect": 0.55,
+     "facing": "right"
+    },
+    "attack": {
+     "desc": "lunging forward in profile facing left, both arms outstretched with clawing hands, mouth open in a scream, the face distorted with rage, hair flying",
+     "h": 17,
+     "aspect": 0.8,
+     "facing": "left"
+    },
+    "sleeping": {
+     "outfit": "night",
+     "desc": "lying on his back asleep, seen from the side, head to the left on an invisible pillow, tossing in a troubled dream, one arm flung out, face tense; the body lies horizontally. NO bed, nothing under him (the bed is a separate image).",
+     "h": 6,
+     "aspect": 2.6
+    },
+    "writing": {
+     "outfit": "night",
+     "desc": "sitting on the edge of an invisible bed in profile facing right, hunched forward, scribbling frantically with a pencil on a sheet of music paper held on his knee, in desperate rapture. He sits on an invisible seat: NO chair, NO stool, nothing drawn under him (the seat is a separate image).",
+     "h": 15,
+     "aspect": 0.8,
+     "facing": "right"
+    },
+    "asylum": {
+     "outfit": "asylum",
+     "desc": "standing in three-quarter view facing left, playing the violin with anguish, the violin under his chin, eyes half-closed, tears on his cheeks, searching for something lost",
+     "h": 18,
+     "aspect": 0.6,
+     "facing": "left"
+    },
+    "dying": {
+     "outfit": "asylum",
+     "desc": "lying completely flat on his back in delirium, seen strictly from the side, head to the left resting on an invisible pillow, legs straight and flat, knees not raised, the whole body horizontal and level; only one thin arm raised and reaching upward, imploring, eyes open and burning. NO bed, nothing under him (the bed is a separate image).",
+     "h": 5.5,
+     "aspect": 3.2
+    }
+   },
+   "night": "a short, dreadfully thin man of a little over thirty: a gaunt, nervous face, sunken eyes, unkempt strands of black hair over a high forehead; a crumpled white linen nightshirt, bare feet",
+   "asylum": "a short, dreadfully thin man of a little over thirty, now even more wasted and hollow-cheeked: sunken burning eyes, unkempt strands of black hair over a high forehead, a few days' stubble; a shapeless grey asylum gown over a coarse shirt, felt slippers"
+  },
+  "roumier": {
+   "name": "Doctor Roumier",
+   "name_src": "Румиер",
+   "role": "доктор, гипнотизёр и исследователь цветной фотографии",
+   "age": "about fifty-five",
+   "color": "#2f3238",
+   "look": "a tall, lean, upright scholar of about fifty-five: close-cropped grey hair receding from a high domed forehead, a short pointed grey beard and moustache, keen deep-set grey eyes, gold pince-nez; a well-cut black frock coat, a dark waistcoat with a watch chain, a high white wing collar and a black silk cravat, polished black shoes",
+   "poses": {
+    "command": {
+     "desc": "standing in profile facing right, leaning slightly forward, one arm stretched out in front of him with the fingers spread in a hypnotic pass, the other hand at his side, staring intently ahead, stern and tense",
+     "h": 21,
+     "aspect": 0.6,
+     "facing": "right"
+    },
+    "plate": {
+     "desc": "standing in three-quarter view facing right, holding up a glass photographic plate to the light with both hands and studying it closely through his pince-nez, absorbed",
+     "h": 21,
+     "aspect": 0.55,
+     "facing": "right"
+    },
+    "desk": {
+     "desc": "standing behind an invisible desk in three-quarter view facing right, upright, listening with cool attention, one hand at his beard, the other at his side",
+     "h": 21,
+     "aspect": 0.5,
+     "facing": "right"
+    },
+    "violin": {
+     "desc": "standing in profile facing right, recoiling backwards, holding a violin and bow wrenched away at arm's length behind him as if it burned, the face white with horror and anguish",
+     "h": 21,
+     "aspect": 0.7,
+     "facing": "right"
+    },
+    "back": {
+     "desc": "standing seen from behind, his back turned, shoulders rigid, head slightly bowed, mastering himself, hands clasped tightly behind his back",
+     "h": 21,
+     "aspect": 0.5
+    },
+    "fallen": {
+     "desc": "fallen on the floor half-lying on his side, propped on one elbow, the other arm raised to shield his face, pince-nez knocked askew, terrified",
+     "h": 9,
+     "aspect": 1.9
+    }
+   }
+  },
+  "servant": {
+   "name": "Roumier's manservant",
+   "name_src": "слуга",
+   "role": "слуга Румиера",
+   "age": "about sixty",
+   "color": "#3d3a34",
+   "look": "an elderly manservant of about sixty: a long, mournful clean-shaven face with grey side-whiskers, thin grey hair combed flat; a black tailcoat, striped waistcoat, white shirt and black bow tie, white cotton gloves",
+   "poses": {
+    "announce": {
+     "desc": "standing in three-quarter view facing left, bowing slightly from the waist, announcing a visitor with a disapproving, long-suffering face, one gloved hand raised",
+     "h": 19,
+     "aspect": 0.55,
+     "facing": "left"
+    }
+   }
+  },
+  "officer": {
+   "name": "A former officer",
+   "name_src": "бывший офицер",
+   "role": "прохожий, слышавший музыку из окна",
+   "age": "about forty-five",
+   "color": "#4b4a44",
+   "look": "a former army officer of about forty-five: an upright military bearing, a square face with a greying waxed moustache, close-cropped hair; a decent dark civilian overcoat buttoned to the throat, gloves, a bowler hat",
+   "poses": {
+    "asking": {
+     "desc": "standing in three-quarter view facing left, bowing hastily with his bowler hat in his hand, his face wet with tears, imploring, deeply shaken",
+     "h": 20,
+     "aspect": 0.55,
+     "facing": "left"
+    }
+   }
+  }
+ },
+ "sets": {
+  "study": {
+   "name": "Кабинет Румиера",
+   "light": "study",
+   "look": "the ground-floor study of a learned doctor, hypnotist and researcher of colour photography, in a European city about 1915, on a summer afternoon",
+   "pieces": {
+    "lane": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      90,
+      64
+     ],
+     "pos": [
+      32,
+      -6,
+      -95
+     ],
+     "desc": "the view outside only: a narrow cobbled lane in afternoon light, seen at eye level from across the street, the plastered walls of the houses opposite leaning at slanted angles, a shuttered window and a low doorway, a gas street lamp on an iron bracket, a strip of pale sky above. The picture is entirely outdoors: no window frame, no curtain, no room, no interior, no furniture"
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      124,
+      70
+     ],
+     "pos": [
+      0,
+      -10,
+      -34
+     ],
+     "desc": "the back wall of a learned doctor's study, about 1915, seen flat and straight on, filling the whole image edge to edge from the skirting board to the cornice: dark patterned wallpaper above a low wooden dado; on the left tall bookshelves crammed with leather folios, above them a framed photograph of clouds; on the right a tall window with both casements swung open inwards and a heavy curtain drawn aside (the whole window opening is filled with flat pure chroma green); a tall potted palm against the wall between them. A flat wall only: no floor, no ceiling, no room corner, no furniture in front of it"
+    },
+    "floor": {
+     "kind": "floor",
+     "size": [
+      130,
+      80
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ],
+     "desc": "a parquet floor with a worn oriental carpet, seen straight from above"
+    },
+    "armchair": {
+     "kind": "cutout",
+     "h": 14,
+     "aspect": 0.95,
+     "pos": [
+      15,
+      0,
+      -14.5
+     ],
+     "desc": "a deep, comfortable upholstered armchair with a high back and wide padded arms, seen in strict profile facing left (its back on the right side)"
+    },
+    "camera": {
+     "kind": "cutout",
+     "h": 18,
+     "aspect": 0.55,
+     "pos": [
+      -36,
+      0,
+      -24
+     ],
+     "desc": "a large wooden plate camera of about 1910 with brass fittings and a leather bellows, on a tall wooden tripod, a black focusing cloth hanging from it"
+    },
+    "desk": {
+     "kind": "cutout",
+     "h": 11,
+     "aspect": 1.7,
+     "pos": [
+      -25,
+      0,
+      -19
+     ],
+     "desc": "a heavy writing desk of about 1915 seen from the front, papers, an inkwell, a few glass photographic plates in a rack and a small brass microscope on it"
+    },
+    "struggle": {
+     "kind": "cutout",
+     "h": 24,
+     "aspect": 1.3,
+     "pos": [
+      -6,
+      2,
+      -33
+     ],
+     "cast": false,
+     "desc": "three men struggling seen as solid flat black silhouettes: two servants pinning the arms of a thin, thrashing man between them. Only the black silhouette shapes themselves, cut out along their outline, with nothing around them: no board, no panel, no frame, no painted background, no wall."
+    }
+   }
+  },
+  "titles": {
+   "name": "Интертитры",
+   "light": "title",
+   "look": "black",
+   "pieces": {}
+  },
+  "void": {
+   "name": "Пустота (крупные планы)",
+   "light": "void",
+   "look": "black",
+   "pieces": {}
+  },
+  "mill": {
+   "name": "Мельница и Ниагара",
+   "light": "mill",
+   "look": "a dream image of overwhelming force",
+   "pieces": {
+    "falls": {
+     "kind": "backdrop",
+     "size": [
+      130,
+      74
+     ],
+     "pos": [
+      0,
+      -10,
+      -40
+     ],
+     "desc": "a tiny wooden village watermill with a little water wheel, dwarfed beneath an enormous roaring waterfall like Niagara crashing down upon it from towering cliffs, spray and foam, the mill about to be shattered. The picture shows only this, filling the whole image edge to edge: no room, no interior, no window frame, no curtain, no street, no people."
+    }
+   }
+  },
+  "cinema": {
+   "name": "Синематограф",
+   "light": "cinema",
+   "look": "a picture palace of the 1910s during a show, the auditorium dark, the screen lit",
+   "pieces": {
+    "film": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      110,
+      62
+     ],
+     "pos": [
+      0,
+      -4,
+      -44
+     ],
+     "desc": "a single frame of a melodramatic silent film: on a grand castle staircase a hero in a cloak fights a duel with a villain while a lady in white kneels in prayer, theatrical gestures. The film image itself fills the whole picture edge to edge: no cinema hall, no screen frame, no curtains, no audience, no orchestra"
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      124,
+      70
+     ],
+     "pos": [
+      0,
+      -10,
+      -34
+     ],
+     "desc": "the front wall of a 1910s picture palace auditorium seen straight on, filling the whole image edge to edge: a large gilded proscenium frame in the centre around the screen (the whole screen area is filled with flat pure chroma green), heavy velvet drapes at the sides, small wall lamps, plaster ornaments. A flat wall only: no floor, no seats, no people"
+    },
+    "pit": {
+     "kind": "cutout",
+     "h": 13,
+     "aspect": 3.0,
+     "pos": [
+      0,
+      0,
+      -24
+     ],
+     "desc": "a small orchestra pit seen from behind and above: the backs and heads of a few musicians in evening dress — two violins, a cello, a flute and an upright piano — little lamps on the music stands, and a conductor with a raised baton in the middle"
+    },
+    "audience": {
+     "kind": "cutout",
+     "h": 11,
+     "aspect": 3.4,
+     "pos": [
+      -6,
+      0,
+      -5
+     ],
+     "cast": false,
+     "desc": "a long row of seated spectators seen from behind as solid flat black silhouettes: heads and shoulders, bowler hats, a lady's wide hat with a feather. Only the black silhouette shapes themselves, cut out along their outline, with nothing around them: no board, no panel, no frame, no painted background, no wall."
+    },
+    "floor": {
+     "kind": "floor",
+     "card": "study/floor",
+     "size": [
+      130,
+      80
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ]
+    }
+   }
+  },
+  "street": {
+   "name": "Улица (незримый оркестр)",
+   "light": "street",
+   "look": "a city street of the 1910s in the afternoon",
+   "pieces": {
+    "houses": {
+     "kind": "backdrop",
+     "size": [
+      150,
+      85
+     ],
+     "pos": [
+      0,
+      -12,
+      -60
+     ],
+     "desc": "a city street of the 1910s seen from the side across the road: tall narrow houses leaning at slanted angles, shop fronts with awnings and blank signboards, a gas lamp, a church spire far behind, pale afternoon sky"
+    },
+    "orchestra": {
+     "kind": "cutout",
+     "h": 20,
+     "aspect": 2.2,
+     "pos": [
+      -12,
+      0,
+      -40
+     ],
+     "cast": false,
+     "desc": "a small phantom orchestra walking in a row seen in profile as solid flat black silhouettes, life-size figures: violinists playing as they walk, a cellist carrying his cello, a flautist and a conductor with a baton. Only the black silhouette shapes themselves, cut out along their outline, with nothing around them: no board, no panel, no frame, no painted background, no wall."
+    },
+    "floor": {
+     "kind": "floor",
+     "size": [
+      160,
+      100
+     ],
+     "pos": [
+      0,
+      0,
+      -10
+     ],
+     "desc": "an old cobbled roadway with a stone kerb, seen straight from above"
+    }
+   }
+  },
+  "room": {
+   "name": "Комната Дюплэ (ночь)",
+   "light": "night",
+   "look": "a poor violinist's rented attic room in a European city about 1915, at night",
+   "pieces": {
+    "roofs": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      140,
+      80
+     ],
+     "pos": [
+      10,
+      -6,
+      -95
+     ],
+     "desc": "moonlit city rooftops and chimney pots at night seen from an attic window, a big pale moon, a few lit attic windows far away. The picture shows only this, filling the whole image edge to edge: no room, no interior, no window frame, no curtain, no street, no people."
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      124,
+      70
+     ],
+     "pos": [
+      0,
+      -10,
+      -34
+     ],
+     "desc": "the back wall of a poor attic room, about 1915, seen flat and straight on, filling the whole image edge to edge: a sloping ceiling beam, cracked whitewashed plaster, a small crooked window in the centre-right (the whole window opening is filled with flat pure chroma green), a violin hanging on a nail, a few sheets of music pinned to the wall. A flat wall only: no floor, no furniture in front of it"
+    },
+    "bed": {
+     "kind": "cutout",
+     "h": 10,
+     "aspect": 2.2,
+     "pos": [
+      -12,
+      0,
+      -19
+     ],
+     "desc": "a narrow iron bedstead seen strictly from the side, a thin mattress, a rumpled grey blanket and a flat pillow at the left end"
+    },
+    "table": {
+     "kind": "cutout",
+     "h": 13,
+     "aspect": 0.8,
+     "pos": [
+      22,
+      0,
+      -18
+     ],
+     "desc": "a small rickety wooden table with a guttering candle in a tin candlestick, an open violin case and scattered sheets of music paper on it"
+    },
+    "floor": {
+     "kind": "floor",
+     "size": [
+      130,
+      80
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ],
+     "desc": "bare worn floorboards of an attic, seen straight from above"
+    }
+   }
+  },
+  "lane": {
+   "name": "Переулок под окном Румиера",
+   "light": "lane",
+   "look": "a narrow cobbled lane under the ground-floor windows of the doctor's house, afternoon",
+   "pieces": {
+    "lane": {
+     "kind": "backdrop",
+     "card": "study/lane",
+     "size": [
+      110,
+      82
+     ],
+     "pos": [
+      8,
+      -10,
+      -80
+     ]
+    },
+    "facade": {
+     "kind": "cutout",
+     "hole": true,
+     "h": 50,
+     "aspect": 0.75,
+     "pos": [
+      -34,
+      -6,
+      -30
+     ],
+     "desc": "the plastered ground-floor facade of a doctor's house, about 1915, seen straight on: a tall window standing wide open with a curtain stirring inside (the window opening is filled with flat pure chroma green), a brass name plate without letters beside a heavy door, a stone step"
+    },
+    "floor": {
+     "kind": "floor",
+     "card": "street/floor",
+     "size": [
+      140,
+      90
+     ],
+     "pos": [
+      0,
+      0,
+      -8
+     ]
+    }
+   }
+  },
+  "ward": {
+   "name": "Палата лечебницы",
+   "light": "ward",
+   "look": "a bare ward of a mental asylum, about 1915",
+   "pieces": {
+    "sky": {
+     "kind": "backdrop",
+     "draw": "screen",
+     "size": [
+      140,
+      80
+     ],
+     "pos": [
+      0,
+      -6,
+      -95
+     ],
+     "desc": "a pale, empty overcast sky with a few bare treetops at the bottom. The picture shows only this, filling the whole image edge to edge: no room, no interior, no window frame, no curtain, no street, no people."
+    },
+    "wall": {
+     "kind": "backdrop",
+     "hole": true,
+     "size": [
+      124,
+      70
+     ],
+     "pos": [
+      0,
+      -10,
+      -34
+     ],
+     "desc": "the bare wall of an asylum ward, about 1915, seen flat and straight on, filling the whole image edge to edge: cold tiled lower half, peeling painted plaster above, one small high window with iron bars in the centre (the window panes are filled with flat pure chroma green), a heavy door with a spy-hole on the left. A flat wall only: no floor, no furniture in front of it"
+    },
+    "bed": {
+     "kind": "cutout",
+     "h": 9,
+     "aspect": 2.3,
+     "pos": [
+      -10,
+      0,
+      -19
+     ],
+     "desc": "a narrow white-painted iron hospital bed seen strictly from the side, a coarse grey blanket, a flat pillow at the left end"
+    },
+    "doctors": {
+     "kind": "cutout",
+     "h": 20,
+     "aspect": 0.9,
+     "pos": [
+      -38,
+      0,
+      -28
+     ],
+     "cast": false,
+     "desc": "two doctors in long coats standing side by side, listening, one with his hand raised to his mouth, seen as solid flat black silhouettes. Only the black silhouette shapes themselves, cut out along their outline, with nothing around them: no board, no panel, no frame, no painted background, no wall."
+    },
+    "floor": {
+     "kind": "floor",
+     "card": "room/floor",
+     "size": [
+      130,
+      80
+     ],
+     "pos": [
+      0,
+      0,
+      -6
+     ]
+    }
+   }
+  },
+  "curtain": {
+   "name": "Занавес",
+   "light": "curtain",
+   "look": "a theatre stage",
+   "pieces": {
+    "curtain": {
+     "kind": "backdrop",
+     "size": [
+      130,
+      74
+     ],
+     "pos": [
+      0,
+      -10,
+      -30
+     ],
+     "desc": "a heavy closed theatre curtain of opaque dark crimson velvet with deep vertical folds and a gold fringe at the bottom, completely closed, nothing visible through it or behind it, faint footlight glow along the bottom; the curtain fills the whole image edge to edge, no proscenium, no stage, no scenery"
+    }
+   }
+  }
+ },
+ "props": {
+  "title-main": {
+   "kind": "procedural",
+   "draw": "title",
+   "story_title": true,
+   "size": [
+    48,
+    27
+   ]
+  },
+  "title-epigraph": {
+   "kind": "procedural",
+   "draw": "title",
+   "para": "001",
+   "attr": true,
+   "size": [
+    48,
+    27
+   ]
+  },
+  "title-1": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "I",
+   "big": true,
+   "size": [
+    48,
+    27
+   ]
+  },
+  "title-2": {
+   "kind": "procedural",
+   "draw": "title",
+   "text": "II",
+   "big": true,
+   "size": [
+    48,
+    27
+   ]
+  },
+  "violin": {
+   "kind": "cutout",
+   "h": 14,
+   "aspect": 0.42,
+   "desc": "an old violin with its bow laid across it, standing upright, worn varnish, one string loose"
+  }
+ }
+}

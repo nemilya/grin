@@ -1,0 +1,196 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "1b26a31546a8",
+   "file": "story-033-1.opus",
+   "dur": 16.557,
+   "chars": 243,
+   "speech": "He threw himself upon Roumier and bore him to the floor, raining blows on him. At that moment the servants appeared, drawn by the noise. Not without difficulty they bound Duplay, who afterwards, on the doctor’s orders, was taken to the asylum.",
+   "words": [
+    [
+     0.1,
+     0.2
+    ],
+    [
+     0.2,
+     0.6
+    ],
+    [
+     0.6,
+     1.1
+    ],
+    [
+     1.1,
+     1.4
+    ],
+    [
+     1.4,
+     2.2
+    ],
+    [
+     2.3,
+     2.4
+    ],
+    [
+     2.4,
+     2.8
+    ],
+    [
+     2.8,
+     2.9
+    ],
+    [
+     2.9,
+     3.0
+    ],
+    [
+     3.0,
+     3.2
+    ],
+    [
+     3.2,
+     3.7
+    ],
+    [
+     3.7,
+     4.1
+    ],
+    [
+     4.1,
+     4.6
+    ],
+    [
+     4.6,
+     4.7
+    ],
+    [
+     4.7,
+     5.0
+    ],
+    [
+     5.9,
+     6.0
+    ],
+    [
+     6.0,
+     6.2
+    ],
+    [
+     6.2,
+     6.5
+    ],
+    [
+     6.5,
+     6.6
+    ],
+    [
+     6.6,
+     7.1
+    ],
+    [
+     7.1,
+     7.7
+    ],
+    [
+     7.8,
+     8.2
+    ],
+    [
+     8.2,
+     8.3
+    ],
+    [
+     8.3,
+     8.4
+    ],
+    [
+     8.4,
+     8.8
+    ],
+    [
+     9.7,
+     10.0
+    ],
+    [
+     10.0,
+     10.3
+    ],
+    [
+     10.3,
+     10.9
+    ],
+    [
+     10.9,
+     11.0
+    ],
+    [
+     11.0,
+     11.5
+    ],
+    [
+     11.5,
+     12.1
+    ],
+    [
+     12.8,
+     12.9
+    ],
+    [
+     12.9,
+     13.6
+    ],
+    [
+     13.7,
+     13.8
+    ],
+    [
+     13.8,
+     13.9
+    ],
+    [
+     13.9,
+     14.3
+    ],
+    [
+     14.3,
+     14.7
+    ],
+    [
+     15.2,
+     15.3
+    ],
+    [
+     15.3,
+     15.7
+    ],
+    [
+     15.7,
+     15.9
+    ],
+    [
+     15.9,
+     16.0
+    ],
+    [
+     16.0,
+     16.5
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "he threw himself upon Romier and bore him to the floor, raining blows on him. At that moment the servants appeared, drawn by the noise. Not without difficulty they bound to play, who afterwards, on the doctor's orders, was taken to the asylum.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00264,
+    "verify": 0.00148
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:01:25"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

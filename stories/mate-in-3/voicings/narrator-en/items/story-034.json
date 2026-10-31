@@ -1,0 +1,60 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "9649bbf7d5b0",
+   "file": "story-034-1.opus",
+   "dur": 4.603,
+   "chars": 48,
+   "speech": "He answered in a whisper, solemn and despondent:",
+   "words": [
+    [
+     0.1,
+     0.2
+    ],
+    [
+     0.2,
+     0.8
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     0.9,
+     1.0
+    ],
+    [
+     1.0,
+     1.5
+    ],
+    [
+     2.5,
+     3.3
+    ],
+    [
+     3.6,
+     3.8
+    ],
+    [
+     3.8,
+     4.4
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "he answered in a whisper, solemn and despondent.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.0008,
+    "verify": 0.00038
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 07:00:18"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

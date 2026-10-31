@@ -1,0 +1,48 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "263708fe3f14",
+   "file": "story-019-1.opus",
+   "dur": 4.054,
+   "chars": 41,
+   "speech": "— Я повинуюсь, — мертвенно ответил Дюплэ.",
+   "words": [
+    [
+     0.1,
+     0.6
+    ],
+    [
+     0.6,
+     1.8
+    ],
+    [
+     2.4,
+     3.0
+    ],
+    [
+     3.0,
+     3.5
+    ],
+    [
+     3.5,
+     4.0
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Я повинуюсь. Мертвенно ответил Дюпле.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00075,
+    "verify": 0.00039
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:04:17"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

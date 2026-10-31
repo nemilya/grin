@@ -1,0 +1,60 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "2ee7a3dd0614",
+   "file": "story-027-1.opus",
+   "dur": 2.52,
+   "chars": 41,
+   "speech": "He put away the handkerchief and went on:",
+   "words": [
+    [
+     0.1,
+     0.2
+    ],
+    [
+     0.2,
+     0.4
+    ],
+    [
+     0.4,
+     0.6
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     0.7,
+     1.5
+    ],
+    [
+     1.9,
+     2.0
+    ],
+    [
+     2.0,
+     2.3
+    ],
+    [
+     2.3,
+     2.5
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "he put away the handkerchief and went on.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00049,
+    "verify": 0.00024
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:59:26"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

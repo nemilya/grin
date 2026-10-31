@@ -1,0 +1,120 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "4cd72ad85b09",
+   "file": "story-044-1.opus",
+   "dur": 11.245,
+   "chars": 123,
+   "speech": "Fright brought my memory back. I leapt up and cried out in a measured, firm voice, trying not to seem ridiculous to myself:",
+   "words": [
+    [
+     0.1,
+     0.9
+    ],
+    [
+     1.0,
+     1.2
+    ],
+    [
+     1.2,
+     1.4
+    ],
+    [
+     1.4,
+     1.8
+    ],
+    [
+     1.8,
+     2.3
+    ],
+    [
+     3.7,
+     3.8
+    ],
+    [
+     3.8,
+     4.2
+    ],
+    [
+     4.2,
+     4.6
+    ],
+    [
+     4.6,
+     4.8
+    ],
+    [
+     4.8,
+     5.3
+    ],
+    [
+     5.3,
+     5.6
+    ],
+    [
+     5.6,
+     5.7
+    ],
+    [
+     5.7,
+     5.8
+    ],
+    [
+     5.8,
+     6.4
+    ],
+    [
+     6.4,
+     6.9
+    ],
+    [
+     6.9,
+     7.5
+    ],
+    [
+     8.4,
+     8.8
+    ],
+    [
+     8.8,
+     9.1
+    ],
+    [
+     9.1,
+     9.2
+    ],
+    [
+     9.2,
+     9.7
+    ],
+    [
+     9.7,
+     10.5
+    ],
+    [
+     10.5,
+     10.6
+    ],
+    [
+     10.6,
+     11.2
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Fright brought my memory back. I leapt up and cried out in a measured firm voice, trying not to seem ridiculous to myself.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00181,
+    "verify": 0.00089
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-27 21:45:46"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

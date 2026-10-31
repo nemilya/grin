@@ -1,0 +1,44 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "16883d0dd8d6",
+   "file": "story-008-1.opus",
+   "dur": 4.096,
+   "chars": 26,
+   "speech": "Грациан Дюплэ был скрипач.",
+   "words": [
+    [
+     0.1,
+     1.0
+    ],
+    [
+     1.0,
+     1.5
+    ],
+    [
+     2.3,
+     2.7
+    ],
+    [
+     3.2,
+     4.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Грациан Дюпле был скрипач.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00076,
+    "verify": 0.00034
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:00:19"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

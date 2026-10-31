@@ -1,0 +1,31 @@
+{
+ "name": {"ru": "Киноизображение (Тарковский)", "en": "Film image (Tarkovsky)"},
+ "_": "Стиль ассетов «киноизображение»: те же слои в объёмной сцене, но нарисованные как части кадра из советского авторского кино 70-х на 35-мм цветной плёнке — фотографично, без кромки и бумаги, с мягким краем (key: soft), без теней от плоскостей (layers.cast: false), с туманом и плёночной цветокоррекцией. Формулировки figure/piece/object/part/sheet подменяют «бумажный театр» в промптах движка.",
+ "cutout": "Rendered photographically, like a figure from a 1970s Soviet art-house film shot on 35mm colour negative (the cinematography of Andrei Tarkovsky's films): natural soft overcast light, deep muted colours (moss and olive greens, wet umber, slate grey, faded ochre), fine film grain, slight softness. Natural photographic edges: no outline, no white border, no paper margin, not a drawing, not a cut-out, not a sticker. The whole subject fully visible, nothing cropped.",
+ "cutout_bg": "Isolated on a perfectly flat, uniform pure chroma-green (#00FF00) background — nothing else in the image: no room, no wall, no window, no floor, no ground, no shadow.",
+ "figure": "A single isolated figure (nothing else in the image, only this one person) of",
+ "piece": "A single isolated element for a multi-plane film composite, photographed like part of a frame from a 1970s Soviet art-house film on 35mm colour negative: photographic realism, natural soft light, deep muted colours, fine film grain, natural photographic edges — no outline, no border, not a drawing.",
+ "object": "A single isolated object for a multi-plane film composite, photographed like part of a frame from a 1970s Soviet art-house film on 35mm colour negative: photographic realism, natural soft light, deep muted colours, fine film grain, natural photographic edges — no outline, no border, not a drawing.",
+ "part": "One separate isolated piece only (a part of a figure for a multi-plane film composite), photographed",
+ "sheet": "for a film (costume and casting reference photographs)",
+ "sheet_each": "The four figures stand apart with clear space between them.",
+ "sheet_bg": "On a plain light grey studio backdrop, soft even light.",
+ "backdrop": "A wide background plate for a multi-plane film composite, like a frame from a 1970s Soviet art-house film shot on 35mm colour negative (the cinematography of Andrei Tarkovsky's films): photographic realism, deep perspective, atmospheric haze, natural soft light, deep muted colours (moss and olive greens, wet umber, slate grey, faded ochre), fine film grain, slight softness. No people.",
+ "silhouette": "A single figure seen as a dark backlit silhouette, photographed like a frame from a 1970s Soviet art-house film on 35mm film, soft edges, isolated on a perfectly flat, uniform pure chroma-green (#00FF00) background.",
+ "texture": "A seamless flat texture seen straight from above, evenly lit, photographic, 35mm film grain, deep muted colours, no objects, no perspective, no shadows.",
+ "no_text": "No text, no letters, no captions, no numbers, no logos, no watermark, no frame.",
+ "key": "soft",
+ "layers": {"soft": true, "cast": false},
+ "stage": {
+  "paper_roughness": 0.95,
+  "curl": 0,
+  "paper_normal": false,
+  "grain": 0.075,
+  "vignette": 0.6,
+  "saturation": 0.72,
+  "tint": "#eef2e6",
+  "flicker": 0.5,
+  "fog": {"color": "#7d878c", "density": 0.0032},
+  "background": "#060403"
+ }
+}

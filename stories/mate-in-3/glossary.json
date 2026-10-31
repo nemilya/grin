@@ -1,0 +1,29 @@
+{
+ "terms": [
+  {"src": "Лейпциг... Международный турнир... Мат в три хода", "dst": "Leipzig… International Tournament… Mate in three moves", "note": "рефрен-заклинание пациента; в его устах — «International Tournament, sir» (турнир-с), в финальном крике доктора — без «sir»"},
+  {"src": "мат в три хода", "dst": "mate in three moves", "note": "шахматная задача; название рассказа — Mate in Three Moves"},
+  {"src": "Лейпциг", "dst": "Leipzig", "note": "город шахматного турнира"},
+  {"src": "Миша", "dst": "Misha", "note": "пациент — так его зовёт жена; доктор имени не знает"},
+  {"src": "-с (словоерс): так-с, хорошо-с, вот-с, прошу-с", "dst": "sir (sparingly): Just so, sir / Very well, sir / that’s what, sir", "note": "угодливая вежливость пациента; не на каждом слове — там, где слышна интонация"},
+  {"src": "изволите видеть", "dst": "you see, sir / if you please", "note": "старомодная учтивость"},
+  {"src": "доктор", "dst": "Doctor", "note": "обращение — с заглавной"},
+  {"src": "кабинет", "dst": "consulting room", "note": "приёмная доктора"},
+  {"src": "портьера", "dst": "portière", "note": "тяжёлая занавесь в дверном проёме"},
+  {"src": "сюртук", "dst": "frock coat", "note": ""},
+  {"src": "крахмальная манжетка, бронзированная запонка", "dst": "starched cuff, bronzed cufflink", "note": "деталь поднятой руки"},
+  {"src": "паутина", "dst": "cobweb", "note": "невидимая вязкая паутина на пальцах — сквозной образ"},
+  {"src": "дворник", "dst": "yard-keeper", "note": "первый пациент доктора"},
+  {"src": "кумачовый платок", "dst": "kerchief of red calico", "note": "женщина с младенцем"},
+  {"src": "гимназистка", "dst": "gymnasium schoolgirl", "note": "в форме гимназии: коричневое платье, чёрный фартук"},
+  {"src": "барышня", "dst": "young lady", "note": ""},
+  {"src": "старушка, старуха", "dst": "little old woman, old woman", "note": "последняя в процессии"},
+  {"src": "похоронная процессия", "dst": "funeral procession", "note": ""},
+  {"src": "папироска", "dst": "cigarette", "note": ""},
+  {"src": "крылечко", "dst": "porch", "note": "жена зовёт с крылечка"},
+  {"src": "Пошла к черту!", "dst": "Go to the devil!", "note": ""},
+  {"src": "страшная простота", "dst": "terrible simplicity", "note": "ровно два слова — следующий абзац говорит о «двух последних словах»"},
+  {"src": "профаны", "dst": "the uninitiated", "note": "«Удивление — удел профанов»"},
+  {"src": "как дважды два — четыре", "dst": "as plainly as two times two is four", "note": ""}
+ ],
+ "log": {"model": "claude-code", "at": "2026-10-27"}
+}

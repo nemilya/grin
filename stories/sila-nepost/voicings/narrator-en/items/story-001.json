@@ -1,0 +1,200 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "0bf599bb4132",
+   "file": "story-001-1.opus",
+   "dur": 19.856,
+   "chars": 252,
+   "speech": "While some that night dreamed of the fabulous riches of the East, others dreamed that devils were bearing them away into the unknown distances of the ocean, where they must wander until the end of their lives. J. Fenimore Cooper, “Mercedes of Castile”.",
+   "words": [
+    [
+     0.0,
+     0.5
+    ],
+    [
+     0.5,
+     1.0
+    ],
+    [
+     1.0,
+     1.2
+    ],
+    [
+     1.2,
+     1.6
+    ],
+    [
+     1.6,
+     2.4
+    ],
+    [
+     2.4,
+     2.6
+    ],
+    [
+     2.6,
+     2.7
+    ],
+    [
+     2.7,
+     3.5
+    ],
+    [
+     3.5,
+     4.0
+    ],
+    [
+     4.0,
+     4.1
+    ],
+    [
+     4.1,
+     4.3
+    ],
+    [
+     4.3,
+     4.8
+    ],
+    [
+     5.6,
+     6.0
+    ],
+    [
+     6.0,
+     6.6
+    ],
+    [
+     6.7,
+     6.9
+    ],
+    [
+     6.9,
+     7.4
+    ],
+    [
+     7.4,
+     7.6
+    ],
+    [
+     7.6,
+     8.1
+    ],
+    [
+     8.1,
+     8.3
+    ],
+    [
+     8.3,
+     8.9
+    ],
+    [
+     9.0,
+     9.2
+    ],
+    [
+     9.2,
+     9.4
+    ],
+    [
+     9.4,
+     10.1
+    ],
+    [
+     10.1,
+     10.8
+    ],
+    [
+     10.8,
+     11.0
+    ],
+    [
+     11.0,
+     11.1
+    ],
+    [
+     11.1,
+     11.6
+    ],
+    [
+     12.4,
+     12.5
+    ],
+    [
+     12.5,
+     12.6
+    ],
+    [
+     12.6,
+     12.9
+    ],
+    [
+     12.9,
+     13.6
+    ],
+    [
+     13.8,
+     14.1
+    ],
+    [
+     14.1,
+     14.3
+    ],
+    [
+     14.3,
+     14.6
+    ],
+    [
+     14.6,
+     14.8
+    ],
+    [
+     14.8,
+     15.0
+    ],
+    [
+     15.0,
+     15.6
+    ],
+    [
+     16.4,
+     16.7
+    ],
+    [
+     16.7,
+     17.3
+    ],
+    [
+     17.3,
+     17.7
+    ],
+    [
+     18.4,
+     19.1
+    ],
+    [
+     19.1,
+     19.2
+    ],
+    [
+     19.2,
+     19.7
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "While some that night dreamed of the fabulous riches of the East, others dreamed that devils were bearing them away into the unknown distances of the ocean, where they must wander until the end of their lives. J. Fennimore Cooper, Mercedes of Castile.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00317,
+    "verify": 0.0016
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 01:54:28"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

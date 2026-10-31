@@ -1,0 +1,60 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "a7eac8fac9c9",
+   "file": "story-019-1.opus",
+   "dur": 4.611,
+   "chars": 45,
+   "speech": "“I obey,” Duplay answered in a deathly voice.",
+   "words": [
+    [
+     0.2,
+     0.4
+    ],
+    [
+     0.4,
+     1.0
+    ],
+    [
+     1.8,
+     2.4
+    ],
+    [
+     2.4,
+     3.1
+    ],
+    [
+     3.1,
+     3.2
+    ],
+    [
+     3.2,
+     3.3
+    ],
+    [
+     3.3,
+     4.0
+    ],
+    [
+     4.0,
+     4.5
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "I obey. Duplay answered in a deathly voice.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00083,
+    "verify": 0.00038
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 01:58:42"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

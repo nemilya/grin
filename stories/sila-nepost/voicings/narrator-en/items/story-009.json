@@ -1,0 +1,32 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "341388b72e60",
+   "file": "story-009-1.opus",
+   "dur": 0.819,
+   "chars": 10,
+   "speech": "Chapter 2.",
+   "words": [
+    [
+     0.0,
+     0.7
+    ]
+   ],
+   "score": 0.5,
+   "tail": true,
+   "transcript": "Chapter two.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00026,
+    "verify": 8e-05
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 01:56:26"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

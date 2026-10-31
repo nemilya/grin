@@ -1,0 +1,52 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "ea48cf3326f8",
+   "file": "story-010-1.opus",
+   "dur": 3.998,
+   "chars": 37,
+   "speech": "«Тому, чье имя ныне, — Отпавший Лист.",
+   "words": [
+    [
+     0.0,
+     0.7
+    ],
+    [
+     0.8,
+     1.1
+    ],
+    [
+     1.1,
+     1.4
+    ],
+    [
+     1.4,
+     2.1
+    ],
+    [
+     2.6,
+     3.5
+    ],
+    [
+     3.5,
+     4.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "тому, чьё имя ныне отпавший лист,",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00077,
+    "verify": 0.00036
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:18:34"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

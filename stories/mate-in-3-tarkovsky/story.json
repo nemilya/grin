@@ -1,0 +1,20 @@
+{
+ "_": "Постановка «Мата в три хода» рукой Тарковского — «киноизображение»: фотографичные слои в объёмной сцене (styles/tarkovsky-film.json), длинные планы, паузы, стихии (directors/tarkovsky.json в раскадровке). Текст, перевод и голос — базовой истории (base); свои — библия, раскадровка, ассеты, сборка.",
+ "base": "mate-in-3",
+ "film": {
+  "style": "tarkovsky-film",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24
+ },
+ "art_context": "Provincial Russian town, around 1908, as remembered in a Tarkovsky film: a rainy summer evening, a young doctor's modest consulting room with an electric desk lamp, rain on the window, damp walls; memories of a hot dusty summer street, a garden at night under the stars, a dark bedroom. Clothing and objects of the Russian Empire, 1900s. No anachronisms.",
+ "formats": {
+  "horizontal": {
+   "width": 1920,
+   "height": 1080,
+   "fps": 24,
+   "storyboard": "storyboard-16x9.json",
+   "_": "горизонталь 16:9 (YouTube): те же реплики, свет, звук, ассеты; камеры под широкий кадр — storyboard-16x9.json"
+  }
+ }
+}

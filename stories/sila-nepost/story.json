@@ -1,0 +1,33 @@
+{
+ "_": "«Сила непостижимого» (Грин, 1918). Разбор и план — docs/stories/sila-nepost.md. Исходник с lib.ru: абзацы по отступу (format libru), первый блок — автор и название; эпиграф (Купер) — курсивом, главы I, II — заголовки (в ролике — интертитры).",
+ "title": {
+  "ru": "Сила непостижимого",
+  "en": "The Power of the Incomprehensible"
+ },
+ "author": {
+  "ru": "Александр Грин",
+  "en": "Alexander Grin"
+ },
+ "source": {
+  "lang": "ru",
+  "file": "content/sila-nepost.txt",
+  "format": "libru",
+  "skip": 1
+ },
+ "film": {
+  "lang": "en",
+  "voicing": "narrator-en",
+  "style": "silent-autochrome",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "speak_title": false,
+  "voicings": {
+   "en": "narrator-en",
+   "ru": "narrator-ru"
+  }
+ },
+ "art_context": "A European city (French names; the country is not named), mid-1910s: a poor violinist's rented room; a picture palace with an orchestra pit; the study and laboratory of a learned doctor who is both a hypnotist and a researcher of colour photography (autochrome plates, a camera on a tripod, a heavy writing desk, an armchair by an open window onto a narrow lane); a narrow cobbled lane; a mental asylum ward. Clothing and objects of the 1910s: frock coats and lounge suits, starched collars, bowler hats, gas and early electric light, a violin in a worn case. No anachronisms.",
+ "speech_replacements": [],
+ "year": 1918
+}

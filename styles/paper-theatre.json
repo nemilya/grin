@@ -1,0 +1,21 @@
+{
+ "name": {
+  "ru": "Бумажный театр",
+  "en": "Paper theatre"
+ },
+ "_": "Стиль ассетов: промпты техники (без сюжета) для вырезок, задников, силуэтов и текстур + свет и материал бумаги на сцене. Описания героев и мест — в bible.json, без стиля.",
+ "cutout": "A single hand-made paper cut-out puppet for a children's toy theatre: drawn and painted by hand with gouache and colored pencils on thin matte cardboard, slightly naive but precise and expressive drawing, visible pencil hatching and dry-brush texture, muted early-1900s palette (ochre, umber, faded olive green, dusty rose, ink black, warm paper white). The figure is cut out with scissors, leaving a narrow, slightly uneven white paper margin around the whole silhouette. Flat, even, shadowless lighting, the whole figure fully visible, nothing cropped.",
+ "cutout_bg": "Isolated on a perfectly flat, uniform pure chroma-green (#00FF00) background with no texture, no gradient and no shadow; the green touches only the white paper margin.",
+ "backdrop": "A painted cardboard backdrop for a children's toy theatre: gouache and colored pencil on matte cardboard, slightly naive hand-made look, visible brush strokes and paper grain, flat frontal view, perspective drawn simply by hand, muted early-1900s palette, soft even lighting, no people.",
+ "silhouette": "A single solid black paper silhouette cut-out in the tradition of Lotte Reiniger shadow puppets: intricate scissor-cut details (lace, plumes, fingers, hair), crisp edges, pure matte black with no interior detail, isolated on a perfectly flat, uniform pure chroma-green (#00FF00) background.",
+ "texture": "A seamless flat texture, top-down, evenly lit, hand-painted with gouache on matte paper, no objects, no perspective, no shadows.",
+ "no_text": "No text, no letters, no captions, no numbers, no logos, no watermark, no frame.",
+ "stage": {
+  "paper_roughness": 0.92,
+  "curl": 0.035,
+  "grain": 0.045,
+  "vignette": 0.55,
+  "background": "#060403",
+  "hand": 1.0
+ }
+}

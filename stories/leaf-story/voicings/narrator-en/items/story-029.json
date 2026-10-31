@@ -1,0 +1,68 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "76faeb618bf4",
+   "file": "story-029-1.opus",
+   "dur": 6.07,
+   "chars": 61,
+   "speech": "“Our brother, Fallen Leaf, thou hast committed a great crime!",
+   "words": [
+    [
+     0.2,
+     0.5
+    ],
+    [
+     0.5,
+     1.0
+    ],
+    [
+     1.6,
+     2.1
+    ],
+    [
+     2.1,
+     2.6
+    ],
+    [
+     3.5,
+     3.8
+    ],
+    [
+     3.8,
+     4.1
+    ],
+    [
+     4.1,
+     4.8
+    ],
+    [
+     4.8,
+     4.9
+    ],
+    [
+     4.9,
+     5.5
+    ],
+    [
+     5.5,
+     6.0
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Our brother, fallen leaf, thou hast committed a great crime.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00109,
+    "verify": 0.00046
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:21:16"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

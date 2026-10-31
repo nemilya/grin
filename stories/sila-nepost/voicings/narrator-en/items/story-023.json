@@ -1,0 +1,48 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "eaa45e39cab4",
+   "file": "story-023-1.opus",
+   "dur": 2.557,
+   "chars": 26,
+   "speech": "“I hear it!” cried Duplay.",
+   "words": [
+    [
+     0.5,
+     0.6
+    ],
+    [
+     0.6,
+     1.0
+    ],
+    [
+     1.0,
+     1.4
+    ],
+    [
+     1.7,
+     2.0
+    ],
+    [
+     2.0,
+     2.6
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "I hear it, cried Dupleix.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00052,
+    "verify": 0.00024
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 01:59:38"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

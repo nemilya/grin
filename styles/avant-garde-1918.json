@@ -1,0 +1,32 @@
+{
+ "name": {"ru": "Авангард 1918", "en": "Avant-garde 1918"},
+ "_": "Стиль «Преступления Отпавшего Листа» (docs/stories/leaf-story.md): внешний мир — кубофутуристическая и лучистская живопись 1912–1918 (Гончарова, Ларионов, Розанова, Попова; фигуры — как гуашевые эскизы костюмов Экстер), пёстрая и тревожная; внутренний мир Ранума — супрематическая геометрия на белом, её рисует движок; лист — единственный натуральный предмет (у пропа своя technique и фон-маджента).",
+ "cutout": "Painted as a figure in a Russian avant-garde painting of 1912–1918 — cubo-futurism and rayonism, in the manner of Natalia Goncharova's and Olga Rozanova's paintings and Alexandra Exter's gouache costume designs for Tairov's Kamerny Theatre: the body and clothes built of bold angular faceted planes with crisp edges, strong dark brushed contours, slanting rays of colour crossing the forms; the face simplified and mask-like yet clearly readable and dignified, not a caricature; bright saturated tempera and gouache colours (vermilion, ultramarine, chrome yellow, emerald, ochre, black and white) with visible brushstrokes and a matte paper texture. Natural painted edges: no outline around the whole figure, no white border, no paper margin, not a sticker. The whole subject fully visible, nothing cropped.",
+ "cutout_bg": "Isolated on a perfectly flat, uniform pure chroma-green (#00FF00) background — nothing else in the image: no room, no wall, no floor, no ground, no shadow.",
+ "figure": "A single isolated figure (nothing else in the image, only this one person) of",
+ "piece": "A single isolated piece of scenery painted in the manner of Russian cubo-futurist and rayonist painting of 1912–1918 (Natalia Goncharova, Olga Rozanova): built of bold angular faceted planes, slanting rays of light, strong dark brushed contours, bright saturated tempera colours, visible brushstrokes, matte paper texture. Natural painted edges — no outline around it, no border.",
+ "object": "A single isolated object painted in the manner of Russian cubo-futurist and rayonist painting of 1912–1918 (Natalia Goncharova, Kazimir Malevich): built of bold angular faceted planes, slanting rays of motion and light, strong dark brushed contours, bright saturated tempera colours, visible brushstrokes, matte paper texture. Natural painted edges — no outline around it, no border, not a sticker.",
+ "part": "One separate isolated piece only (a part of a figure for a multi-plane composite), painted",
+ "sheet": "for an animated film painted in the manner of Russian avant-garde art of 1912–1918 (gouache costume designs)",
+ "sheet_each": "The four figures stand apart with clear space between them.",
+ "sheet_bg": "On a plain off-white paper background.",
+ "backdrop": "A wide painted backdrop in the manner of Russian cubo-futurist and rayonist painting of 1912–1918 (Natalia Goncharova, Mikhail Larionov, Olga Rozanova, Lyubov Popova): the scene broken into angular, faceted, interpenetrating planes, slanting beams and rays of light crossing the image, a dynamic tilted perspective — yet the place stays clearly recognisable; bold saturated colours (vermilion, ultramarine, chrome yellow, emerald, ochre, black and white), visible brushwork, matte canvas texture. No people.",
+ "silhouette": "A single figure as a flat black silhouette, like a cut-out shape in a Russian avant-garde poster of 1918, crisp edges, isolated on a perfectly flat, uniform pure chroma-green (#00FF00) background.",
+ "texture": "A seamless flat texture seen straight from above, evenly lit: sand or ground painted in faceted cubo-futurist planes, bold visible brushwork, warm ochres, no objects, no perspective, no shadows.",
+ "no_text": "No text, no letters, no captions, no numbers, no logos, no signature, no watermark, no frame.",
+ "key": "soft",
+ "key_match": true,
+ "layers": {"soft": true, "cast": false},
+ "stage": {
+  "paper_roughness": 0.95,
+  "curl": 0,
+  "paper_normal": false,
+  "hand": 1,
+  "grain": 0.035,
+  "vignette": 0.35,
+  "saturation": 1,
+  "flicker": 0,
+  "fog": null,
+  "background": "#f3efe4"
+ }
+}

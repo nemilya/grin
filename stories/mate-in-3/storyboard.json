@@ -1,0 +1,4268 @@
+{
+ "_": "Раскадровка: сцены → кадры. Кадр начинается на реплике at = «<абзац>.<предложение>[+доля]» (story-018, предложение 13 → «018.13»; «+0.5» — с середины предложения) и длится до следующего. Состояние сцены (кто где стоит, какая поза) переходит из кадра в кадр; в кадре меняется только то, что указано. Элементы: card — ассет (герой/поза, декорация/кусок, prop/…), pos [x,y,z] см, rot — поворот по Y (или [x,y,z]), move — движение за кадр, fx — бумажные «кукловодные» эффекты. Камера: cam — именованная точка, push/drift — наезд и смещение за кадр, hand — сила «ручной» камеры. Фокус: on — элемент или точка, to — перевод фокуса, f — диафрагма (больше — мельче ГРИП). Свет: пресет сцены, k — сила, fx — сердцебиение/качание/вдох. Переход in: dip — свет гаснет и загорается (смена места), cut — склейка.",
+ "lang": "en",
+ "preroll": 2.0,
+ "tail": 4.5,
+ "lights": {
+  "lamp": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -22,
+     44,
+     38
+    ],
+    "target": [
+     3,
+     9,
+     -6
+    ],
+    "color": "#ffb36b",
+    "intensity": 1.35,
+    "angle": 24,
+    "penumbra": 0.75,
+    "shadow": 2.5
+   },
+   "practical": {
+    "pos": [
+     -10.8,
+     17.8,
+     -3.4
+    ],
+    "color": "#ffc27a",
+    "intensity": 0.9,
+    "glow": 1.6
+   },
+   "fill": {
+    "color": "#3d2616",
+    "intensity": 0.22
+   },
+   "bg": "#070504"
+  },
+  "day": {
+   "key": {
+    "type": "sun",
+    "pos": [
+     -40,
+     55,
+     35
+    ],
+    "target": [
+     0,
+     12,
+     -20
+    ],
+    "color": "#fff0d2",
+    "intensity": 1.45,
+    "shadow": 1.0
+   },
+   "fill": {
+    "color": "#b9cde0",
+    "ground": "#8a6a40",
+    "intensity": 0.42
+   },
+   "bg": "#b9a985"
+  },
+  "night": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     34,
+     58,
+     40
+    ],
+    "target": [
+     0,
+     6,
+     -10
+    ],
+    "color": "#86a2ff",
+    "intensity": 0.75,
+    "angle": 42,
+    "penumbra": 0.9,
+    "shadow": 2.0
+   },
+   "fill": {
+    "color": "#0b1530",
+    "intensity": 0.28
+   },
+   "bg": "#010207"
+  },
+  "bedroom": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     14,
+     40,
+     26
+    ],
+    "target": [
+     0,
+     5,
+     -6
+    ],
+    "color": "#8aa6ff",
+    "intensity": 0.7,
+    "angle": 40,
+    "penumbra": 0.85,
+    "shadow": 2.0
+   },
+   "fill": {
+    "color": "#0a1024",
+    "intensity": 0.22
+   },
+   "bg": "#010205"
+  },
+  "void": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -6,
+     42,
+     22
+    ],
+    "target": [
+     -6,
+     6,
+     -13
+    ],
+    "color": "#a8c0ff",
+    "intensity": 1.1,
+    "angle": 26,
+    "penumbra": 0.9,
+    "shadow": 2.0
+   },
+   "fill": {
+    "color": "#40507a",
+    "intensity": 0.14
+   },
+   "bg": "#000000"
+  },
+  "screen": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     0,
+     30,
+     30
+    ],
+    "target": [
+     0,
+     10,
+     -14
+    ],
+    "color": "#ffe2b8",
+    "intensity": 0.04,
+    "angle": 50,
+    "penumbra": 1,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#000000",
+    "intensity": 0.02
+   },
+   "bg": "#000000"
+  },
+  "insert": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -14,
+     32,
+     26
+    ],
+    "target": [
+     0,
+     4,
+     -2
+    ],
+    "color": "#ffb066",
+    "intensity": 1.2,
+    "angle": 34,
+    "penumbra": 0.85,
+    "shadow": 2.0
+   },
+   "fill": {
+    "color": "#1a1009",
+    "intensity": 0.08
+   },
+   "bg": "#040302"
+  },
+  "electric": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     3,
+     38,
+     6
+    ],
+    "target": [
+     3,
+     0,
+     -6
+    ],
+    "color": "#f2f5ff",
+    "intensity": 2.2,
+    "angle": 70,
+    "penumbra": 0.15,
+    "shadow": 0.6
+   },
+   "fill": {
+    "color": "#c9cfd8",
+    "intensity": 0.6
+   },
+   "bg": "#16181b",
+   "practical": {
+    "pos": [
+     3,
+     30.5,
+     -8
+    ],
+    "color": "#eef3ff",
+    "intensity": 1.2,
+    "glow": 2.5
+   }
+  }
+ },
+ "cams": {
+  "office-high": {
+   "pos": [
+    0,
+    44,
+    80
+   ],
+   "look": [
+    0,
+    10,
+    -10
+   ],
+   "fov": 34
+  },
+  "two": {
+   "pos": [
+    2,
+    17,
+    60
+   ],
+   "look": [
+    2,
+    11,
+    -6
+   ],
+   "fov": 34
+  },
+  "pat": {
+   "pos": [
+    -1,
+    14,
+    24
+   ],
+   "look": [
+    10.5,
+    11.5,
+    0
+   ],
+   "fov": 30
+  },
+  "pat-close": {
+   "pos": [
+    4.5,
+    14.2,
+    23
+   ],
+   "look": [
+    10.5,
+    12.4,
+    0
+   ],
+   "fov": 28
+  },
+  "pat-low": {
+   "pos": [
+    1,
+    5,
+    28
+   ],
+   "look": [
+    10,
+    15,
+    0
+   ],
+   "fov": 32
+  },
+  "doc": {
+   "pos": [
+    9,
+    15,
+    18
+   ],
+   "look": [
+    -6,
+    12,
+    -14
+   ],
+   "fov": 30
+  },
+  "doc-close": {
+   "pos": [
+    3,
+    14.5,
+    4
+   ],
+   "look": [
+    -6,
+    12.5,
+    -14
+   ],
+   "fov": 26
+  },
+  "door": {
+   "pos": [
+    4,
+    16,
+    40
+   ],
+   "look": [
+    16,
+    14,
+    -20
+   ],
+   "fov": 30
+  },
+  "desk": {
+   "pos": [
+    -0.5,
+    13.7,
+    22
+   ],
+   "look": [
+    -0.5,
+    11.799999999999999,
+    -4
+   ],
+   "fov": 28
+  },
+  "armchair": {
+   "pos": [
+    0.5,
+    26,
+    12
+   ],
+   "look": [
+    -6,
+    10,
+    -15.8
+   ],
+   "fov": 30
+  },
+  "box": {
+   "pos": [
+    0,
+    30,
+    130
+   ],
+   "look": [
+    0,
+    12,
+    -10
+   ],
+   "fov": 34
+  },
+  "win-wide": {
+   "pos": [
+    -3,
+    17,
+    40
+   ],
+   "look": [
+    -1,
+    16,
+    -20
+   ],
+   "fov": 34
+  },
+  "win-street": {
+   "pos": [
+    -2.35,
+    12.3,
+    15
+   ],
+   "look": [
+    -2.35,
+    19,
+    -27
+   ],
+   "fov": 30
+  },
+  "win-patient": {
+   "pos": [
+    -17,
+    14,
+    18
+   ],
+   "look": [
+    -7,
+    13,
+    -3
+   ],
+   "fov": 30
+  },
+  "gar-wide": {
+   "pos": [
+    0,
+    15,
+    46
+   ],
+   "look": [
+    0,
+    14,
+    -20
+   ],
+   "fov": 36
+  },
+  "gar-sky": {
+   "pos": [
+    -4,
+    7,
+    18
+   ],
+   "look": [
+    0,
+    42,
+    -70
+   ],
+   "fov": 42
+  },
+  "gar-patient": {
+   "pos": [
+    -15,
+    10,
+    16
+   ],
+   "look": [
+    -5,
+    9,
+    -2
+   ],
+   "fov": 30
+  },
+  "gar-door": {
+   "pos": [
+    4,
+    10,
+    16
+   ],
+   "look": [
+    13.6,
+    11,
+    -22
+   ],
+   "fov": 28
+  },
+  "bed-wide": {
+   "pos": [
+    0,
+    19,
+    42
+   ],
+   "look": [
+    0,
+    8,
+    -8
+   ],
+   "fov": 34
+  },
+  "bed-close": {
+   "pos": [
+    7,
+    12,
+    12
+   ],
+   "look": [
+    3,
+    6,
+    -8
+   ],
+   "fov": 30
+  },
+  "void-wide": {
+   "pos": [
+    -6,
+    14,
+    62
+   ],
+   "look": [
+    -6,
+    10,
+    -14
+   ],
+   "fov": 34
+  },
+  "scr": {
+   "pos": [
+    0,
+    16,
+    42
+   ],
+   "look": [
+    0,
+    16,
+    -14
+   ],
+   "fov": 34
+  },
+  "ins": {
+   "pos": [
+    0,
+    8,
+    30
+   ],
+   "look": [
+    0,
+    6,
+    0
+   ],
+   "fov": 28
+  },
+  "desk-right": {
+   "pos": [
+    2.2,
+    13.6,
+    19
+   ],
+   "look": [
+    2.2,
+    10.6,
+    -4
+   ],
+   "fov": 28
+  }
+ },
+ "scenes": [
+  {
+   "id": "s01",
+   "title": "An empty practice",
+   "set": "office",
+   "note": "Темнота стола — щелчок лампы, загорается бумажный кабинет. Доктор ходит из угла в угол. Двое пациентов за месяц проходят в дверном проёме — первая «процессия», рифма к будущей.",
+   "cast": {
+    "doctor": {
+     "card": "doctor/pacing",
+     "pos": [
+      -16,
+      0,
+      -12
+     ]
+    },
+    "portiere": {
+     "pos": [
+      17,
+      0,
+      -22.5
+     ]
+    }
+   },
+   "shots": [
+    {
+     "id": "s01a",
+     "at": "start",
+     "in": "fade",
+     "cam": "office-high",
+     "push": 14,
+     "light": {
+      "k": 0,
+      "k_to": 1,
+      "ramp": [
+       0.18,
+       0.3
+      ]
+     },
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "doctor": {
+       "move": {
+        "to": [
+         6,
+         0,
+         -12
+        ],
+        "ease": "inOut"
+       },
+       "fx": {
+        "walk": 1.2
+       }
+      }
+     },
+     "note": "лампа включается не сразу — щелчок и разгорание",
+     "sfx": [
+      {
+       "name": "click",
+       "at": 0.17,
+       "gain": -10
+      }
+     ]
+    },
+    {
+     "id": "s01b",
+     "at": "001.0+0.55",
+     "cam": "desk-right",
+     "push": 3,
+     "focus": {
+      "on": "desk-set",
+      "f": 2.2
+     },
+     "cast": {
+      "desk-set": {
+       "move": {
+        "keys": [
+         [
+          0.15,
+          [
+           3.3,
+           8.4,
+           -3.85
+          ]
+         ],
+         [
+          0.4,
+          [
+           1.3,
+           8.4,
+           -3.85
+          ]
+         ],
+         [
+          0.65,
+          [
+           2.4,
+           8.4,
+           -3.85
+          ]
+         ],
+         [
+          0.85,
+          [
+           1.8,
+           8.4,
+           -3.85
+          ]
+         ]
+        ],
+        "ease": "inOut"
+       }
+      }
+     },
+     "note": "один и тот же предмет двадцать раз с места на место"
+    },
+    {
+     "id": "s01c",
+     "at": "001.1",
+     "cam": "door",
+     "focus": {
+      "on": "portiere"
+     },
+     "cast": {
+      "doctor": {
+       "card": "doctor/seated",
+       "pos": [
+        -6,
+        0,
+        -14
+       ]
+      },
+      "yard-keeper": {
+       "card": "yard-keeper/walking",
+       "pos": [
+        17,
+        0,
+        -23
+       ],
+       "move": {
+        "keys": [
+         [
+          0.04,
+          [
+           17,
+           0,
+           -23
+          ]
+         ],
+         [
+          0.18,
+          [
+           16.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.34,
+          [
+           12.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.68,
+          [
+           12.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.82,
+          [
+           16.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.96,
+          [
+           17,
+           0,
+           -23
+          ]
+         ]
+        ],
+        "ease": "inOut"
+       },
+       "fx": {
+        "walk": 1.5
+       }
+      }
+     },
+     "note": "дворник выходит из-за портьеры, стоит, уходит — первая «процессия» в дверях"
+    },
+    {
+     "id": "s01c2",
+     "at": "001.1+0.5",
+     "cam": "door",
+     "push": 2,
+     "focus": {
+      "on": "portiere"
+     },
+     "cast": {
+      "yard-keeper": null,
+      "stranger": {
+       "card": "stranger/walking",
+       "pos": [
+        17,
+        0,
+        -23
+       ],
+       "move": {
+        "keys": [
+         [
+          0.04,
+          [
+           17,
+           0,
+           -23
+          ]
+         ],
+         [
+          0.18,
+          [
+           16.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.34,
+          [
+           12.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.68,
+          [
+           12.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.82,
+          [
+           16.5,
+           0,
+           -21.6
+          ]
+         ],
+         [
+          0.96,
+          [
+           17,
+           0,
+           -23
+          ]
+         ]
+        ],
+        "ease": "inOut"
+       },
+       "fx": {
+        "walk": 1.5,
+        "jitter": 1.0
+       }
+      }
+     },
+     "note": "за ним — заезжий с тиком, тем же путём"
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "The third patient",
+   "set": "office",
+   "cast": {
+    "yard-keeper": null,
+    "stranger": null,
+    "patient": {
+     "card": "patient/standing",
+     "pos": [
+      17,
+      0,
+      -23
+     ]
+    }
+   },
+   "shots": [
+    {
+     "id": "s02a",
+     "at": "002.0",
+     "cam": "door",
+     "push": 4,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "pos": [
+        17,
+        0,
+        -23
+       ],
+       "move": {
+        "keys": [
+         [
+          0.25,
+          [
+           17,
+           0,
+           -23
+          ]
+         ],
+         [
+          0.8,
+          [
+           14,
+           0,
+           -17
+          ]
+         ]
+        ],
+        "ease": "inOut"
+       }
+      }
+     },
+     "note": "из-за портьеры выдвигается новая фигура"
+    },
+    {
+     "id": "s02b",
+     "at": "002.1",
+     "cam": "door",
+     "push": 9,
+     "light": {
+      "angle_to": 30,
+      "k_to": 1.25
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "note": "«закрыв глаза, вижу его как живого» — свет сжимается на нём, как луч памяти"
+    },
+    {
+     "id": "s02c",
+     "at": "002.2",
+     "set": "dark",
+     "light": {
+      "preset": "insert"
+     },
+     "cam": "ins",
+     "push": 3,
+     "cast": {
+      "head": {
+       "card": "patient/head",
+       "pos": [
+        0,
+        0,
+        0
+       ]
+      }
+     },
+     "focus": {
+      "on": "head",
+      "f": 2
+     },
+     "note": "портрет: лысина, курчавая бородка, острый нос"
+    },
+    {
+     "id": "s02c2",
+     "set": "office",
+     "at": "002.3",
+     "cam": "door",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "head": null,
+      "patient": {
+       "fx": {
+        "jitter": 1.0
+       }
+      }
+     },
+     "note": "наклонность к полноте — и резкие, порывистые движения: карточку дёргают"
+    },
+    {
+     "id": "s02d",
+     "at": "002.4",
+     "set": "dark",
+     "light": {
+      "preset": "insert"
+     },
+     "cam": "ins",
+     "push": 2,
+     "cast": {
+      "head": {
+       "card": "patient/head",
+       "pos": [
+        0,
+        0,
+        0
+       ],
+       "fx": {
+        "jitter": 0.7
+       }
+      }
+     },
+     "focus": {
+      "on": "head",
+      "f": 2.2
+     },
+     "note": "подёргивание век"
+    },
+    {
+     "id": "s02d2",
+     "at": "002.4+0.72",
+     "set": "dark",
+     "light": {
+      "preset": "insert"
+     },
+     "cam": "ins",
+     "push": 6,
+     "cast": {
+      "head": null,
+      "hands": {
+       "card": "patient/hands-cobweb",
+       "pos": [
+        0,
+        0,
+        0
+       ],
+       "fx": {
+        "jitter": 1.2
+       }
+      }
+     },
+     "focus": {
+      "on": "hands",
+      "f": 2.4
+     },
+     "note": "пальцы в невидимой паутине"
+    },
+    {
+     "id": "s02e",
+     "set": "office",
+     "at": "003.0",
+     "cam": "doc",
+     "push": 2,
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "hands": null,
+      "patient": {
+       "pos": [
+        14,
+        0,
+        -17
+       ],
+       "fx": {}
+      }
+     },
+     "note": "холодная внимательная невозмутимость"
+    },
+    {
+     "id": "s02f",
+     "at": "003.1",
+     "cam": "two",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated",
+       "pos": [
+        10.5,
+        0,
+        0
+       ],
+       "glow": {
+        "color": "#ff8a7a",
+        "k": 0.35,
+        "start": 0.4
+       }
+      }
+     },
+     "note": "сел, краснея, как девушка: розовый отсвет на карточке"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "What ails you?",
+   "set": "office",
+   "cast": {
+    "patient": {
+     "card": "patient/seated",
+     "pos": [
+      10.5,
+      0,
+      0
+     ]
+    }
+   },
+   "shots": [
+    {
+     "id": "s03a",
+     "at": "004.0",
+     "cam": "doc",
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s03b",
+     "at": "005.0",
+     "cam": "pat",
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s03c",
+     "at": "006.0",
+     "cam": "desk",
+     "drift": [
+      4,
+      0,
+      0
+     ],
+     "focus": {
+      "on": "desk-set",
+      "to": "lamp",
+      "at": [
+       0.2,
+       0.8
+      ],
+      "f": 2.6
+     },
+     "note": "его взгляд по письменным принадлежностям"
+    },
+    {
+     "id": "s03d",
+     "at": "006.1",
+     "cam": "pat",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s03e",
+     "at": "007.0",
+     "cam": "pat-close",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "fx": {
+        "jitter": 0.6
+       }
+      }
+     }
+    },
+    {
+     "id": "s03f",
+     "at": "008.0",
+     "cam": "pat-close",
+     "push": 3,
+     "focus": {
+      "on": "patient",
+      "f": 1.8
+     },
+     "cast": {
+      "patient": {
+       "fx": {
+        "breathe": 0.012,
+        "jitter": 0
+       }
+      }
+     },
+     "note": "дышит медленно, с трудом — карточка чуть дышит"
+    },
+    {
+     "id": "s03g",
+     "at": "009.0",
+     "cam": "doc",
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "patient": {
+       "fx": {}
+      }
+     }
+    },
+    {
+     "id": "s03h",
+     "at": "010.1",
+     "cam": "pat",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-up"
+      }
+     },
+     "note": "поднимает близорукие, растерянно улыбающиеся глаза"
+    },
+    {
+     "id": "s03i",
+     "at": "011.0",
+     "cam": "two",
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s03j",
+     "at": "011.2",
+     "cam": "pat",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-beard",
+       "fx": {
+        "jitter": 0.5
+       }
+      }
+     }
+    },
+    {
+     "id": "s03j2",
+     "at": "011.3",
+     "cam": "pat-close",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "glow": {
+        "color": "#ff8a7a",
+        "k": 0.3,
+        "start": 0.3
+       }
+      }
+     },
+     "note": "лицо горит то отчаянием, то смущением"
+    },
+    {
+     "id": "s03k",
+     "at": "011.4",
+     "cam": "two",
+     "push": 3,
+     "hand": 0.7,
+     "focus": {
+      "on": "doctor",
+      "to": "patient",
+      "at": [
+       0.3,
+       0.7
+      ]
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated",
+       "fx": {},
+       "glow": null
+      }
+     },
+     "note": "лучше выждать — долгий спокойный кадр"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Leipzig",
+   "set": "office",
+   "shots": [
+    {
+     "id": "s04a",
+     "at": "012.0",
+     "cam": "pat",
+     "push": 4,
+     "hand": 0.7,
+     "focus": {
+      "on": "patient"
+     },
+     "note": "заговорил и почти успокоился"
+    },
+    {
+     "id": "s04b",
+     "at": "012.1+0.4",
+     "set": "dark",
+     "light": {
+      "preset": "insert"
+     },
+     "cam": "ins",
+     "push": 3,
+     "cast": {
+      "hands": {
+       "card": "patient/hands-cobweb",
+       "pos": [
+        0,
+        0,
+        0
+       ],
+       "fx": {
+        "jitter": 0.8
+       }
+      }
+     },
+     "focus": {
+      "on": "hands",
+      "f": 2.4
+     }
+    },
+    {
+     "id": "s04c",
+     "set": "office",
+     "at": "013.0",
+     "cam": "pat",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "hands": null,
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    },
+    {
+     "id": "s04d",
+     "at": "014.0",
+     "cam": "doc",
+     "push": 2,
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s04e",
+     "at": "015.0",
+     "cam": "doc-close",
+     "push": 2,
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "doctor": {
+       "card": "doctor/seated-pencil",
+       "fx": {
+        "jitter": 0.4
+       }
+      }
+     },
+     "note": "нога на ногу, карандаш по кончикам пальцев"
+    },
+    {
+     "id": "s04f",
+     "at": "015.1",
+     "cam": "pat",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "doctor": {
+       "fx": {}
+      },
+      "patient": {
+       "card": "patient/seated"
+      }
+     }
+    },
+    {
+     "id": "s04g",
+     "at": "016.0",
+     "cam": "pat-close",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    },
+    {
+     "id": "s04h",
+     "at": "016.2",
+     "set": "dark",
+     "light": {
+      "preset": "insert",
+      "k": 0,
+      "k_to": 1,
+      "ramp": [
+       0,
+       0.25
+      ]
+     },
+     "cam": "ins",
+     "push": 5,
+     "cast": {
+      "clipping": {
+       "card": "prop/clipping",
+       "pos": [
+        -1.6,
+        8.4,
+        -4.0
+       ],
+       "rot": [
+        -8,
+        0,
+        0
+       ]
+      }
+     },
+     "focus": {
+      "on": [
+       0,
+       6,
+       6
+      ],
+      "to": "clipping",
+      "at": [
+       0.05,
+       0.5
+      ],
+      "f": 2.2
+     },
+     "note": "ВЫРЕЗКА: «Лейпциг. Международный турнир. Мат в три хода» — проявляется из темноты, фокус собирается"
+    },
+    {
+     "id": "s04i",
+     "set": "office",
+     "at": "017.0",
+     "cam": "doc",
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "clipping": null,
+      "question": {
+       "card": "prop/question",
+       "pos": [
+        -9,
+        -16,
+        -16.5
+       ],
+       "move": {
+        "to": [
+         -9,
+         3,
+         -16.5
+        ],
+        "start": 0.15,
+        "end": 0.45,
+        "ease": "out"
+       },
+       "fx": {
+        "sway": 2
+       }
+      }
+     },
+     "note": "«изобразить собой огромный вопросительный знак» — бумажный «?» выезжает за доктором"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "The window (first move)",
+   "set": "office",
+   "note": "Первый ход. Рассказ пациента — дневная декорация: единственный солнечный свет в фильме. Процессия: от самой яркой (красный кумач) к почти бесцветной старухе.",
+   "cast": {
+    "question": null
+   },
+   "shots": [
+    {
+     "id": "s05a",
+     "at": "018.0",
+     "cam": "pat-close",
+     "push": 3,
+     "hand": 1.3,
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s05a2",
+     "at": "018.3",
+     "cam": "pat",
+     "drift": [
+      -2,
+      0,
+      0
+     ],
+     "hand": 1.2,
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s05b",
+     "at": "018.5",
+     "cam": "pat-close",
+     "push": 4,
+     "hand": 1.0,
+     "light": {
+      "k_to": 0.7
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.7
+     },
+     "note": "«выплывет мысль эта самая» — свет вокруг гаснет"
+    },
+    {
+     "id": "s05c",
+     "at": "018.8",
+     "cam": "pat",
+     "drift": [
+      -2,
+      0,
+      0
+     ],
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s05d",
+     "at": "018.10",
+     "cam": "pat-close",
+     "push": 3,
+     "light": {
+      "k": 0.7,
+      "k_to": 0.55
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "note": "«тот помрёт, другой…»"
+    },
+    {
+     "id": "s05e",
+     "at": "018.13",
+     "set": "window",
+     "in": "dip",
+     "cam": "win-wide",
+     "push": 6,
+     "cast": {
+      "patient": {
+       "card": "patient/at-window",
+       "pos": [
+        -9,
+        0,
+        0
+       ]
+      },
+      "dust": {
+       "card": "prop/dust",
+       "pos": [
+        -4,
+        18,
+        -2
+       ],
+       "box": [
+        18,
+        20,
+        10
+       ]
+      }
+     },
+     "focus": {
+      "on": "patient",
+      "to": "room-wall",
+      "at": [
+       0.4,
+       0.9
+      ]
+     },
+     "note": "у окошка с книгой; пылинки в луче"
+    },
+    {
+     "id": "s05e2",
+     "at": "018.14",
+     "cam": "win-patient",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "note": "сижу и смотрю"
+    },
+    {
+     "id": "s05f",
+     "at": "018.16",
+     "cam": "win-street",
+     "push": 3,
+     "hand": 0.8,
+     "focus": {
+      "on": "street",
+      "f": 1.4
+     },
+     "note": "тихий летний день — пустая улица"
+    },
+    {
+     "id": "s05g",
+     "at": "018.17",
+     "cam": "win-street",
+     "focus": {
+      "on": [
+       -2.35,
+       20,
+       -27
+      ],
+      "f": 1.4
+     },
+     "cast": {
+      "woman-baby": {
+       "card": "woman-baby/walking",
+       "pos": [
+        -12,
+        8,
+        -27
+       ],
+       "move": {
+        "to": [
+         10,
+         8,
+         -27
+        ],
+        "ease": "linear"
+       },
+       "fx": {
+        "walk": 1.4
+       }
+      }
+     },
+     "note": "красный кумачовый платок"
+    },
+    {
+     "id": "s05h",
+     "at": "018.18",
+     "cam": "win-street",
+     "focus": {
+      "on": [
+       -2.35,
+       20,
+       -27
+      ],
+      "f": 1.4
+     },
+     "cast": {
+      "woman-baby": null,
+      "girl": {
+       "card": "girl/running",
+       "pos": [
+        -12,
+        8,
+        -27
+       ],
+       "move": {
+        "to": [
+         10,
+         8,
+         -27
+        ],
+        "start": 0.05,
+        "end": 0.75,
+        "ease": "linear"
+       },
+       "fx": {
+        "bob": 0.6,
+        "bob_hz": 3.2
+       }
+      }
+     },
+     "note": "рыжая косичка торчит"
+    },
+    {
+     "id": "s05i",
+     "at": "018.20",
+     "cam": "win-street",
+     "drift": [
+      0,
+      0,
+      2
+     ],
+     "focus": {
+      "on": [
+       -2.35,
+       20,
+       -27
+      ],
+      "f": 1.4
+     },
+     "cast": {
+      "girl": null,
+      "schoolgirl": {
+       "card": "schoolgirl/walking",
+       "pos": [
+        -12,
+        8,
+        -27
+       ],
+       "move": {
+        "to": [
+         10,
+         8,
+         -27
+        ],
+        "start": 0.0,
+        "end": 0.42,
+        "ease": "linear"
+       },
+       "fx": {
+        "walk": 1.2
+       }
+      },
+      "lady": {
+       "card": "lady/walking",
+       "pos": [
+        -12,
+        8,
+        -27
+       ],
+       "move": {
+        "to": [
+         10,
+         8,
+         -27
+        ],
+        "start": 0.28,
+        "end": 0.74,
+        "ease": "linear"
+       },
+       "fx": {
+        "walk": 1.0
+       }
+      },
+      "old-woman": {
+       "card": "old-woman/walking",
+       "pos": [
+        -12,
+        8,
+        -27
+       ],
+       "move": {
+        "to": [
+         -1.5,
+         8,
+         -27
+        ],
+        "start": 0.6,
+        "end": 1.0,
+        "ease": "out"
+       },
+       "fx": {
+        "walk": 0.8,
+        "walk_hz": 1.0
+       }
+      }
+     },
+     "note": "гимназистка, дама, старушка — цвет уходит"
+    },
+    {
+     "id": "s05j",
+     "at": "018.21",
+     "set": "office",
+     "in": "dip",
+     "cam": "pat-close",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "schoolgirl": null,
+      "lady": null,
+      "old-woman": null,
+      "dust": null,
+      "patient": {
+       "card": "patient/seated-talking",
+       "pos": [
+        10.5,
+        0,
+        0
+       ]
+      }
+     },
+     "note": "«понимаете?»"
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "title": "The chain",
+   "set": "office",
+   "shots": [
+    {
+     "id": "s06a",
+     "at": "019.0",
+     "set": "dark",
+     "light": {
+      "preset": "insert"
+     },
+     "cam": "ins",
+     "push": 3,
+     "cast": {
+      "hands": {
+       "card": "patient/hands-button",
+       "pos": [
+        0,
+        0,
+        0
+       ],
+       "fx": {
+        "jitter": 1.4
+       }
+      }
+     },
+     "focus": {
+      "on": "hands",
+      "f": 2.4
+     },
+     "note": "пальцы расстёгивают и застёгивают пуговицу сюртука"
+    },
+    {
+     "id": "s06b",
+     "set": "office",
+     "at": "019.1",
+     "cam": "pat",
+     "push": 4,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "hands": null,
+      "shadow-procession": {
+       "card": "funeral/mourners",
+       "pos": [
+        -30,
+        6,
+        -19
+       ],
+       "shadow_only": true,
+       "move": {
+        "to": [
+         30,
+         6,
+         -19
+        ],
+        "ease": "linear"
+       }
+      }
+     },
+     "note": "цепь умозаключений — по стене за ним скользит тень процессии (только тень, самой фигуры не видно)"
+    },
+    {
+     "id": "s06c",
+     "at": "020.0",
+     "cam": "doc",
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "shadow-procession": null
+     }
+    },
+    {
+     "id": "s06d",
+     "at": "021.0",
+     "cam": "pat",
+     "focus": {
+      "on": "patient",
+      "to": "portiere",
+      "at": [
+       0.35,
+       0.8
+      ],
+      "f": 1.8
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated"
+      }
+     },
+     "note": "смотрит за портьеру — фокус уходит в темноту дверного проёма"
+    },
+    {
+     "id": "s06e",
+     "at": "021.1",
+     "cam": "two",
+     "focus": {
+      "on": "doctor",
+      "to": "patient",
+      "at": [
+       0.5,
+       0.9
+      ]
+     }
+    },
+    {
+     "id": "s06f",
+     "at": "022.0",
+     "set": "screen",
+     "in": "dip",
+     "cam": "scr",
+     "push": 4,
+     "focus": {
+      "on": "screen",
+      "f": 1.2
+     },
+     "cast": {
+      "hearse": {
+       "card": "funeral/hearse",
+       "pos": [
+        -26,
+        4,
+        -13.5
+       ],
+       "move": {
+        "to": [
+         22,
+         4,
+         -13.5
+        ],
+        "start": 0.05,
+        "end": 1.0,
+        "ease": "linear"
+       },
+       "fx": {
+        "walk": 0.6
+       }
+      },
+      "mourners": {
+       "card": "funeral/mourners",
+       "pos": [
+        -52,
+        4,
+        -13.6
+       ],
+       "move": {
+        "to": [
+         -6,
+         4,
+         -13.6
+        ],
+        "start": 0.05,
+        "end": 1.0,
+        "ease": "linear"
+       },
+       "fx": {
+        "walk": 1.0
+       }
+      }
+     },
+     "note": "«одной похоронной процессии не хватает» — театр теней"
+    },
+    {
+     "id": "s06g",
+     "at": "022.1",
+     "set": "office",
+     "in": "dip",
+     "cam": "pat-close",
+     "push": 3,
+     "light": {
+      "k": 0.85
+     },
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "hearse": null,
+      "mourners": null
+     },
+     "note": "«и ты, брат, помрёшь»"
+    },
+    {
+     "id": "s06h",
+     "at": "022.3",
+     "set": "dark",
+     "light": {
+      "preset": "insert",
+      "k": 0.9
+     },
+     "cam": "ins",
+     "push": 4,
+     "cast": {
+      "apples": {
+       "card": "prop/apples",
+       "pos": [
+        0,
+        2,
+        0
+       ],
+       "fx": {
+        "sway": 1.5
+       }
+      }
+     },
+     "focus": {
+      "on": "apples",
+      "f": 2.2
+     },
+     "note": "трупы созревающие, вроде как яблоки на сучке"
+    },
+    {
+     "id": "s06i",
+     "at": "022.3+0.72",
+     "set": "office",
+     "cam": "pat-close",
+     "push": 5,
+     "hand": 0.6,
+     "light": {
+      "k": 0.8,
+      "angle_to": 28
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.5
+     },
+     "cast": {
+      "apples": null
+     },
+     "note": "«страшная простота» — резкий крупный, свет сжимается"
+    },
+    {
+     "id": "s06j",
+     "at": "023.0",
+     "cam": "doc-close",
+     "push": 3,
+     "focus": {
+      "on": "doctor"
+     },
+     "light": {
+      "k": 1
+     }
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "title": "The handkerchief",
+   "set": "office",
+   "note": "Передышка: смешная бытовая деталь разряжает жуть — свет на секунду теплее.",
+   "shots": [
+    {
+     "id": "s07a",
+     "at": "024.0",
+     "cam": "pat",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    },
+    {
+     "id": "s07b",
+     "at": "024.1",
+     "set": "window",
+     "in": "dip",
+     "light": {
+      "preset": "day",
+      "k": 1.1
+     },
+     "cam": "win-wide",
+     "push": 3,
+     "focus": {
+      "on": "hammock",
+      "f": 1.5
+     },
+     "cast": {
+      "room-wall": {
+       "hidden": true
+      },
+      "geranium": {
+       "hidden": true
+      },
+      "hammock": {
+       "card": "patient/in-hammock",
+       "pos": [
+        0,
+        8,
+        -20
+       ]
+      }
+     },
+     "note": "после обеда в гамаке, с наслаждением"
+    },
+    {
+     "id": "s07c",
+     "at": "024.2",
+     "set": "office",
+     "in": "dip",
+     "cam": "pat-close",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "hammock": null
+     }
+    },
+    {
+     "id": "s07d",
+     "at": "025.0",
+     "cam": "pat-close",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated"
+      }
+     }
+    },
+    {
+     "id": "s07e",
+     "at": "025.1",
+     "cam": "pat",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-handkerchief",
+       "fx": {
+        "jitter": 0.5
+       }
+      }
+     },
+     "note": "сморкается, не сводя глаз"
+    },
+    {
+     "id": "s07f",
+     "at": "026.0",
+     "cam": "doc",
+     "light": {
+      "k": 1,
+      "k_to": 1.2,
+      "warm": 0.15
+     },
+     "focus": {
+      "on": "doctor"
+     },
+     "note": "невольно улыбнулся — свет теплеет"
+    },
+    {
+     "id": "s07g",
+     "at": "026.1",
+     "cam": "pat",
+     "push": 4,
+     "light": {
+      "k": 1.2,
+      "k_to": 1
+     },
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "fx": {}
+      }
+     }
+    },
+    {
+     "id": "s07g2",
+     "at": "026.2",
+     "cam": "doc-close",
+     "push": 2,
+     "focus": {
+      "on": "doctor"
+     },
+     "note": "уже готов был поверить"
+    },
+    {
+     "id": "s07h",
+     "at": "027.0",
+     "cam": "two",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "title": "The garden. Infinity (second move)",
+   "set": "garden",
+   "note": "Второй ход. Ночной садик: чёрный картон, проколотый звёздами, — звёзды мерцают нервно. «Чистый лист бумаги, вот» — лист берётся прямо со стола доктора.",
+   "cast": {
+    "patient": {
+     "card": "patient/on-bench",
+     "pos": [
+      -6,
+      0,
+      -2
+     ]
+    },
+    "cigarette": {
+     "card": "prop/glow",
+     "pos": [
+      -1.2,
+      9.6,
+      -1.6
+     ],
+     "color": "#ff7a2a",
+     "size": [
+      0.5,
+      0.5
+     ],
+     "fx": {
+      "flicker": 0.4
+     }
+    }
+   },
+   "shots": [
+    {
+     "id": "s08a",
+     "at": "028.2",
+     "in": "dip",
+     "cam": "gar-wide",
+     "push": 5,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "stars": {
+       "fx": {
+        "twinkle": 0.3
+       }
+      }
+     }
+    },
+    {
+     "id": "s08b",
+     "at": "028.3",
+     "cam": "gar-sky",
+     "push": 4,
+     "hand": 0.8,
+     "focus": {
+      "on": "stars",
+      "f": 1.2
+     },
+     "cast": {
+      "stars": {
+       "fx": {
+        "twinkle": 0.85
+       }
+      }
+     },
+     "note": "звёзды горят не мягко, а раздражают — мерцание резче"
+    },
+    {
+     "id": "s08c",
+     "at": "029.0",
+     "cam": "gar-patient",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "stars": {
+       "fx": {
+        "twinkle": 0.4
+       }
+      }
+     }
+    },
+    {
+     "id": "s08d",
+     "at": "029.2",
+     "cam": "gar-wide",
+     "push": -10,
+     "hand": 0.7,
+     "focus": {
+      "on": "patient"
+     },
+     "note": "о вечности, смерти, тайне вселенной — медленный отъезд"
+    },
+    {
+     "id": "s08e",
+     "at": "029.4",
+     "cam": "gar-patient",
+     "push": 3,
+     "focus": {
+      "on": "patient",
+      "f": 1.7
+     }
+    },
+    {
+     "id": "s08f",
+     "at": "029.6",
+     "cam": "gar-sky",
+     "push": 8,
+     "hand": 0.6,
+     "focus": {
+      "on": "stars",
+      "f": 1.2
+     },
+     "note": "бесконечное количество времени до «я»"
+    },
+    {
+     "id": "s08g",
+     "at": "029.9",
+     "set": "office",
+     "in": "dip",
+     "cam": "desk",
+     "push": 3,
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking",
+       "pos": [
+        10.5,
+        0,
+        0
+       ]
+      },
+      "cigarette": null,
+      "sheet": {
+       "card": "prop/sheet",
+       "pos": [
+        -1.6,
+        8.4,
+        -3.95
+       ],
+       "rot": [
+        -6,
+        0,
+        0
+       ]
+      },
+      "pencil": {
+       "card": "prop/pencil",
+       "pos": [
+        3,
+        9.9,
+        -3.55
+       ],
+       "rot": [
+        0,
+        0,
+        24
+       ]
+      }
+     },
+     "focus": {
+      "on": "sheet",
+      "f": 2.0
+     },
+     "note": "«чистый лист бумаги, скажем, вот» — со стола доктора"
+    },
+    {
+     "id": "s08h",
+     "at": "029.10",
+     "cam": "desk",
+     "push": 2,
+     "focus": {
+      "on": "sheet",
+      "f": 2.0
+     },
+     "cast": {
+      "sheet": {
+       "card": "prop/sheet-10"
+      },
+      "pencil": {
+       "pos": [
+        3,
+        9.9,
+        -3.55
+       ],
+       "move": {
+        "keys": [
+         [
+          0,
+          [
+           3,
+           10.2,
+           -3.55
+          ]
+         ],
+         [
+          0.3,
+          [
+           0,
+           11.7,
+           -3.55
+          ]
+         ],
+         [
+          0.45,
+          [
+           -1.2,
+           11.2,
+           -3.55
+          ]
+         ],
+         [
+          0.7,
+          [
+           1,
+           10.7,
+           -3.55
+          ]
+         ],
+         [
+          1,
+          [
+           3.5,
+           10.2,
+           -3.55
+          ]
+         ]
+        ]
+       }
+      }
+     },
+     "note": "пишу 10"
+    },
+    {
+     "id": "s08i",
+     "at": "029.11",
+     "cam": "desk",
+     "push": 2,
+     "focus": {
+      "on": "sheet",
+      "f": 2.0
+     },
+     "cast": {
+      "pencil": null,
+      "eraser": {
+       "card": "prop/eraser",
+       "pos": [
+        3.5,
+        10.9,
+        -3.55
+       ],
+       "move": {
+        "keys": [
+         [
+          0,
+          [
+           3.5,
+           10.9,
+           -3.55
+          ]
+         ],
+         [
+          0.25,
+          [
+           -0.5,
+           11.4,
+           -3.55
+          ]
+         ],
+         [
+          0.6,
+          [
+           -2.5,
+           11.0,
+           -3.55
+          ]
+         ],
+         [
+          0.85,
+          [
+           3.5,
+           10.9,
+           -3.55
+          ]
+         ]
+        ]
+       },
+       "fx": {
+        "wobble": 1.2
+       }
+      },
+      "sheet": {
+       "card": "prop/sheet-erased",
+       "swap_at": 0.55
+      }
+     },
+     "note": "стираю начисто"
+    },
+    {
+     "id": "s08j",
+     "at": "029.13",
+     "cam": "desk",
+     "push": 3,
+     "focus": {
+      "on": "sheet",
+      "f": 2.0
+     },
+     "cast": {
+      "eraser": null,
+      "pencil": {
+       "card": "prop/pencil",
+       "pos": [
+        3,
+        9.9,
+        -3.55
+       ],
+       "rot": [
+        0,
+        0,
+        24
+       ],
+       "move": {
+        "keys": [
+         [
+          0,
+          [
+           3,
+           10.2,
+           -3.55
+          ]
+         ],
+         [
+          0.3,
+          [
+           0,
+           11.7,
+           -3.55
+          ]
+         ],
+         [
+          0.45,
+          [
+           -1.2,
+           11.2,
+           -3.55
+          ]
+         ],
+         [
+          0.7,
+          [
+           1,
+           10.7,
+           -3.55
+          ]
+         ],
+         [
+          1,
+          [
+           3.5,
+           10.2,
+           -3.55
+          ]
+         ]
+        ]
+       }
+      },
+      "sheet": {
+       "card": "prop/sheet-10",
+       "swap_at": 0.45
+      }
+     },
+     "note": "и снова «10»"
+    },
+    {
+     "id": "s08k",
+     "at": "029.14",
+     "cam": "desk",
+     "push": 4,
+     "hand": 0.5,
+     "focus": {
+      "on": [
+       -1.5,
+       14,
+       8
+      ],
+      "to": "sheet",
+      "at": [
+       0,
+       0.5
+      ],
+      "f": 2.2
+     },
+     "cast": {
+      "pencil": null
+     },
+     "note": "1 и 0"
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "title": "Without fear of death",
+   "set": "office",
+   "cast": {
+    "sheet": null
+   },
+   "shots": [
+    {
+     "id": "s09a",
+     "at": "030.0",
+     "cam": "pat",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-wipe"
+      }
+     }
+    },
+    {
+     "id": "s09b",
+     "at": "031.0",
+     "cam": "doc",
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "doctor": {
+       "card": "doctor/seated"
+      }
+     }
+    },
+    {
+     "id": "s09c",
+     "at": "032.0",
+     "cam": "pat",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    },
+    {
+     "id": "s09d",
+     "at": "032.2",
+     "cam": "two",
+     "light": {
+      "fx": {
+       "swing": 1
+      }
+     },
+     "focus": {
+      "on": "patient"
+     },
+     "note": "мысли вертелись вихрем — лампа качается, как от толчка"
+    },
+    {
+     "id": "s09e",
+     "at": "032.3",
+     "cam": "pat-close",
+     "push": 3,
+     "light": {
+      "fx": {
+       "swing": 0.35
+      }
+     },
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s09f",
+     "at": "033.0",
+     "cam": "doc-close",
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s09g",
+     "at": "034.0",
+     "cam": "pat-close",
+     "push": 3,
+     "light": {
+      "k": 0.6,
+      "angle_to": 30
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated"
+      }
+     },
+     "note": "шёпотом, торжественным и удручённым"
+    },
+    {
+     "id": "s09h",
+     "at": "035.0",
+     "cam": "pat-close",
+     "push": 4,
+     "hand": 0.3,
+     "light": {
+      "k": 0.55
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "note": "затаённое дыхание: камера почти неподвижна"
+    },
+    {
+     "id": "s09i",
+     "at": "036.0",
+     "cam": "two",
+     "light": {
+      "k": 1
+     },
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s09j",
+     "at": "036.1",
+     "cam": "two",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "fx": {
+        "jitter": 1.2,
+        "bob": 0.12,
+        "bob_hz": 2
+       }
+      }
+     },
+     "note": "судорожно завертелся на стуле"
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "title": "No walls",
+   "set": "office",
+   "note": "Центральный трюк: «стенки» — это буквально картонные стенки коробки-театра. Они падают — и доктор в своём кресле остаётся в пустоте со звёздами.",
+   "cast": {
+    "patient": {
+     "card": "patient/seated-talking",
+     "fx": {}
+    }
+   },
+   "shots": [
+    {
+     "id": "s10a",
+     "at": "037.0",
+     "cam": "pat-low",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     }
+    },
+    {
+     "id": "s10b",
+     "at": "037.1",
+     "cam": "doc",
+     "push": 3,
+     "focus": {
+      "on": "doctor"
+     },
+     "note": "вы, вот вы, доктор, в этом кресле"
+    },
+    {
+     "id": "s10c",
+     "at": "037.3",
+     "cam": "box",
+     "push": 12,
+     "focus": {
+      "on": "doctor",
+      "f": 1.0
+     },
+     "note": "отъезд: кабинет — коробка на столе, видны картонные края стен"
+    },
+    {
+     "id": "s10d",
+     "at": "037.4",
+     "cam": "void-wide",
+     "push": -14,
+     "light": {
+      "preset": "void",
+      "k": 0.6,
+      "k_to": 1,
+      "ramp": [
+       0,
+       0.3
+      ]
+     },
+     "focus": {
+      "on": "doctor",
+      "f": 0.3
+     },
+     "cast": {
+      "wall": {
+       "move": {
+        "to": [
+         0,
+         -60,
+         -40
+        ],
+        "rot_to": [
+         -75,
+         0,
+         0
+        ],
+        "start": 0.0,
+        "end": 0.55,
+        "ease": "in"
+       }
+      },
+      "wall-left": {
+       "move": {
+        "to": [
+         -40,
+         -60,
+         -8
+        ],
+        "rot_to": [
+         0,
+         90,
+         80
+        ],
+        "start": 0.05,
+        "end": 0.6,
+        "ease": "in"
+       }
+      },
+      "wall-right": {
+       "move": {
+        "to": [
+         40,
+         -60,
+         -8
+        ],
+        "rot_to": [
+         0,
+         -90,
+         -80
+        ],
+        "start": 0.1,
+        "end": 0.65,
+        "ease": "in"
+       }
+      },
+      "portiere": {
+       "move": {
+        "to": [
+         24,
+         -60,
+         -30
+        ],
+        "rot_to": [
+         -60,
+         0,
+         0
+        ],
+        "start": 0.0,
+        "end": 0.55,
+        "ease": "in"
+       }
+      },
+      "floor": {
+       "move": {
+        "to": [
+         0,
+         -80,
+         -4
+        ],
+        "start": 0.2,
+        "end": 0.8,
+        "ease": "in"
+       }
+      },
+      "desk": {
+       "move": {
+        "to": [
+         -2,
+         -70,
+         -4
+        ],
+        "start": 0.15,
+        "end": 0.7,
+        "ease": "in"
+       }
+      },
+      "lamp": {
+       "move": {
+        "to": [
+         -10.8,
+         -60,
+         -3.85
+        ],
+        "start": 0.15,
+        "end": 0.7,
+        "ease": "in"
+       }
+      },
+      "desk-set": {
+       "move": {
+        "to": [
+         3.3,
+         -60,
+         -3.9
+        ],
+        "start": 0.15,
+        "end": 0.7,
+        "ease": "in"
+       }
+      },
+      "patient": {
+       "move": {
+        "to": [
+         10.5,
+         -60,
+         0
+        ],
+        "start": 0.1,
+        "end": 0.6,
+        "ease": "in"
+       }
+      },
+      "doctor": {
+       "card": "doctor/seated-frozen",
+       "pos": [
+        -6,
+        0,
+        -15.3
+       ]
+      },
+      "stars": {
+       "fx": {
+        "twinkle": 0.25
+       }
+      },
+      "stars-near": {
+       "fx": {
+        "twinkle": 0.2
+       }
+      }
+     },
+     "note": "стенок нет — холод всего сердца; доктор в кресле один в пустоте"
+    },
+    {
+     "id": "s10e",
+     "at": "037.5",
+     "cam": "void-wide",
+     "push": 4,
+     "hand": 0.5,
+     "light": {
+      "preset": "void"
+     },
+     "focus": {
+      "on": "doctor",
+      "f": 0.3
+     },
+     "drift": [
+      9,
+      2,
+      0
+     ],
+     "cast": {
+      "stars-near": {
+       "fx": {
+        "twinkle": 0.2
+       }
+      }
+     }
+    },
+    {
+     "id": "s10f",
+     "at": "038.0",
+     "cam": "doc",
+     "light": {
+      "preset": "lamp"
+     },
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "wall": {
+       "reset": true
+      },
+      "wall-left": {
+       "reset": true
+      },
+      "wall-right": {
+       "reset": true
+      },
+      "portiere": {
+       "reset": true
+      },
+      "floor": {
+       "reset": true
+      },
+      "desk": {
+       "reset": true
+      },
+      "lamp": {
+       "reset": true
+      },
+      "desk-set": {
+       "reset": true
+      },
+      "patient": {
+       "pos": [
+        10.5,
+        0,
+        0
+       ]
+      },
+      "doctor": {
+       "card": "doctor/seated",
+       "pos": [
+        -6,
+        0,
+        -14
+       ]
+      }
+     },
+     "note": "«возможно…» — стены на месте, тёплый свет, как ни в чём не бывало"
+    },
+    {
+     "id": "s10g",
+     "at": "039.0",
+     "cam": "pat-low",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    },
+    {
+     "id": "s10g2",
+     "at": "039.1+0.25",
+     "cam": "pat-close",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-fist",
+       "fx": {
+        "jitter": 0.6
+       }
+      }
+     },
+     "note": "стукнул себя кулаком в грудь"
+    },
+    {
+     "id": "s10g3",
+     "at": "039.2",
+     "cam": "pat-close",
+     "push": 4,
+     "hand": 0.5,
+     "light": {
+      "k": 0.85
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "cast": {
+      "patient": {
+       "fx": {}
+      }
+     },
+     "note": "а поняв — умру"
+    },
+    {
+     "id": "s10h",
+     "at": "039.3",
+     "cam": "desk",
+     "push": 2,
+     "cast": {
+      "clipping": {
+       "card": "prop/clipping",
+       "pos": [
+        -1.6,
+        8.4,
+        -4.0
+       ],
+       "rot": [
+        -6,
+        0,
+        -3
+       ]
+      }
+     },
+     "focus": {
+      "on": "clipping",
+      "f": 2.0
+     },
+     "note": "та самая задача — на столе"
+    },
+    {
+     "id": "s10i",
+     "at": "039.4",
+     "cam": "pat",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-talking"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "title": "The porch, the bed, the procession (third move)",
+   "set": "office",
+   "note": "Третий ход. Крыльцо: жена — только силуэт в тёплой двери. Спальня: сердце — свет бьётся рывками, кровать уплывает. Ночная процессия бледных фигур; мысль останавливается на старухе.",
+   "shots": [
+    {
+     "id": "s11a",
+     "at": "040.0",
+     "cam": "desk",
+     "push": 3,
+     "focus": {
+      "on": "clipping",
+      "f": 2.0
+     },
+     "note": "задача из журнальчика"
+    },
+    {
+     "id": "s11b",
+     "at": "040.1",
+     "cam": "pat-close",
+     "push": 2,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "clipping": null
+     }
+    },
+    {
+     "id": "s11c",
+     "at": "040.3",
+     "set": "garden",
+     "in": "dip",
+     "cam": "gar-wide",
+     "push": 3,
+     "focus": {
+      "on": "house",
+      "to": "patient",
+      "at": [
+       0.55,
+       0.85
+      ]
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/on-bench",
+       "pos": [
+        -6,
+        0,
+        -2
+       ]
+      },
+      "cigarette": {
+       "card": "prop/glow",
+       "pos": [
+        -1.2,
+        9.6,
+        -1.6
+       ],
+       "color": "#ff7a2a",
+       "size": [
+        0.5,
+        0.5
+       ],
+       "fx": {
+        "flicker": 0.4
+       }
+      },
+      "door-light": {
+       "k": 0,
+       "k_to": 1,
+       "ramp": [
+        0.05,
+        0.15
+       ]
+      },
+      "wife": {
+       "card": "wife/doorway",
+       "pos": [
+        13.6,
+        5,
+        -22.2
+       ]
+      }
+     },
+     "note": "«Миша!» — дверь вспыхивает, в ней силуэт"
+    },
+    {
+     "id": "s11d",
+     "at": "040.5",
+     "cam": "gar-patient",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "stars": {
+       "fx": {
+        "twinkle": 0.3
+       }
+      }
+     },
+     "note": "настроение самое неземное"
+    },
+    {
+     "id": "s11e",
+     "at": "040.7",
+     "cam": "gar-door",
+     "push": 2,
+     "focus": {
+      "on": "wife"
+     },
+     "cast": {
+      "wife": {
+       "move": {
+        "to": [
+         12.9,
+         5,
+         -22.2
+        ],
+        "end": 0.4
+       }
+      }
+     },
+     "note": "«Миша-а! Уснул, что ли?»"
+    },
+    {
+     "id": "s11f",
+     "at": "040.9",
+     "cam": "gar-wide",
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "fx": {
+        "jitter": 1.2
+       }
+      }
+     },
+     "note": "«Пошла к чёрту!»"
+    },
+    {
+     "id": "s11g",
+     "at": "040.10",
+     "cam": "gar-wide",
+     "push": 2,
+     "focus": {
+      "on": "house"
+     },
+     "cast": {
+      "patient": {
+       "fx": {}
+      },
+      "wife": {
+       "move": {
+        "to": [
+         17,
+         5,
+         -22.2
+        ],
+        "end": 0.5
+       }
+      },
+      "door-light": {
+       "k": 1,
+       "k_to": 0,
+       "ramp": [
+        0.45,
+        0.6
+       ]
+      }
+     },
+     "note": "ушла — дверь гаснет"
+    },
+    {
+     "id": "s11h",
+     "at": "040.12",
+     "cam": "gar-patient",
+     "push": 4,
+     "hand": 0.6,
+     "light": {
+      "k_to": 0.7
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "cast": {
+      "stars": {
+       "fx": {
+        "twinkle": 0.1
+       }
+      }
+     }
+    },
+    {
+     "id": "s11i",
+     "at": "040.13",
+     "set": "bedroom",
+     "in": "dip",
+     "cam": "bed-wide",
+     "push": 4,
+     "focus": {
+      "on": "bed"
+     },
+     "cast": {
+      "patient": null,
+      "cigarette": null,
+      "wife": null,
+      "bed": {
+       "card": "patient/in-bed",
+       "pos": [
+        0,
+        0,
+        -8
+       ]
+      }
+     }
+    },
+    {
+     "id": "s11j",
+     "at": "040.14+0.45",
+     "cam": "bed-close",
+     "push": 3,
+     "focus": {
+      "on": "bed",
+      "f": 1.6
+     },
+     "cast": {
+      "flies": {
+       "card": "prop/flies",
+       "pos": [
+        3,
+        10,
+        -3
+       ],
+       "box": [
+        16,
+        12,
+        8
+       ]
+      }
+     },
+     "note": "круги, мухи светящиеся"
+    },
+    {
+     "id": "s11k",
+     "at": "040.15",
+     "cam": "bed-close",
+     "push": 3,
+     "light": {
+      "fx": {
+       "heartbeat": 1
+      }
+     },
+     "focus": {
+      "on": "bed",
+      "f": 1.6
+     },
+     "note": "сердце: свет бьётся рывками, то замирает"
+    },
+    {
+     "id": "s11l",
+     "at": "040.17",
+     "cam": "bed-wide",
+     "push": 4,
+     "hand": 1.5,
+     "light": {
+      "fx": {
+       "heartbeat": 1.6
+      }
+     },
+     "focus": {
+      "on": "bed"
+     },
+     "note": "барабанным боем — камера вздрагивает в такт"
+    },
+    {
+     "id": "s11m",
+     "at": "040.19",
+     "cam": "bed-close",
+     "push": 2,
+     "light": {
+      "k": 1,
+      "k_to": 0.15
+     },
+     "focus": {
+      "on": "bed",
+      "f": 1.5
+     },
+     "note": "«умираю» — свет почти гаснет"
+    },
+    {
+     "id": "s11n",
+     "at": "040.20",
+     "cam": "bed-wide",
+     "push": -6,
+     "light": {
+      "k": 0.35,
+      "k_to": 0.5
+     },
+     "focus": {
+      "on": "bed",
+      "f": 1.4
+     },
+     "cast": {
+      "bed": {
+       "move": {
+        "to": [
+         6,
+         9,
+         -2
+        ],
+        "rot_to": [
+         0,
+         0,
+         -9
+        ],
+        "ease": "inOut"
+       },
+       "fx": {
+        "sway": 1.2
+       }
+      },
+      "wall": {
+       "move": {
+        "to": [
+         0,
+         -5,
+         -26
+        ],
+        "ease": "inOut"
+       }
+      },
+      "flies": null
+     },
+     "note": "кровать поплыла"
+    },
+    {
+     "id": "s11o",
+     "at": "040.21",
+     "cam": "bed-wide",
+     "light": {
+      "k": 0.5,
+      "k_to": 0.8
+     },
+     "focus": {
+      "on": "bed"
+     },
+     "cast": {
+      "bed": {
+       "move": {
+        "to": [
+         0,
+         0,
+         -8
+        ],
+        "rot_to": [
+         0,
+         0,
+         0
+        ],
+        "end": 0.7
+       }
+      },
+      "wall": {
+       "move": {
+        "to": [
+         0,
+         0,
+         -20
+        ],
+        "end": 0.7
+       }
+      }
+     },
+     "note": "прошло, опомнился"
+    },
+    {
+     "id": "s11p",
+     "at": "040.23",
+     "set": "screen",
+     "in": "dip",
+     "cam": "scr",
+     "focus": {
+      "on": "screen",
+      "f": 1.2
+     },
+     "cast": {
+      "bed": null,
+      "dogs": {
+       "card": "dogs/running",
+       "pos": [
+        -22,
+        3,
+        -13.5
+       ],
+       "move": {
+        "to": [
+         22,
+         3,
+         -13.5
+        ],
+        "start": 0.05,
+        "end": 0.95,
+        "ease": "linear"
+       },
+       "fx": {
+        "bob": 0.6,
+        "bob_hz": 4
+       }
+      }
+     },
+     "note": "мысли бегут, как собаки на улице"
+    },
+    {
+     "id": "s11q",
+     "at": "040.24",
+     "set": "bedroom",
+     "in": "dip",
+     "cam": "bed-wide",
+     "push": 3,
+     "light": {
+      "k": 0.8
+     },
+     "focus": {
+      "on": [
+       0,
+       10,
+       -14
+      ],
+      "f": 1.4
+     },
+     "cast": {
+      "dogs": null,
+      "bed": {
+       "card": "patient/in-bed",
+       "pos": [
+        0,
+        0,
+        -2
+       ]
+      },
+      "girl": {
+       "card": "girl/running",
+       "pos": [
+        -30,
+        0,
+        -14
+       ],
+       "move": {
+        "to": [
+         30,
+         0,
+         -14
+        ],
+        "start": 0.0,
+        "end": 0.6,
+        "ease": "linear"
+       },
+       "fx": {
+        "bob": 0.3
+       },
+       "glow": {
+        "color": "#9fb5ff",
+        "k": 0.25
+       }
+      },
+      "lady": {
+       "card": "lady/walking",
+       "pos": [
+        -30,
+        0,
+        -14
+       ],
+       "move": {
+        "to": [
+         30,
+         0,
+         -14
+        ],
+        "start": 0.2,
+        "end": 0.85,
+        "ease": "linear"
+       },
+       "fx": {
+        "walk": 1.0
+       },
+       "glow": {
+        "color": "#9fb5ff",
+        "k": 0.25
+       }
+      },
+      "old-woman": {
+       "card": "old-woman/walking",
+       "pos": [
+        -30,
+        0,
+        -14
+       ],
+       "move": {
+        "to": [
+         -2,
+         0,
+         -14
+        ],
+        "start": 0.45,
+        "end": 1.0,
+        "ease": "out"
+       },
+       "fx": {
+        "walk": 0.8,
+        "walk_hz": 1.0
+       },
+       "glow": {
+        "color": "#9fb5ff",
+        "k": 0.3
+       }
+      }
+     },
+     "note": "вся процессия, как живая — бледные лунные фигуры"
+    },
+    {
+     "id": "s11r",
+     "at": "040.25",
+     "cam": "bed-wide",
+     "push": 14,
+     "hand": 1.0,
+     "light": {
+      "k": 0.8,
+      "angle_to": 18,
+      "target_to": [
+       -2,
+       7,
+       -14
+      ]
+     },
+     "focus": {
+      "on": "old-woman",
+      "f": 1.8
+     },
+     "cast": {
+      "girl": null,
+      "lady": null,
+      "old-woman": {
+       "card": "old-woman/facing",
+       "pos": [
+        -2,
+        0,
+        -14
+       ]
+      }
+     },
+     "note": "мысль остановилась на старухе — она оборачивается к нам"
+    },
+    {
+     "id": "s11s",
+     "at": "040.25+0.45",
+     "cam": "bed-wide",
+     "push": 4,
+     "hand": 2.4,
+     "light": {
+      "k": 1.6,
+      "k_to": 0.9,
+      "ramp": [
+       0,
+       0.08
+      ]
+     },
+     "focus": {
+      "on": "old-woman",
+      "f": 1.8
+     },
+     "note": "задрожал и закричал во весь голос"
+    },
+    {
+     "id": "s11t",
+     "at": "040.26",
+     "set": "office",
+     "in": "dip",
+     "cam": "pat-close",
+     "push": 4,
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "cast": {
+      "old-woman": null,
+      "bed": null,
+      "patient": {
+       "card": "patient/seated-talking",
+       "pos": [
+        10.5,
+        0,
+        0
+       ]
+      }
+     }
+    },
+    {
+     "id": "s11u",
+     "at": "040.27",
+     "cam": "pat-close",
+     "push": 3,
+     "hand": 0.4,
+     "light": {
+      "k": 0.9,
+      "k_to": 0.75
+     },
+     "focus": {
+      "on": "patient",
+      "f": 1.6
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated"
+      }
+     },
+     "note": "умру… не выдержу"
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "title": "The hand (mate)",
+   "set": "office",
+   "note": "Рука — шарнирная бумажная кукла на латунных скрепках; бронзированная запонка рифмуется со скрепкой. Опускание — по суставам, как в тексте: кисть, локоть, плечо.",
+   "shots": [
+    {
+     "id": "s12a",
+     "at": "041.0",
+     "cam": "two",
+     "push": 3,
+     "light": {
+      "fx": {
+       "breath": 1
+      }
+     },
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "wall": {
+       "fx": {
+        "breathe": 0.02
+       }
+      },
+      "wall-left": {
+       "fx": {
+        "breathe": 0.02
+       }
+      },
+      "wall-right": {
+       "fx": {
+        "breathe": 0.02
+       }
+      }
+     },
+     "note": "сама комната вздохнула — стены и свет делают вдох",
+     "sfx": [
+      {
+       "name": "breath",
+       "at": 0.02,
+       "gain": -14
+      }
+     ]
+    },
+    {
+     "id": "s12b",
+     "at": "041.1",
+     "cam": "pat-close",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "wall": {
+       "fx": {}
+      },
+      "wall-left": {
+       "fx": {}
+      },
+      "wall-right": {
+       "fx": {}
+      },
+      "patient": {
+       "card": "patient/seated-pale",
+       "parts": {
+        "arm-upper": -15,
+        "arm-fore": 10,
+        "arm-hand": 5
+       }
+      }
+     },
+     "note": "белый, как известь"
+    },
+    {
+     "id": "s12c",
+     "at": "041.2",
+     "cam": "pat-low",
+     "push": 3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "parts": {
+        "arm-upper": [
+         [
+          0.25,
+          -15
+         ],
+         [
+          0.55,
+          -168
+         ]
+        ],
+        "arm-fore": [
+         [
+          0.25,
+          10
+         ],
+         [
+          0.55,
+          0
+         ]
+        ],
+        "arm-hand": [
+         [
+          0.3,
+          5
+         ],
+         [
+          0.6,
+          0
+         ]
+        ]
+       }
+      }
+     },
+     "note": "старательным, неуклюжим движением поднял руку"
+    },
+    {
+     "id": "s12d",
+     "at": "041.2+0.7",
+     "set": "dark",
+     "light": {
+      "preset": "insert"
+     },
+     "cam": "ins",
+     "push": 3,
+     "cast": {
+      "cuff": {
+       "card": "patient/arm-fore",
+       "pos": [
+        0,
+        12,
+        0
+       ],
+       "h": 12,
+       "rot": [
+        0,
+        0,
+        180
+       ]
+      }
+     },
+     "focus": {
+      "on": "cuff",
+      "f": 2.4
+     },
+     "note": "крахмальная манжетка и бронзированная запонка — блик"
+    },
+    {
+     "id": "s12e",
+     "at": "042.0",
+     "set": "office",
+     "cam": "two",
+     "push": 3,
+     "hand": 1.6,
+     "focus": {
+      "on": "doctor",
+      "to": "patient",
+      "at": [
+       0.4,
+       0.7
+      ]
+     },
+     "cast": {
+      "cuff": null,
+      "doctor": {
+       "card": "doctor/seated-frozen",
+       "fx": {
+        "jitter": 0.6
+       }
+      }
+     },
+     "note": "двое сумасшедших — паника заражает и камеру"
+    },
+    {
+     "id": "s12e2",
+     "at": "042.1",
+     "cam": "pat-low",
+     "push": 3,
+     "hand": 1.4,
+     "focus": {
+      "on": "patient"
+     },
+     "note": "беспомощная, выброшенная вверх рука с жёлтыми пальцами"
+    },
+    {
+     "id": "s12f",
+     "at": "042.2",
+     "set": "dark",
+     "light": {
+      "preset": "insert",
+      "k": 1,
+      "k_to": 0.2
+     },
+     "cam": "ins",
+     "push": 7,
+     "hand": 0.8,
+     "cast": {
+      "head": {
+       "card": "patient/head-abyss",
+       "pos": [
+        0,
+        0,
+        0
+       ]
+      }
+     },
+     "focus": {
+      "on": "head",
+      "f": 1.2,
+      "f_to": 0.35
+     },
+     "note": "глаза уходят в глубь орбит — маленькие чёрные пропасти гаснут; фокус расплывается"
+    },
+    {
+     "id": "s12g",
+     "at": "043.0",
+     "set": "office",
+     "cam": "pat-low",
+     "hand": 0.4,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "head": null,
+      "doctor": {
+       "fx": {}
+      }
+     },
+     "note": "рука опускалась"
+    },
+    {
+     "id": "s12h",
+     "at": "043.1",
+     "cam": "pat",
+     "push": 2,
+     "hand": 0.3,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "parts": {
+        "arm-hand": [
+         [
+          0.02,
+          0
+         ],
+         [
+          0.2,
+          70
+         ]
+        ],
+        "arm-fore": [
+         [
+          0.2,
+          0
+         ],
+         [
+          0.4,
+          75
+         ]
+        ],
+        "arm-upper": [
+         [
+          0.4,
+          -168
+         ],
+         [
+          0.66,
+          -8
+         ],
+         [
+          0.72,
+          -30
+         ],
+         [
+          0.78,
+          -14
+         ],
+         [
+          0.84,
+          -24
+         ],
+         [
+          0.9,
+          -19
+         ]
+        ]
+       }
+      }
+     },
+     "note": "в кисти, в локте, в плече — всколыхнулась и тихо упала, ладонью о колено",
+     "sfx": [
+      {
+       "name": "thump",
+       "at": 0.68,
+       "gain": -9
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s13",
+   "title": "Leipzig!",
+   "set": "office",
+   "shots": [
+    {
+     "id": "s13a",
+     "at": "044.0",
+     "cam": "doc",
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s13b",
+     "at": "044.1",
+     "cam": "doc",
+     "push": 2,
+     "hand": 1.4,
+     "focus": {
+      "on": "doctor"
+     },
+     "cast": {
+      "doctor": {
+       "card": "doctor/standing-shout",
+       "pos": [
+        -6,
+        -4,
+        -14
+       ],
+       "move": {
+        "to": [
+         -6,
+         0,
+         -14
+        ],
+        "start": 0.1,
+        "end": 0.2,
+        "ease": "out"
+       }
+      }
+     },
+     "note": "вскочил",
+     "sfx": [
+      {
+       "name": "rustle",
+       "at": 0.08,
+       "gain": -8
+      }
+     ]
+    },
+    {
+     "id": "s13c",
+     "at": "045.0",
+     "cam": "doc",
+     "push": 3,
+     "hand": 1.2,
+     "light": {
+      "k": 1.25
+     },
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s13d",
+     "at": "045.1",
+     "cam": "doc-close",
+     "push": 2,
+     "hand": 1.2,
+     "light": {
+      "k": 1.25
+     },
+     "focus": {
+      "on": "doctor"
+     }
+    },
+    {
+     "id": "s13e",
+     "at": "045.2",
+     "cam": "desk",
+     "push": 1.5,
+     "hand": 1.0,
+     "light": {
+      "k": 1.1
+     },
+     "cast": {
+      "clipping": {
+       "card": "prop/clipping",
+       "pos": [
+        -1.6,
+        8.4,
+        -4.0
+       ],
+       "rot": [
+        -6,
+        0,
+        -3
+       ]
+      }
+     },
+     "focus": {
+      "on": "clipping",
+      "f": 2.0
+     }
+    }
+   ]
+  },
+  {
+   "id": "s14",
+   "title": "Electric light",
+   "set": "office",
+   "note": "Финал — единственный абсолютно неподвижный кадр: ручная камера (жизнь) кончилась. Тёплая лампа сменяется плоским холодным электрическим светом сверху.",
+   "cast": {
+    "clipping": null
+   },
+   "shots": [
+    {
+     "id": "s14a",
+     "at": "046.0",
+     "cam": "pat",
+     "hand": 0.15,
+     "focus": {
+      "on": "patient"
+     },
+     "cast": {
+      "patient": {
+       "card": "patient/seated-dead",
+       "parts": null
+      }
+     }
+    },
+    {
+     "id": "s14b",
+     "at": "046.1",
+     "cam": "two",
+     "hand": 0,
+     "light": {
+      "preset": "electric",
+      "k": 0,
+      "k_to": 1,
+      "ramp": [
+       0.18,
+       0.24
+      ]
+     },
+     "focus": {
+      "on": "patient",
+      "f": 0.8
+     },
+     "note": "залитый электрическим светом — щелчок, свет сверху",
+     "sfx": [
+      {
+       "name": "click",
+       "at": 0.17,
+       "gain": -8
+      },
+      {
+       "name": "hum",
+       "at": 0.18,
+       "gain": -15
+      }
+     ]
+    },
+    {
+     "id": "s14c",
+     "at": "046.1+0.62",
+     "cam": "armchair",
+     "hand": 0,
+     "light": {
+      "preset": "electric"
+     },
+     "focus": {
+      "on": [
+       -6,
+       15.5,
+       -15.8
+      ],
+      "f": 1.1
+     },
+     "cast": {
+      "doctor": null
+     },
+     "end": {
+      "light_off": 2.4
+     },
+     "note": "его взгляд: точка над спинкой пустого кресла, где минуту назад блестели мои глаза — камера в точке зрения мёртвого; свет гаснет",
+     "sfx": [
+      {
+       "name": "click",
+       "before_end": 2.4,
+       "gain": -8,
+       "stop_all": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sound": {
+  "_": "Звук: beds — фон по декорациям (clock, crickets, room), music — от кадра from до кадра to (drone — тянущийся тон, musicbox — мелодия «нота:доли», + — аккорд, rit — замедление к концу), sfx — в кадрах. Громкость — gain, дБ.",
+  "beds": {
+   "office": "clock",
+   "dark": "clock",
+   "screen": "room",
+   "window": "room",
+   "garden": "crickets",
+   "bedroom": "room",
+   "void": "room"
+  },
+  "bed_gain": -7,
+  "music": [
+   {
+    "from": "s11t",
+    "to": "s13b",
+    "kind": "drone",
+    "notes": [
+     "D2",
+     "A2"
+    ],
+    "gain": -21,
+    "fade_in": 3,
+    "fade_out": 0.05
+   },
+   {
+    "from": "s12c",
+    "to": "s13b",
+    "kind": "musicbox",
+    "bpm": 64,
+    "rit": 1.1,
+    "gain": -17,
+    "fade_in": 0.01,
+    "fade_out": 0.05,
+    "notes": "D4+A4:1 D5:1 F5:1 E5:2 D5:1 A3+C#5:1 E5:1 A5:1 G5:2 F5:1 D4+F5:1 E5:1 D5:1 C#5:2 A4:1 A#3+A#4:1 D5:1 G5:1 F5:2 E5:1 D4+A4:1 D5:1 F5:1 A5:2 G5:1 F5:1 E5:1 D5:1 A3+C#5:2 E5:1 D4+D5:1 A4:1 F4:1 E4:2 C#5:1 D4+D5:3 -:3"
+   },
+   {
+    "from": "s14a",
+    "to": "s14b",
+    "kind": "musicbox",
+    "bpm": 40,
+    "gain": -19,
+    "fade_in": 0.01,
+    "fade_out": 0.01,
+    "tail": 4,
+    "notes": "D5:3"
+   }
+  ]
+ }
+}

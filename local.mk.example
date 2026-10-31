@@ -1,0 +1,18 @@
+# Скопируйте в local.mk (в git не попадает; .env с теми же строками тоже подходит)
+OPENROUTER_API_KEY = sk-or-...
+# прокси для запросов к OpenRouter (socks5h://… или http://…); тогда они идут через curl
+# OPENROUTER_PROXY = socks5h://127.0.0.1:1080
+# где рисовать кадры: по умолчанию auto — видеокарта, если есть, иначе программный SwiftShader;
+# gpu / cpu — задать явно
+# CAPTURE_GL = auto
+# рендер без перегрева: ffmpeg с низким приоритетом и в 2 потока, паузы между кадрами (или make video COOL=1)
+# CAPTURE_COOL = 1
+# кодек: по умолчанию на macOS — аппаратный h264_videotoolbox, иначе libx264; задать явно: videotoolbox / x264
+# CAPTURE_ENCODER = x264
+
+# сайт (make site → make deploy): папка на сервере, которую раздаёт nginx (deploy/README.md)
+# DEPLOY = ssh://nemilya-me/var/www/grin
+# SITE_URL = https://grin.nemilya.me
+
+# media (pictures, narration) — the repository laid over stories/ (make media-pull / media-push); default:
+# MEDIA_REMOTE = https://github.com/nemilya/grin-media.git

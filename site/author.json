@@ -1,0 +1,21 @@
+{
+ "_": "Тексты об авторе для лендинга (site.json → author): name, years, lead — подзаголовок, bio — абзацы.",
+ "name": {"en": "Alexander Grin", "ru": "Александр Грин"},
+ "years": "1880–1932",
+ "lead": {
+  "en": "Stories read aloud and staged on screen: in the original Russian and in English translation.",
+  "ru": "Рассказы вслух и на экране: в оригинале и в английском переводе."
+ },
+ "bio": {
+  "en": [
+   "Alexander Grin (Alexander Stepanovich Grinevsky) was born in 1880 in Slobodskoy, in the Vyatka province of Russia. At sixteen he left home for Odessa to become a sailor; the years that followed were spent wandering — at sea, in the Urals, in the army, in prison and in exile.",
+   "He began to publish in 1906. His early stories, like “Mate in Three Moves” (1908), are sharp psychological pieces about fear, solitude and the edge of reason. Later he invented his own country — critics called it Grinlandia — with seaside towns named Liss, Zurbagan and Gel-Gyu, where romance and harsh reality meet.",
+   "His best-known books are “Scarlet Sails” (1923) and “She Who Runs on the Waves” (1928). Grin spent his last years in the Crimea, in Feodosia and Stary Krym, where he died in 1932."
+  ],
+  "ru": [
+   "Александр Грин (Александр Степанович Гриневский) родился в 1880 году в Слободском Вятской губернии. В шестнадцать лет уехал в Одессу, чтобы стать моряком; дальше были годы скитаний — море, Урал, армия, тюрьма и ссылка.",
+   "Печататься начал в 1906 году. Ранние рассказы, как «Мат в три хода» (1908), — острая психологическая проза о страхе, одиночестве и границе рассудка. Позже Грин придумал свою страну — критики назвали её Гринландией — с приморскими городами Лисс, Зурбаган и Гель-Гью, где романтика встречается с жёсткой правдой жизни.",
+   "Самые известные его книги — «Алые паруса» (1923) и «Бегущая по волнам» (1928). Последние годы Грин провёл в Крыму, в Феодосии и Старом Крыму, где и умер в 1932 году."
+  ]
+ }
+}

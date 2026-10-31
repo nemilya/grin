@@ -1,0 +1,42 @@
+{
+ "_": "История для движка бумажного театра. source — исходник (язык lang — основной; первые skip блоков — автор и название, не озвучиваются). film — параметры ролика: язык озвучки и субтитров, формат, стиль; formats — другие форматы того же фильма (поверх film). Этапы — make status / make <этап> (README).",
+ "title": {
+  "ru": "Мат в три хода",
+  "en": "Mate in Three Moves"
+ },
+ "author": {
+  "ru": "Александр Грин",
+  "en": "Alexander Grin"
+ },
+ "source": {
+  "lang": "ru",
+  "file": "content/mate-in-3.txt",
+  "format": "text",
+  "skip": 2
+ },
+ "film": {
+  "lang": "en",
+  "voicing": "narrator-en",
+  "style": "paper-theatre",
+  "width": 1080,
+  "height": 1920,
+  "fps": 24,
+  "speak_title": false,
+  "voicings": {
+   "en": "narrator-en",
+   "ru": "narrator-ru"
+  }
+ },
+ "art_context": "Provincial Russian town, around 1908 (the story was published in 1908): a young doctor's modest consulting room lit by an electric lamp; summer streets of wooden houses and dust; a small garden with a porch at night. Clothing and objects of the Russian Empire, 1900s: frock coats, starched cuffs, gymnasium uniforms, kerchiefs, kerosene and early electric lamps. No anachronisms.",
+ "speech_replacements": [],
+ "formats": {
+  "horizontal": {
+   "width": 1920,
+   "height": 1080,
+   "fps": 24,
+   "storyboard": "storyboard-16x9.json",
+   "_": "горизонталь 16:9 (YouTube): те же перевод, озвучка, звук, ассеты; камеры и правки кадров — storyboard-16x9.json"
+  }
+ },
+ "year": 1908
+}

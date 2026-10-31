@@ -1,0 +1,184 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "bbcefc0d105b",
+   "file": "story-008-1.opus",
+   "dur": 16.697,
+   "chars": 222,
+   "speech": "The passer-by who had so horrified Ranum vanished into the crowd, but the Indian followed his path through the city streets with his inner eye. For the present he left him, listening for the answer of the Great Initiation.",
+   "words": [
+    [
+     0.0,
+     0.1
+    ],
+    [
+     0.1,
+     1.0
+    ],
+    [
+     1.0,
+     1.2
+    ],
+    [
+     1.2,
+     1.4
+    ],
+    [
+     1.4,
+     1.7
+    ],
+    [
+     1.7,
+     2.5
+    ],
+    [
+     2.5,
+     2.9
+    ],
+    [
+     3.4,
+     4.0
+    ],
+    [
+     4.0,
+     4.3
+    ],
+    [
+     4.3,
+     4.4
+    ],
+    [
+     4.4,
+     4.9
+    ],
+    [
+     5.7,
+     5.8
+    ],
+    [
+     5.8,
+     6.0
+    ],
+    [
+     6.0,
+     6.4
+    ],
+    [
+     6.4,
+     6.8
+    ],
+    [
+     6.8,
+     7.0
+    ],
+    [
+     7.0,
+     7.5
+    ],
+    [
+     7.5,
+     7.6
+    ],
+    [
+     7.6,
+     7.7
+    ],
+    [
+     7.7,
+     8.0
+    ],
+    [
+     8.0,
+     8.6
+    ],
+    [
+     8.6,
+     8.7
+    ],
+    [
+     8.7,
+     8.9
+    ],
+    [
+     8.9,
+     9.2
+    ],
+    [
+     9.2,
+     9.5
+    ],
+    [
+     10.8,
+     10.9
+    ],
+    [
+     10.9,
+     11.0
+    ],
+    [
+     11.0,
+     11.4
+    ],
+    [
+     12.0,
+     12.1
+    ],
+    [
+     12.1,
+     12.4
+    ],
+    [
+     12.4,
+     12.6
+    ],
+    [
+     13.4,
+     14.0
+    ],
+    [
+     14.0,
+     14.2
+    ],
+    [
+     14.2,
+     14.4
+    ],
+    [
+     14.4,
+     15.0
+    ],
+    [
+     15.0,
+     15.1
+    ],
+    [
+     15.1,
+     15.2
+    ],
+    [
+     15.2,
+     15.8
+    ],
+    [
+     15.8,
+     16.6
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "the passerby who had so horrified Ranum vanished into the crowd. But the Indian followed his path through the city streets with his inner eye. For the present, he left him, listening for the answer of the great initiation.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00267,
+    "verify": 0.00139
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 21:18:24"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

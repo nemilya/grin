@@ -1,0 +1,108 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "7aa77e3a4e79",
+   "file": "story-031-1.opus",
+   "dur": 8.011,
+   "chars": 102,
+   "speech": "“Go on,” I said, “and don’t stop. In such cases it is better to tell everything at once; it’s easier.”",
+   "words": [
+    [
+     0.0,
+     0.2
+    ],
+    [
+     0.2,
+     0.6
+    ],
+    [
+     1.1,
+     1.2
+    ],
+    [
+     1.2,
+     1.6
+    ],
+    [
+     2.0,
+     2.2
+    ],
+    [
+     2.2,
+     2.4
+    ],
+    [
+     2.4,
+     2.9
+    ],
+    [
+     3.6,
+     3.7
+    ],
+    [
+     3.7,
+     3.9
+    ],
+    [
+     3.9,
+     4.5
+    ],
+    [
+     4.5,
+     4.6
+    ],
+    [
+     4.6,
+     4.7
+    ],
+    [
+     4.7,
+     4.9
+    ],
+    [
+     4.9,
+     5.1
+    ],
+    [
+     5.1,
+     5.4
+    ],
+    [
+     5.4,
+     5.8
+    ],
+    [
+     5.8,
+     5.9
+    ],
+    [
+     5.9,
+     6.5
+    ],
+    [
+     7.3,
+     7.5
+    ],
+    [
+     7.5,
+     8.0
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Go on, I said, and don't stop. In such cases, it is better to tell everything at once. It's easier.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00132,
+    "verify": 0.00076
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 07:00:01"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

@@ -1,0 +1,44 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "02b9b0ad1cc6",
+   "file": "story-023-1.opus",
+   "dur": 2.746,
+   "chars": 28,
+   "speech": "— Я слышу! — вскричал Дюплэ.",
+   "words": [
+    [
+     0.3,
+     0.4
+    ],
+    [
+     0.4,
+     1.1
+    ],
+    [
+     1.7,
+     2.3
+    ],
+    [
+     2.3,
+     2.7
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "\"Я слышу\", вскричал Дюпле.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00055,
+    "verify": 0.0003
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:04:41"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

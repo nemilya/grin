@@ -1,0 +1,140 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "eec9f5095ed6",
+   "file": "story-007-1.opus",
+   "dur": 14.852,
+   "chars": 144,
+   "speech": "“It’s a thing, you see, sir, of such a kind… A very strange… strange. A strange thing… One might say — a thing… But then, you won’t believe me.”",
+   "words": [
+    [
+     0.0,
+     0.6
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     1.4
+    ],
+    [
+     1.7,
+     1.8
+    ],
+    [
+     1.8,
+     2.4
+    ],
+    [
+     2.7,
+     3.1
+    ],
+    [
+     3.2,
+     3.3
+    ],
+    [
+     3.3,
+     3.6
+    ],
+    [
+     3.6,
+     3.7
+    ],
+    [
+     3.7,
+     4.3
+    ],
+    [
+     5.0,
+     5.0
+    ],
+    [
+     5.0,
+     5.3
+    ],
+    [
+     5.3,
+     6.1
+    ],
+    [
+     7.2,
+     8.0
+    ],
+    [
+     8.8,
+     8.9
+    ],
+    [
+     8.9,
+     9.6
+    ],
+    [
+     9.6,
+     10.1
+    ],
+    [
+     10.1,
+     10.3
+    ],
+    [
+     10.3,
+     10.5
+    ],
+    [
+     10.5,
+     11.0
+    ],
+    [
+     12.1,
+     12.2
+    ],
+    [
+     12.2,
+     12.7
+    ],
+    [
+     13.4,
+     13.5
+    ],
+    [
+     13.5,
+     13.8
+    ],
+    [
+     13.8,
+     14.0
+    ],
+    [
+     14.0,
+     14.2
+    ],
+    [
+     14.2,
+     14.6
+    ],
+    [
+     14.6,
+     14.8
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "it's a thing you see sir of such a kind a very strange strange a strange thing one might say a thing but then you won't believe me.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00237,
+    "verify": 0.00114
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:56:58"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

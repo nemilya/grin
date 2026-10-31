@@ -1,0 +1,15 @@
+{
+ "name": "grin",
+ "private": true,
+ "description": "Frame capture of the scene (tools/capture.mjs) — Playwright Chromium",
+ "type": "module",
+ "scripts": {
+  "stills": "node tools/capture.mjs stills",
+  "video": "node tools/capture.mjs video"
+ },
+ "devDependencies": {
+  "playwright": "1.59.1"
+ },
+ "_": "playwright is pinned to 1.59.1 — the last version that installs Chromium on macOS 13; without it capture uses the installed Google Chrome",
+ "license": "MIT"
+}

@@ -1,0 +1,48 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "a15752c3f735",
+   "file": "story-027-1.opus",
+   "dur": 3.363,
+   "chars": 30,
+   "speech": "Он спрятал платок и продолжал:",
+   "words": [
+    [
+     0.3,
+     0.8
+    ],
+    [
+     0.9,
+     1.4
+    ],
+    [
+     1.4,
+     2.3
+    ],
+    [
+     2.6,
+     2.6
+    ],
+    [
+     2.6,
+     3.4
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Он спрятал платок и продолжал.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00061,
+    "verify": 0.00028
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-29 23:03:37"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

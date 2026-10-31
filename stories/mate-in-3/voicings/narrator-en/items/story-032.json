@@ -1,0 +1,220 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "042811925d32",
+   "file": "story-032-1.opus",
+   "dur": 22.137,
+   "chars": 262,
+   "speech": "“Yes,” he caught up, “I… and… well, that’s not the point… So then. My thoughts kept spinning without stopping, as if some whirlwind had caught them up… And it was here, for the first time, that the terrible thought came to me that one could know everything, if…”",
+   "words": [
+    [
+     0.1,
+     0.7
+    ],
+    [
+     0.8,
+     0.9
+    ],
+    [
+     0.9,
+     1.1
+    ],
+    [
+     1.1,
+     1.2
+    ],
+    [
+     1.9,
+     2.2
+    ],
+    [
+     2.8,
+     2.9
+    ],
+    [
+     3.6,
+     3.9
+    ],
+    [
+     4.0,
+     4.3
+    ],
+    [
+     4.3,
+     4.5
+    ],
+    [
+     4.5,
+     4.6
+    ],
+    [
+     4.6,
+     5.0
+    ],
+    [
+     5.9,
+     6.1
+    ],
+    [
+     6.1,
+     6.4
+    ],
+    [
+     7.7,
+     7.9
+    ],
+    [
+     7.9,
+     8.5
+    ],
+    [
+     8.5,
+     8.8
+    ],
+    [
+     8.8,
+     9.5
+    ],
+    [
+     9.5,
+     9.8
+    ],
+    [
+     9.8,
+     10.5
+    ],
+    [
+     10.5,
+     10.7
+    ],
+    [
+     10.7,
+     11.0
+    ],
+    [
+     11.3,
+     11.7
+    ],
+    [
+     11.8,
+     12.5
+    ],
+    [
+     12.5,
+     12.7
+    ],
+    [
+     12.7,
+     12.9
+    ],
+    [
+     12.9,
+     13.1
+    ],
+    [
+     13.1,
+     13.3
+    ],
+    [
+     14.3,
+     14.4
+    ],
+    [
+     14.4,
+     14.5
+    ],
+    [
+     14.5,
+     14.7
+    ],
+    [
+     14.7,
+     15.2
+    ],
+    [
+     15.8,
+     15.9
+    ],
+    [
+     15.9,
+     16.0
+    ],
+    [
+     16.0,
+     16.4
+    ],
+    [
+     16.4,
+     16.9
+    ],
+    [
+     17.2,
+     17.4
+    ],
+    [
+     17.4,
+     17.5
+    ],
+    [
+     17.7,
+     18.2
+    ],
+    [
+     18.2,
+     18.7
+    ],
+    [
+     18.7,
+     19.0
+    ],
+    [
+     19.0,
+     19.1
+    ],
+    [
+     19.1,
+     19.3
+    ],
+    [
+     19.3,
+     19.6
+    ],
+    [
+     19.6,
+     19.9
+    ],
+    [
+     19.9,
+     20.2
+    ],
+    [
+     20.2,
+     20.6
+    ],
+    [
+     20.8,
+     21.5
+    ],
+    [
+     21.8,
+     22.1
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Yes, he caught up. I and well, that's not the point. So then my thoughts kept spinning without stopping as if some whirlwind had caught them up. And it was here for the first time that the terrible thought came to me that one could know everything if",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00348,
+    "verify": 0.00177
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 07:00:09"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

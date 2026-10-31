@@ -1,0 +1,172 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "9a91c8fae1ef",
+   "file": "story-028-1.opus",
+   "dur": 14.562,
+   "chars": 209,
+   "speech": "“That was to be expected,” said Roumier, standing with his back to him and turning round only after he had mastered his agitation. “You played a few operetta airs, mixed up with scraps of Schubert’s Serenade.”",
+   "words": [
+    [
+     0.1,
+     0.4
+    ],
+    [
+     0.4,
+     0.6
+    ],
+    [
+     0.6,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     1.7
+    ],
+    [
+     2.1,
+     2.2
+    ],
+    [
+     2.2,
+     2.7
+    ],
+    [
+     3.0,
+     3.6
+    ],
+    [
+     3.6,
+     3.7
+    ],
+    [
+     3.7,
+     3.9
+    ],
+    [
+     3.9,
+     4.2
+    ],
+    [
+     4.2,
+     4.3
+    ],
+    [
+     4.3,
+     4.6
+    ],
+    [
+     4.6,
+     4.8
+    ],
+    [
+     4.8,
+     5.1
+    ],
+    [
+     5.1,
+     5.4
+    ],
+    [
+     5.4,
+     5.7
+    ],
+    [
+     5.7,
+     6.0
+    ],
+    [
+     6.0,
+     6.1
+    ],
+    [
+     6.1,
+     6.3
+    ],
+    [
+     6.3,
+     6.8
+    ],
+    [
+     6.8,
+     7.0
+    ],
+    [
+     7.0,
+     7.7
+    ],
+    [
+     9.1,
+     9.2
+    ],
+    [
+     9.2,
+     9.6
+    ],
+    [
+     9.6,
+     9.7
+    ],
+    [
+     9.7,
+     10.1
+    ],
+    [
+     10.1,
+     10.8
+    ],
+    [
+     10.8,
+     11.3
+    ],
+    [
+     11.7,
+     12.1
+    ],
+    [
+     12.1,
+     12.4
+    ],
+    [
+     12.4,
+     12.5
+    ],
+    [
+     12.5,
+     13.1
+    ],
+    [
+     13.1,
+     13.2
+    ],
+    [
+     13.2,
+     13.9
+    ],
+    [
+     13.9,
+     14.5
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "That was to be expected, said Roumier, standing with his back to him and turning around only after he had mastered his agitation. You played a few operetta airs mixed up with scraps of Schubert's serenade.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00235,
+    "verify": 0.00127
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 02:00:29"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

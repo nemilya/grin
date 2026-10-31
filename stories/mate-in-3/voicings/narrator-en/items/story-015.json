@@ -1,0 +1,176 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "d1c5c01f52c6",
+   "file": "story-015-1.opus",
+   "dur": 19.456,
+   "chars": 210,
+   "speech": "Having thus hinted at my supposed experience in the field of psychiatry, I assumed a relaxed pose — that is, I crossed my legs and began tapping a pencil against my fingertips. He faltered, sighed, and went on:",
+   "words": [
+    [
+     0.3,
+     0.9
+    ],
+    [
+     1.0,
+     1.4
+    ],
+    [
+     1.4,
+     1.9
+    ],
+    [
+     1.9,
+     2.0
+    ],
+    [
+     2.0,
+     2.4
+    ],
+    [
+     2.4,
+     3.3
+    ],
+    [
+     3.3,
+     4.1
+    ],
+    [
+     4.1,
+     4.2
+    ],
+    [
+     4.2,
+     4.3
+    ],
+    [
+     4.3,
+     4.7
+    ],
+    [
+     4.7,
+     4.8
+    ],
+    [
+     4.8,
+     5.7
+    ],
+    [
+     6.6,
+     6.7
+    ],
+    [
+     6.7,
+     7.3
+    ],
+    [
+     7.3,
+     7.3
+    ],
+    [
+     7.3,
+     7.9
+    ],
+    [
+     7.9,
+     8.6
+    ],
+    [
+     9.3,
+     9.4
+    ],
+    [
+     9.4,
+     9.6
+    ],
+    [
+     9.6,
+     9.9
+    ],
+    [
+     10.0,
+     10.4
+    ],
+    [
+     10.4,
+     10.6
+    ],
+    [
+     10.6,
+     11.2
+    ],
+    [
+     11.3,
+     11.6
+    ],
+    [
+     11.6,
+     12.0
+    ],
+    [
+     12.0,
+     12.5
+    ],
+    [
+     12.5,
+     12.6
+    ],
+    [
+     12.6,
+     13.2
+    ],
+    [
+     13.2,
+     13.6
+    ],
+    [
+     13.6,
+     13.7
+    ],
+    [
+     13.7,
+     14.5
+    ],
+    [
+     16.0,
+     16.1
+    ],
+    [
+     16.1,
+     16.7
+    ],
+    [
+     17.6,
+     18.3
+    ],
+    [
+     18.3,
+     18.8
+    ],
+    [
+     18.9,
+     19.2
+    ],
+    [
+     19.2,
+     19.4
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Having thus hinted at my supposed experience in the field of psychiatry, I assumed a relaxed pose. That is, I crossed my legs and began tapping a pencil against my fingertips. He faltered, sighed, and went on.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00305,
+    "verify": 0.00152
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:57:46"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

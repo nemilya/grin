@@ -1,0 +1,36 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "7b2059abfcb5",
+   "file": "story-005-1.opus",
+   "dur": 1.456,
+   "chars": 14,
+   "speech": "— Я, доктор...",
+   "words": [
+    [
+     0.1,
+     0.4
+    ],
+    [
+     1.0,
+     1.4
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Я, доктор.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00033,
+    "verify": 0.00012
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-29 22:43:12"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

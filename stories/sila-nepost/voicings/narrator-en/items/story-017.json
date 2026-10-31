@@ -1,0 +1,168 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "5d7685bde30d",
+   "file": "story-017-1.opus",
+   "dur": 14.869,
+   "chars": 186,
+   "speech": "When this had been done, and Duplay, bow and violin in hand, had settled himself in a deep, comfortable armchair, Roumier, in no more than a minute, put him to sleep by gaze and command.",
+   "words": [
+    [
+     0.4,
+     0.5
+    ],
+    [
+     0.5,
+     0.7
+    ],
+    [
+     0.7,
+     0.8
+    ],
+    [
+     0.8,
+     1.0
+    ],
+    [
+     1.0,
+     1.4
+    ],
+    [
+     2.0,
+     2.4
+    ],
+    [
+     2.4,
+     2.9
+    ],
+    [
+     3.4,
+     3.8
+    ],
+    [
+     3.8,
+     3.9
+    ],
+    [
+     3.9,
+     4.4
+    ],
+    [
+     4.4,
+     4.5
+    ],
+    [
+     4.5,
+     5.0
+    ],
+    [
+     5.4,
+     5.6
+    ],
+    [
+     5.6,
+     5.9
+    ],
+    [
+     5.9,
+     6.5
+    ],
+    [
+     6.5,
+     6.6
+    ],
+    [
+     6.6,
+     6.6
+    ],
+    [
+     6.6,
+     7.3
+    ],
+    [
+     7.3,
+     7.8
+    ],
+    [
+     7.8,
+     8.4
+    ],
+    [
+     9.2,
+     10.0
+    ],
+    [
+     10.2,
+     10.4
+    ],
+    [
+     10.4,
+     10.6
+    ],
+    [
+     10.6,
+     10.8
+    ],
+    [
+     10.8,
+     11.0
+    ],
+    [
+     11.0,
+     11.0
+    ],
+    [
+     11.0,
+     11.4
+    ],
+    [
+     12.0,
+     12.1
+    ],
+    [
+     12.1,
+     12.3
+    ],
+    [
+     12.3,
+     12.4
+    ],
+    [
+     12.4,
+     13.1
+    ],
+    [
+     13.1,
+     13.3
+    ],
+    [
+     13.3,
+     14.1
+    ],
+    [
+     14.1,
+     14.3
+    ],
+    [
+     14.3,
+     14.8
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "When this had been done, and Du Play, bow and violin in hand, had settled himself in a deep, comfortable armchair, Roumier, in no more than a minute, put him to sleep by gaze and command.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00238,
+    "verify": 0.00129
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 01:58:32"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

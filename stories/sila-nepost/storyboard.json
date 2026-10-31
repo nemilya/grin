@@ -1,0 +1,2433 @@
+{
+ "_": "«Сила непостижимого» — немое кино → автохром (docs/stories/sila-nepost.md, режиссёр directors/silent.json). Реальность — ч/б с виражом (янтарь — интерьер, синий — ночь, сепия — улица, зелёный — лечебница), ирис на сценах, интертитры; цвет автохрома — только когда звучит та музыка: сон (r02–r03), гипноз (h05–h09), вспышка в лечебнице (w03–w04). Звук — тапёр (piano), треск проектора, ту самую музыку не играть: гул и тишина; ложь — серенада Шуберта шкатулкой.",
+ "director": "silent",
+ "lang": "en",
+ "preroll": 7.0,
+ "tail": 12,
+ "fade_out": 8,
+ "demo_start": "h01",
+ "no_subtitles": [
+  "001"
+ ],
+ "holds": {
+  "001": 5,
+  "007": 2,
+  "008": 5,
+  "016": 2,
+  "019": 2,
+  "023": 2,
+  "025.4": 2,
+  "028": 3,
+  "033": 3
+ },
+ "cams": {
+  "wide": {
+   "pos": [
+    -1,
+    15,
+    50
+   ],
+   "look": [
+    -1,
+    13.5,
+    -20
+   ],
+   "fov": 30
+  },
+  "roumier": {
+   "pos": [
+    -1,
+    17,
+    22
+   ],
+   "look": [
+    -14,
+    16.5,
+    -9
+   ],
+   "fov": 26
+  },
+  "duplay": {
+   "pos": [
+    4,
+    13,
+    16
+   ],
+   "look": [
+    12.5,
+    12.5,
+    -13
+   ],
+   "fov": 24
+  },
+  "duplay-play": {
+   "pos": [
+    1,
+    15,
+    32
+   ],
+   "look": [
+    10,
+    13,
+    -11
+   ],
+   "fov": 30
+  },
+  "title": {
+   "pos": [
+    0,
+    15,
+    40
+   ],
+   "look": [
+    0,
+    15,
+    -20
+   ],
+   "fov": 30
+  },
+  "face": {
+   "pos": [
+    0,
+    12,
+    18
+   ],
+   "look": [
+    0,
+    12,
+    -10
+   ],
+   "fov": 30
+  },
+  "face-close": {
+   "pos": [
+    0,
+    13,
+    10
+   ],
+   "look": [
+    0,
+    13,
+    -10
+   ],
+   "fov": 28
+  },
+  "mill": {
+   "pos": [
+    0,
+    16,
+    40
+   ],
+   "look": [
+    0,
+    16,
+    -40
+   ],
+   "fov": 30
+  },
+  "cinema-wide": {
+   "pos": [
+    0,
+    20,
+    70
+   ],
+   "look": [
+    0,
+    20,
+    -34
+   ],
+   "fov": 32
+  },
+  "screen": {
+   "pos": [
+    0,
+    18,
+    26
+   ],
+   "look": [
+    0,
+    18,
+    -34
+   ],
+   "fov": 34
+  },
+  "watcher": {
+   "pos": [
+    16,
+    13,
+    14
+   ],
+   "look": [
+    22,
+    12.5,
+    -6
+   ],
+   "fov": 26
+  },
+  "street": {
+   "pos": [
+    0,
+    15,
+    46
+   ],
+   "look": [
+    0,
+    14,
+    -30
+   ],
+   "fov": 32
+  },
+  "street-close": {
+   "pos": [
+    8,
+    15,
+    12
+   ],
+   "look": [
+    14,
+    14,
+    -12
+   ],
+   "fov": 26
+  },
+  "room": {
+   "pos": [
+    0,
+    15,
+    48
+   ],
+   "look": [
+    0,
+    13,
+    -20
+   ],
+   "fov": 30
+  },
+  "bed": {
+   "pos": [
+    -10,
+    12,
+    8
+   ],
+   "look": [
+    -12,
+    9,
+    -18
+   ],
+   "fov": 28
+  },
+  "writing": {
+   "pos": [
+    -4,
+    13,
+    12
+   ],
+   "look": [
+    -6,
+    11,
+    -16
+   ],
+   "fov": 26
+  },
+  "plate": {
+   "pos": [
+    -6,
+    17,
+    14
+   ],
+   "look": [
+    -12,
+    16.5,
+    -24
+   ],
+   "fov": 28
+  },
+  "desk": {
+   "pos": [
+    -18,
+    15,
+    14
+   ],
+   "look": [
+    -25,
+    13,
+    -20
+   ],
+   "fov": 26
+  },
+  "visitor": {
+   "pos": [
+    -2,
+    15,
+    14
+   ],
+   "look": [
+    2,
+    14,
+    -12
+   ],
+   "fov": 26
+  },
+  "attack": {
+   "pos": [
+    0,
+    14,
+    14
+   ],
+   "look": [
+    4,
+    12,
+    -10
+   ],
+   "fov": 26
+  },
+  "wall": {
+   "pos": [
+    -4,
+    18,
+    20
+   ],
+   "look": [
+    -4,
+    16,
+    -33
+   ],
+   "fov": 32
+  },
+  "lane": {
+   "pos": [
+    0,
+    15,
+    46
+   ],
+   "look": [
+    0,
+    15,
+    -30
+   ],
+   "fov": 32
+  },
+  "lane-two": {
+   "pos": [
+    4,
+    15,
+    22
+   ],
+   "look": [
+    4,
+    14,
+    -13
+   ],
+   "fov": 30
+  },
+  "officer": {
+   "pos": [
+    8,
+    16,
+    10
+   ],
+   "look": [
+    12,
+    15,
+    -12
+   ],
+   "fov": 26
+  },
+  "realize": {
+   "pos": [
+    -6,
+    14,
+    10
+   ],
+   "look": [
+    -4,
+    13,
+    -14
+   ],
+   "fov": 26
+  },
+  "ward-close": {
+   "pos": [
+    10,
+    15,
+    14
+   ],
+   "look": [
+    14,
+    13,
+    -13
+   ],
+   "fov": 26
+  },
+  "deathbed": {
+   "pos": [
+    -8,
+    11,
+    6
+   ],
+   "look": [
+    -10,
+    8,
+    -18
+   ],
+   "fov": 28
+  },
+  "curtain": {
+   "pos": [
+    0,
+    16,
+    40
+   ],
+   "look": [
+    0,
+    16,
+    -30
+   ],
+   "fov": 30
+  }
+ },
+ "lights": {
+  "study": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#f2d9a8"
+   }
+  },
+  "study-seep": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#f2d9a8"
+   },
+   "grade_to": {
+    "saturation": 0.4,
+    "tint": "#f8ecd6",
+    "autochrome": 0.6
+   },
+   "grade_at": [
+    0.25,
+    1
+   ]
+  },
+  "study-dawn": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0.4,
+    "tint": "#f8ecd6",
+    "autochrome": 0.6
+   }
+  },
+  "study-music": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0.4,
+    "tint": "#f8ecd6",
+    "autochrome": 0.6
+   },
+   "grade_to": {
+    "saturation": 1,
+    "tint": "#ffffff",
+    "autochrome": 1
+   },
+   "grade_at": [
+    0,
+    0.45
+   ]
+  },
+  "study-colour": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 1,
+    "tint": "#ffffff",
+    "autochrome": 1
+   }
+  },
+  "study-drain": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 1,
+    "tint": "#ffffff",
+    "autochrome": 1
+   },
+   "grade_to": {
+    "saturation": 0,
+    "tint": "#e4e2da",
+    "autochrome": 0
+   },
+   "grade_at": [
+    0.45,
+    0.6
+   ]
+  },
+  "study-cold": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#e4e2da"
+   }
+  },
+  "title": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#000000",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#efe6d2"
+   }
+  },
+  "void": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -10,
+     40,
+     40
+    ],
+    "target": [
+     0,
+     12,
+     -10
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.1,
+    "angle": 22,
+    "penumbra": 0.9,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#3a342c",
+    "intensity": 0.15
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#eadcc0"
+   }
+  },
+  "mill": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#9aa4b0",
+    "ground": "#2a2e34",
+    "intensity": 0.7
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#c8d4e4"
+   }
+  },
+  "cinema": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 0.55,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#6a6050",
+    "ground": "#1a1612",
+    "intensity": 0.3
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#e9d3a6"
+   }
+  },
+  "street": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.15,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#ead2ad"
+   }
+  },
+  "night": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#dfe6f5",
+    "intensity": 0.75,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#4a5470",
+    "ground": "#12141a",
+    "intensity": 0.35
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#b8c6e2"
+   }
+  },
+  "lane": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.15,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#ead2ad"
+   }
+  },
+  "ward": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 0.9,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#d4e0cc"
+   }
+  },
+  "curtain": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     0,
+     30,
+     45
+    ],
+    "target": [
+     0,
+     14,
+     -30
+    ],
+    "color": "#fff1dc",
+    "intensity": 1.0,
+    "angle": 34,
+    "penumbra": 0.9,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#e6d6b8"
+   }
+  },
+  "night-dream": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#dfe6f5",
+    "intensity": 0.75,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#4a5470",
+    "ground": "#12141a",
+    "intensity": 0.35
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#b8c6e2"
+   },
+   "grade_to": {
+    "saturation": 1,
+    "tint": "#ffffff",
+    "autochrome": 1
+   },
+   "grade_at": [
+    0.12,
+    0.55
+   ]
+  },
+  "night-wake": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#dfe6f5",
+    "intensity": 0.75,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#4a5470",
+    "ground": "#12141a",
+    "intensity": 0.35
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 1,
+    "tint": "#ffffff",
+    "autochrome": 1
+   },
+   "grade_to": {
+    "saturation": 0,
+    "tint": "#b8c6e2",
+    "autochrome": 0
+   },
+   "grade_at": [
+    0.2,
+    0.9
+   ]
+  },
+  "study-rage": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 1.0,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#e4e2da"
+   },
+   "fx": {
+    "heartbeat": 0.8
+   }
+  },
+  "ward-flash": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 0.9,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0,
+    "tint": "#d4e0cc"
+   },
+   "grade_to": {
+    "saturation": 0.55,
+    "tint": "#f6efe0",
+    "autochrome": 0.8
+   },
+   "grade_at": [
+    0.15,
+    0.7
+   ]
+  },
+  "ward-fade": {
+   "key": {
+    "type": "spot",
+    "pos": [
+     -15,
+     70,
+     55
+    ],
+    "target": [
+     0,
+     10,
+     -15
+    ],
+    "color": "#fff6e8",
+    "intensity": 0.9,
+    "angle": 40,
+    "penumbra": 0.8,
+    "shadow": 0
+   },
+   "fill": {
+    "color": "#8a8070",
+    "ground": "#2a241c",
+    "intensity": 0.5
+   },
+   "bg": "#050403",
+   "fog": null,
+   "grade": {
+    "saturation": 0.55,
+    "tint": "#f6efe0",
+    "autochrome": 0.8
+   },
+   "grade_to": {
+    "saturation": 0,
+    "tint": "#d4e0cc",
+    "autochrome": 0
+   },
+   "grade_at": [
+    0.1,
+    0.8
+   ]
+  }
+ },
+ "scenes": [
+  {
+   "id": "s00",
+   "title": "Title",
+   "set": "titles",
+   "shots": [
+    {
+     "id": "t01",
+     "at": "start",
+     "in": "fade",
+     "cam": "title",
+     "cast": {
+      "card": {
+       "card": "prop/title-main",
+       "pos": [
+        0,
+        1.5,
+        -20
+       ]
+      }
+     },
+     "note": "заглавная карточка: автор, название",
+     "focus": {
+      "on": "card",
+      "f": 0
+     }
+    },
+    {
+     "id": "t02",
+     "at": "001.0",
+     "cam": "title",
+     "cast": {
+      "card": {
+       "card": "prop/title-epigraph",
+       "pos": [
+        0,
+        1.5,
+        -20
+       ]
+      }
+     },
+     "note": "эпиграф интертитром (субтитров нет), голос читает",
+     "focus": {
+      "on": "card",
+      "f": 0
+     }
+    },
+    {
+     "id": "t03",
+     "at": "001.1+1",
+     "cam": "title",
+     "cast": {
+      "card": {
+       "card": "prop/title-1",
+       "pos": [
+        0,
+        1.5,
+        -20
+       ]
+      }
+     },
+     "note": "I",
+     "focus": {
+      "on": "card",
+      "f": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "s01",
+   "title": "Presentiment",
+   "set": "void",
+   "shots": [
+    {
+     "id": "a01",
+     "at": "003.0",
+     "in": "iris",
+     "cam": "face",
+     "push": 3,
+     "cast": {
+      "duplay": {
+       "card": "duplay/face",
+       "pos": [
+        0,
+        5,
+        -10
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.4
+     },
+     "note": "лицо Дюплэ: острейшая чувствительность"
+    },
+    {
+     "id": "a02",
+     "at": "003.1",
+     "cam": "face-close",
+     "push": 2,
+     "focus": {
+      "on": "duplay",
+      "f": 0.5
+     },
+     "note": "предчувствие мгновенного озарения"
+    },
+    {
+     "id": "a03",
+     "at": "003.2",
+     "set": "mill",
+     "cam": "mill",
+     "push": 12,
+     "focus": {
+      "on": [
+       0,
+       16,
+       -40
+      ],
+      "f": 0.2
+     },
+     "note": "деревенская мельница под Ниагарой"
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "title": "The cinematograph",
+   "set": "cinema",
+   "shots": [
+    {
+     "id": "c01",
+     "at": "004.0",
+     "in": "iris",
+     "cam": "cinema-wide",
+     "push": 5,
+     "focus": {
+      "on": [
+       0,
+       17,
+       -34
+      ],
+      "f": 0.3
+     },
+     "note": "синематограф: экран, оркестр, тени зрителей"
+    },
+    {
+     "id": "c02",
+     "at": "004.2",
+     "cam": "screen",
+     "push": 3,
+     "focus": {
+      "on": [
+       0,
+       19,
+       -44
+      ],
+      "f": 0.3
+     },
+     "note": "немое действие, окрашенное звуками"
+    },
+    {
+     "id": "c03",
+     "at": "004.4",
+     "cam": "watcher",
+     "cast": {
+      "duplay": {
+       "card": "duplay/watching",
+       "pos": [
+        22,
+        0,
+        -6
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "тень элегии: Дюплэ смотрит"
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "title": "The invisible orchestra",
+   "set": "street",
+   "shots": [
+    {
+     "id": "b01",
+     "at": "005.0",
+     "in": "iris",
+     "cam": "street",
+     "cast": {
+      "duplay": {
+       "card": "duplay/walking",
+       "pos": [
+        -22,
+        0,
+        -12
+       ],
+       "move": {
+        "to": [
+         14,
+         0,
+         -12
+        ],
+        "ease": "linear"
+       }
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "идёт по улице, за ним — тени незримого оркестра"
+    },
+    {
+     "id": "b02",
+     "at": "005.2",
+     "set": "cinema",
+     "cam": "screen",
+     "push": 3,
+     "cast": {
+      "duplay": {
+       "card": "duplay/walking",
+       "pos": [
+        0,
+        8,
+        -33
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "сам себе — действующее лицо пьесы без названия: он на экране"
+    },
+    {
+     "id": "b03",
+     "at": "005.4",
+     "set": "street",
+     "cam": "street-close",
+     "cast": {
+      "duplay": {
+       "card": "duplay/walking",
+       "pos": [
+        14,
+        0,
+        -12
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "герой пьесы, погружённый в созерцание"
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "title": "Dreams",
+   "set": "room",
+   "shots": [
+    {
+     "id": "r01",
+     "at": "006.0",
+     "in": "iris",
+     "cam": "room",
+     "cast": {
+      "duplay": {
+       "card": "duplay/sleeping",
+       "pos": [
+        -12,
+        4.2,
+        -18.4
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "ночь, мансарда; тревожный сон"
+    },
+    {
+     "id": "r02",
+     "at": "006.1",
+     "cam": "bed",
+     "push": 4,
+     "light": {
+      "preset": "night-dream"
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.5
+     },
+     "note": "музыка во сне — впервые цвет автохрома"
+    },
+    {
+     "id": "r03",
+     "at": "007.0",
+     "cam": "writing",
+     "light": {
+      "preset": "night-wake"
+     },
+     "cast": {
+      "duplay": {
+       "card": "duplay/writing",
+       "pos": [
+        -6,
+        0,
+        -16
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "проснулся, карандаш и бумага; звуки бледнеют — цвет уходит"
+    },
+    {
+     "id": "r04",
+     "at": "007.1+0.88",
+     "set": "void",
+     "cam": "face",
+     "push": 2,
+     "cast": {
+      "duplay": {
+       "hidden": true
+      },
+      "violin": {
+       "card": "prop/violin",
+       "pos": [
+        0,
+        4,
+        -10
+       ]
+      }
+     },
+     "focus": {
+      "on": "violin",
+      "f": 0.5
+     },
+     "note": "«Грациан Дюплэ был скрипач.» — скрипка в луче"
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "title": "II",
+   "set": "titles",
+   "shots": [
+    {
+     "id": "t04",
+     "at": "008.0+1",
+     "cam": "title",
+     "cast": {
+      "card": {
+       "card": "prop/title-2",
+       "pos": [
+        0,
+        1.5,
+        -20
+       ]
+      }
+     },
+     "note": "II",
+     "focus": {
+      "on": "card",
+      "f": 0
+     }
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "title": "Roumier",
+   "set": "study",
+   "shots": [
+    {
+     "id": "d01",
+     "at": "010.0",
+     "in": "iris",
+     "cam": "wide",
+     "cast": {
+      "roumier": {
+       "card": "roumier/plate",
+       "pos": [
+        -12,
+        0,
+        -24
+       ]
+      },
+      "duplay": {
+       "hidden": true
+      },
+      "servant": {
+       "card": "servant/announce",
+       "pos": [
+        14,
+        0,
+        -12
+       ],
+       "hidden": true
+      },
+      "struggle": {
+       "hidden": true
+      }
+     },
+     "focus": {
+      "on": "roumier",
+      "f": 0.3
+     },
+     "note": "Румиер: цветная фотография и гипноз"
+    },
+    {
+     "id": "d02",
+     "at": "010.1",
+     "cam": "plate",
+     "push": 3,
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "sfx": [
+      {
+       "name": "bell",
+       "at": 0.25,
+       "gain": -16
+      },
+      {
+       "name": "bell",
+       "at": 0.7,
+       "gain": -14
+      }
+     ],
+     "note": "дверной звонок — мучитель"
+    },
+    {
+     "id": "d03",
+     "at": "011.0",
+     "cam": "wide",
+     "cast": {
+      "servant": {
+       "hidden": false
+      }
+     },
+     "focus": {
+      "on": "servant",
+      "f": 0.3
+     },
+     "note": "слуга: посетитель настаивает"
+    },
+    {
+     "id": "d04",
+     "at": "011.1",
+     "cam": "desk",
+     "cast": {
+      "servant": {
+       "hidden": true
+      },
+      "roumier": {
+       "card": "roumier/desk",
+       "pos": [
+        -25,
+        0,
+        -21
+       ]
+      }
+     },
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "отложил бледный снимок облаков, перешёл к столу"
+    },
+    {
+     "id": "d05",
+     "at": "011.2",
+     "cam": "wide",
+     "cast": {
+      "duplay": {
+       "card": "duplay/visitor",
+       "pos": [
+        2,
+        0,
+        -12
+       ],
+       "hidden": false
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "посетитель: мал, страшно худ"
+    },
+    {
+     "id": "d06",
+     "at": "011.3",
+     "cam": "visitor",
+     "push": 3,
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "тупое страдание в запавших глазах"
+    },
+    {
+     "id": "d07",
+     "at": "012.0",
+     "cam": "duplay",
+     "cast": {
+      "duplay": {
+       "card": "duplay/talk",
+       "pos": [
+        12.5,
+        0,
+        -13
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "«Я музыкант»"
+    },
+    {
+     "id": "d08",
+     "at": "013.0",
+     "cam": "wide",
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "монолог о мелодии"
+    },
+    {
+     "id": "d09",
+     "at": "013.3",
+     "cam": "duplay",
+     "push": 4,
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "перо жар-птицы"
+    },
+    {
+     "id": "d10",
+     "at": "013.5",
+     "cam": "desk",
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "Румиер слушает"
+    },
+    {
+     "id": "d11",
+     "at": "013.6",
+     "cam": "duplay",
+     "push": 3,
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "два следствия опыта"
+    },
+    {
+     "id": "d12",
+     "at": "013.8",
+     "cam": "wide",
+     "push": 6,
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "«божественное и сокрушительное»"
+    },
+    {
+     "id": "d13",
+     "at": "014.0",
+     "cam": "desk",
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "взгляд без тени безумия"
+    },
+    {
+     "id": "d14",
+     "at": "015.0",
+     "cam": "desk",
+     "push": 4,
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "предупреждение: ловушка"
+    },
+    {
+     "id": "d15",
+     "at": "016.0",
+     "cam": "duplay",
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "«Я готов»"
+    }
+   ],
+   "cast": {
+    "lane": {
+     "k": 1.8
+    }
+   }
+  },
+  {
+   "id": "s07",
+   "title": "The hypnosis",
+   "set": "study",
+   "shots": [
+    {
+     "id": "h01",
+     "at": "017.0",
+     "cam": "wide",
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "ирис раскрывается: кабинет, Дюплэ в кресле у открытого окна, Румиер усыпляет его",
+     "cast": {
+      "roumier": {
+       "card": "roumier/command",
+       "pos": [
+        -14,
+        0,
+        -9
+       ],
+       "hidden": false
+      },
+      "duplay": {
+       "card": "duplay/trance",
+       "pos": [
+        12.5,
+        0,
+        -13
+       ],
+       "hidden": false
+      }
+     }
+    },
+    {
+     "id": "h02",
+     "at": "018.0",
+     "cam": "roumier",
+     "push": 4,
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "Румиер: «Приказываю вам слышать меня»"
+    },
+    {
+     "id": "h03",
+     "at": "020.0",
+     "cam": "duplay",
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "Дюплэ в трансе, пот на лице, за ним — окно в переулок"
+    },
+    {
+     "id": "h04",
+     "at": "021.0",
+     "cam": "roumier",
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "«Вы слышите музыку»"
+    },
+    {
+     "id": "h05",
+     "at": "022.0",
+     "cam": "duplay",
+     "push": 5,
+     "light": {
+      "preset": "study-seep"
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "молния восторга: цвет впервые проступает"
+    },
+    {
+     "id": "h06",
+     "at": "024.0",
+     "cam": "wide",
+     "light": {
+      "preset": "study-dawn"
+     },
+     "focus": {
+      "on": "roumier",
+      "f": 0.3
+     },
+     "note": "«Начинайте!» — мир уже чуть цветной"
+    },
+    {
+     "id": "h07",
+     "at": "025.0",
+     "cam": "duplay-play",
+     "push": 6,
+     "light": {
+      "preset": "study-music"
+     },
+     "cast": {
+      "duplay": {
+       "card": "duplay/playing",
+       "pos": [
+        10.5,
+        0,
+        -11
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.5
+     },
+     "note": "он играет — полный автохром; музыки не слышно"
+    },
+    {
+     "id": "h08",
+     "at": "025.3",
+     "cam": "roumier",
+     "push": 4,
+     "light": {
+      "preset": "study-colour"
+     },
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "Румиер под властью музыки"
+    },
+    {
+     "id": "h09",
+     "at": "025.5",
+     "cam": "wide",
+     "light": {
+      "preset": "study-drain"
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "вырывает скрипку — цвет гаснет"
+    },
+    {
+     "id": "h10",
+     "at": "026.0",
+     "cam": "roumier",
+     "light": {
+      "preset": "study-cold"
+     },
+     "focus": {
+      "on": "roumier",
+      "f": 0.6
+     },
+     "note": "«Вы ничего не слышали» — Румиер со скрипкой в руках, холодный ч/б",
+     "cast": {
+      "roumier": {
+       "card": "roumier/violin"
+      }
+     }
+    },
+    {
+     "id": "h11",
+     "at": "027.0",
+     "cam": "wide",
+     "light": {
+      "preset": "study-cold"
+     },
+     "cast": {
+      "duplay": {
+       "card": "duplay/trance",
+       "pos": [
+        12.5,
+        0,
+        -13
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "Дюплэ сел, проснулся; ложь про Шуберта"
+    },
+    {
+     "id": "h12",
+     "at": "028.0",
+     "cam": "wide",
+     "light": {
+      "preset": "study-cold"
+     },
+     "cast": {
+      "roumier": {
+       "card": "roumier/back",
+       "pos": [
+        -14,
+        0,
+        -9
+       ]
+      }
+     },
+     "focus": {
+      "on": "roumier",
+      "f": 0.3
+     },
+     "note": "ложь спиной: «опереточные арии… серенада Шуберта» — шкатулка"
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "title": "The lane",
+   "set": "lane",
+   "shots": [
+    {
+     "id": "l01",
+     "at": "029.0",
+     "in": "iris",
+     "cam": "lane",
+     "cast": {
+      "duplay": {
+       "card": "duplay/walking",
+       "pos": [
+        -22,
+        0,
+        -14
+       ],
+       "move": {
+        "to": [
+         -6,
+         0,
+         -14
+        ],
+        "ease": "out"
+       }
+      },
+      "officer": {
+       "card": "officer/asking",
+       "pos": [
+        12,
+        0,
+        -12
+       ],
+       "hidden": true
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "вышел на улицу"
+    },
+    {
+     "id": "l02",
+     "at": "029.1",
+     "cam": "lane-two",
+     "cast": {
+      "officer": {
+       "hidden": false
+      }
+     },
+     "focus": {
+      "on": "officer",
+      "f": 0.4
+     },
+     "note": "незнакомец догнал и остановил"
+    },
+    {
+     "id": "l03",
+     "at": "030.0",
+     "cam": "officer",
+     "push": 3,
+     "focus": {
+      "on": "officer",
+      "f": 0.6
+     },
+     "note": "«Что вы играли?!» — бывший офицер плачет"
+    },
+    {
+     "id": "l04",
+     "at": "031.0",
+     "cam": "realize",
+     "cast": {
+      "duplay": {
+       "card": "duplay/realize",
+       "pos": [
+        -4,
+        0,
+        -14
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "понял истину — бешенство"
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "title": "Fury",
+   "set": "study",
+   "shots": [
+    {
+     "id": "x01",
+     "at": "031.2",
+     "cam": "wide",
+     "light": {
+      "preset": "study-cold"
+     },
+     "cast": {
+      "roumier": {
+       "card": "roumier/command",
+       "pos": [
+        -14,
+        0,
+        -9
+       ]
+      },
+      "duplay": {
+       "card": "duplay/attack",
+       "pos": [
+        4,
+        0,
+        -10
+       ]
+      }
+     },
+     "sfx": [
+      {
+       "name": "bell",
+       "at": 0.15,
+       "gain": -12
+      }
+     ],
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "вернулся, позвонил — перед изумлённым гипнотизёром"
+    },
+    {
+     "id": "x02",
+     "at": "032.0",
+     "cam": "attack",
+     "push": 4,
+     "light": {
+      "preset": "study-rage"
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "«Ты скрыл!.. Смерть!»"
+    },
+    {
+     "id": "x03",
+     "at": "033.0",
+     "cam": "wide",
+     "light": {
+      "preset": "study-cold"
+     },
+     "cast": {
+      "roumier": {
+       "card": "roumier/fallen",
+       "pos": [
+        -12,
+        0,
+        -8
+       ]
+      },
+      "duplay": {
+       "pos": [
+        -3,
+        0,
+        -6
+       ]
+      }
+     },
+     "sfx": [
+      {
+       "name": "thump",
+       "at": 0.15,
+       "gain": -8
+      }
+     ],
+     "focus": {
+      "on": "roumier",
+      "f": 0.3
+     },
+     "note": "повалил Румиера"
+    },
+    {
+     "id": "x04",
+     "at": "033.1",
+     "cam": "wall",
+     "light": {
+      "preset": "study-cold"
+     },
+     "cast": {
+      "roumier": {
+       "hidden": true
+      },
+      "duplay": {
+       "hidden": true
+      },
+      "struggle": {
+       "hidden": false
+      }
+     },
+     "focus": {
+      "on": [
+       -4,
+       16,
+       -33
+      ],
+      "f": 0.3
+     },
+     "note": "слуги вяжут Дюплэ — тени на стене"
+    }
+   ],
+   "cast": {
+    "lane": {
+     "k": 1.8
+    }
+   }
+  },
+  {
+   "id": "s10",
+   "title": "The asylum",
+   "set": "ward",
+   "shots": [
+    {
+     "id": "w01",
+     "at": "034.0",
+     "in": "iris",
+     "cam": "wide",
+     "cast": {
+      "duplay": {
+       "card": "duplay/asylum",
+       "pos": [
+        14,
+        0,
+        -13
+       ],
+       "hidden": false
+      },
+      "doctors": {
+       "hidden": true
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "лечебница: неизлечимая меланхолия"
+    },
+    {
+     "id": "w02",
+     "at": "034.1",
+     "cam": "ward-close",
+     "push": 3,
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "часами играет, ищет потерянное"
+    },
+    {
+     "id": "w03",
+     "at": "034.2",
+     "cam": "wide",
+     "light": {
+      "preset": "ward-flash"
+     },
+     "cast": {
+      "doctors": {
+       "hidden": false
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.3
+     },
+     "note": "вспышки обессиленной красоты — цвет на миг; слушатели бледнеют"
+    },
+    {
+     "id": "w04",
+     "at": "034.2+0.3",
+     "cam": "ward-close",
+     "light": {
+      "preset": "ward-fade"
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "намёки на большее — цвет уходит"
+    },
+    {
+     "id": "w05",
+     "at": "034.2+0.55",
+     "cam": "deathbed",
+     "push": 3,
+     "cast": {
+      "doctors": {
+       "hidden": true
+      },
+      "duplay": {
+       "card": "duplay/dying",
+       "pos": [
+        -10.5,
+        4.2,
+        -18.4
+       ],
+       "rot": [
+        0,
+        0,
+        -3
+       ]
+      }
+     },
+     "focus": {
+      "on": "duplay",
+      "f": 0.6
+     },
+     "note": "смерть в бреду, горячие просьбы"
+    },
+    {
+     "id": "w06",
+     "at": "034.2+0.86",
+     "set": "curtain",
+     "cam": "curtain",
+     "push": 4,
+     "focus": {
+      "on": [
+       0,
+       16,
+       -30
+      ],
+      "f": 0.3
+     },
+     "note": "безжалостный занавес — не поднимается"
+    }
+   ]
+  }
+ ],
+ "sound": {
+  "_": "Тапёр: элегия на титрах, вальс синематографа (аккомпанемент + мелодия), салонные аккорды у Румиера, глухие удары под гипноз; во сне и в кульминации — только гул и цвет; ложь — серенада Шуберта шкатулкой; ярость — тремоло; лечебница — обрывки темы, финал — тишина и проектор.",
+  "beds": {
+   "titles": "projector",
+   "void": "projector",
+   "mill": "projector",
+   "cinema": "projector",
+   "street": "projector",
+   "room": "projector",
+   "study": "projector",
+   "lane": "projector",
+   "ward": "projector",
+   "curtain": "projector"
+  },
+  "bed_gain": -10,
+  "bed_duck": 0.3,
+  "music": [
+   {
+    "from": "t01",
+    "to": "a01",
+    "kind": "piano",
+    "bpm": 56,
+    "gain": -19,
+    "fade_in": 1.5,
+    "fade_out": 4,
+    "notes": "D3+A3+F4:2 D3+A3+E4:1 D3+A3+D4:1 A#2+F3+D4:2 A#2+F3+C4:1 A#2+F3+A#3:1 G2+D3+A#3:2 A2+E3+C#4:2 D3+A3+D4:4 F3+A3+F4:2 C3+G3+E4:2 A#2+F3+D4:2 A2+E3+C#4:2 D3+A3+D4:4 -:2 A2+E3+C#4:2 D2+A2+D3+F3:6"
+   },
+   {
+    "from": "a03",
+    "to": "c01",
+    "kind": "drone",
+    "notes": [
+     "D2",
+     "A2"
+    ],
+    "gain": -24,
+    "fade_in": 3,
+    "fade_out": 2
+   },
+   {
+    "from": "c01",
+    "to": "r01",
+    "kind": "piano",
+    "bpm": 120,
+    "gain": -25,
+    "loop": true,
+    "fade_in": 1,
+    "fade_out": 3,
+    "notes": "A2:1 C4+E4:1 C4+E4:1 A2:1 C4+E4:1 C4+E4:1 E2:1 G#3+B3+D4:1 G#3+B3+D4:1 E2:1 G#3+B3+D4:1 G#3+B3+D4:1 A2:1 C4+E4:1 C4+E4:1 D2:1 A3+D4+F4:1 A3+D4+F4:1 E2:1 G#3+B3+E4:1 G#3+B3+D4:1 A2:1 C4+E4:1 A3+C4:1"
+   },
+   {
+    "from": "c01",
+    "to": "r01",
+    "kind": "piano",
+    "bpm": 120,
+    "gain": -23,
+    "loop": true,
+    "fade_in": 1,
+    "fade_out": 3,
+    "notes": "E5:3 C5:2 A4:1 B4:3 G#4:2 E4:1 C5:2 B4:1 D5:2 F4:1 E4:1 G#4:1 B4:1 A4:3"
+   },
+   {
+    "from": "r02",
+    "to": "r04",
+    "kind": "drone",
+    "notes": [
+     "D2",
+     "A2",
+     "F3"
+    ],
+    "gain": -22,
+    "fade_in": 5,
+    "fade_out": 8
+   },
+   {
+    "from": "d01",
+    "to": "h01",
+    "kind": "piano",
+    "bpm": 46,
+    "gain": -29,
+    "loop": true,
+    "fade_in": 3,
+    "fade_out": 3,
+    "notes": "C3+G3+E4:2 A2+E3+C4:2 F2+C3+A3:2 G2+D3+B3:2 E2+B2+G3:2 A2+E3+C4:2 D2+A2+F3:2 G2+D3+B3:2"
+   },
+   {
+    "from": "h01",
+    "to": "h05",
+    "kind": "piano",
+    "bpm": 40,
+    "gain": -26,
+    "loop": true,
+    "fade_in": 2,
+    "fade_out": 2,
+    "notes": "D2+D3:1 -:1 D2+D3:1 -:1 D#2+D#3:1 -:1 D2+D3:1 -:1"
+   },
+   {
+    "from": "h05",
+    "to": "h09",
+    "kind": "drone",
+    "notes": [
+     "D2",
+     "A2",
+     "D3"
+    ],
+    "gain": -19,
+    "fade_in": 6,
+    "fade_out": 0.3,
+    "offset": 0
+   },
+   {
+    "from": "h12",
+    "to": "l01",
+    "kind": "musicbox",
+    "bpm": 54,
+    "gain": -17,
+    "offset": 9,
+    "cut": false,
+    "fade_in": 0.1,
+    "fade_out": 3,
+    "notes": "A4:0.33 A#4:0.33 A4:0.34 D5:2 A4:1 F4:3 G4:0.33 A4:0.33 G4:0.34 D5:2 G4:1 E4:3"
+   },
+   {
+    "from": "l04",
+    "to": "w01",
+    "kind": "piano",
+    "bpm": 150,
+    "gain": -22,
+    "loop": true,
+    "fade_in": 0.5,
+    "fade_out": 2,
+    "notes": "D2+F3+G#3+B3:0.5 D3+F3+G#3+B3:0.5 D2+F3+G#3+B3:0.5 D3+F3+G#3+B3:0.5 D2+F3+G#3+B3:0.5 D3+F3+G#3+B3:0.5 D2+F3+G#3+B3:0.5 D3+F3+G#3+B3:0.5 C#2+E3+G3+A#3:0.5 C#3+E3+G3+A#3:0.5 C#2+E3+G3+A#3:0.5 C#3+E3+G3+A#3:0.5 C#2+E3+G3+A#3:0.5 C#3+E3+G3+A#3:0.5 C#2+E3+G3+A#3:0.5 C#3+E3+G3+A#3:0.5"
+   },
+   {
+    "from": "w01",
+    "to": "w06",
+    "kind": "piano",
+    "bpm": 44,
+    "gain": -22,
+    "rit": 0.6,
+    "fade_in": 2,
+    "fade_out": 6,
+    "notes": "D4:1 F4:1 E4:2 -:2 D4:1 C#4:1 D4:3 -:3 A3:1 A#3:1 A3:2 -:4 D3+A3+F4:3 -:3 D4:1 F4:1 E4:2 -:3 A2+E3+C#4:4 -:4 D4:1 E4:1 F4:2 G4:1 A4:3 -:4 D2+A2+D3:6"
+   }
+  ]
+ }
+}

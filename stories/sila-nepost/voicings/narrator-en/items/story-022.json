@@ -1,0 +1,208 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "c7f01b30a6e4",
+   "file": "story-022-1.opus",
+   "dur": 23.815,
+   "chars": 247,
+   "speech": "Duplay trembled; his unseeing eyes opened wide and wild, and a lightning-flash of ecstasy transformed his face, like a sea, dull until then, that has suddenly begun to sparkle in the sun. A long moan, like the dying hum of a bell, filled the room.",
+   "words": [
+    [
+     0.1,
+     0.9
+    ],
+    [
+     0.9,
+     1.4
+    ],
+    [
+     2.4,
+     2.7
+    ],
+    [
+     2.8,
+     3.6
+    ],
+    [
+     3.6,
+     4.2
+    ],
+    [
+     4.3,
+     4.8
+    ],
+    [
+     4.8,
+     5.6
+    ],
+    [
+     5.6,
+     5.8
+    ],
+    [
+     5.8,
+     6.5
+    ],
+    [
+     7.1,
+     7.2
+    ],
+    [
+     7.2,
+     7.3
+    ],
+    [
+     7.3,
+     8.4
+    ],
+    [
+     8.4,
+     8.6
+    ],
+    [
+     8.6,
+     9.4
+    ],
+    [
+     9.4,
+     10.2
+    ],
+    [
+     10.2,
+     10.4
+    ],
+    [
+     10.4,
+     11.0
+    ],
+    [
+     11.6,
+     11.8
+    ],
+    [
+     11.8,
+     11.9
+    ],
+    [
+     11.9,
+     12.4
+    ],
+    [
+     12.8,
+     13.1
+    ],
+    [
+     13.1,
+     13.5
+    ],
+    [
+     13.5,
+     13.9
+    ],
+    [
+     14.1,
+     14.3
+    ],
+    [
+     14.3,
+     14.5
+    ],
+    [
+     14.5,
+     15.0
+    ],
+    [
+     15.0,
+     15.5
+    ],
+    [
+     15.5,
+     15.7
+    ],
+    [
+     15.7,
+     16.5
+    ],
+    [
+     16.5,
+     16.6
+    ],
+    [
+     16.6,
+     16.7
+    ],
+    [
+     16.7,
+     17.2
+    ],
+    [
+     18.6,
+     18.7
+    ],
+    [
+     18.7,
+     19.3
+    ],
+    [
+     19.3,
+     19.9
+    ],
+    [
+     20.5,
+     20.8
+    ],
+    [
+     20.8,
+     20.9
+    ],
+    [
+     20.9,
+     21.4
+    ],
+    [
+     21.4,
+     21.8
+    ],
+    [
+     21.8,
+     22.0
+    ],
+    [
+     22.0,
+     22.1
+    ],
+    [
+     22.1,
+     22.6
+    ],
+    [
+     23.1,
+     23.3
+    ],
+    [
+     23.3,
+     23.5
+    ],
+    [
+     23.5,
+     23.8
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "Duplay trembled. His unseeing eyes opened wide and wild, and a lightning flash of ecstasy transformed his face like a sea, dull until then, that has suddenly begun to sparkle in the sun. A long moan, like the dying hum of a bell, filled the room.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00374,
+    "verify": 0.00187
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-30 01:59:35"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

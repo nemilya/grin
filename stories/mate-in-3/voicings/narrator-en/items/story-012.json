@@ -1,0 +1,200 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "d7f5740ad699",
+   "file": "story-012-1.opus",
+   "dur": 23.446,
+   "chars": 251,
+   "speech": "At last the man began to speak and, having begun, grew almost calm. His voice sounded even and quiet, his face stopped twitching, and only the fingers of his left hand went on moving quickly and nervously, freeing themselves from the invisible cobweb.",
+   "words": [
+    [
+     0.0,
+     0.1
+    ],
+    [
+     0.1,
+     1.2
+    ],
+    [
+     1.2,
+     1.3
+    ],
+    [
+     1.3,
+     1.7
+    ],
+    [
+     1.7,
+     2.0
+    ],
+    [
+     2.0,
+     2.2
+    ],
+    [
+     2.2,
+     3.0
+    ],
+    [
+     3.7,
+     4.4
+    ],
+    [
+     4.5,
+     4.8
+    ],
+    [
+     4.8,
+     5.4
+    ],
+    [
+     6.1,
+     6.5
+    ],
+    [
+     6.7,
+     7.4
+    ],
+    [
+     7.4,
+     8.0
+    ],
+    [
+     9.1,
+     9.3
+    ],
+    [
+     9.3,
+     9.8
+    ],
+    [
+     9.8,
+     10.4
+    ],
+    [
+     10.5,
+     11.0
+    ],
+    [
+     11.0,
+     11.2
+    ],
+    [
+     11.2,
+     11.9
+    ],
+    [
+     12.8,
+     13.0
+    ],
+    [
+     13.0,
+     13.5
+    ],
+    [
+     13.5,
+     14.0
+    ],
+    [
+     14.0,
+     14.5
+    ],
+    [
+     15.4,
+     15.6
+    ],
+    [
+     15.6,
+     15.8
+    ],
+    [
+     15.8,
+     16.0
+    ],
+    [
+     16.0,
+     16.6
+    ],
+    [
+     16.6,
+     16.7
+    ],
+    [
+     16.7,
+     16.8
+    ],
+    [
+     16.8,
+     17.1
+    ],
+    [
+     17.1,
+     17.8
+    ],
+    [
+     17.9,
+     18.1
+    ],
+    [
+     18.1,
+     18.4
+    ],
+    [
+     18.4,
+     18.9
+    ],
+    [
+     18.9,
+     19.5
+    ],
+    [
+     19.5,
+     19.6
+    ],
+    [
+     19.6,
+     20.3
+    ],
+    [
+     20.9,
+     21.3
+    ],
+    [
+     21.3,
+     22.0
+    ],
+    [
+     22.0,
+     22.2
+    ],
+    [
+     22.2,
+     22.3
+    ],
+    [
+     22.3,
+     22.8
+    ],
+    [
+     22.8,
+     23.4
+    ]
+   ],
+   "score": 1.0,
+   "tail": true,
+   "transcript": "at last, the man began to speak. And having begun, grew almost calm. His voice sounded even and quiet. His face stopped twitching, and only the fingers of his left hand went on moving quickly and nervously, freeing themselves from the invisible cobweb.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00366,
+    "verify": 0.00181
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:57:29"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

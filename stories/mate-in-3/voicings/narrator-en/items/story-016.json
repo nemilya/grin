@@ -1,0 +1,160 @@
+{
+ "takes": [
+  {
+   "n": 1,
+   "key": "3b5093916819",
+   "file": "story-016-1.opus",
+   "dur": 21.214,
+   "chars": 202,
+   "speech": "“Please, would you be so kind… if possible… every time I raise my hand… Forgive me… Would you trouble yourself to say, please: ‘Leipzig… International Tournament, sir… Mate in three moves’? Eh? Please.”",
+   "words": [
+    [
+     0.5,
+     1.0
+    ],
+    [
+     2.0,
+     2.2
+    ],
+    [
+     2.2,
+     2.3
+    ],
+    [
+     2.3,
+     2.4
+    ],
+    [
+     2.4,
+     2.6
+    ],
+    [
+     2.6,
+     3.1
+    ],
+    [
+     4.2,
+     4.3
+    ],
+    [
+     4.3,
+     4.9
+    ],
+    [
+     6.0,
+     6.2
+    ],
+    [
+     6.2,
+     6.5
+    ],
+    [
+     6.5,
+     6.6
+    ],
+    [
+     6.6,
+     6.9
+    ],
+    [
+     6.9,
+     7.1
+    ],
+    [
+     7.1,
+     7.6
+    ],
+    [
+     8.4,
+     8.7
+    ],
+    [
+     8.7,
+     8.9
+    ],
+    [
+     10.1,
+     10.2
+    ],
+    [
+     10.2,
+     10.3
+    ],
+    [
+     10.3,
+     10.7
+    ],
+    [
+     10.7,
+     11.2
+    ],
+    [
+     11.2,
+     11.4
+    ],
+    [
+     11.4,
+     11.8
+    ],
+    [
+     12.1,
+     12.7
+    ],
+    [
+     13.5,
+     14.1
+    ],
+    [
+     14.9,
+     15.6
+    ],
+    [
+     15.6,
+     16.1
+    ],
+    [
+     16.1,
+     16.4
+    ],
+    [
+     17.2,
+     17.6
+    ],
+    [
+     17.6,
+     17.7
+    ],
+    [
+     17.7,
+     18.0
+    ],
+    [
+     18.0,
+     18.4
+    ],
+    [
+     19.4,
+     19.6
+    ],
+    [
+     20.8,
+     21.2
+    ]
+   ],
+   "score": 0.97,
+   "tail": true,
+   "transcript": "please. Would you be so kind? If if possible. Every time I raise my hand, forgive me. Would you trouble yourself to say please? Leipzig international tournament, sir. Mate in three moves. Hey. Please.",
+   "attempts": 1,
+   "chunks": 1,
+   "cost": {
+    "tts": 0.00334,
+    "verify": 0.0016
+   },
+   "model": "google/gemini-3.8-flash-lite-tts",
+   "voice": "Charon",
+   "created": "2026-10-28 06:57:55"
+  }
+ ],
+ "selected": 1,
+ "approved": false
+}

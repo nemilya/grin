@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Paper Theatre Stage</title>
+<style>
+@font-face { font-family: "Paper Serif"; src: url(fonts/serif-400-lat.woff2) format("woff2"); font-weight: 400; font-style: normal; unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: "Paper Serif"; src: url(fonts/serif-400i-lat.woff2) format("woff2"); font-weight: 400; font-style: italic; unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: "Paper Serif"; src: url(fonts/serif-400-cyr.woff2) format("woff2"); font-weight: 400; font-style: normal; unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Paper Serif"; src: url(fonts/serif-400i-cyr.woff2) format("woff2"); font-weight: 400; font-style: italic; unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "Stage Sans"; src: url(fonts/golos-600-lat.woff2) format("woff2"); font-weight: 600; unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
+@font-face { font-family: "Stage Sans"; src: url(fonts/golos-600-cyr.woff2) format("woff2"); font-weight: 600; unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+:root { --bg: #14110e; --ink: #efe6d6; --muted: #9c8f7c; --line: #2c251e; --accent: #e0a35a; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; }
+body.capture { background: #000; overflow: hidden; }
+main { display: grid; grid-template-columns: minmax(0, auto) minmax(260px, 420px); gap: 16px; padding: 16px; height: 100vh; }
+#view { display: flex; flex-direction: column; gap: 10px; min-height: 0; align-items: center; }
+#frame { height: calc(100vh - 110px); aspect-ratio: 9 / 16; position: relative; background: #000; border-radius: 6px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); }
+#frame canvas { width: 100%; height: 100%; display: block; }
+#safe { position: absolute; inset: 0; pointer-events: none; display: none; }
+#safe.on { display: block; }
+#safe::before { content: ""; position: absolute; left: 6%; right: 6%; top: 8%; bottom: 20%; border: 1px dashed rgba(255, 220, 160, .45); }
+#safe.land::before { left: 5%; right: 5%; top: 5%; bottom: 5%; } /* 16:9: title-safe 90% */
+#bar { display: flex; gap: 8px; align-items: center; width: min(100%, 60vh); }
+#bar input[type=range] { flex: 1; accent-color: var(--accent); }
+button { background: #241e18; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+#info { font-variant-numeric: tabular-nums; color: var(--muted); min-width: 120px; text-align: right; }
+aside { overflow: auto; border-left: 1px solid var(--line); padding-left: 16px; }
+aside h2 { font: 600 13px system-ui; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 6px; }
+.shot { padding: 6px 8px; border-radius: 6px; cursor: pointer; display: grid; grid-template-columns: 56px 1fr; gap: 2px 8px; }
+.shot:hover { background: #1d1813; }
+.shot.cur { background: #2a2017; box-shadow: inset 2px 0 0 var(--accent); }
+.shot b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.shot span { color: var(--muted); font-size: 12px; }
+.shot i { grid-column: 2; font-style: normal; font-size: 12px; color: #c9b9a0; }
+#errors { color: #ff9a7a; white-space: pre-wrap; font-size: 12px; }
+@media (max-width: 800px) { main { grid-template-columns: 1fr; height: auto; } #frame { height: auto; width: 100%; } aside { border: 0; padding: 0; } }
+</style>
+</head>
+<body>
+<main>
+ <section id="view">
+  <div id="frame"><div id="safe"></div></div>
+  <div id="bar">
+   <button id="play" title="пробел">▶</button>
+   <button id="prev" title="←">⏮</button>
+   <button id="next" title="→">⏭</button>
+   <input id="scrub" type="range" min="0" max="1" step="0.01" value="0">
+   <span id="info">0:00</span>
+   <button id="guides" title="g — безопасная зона Reels/Shorts">▭</button>
+  </div>
+ </section>
+ <aside>
+  <div id="meta"></div>
+  <div id="errors"></div>
+  <h2>Кадры</h2>
+  <div id="shots"></div>
+ </aside>
+</main>
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/build/three.module.js" } }
+</script>
+<script type="module">
+import { Stage } from './js/stage.js';
+
+const q = new URLSearchParams(location.search);
+const story = q.get('story') || 'mate-in-3';
+const base = `../stories/${story}/`;
+const capture = q.has('capture');
+const scale = parseFloat(q.get('scale') || (capture ? '1' : '0.5'));
+const tl = await fetch(base + `build/timeline${q.get('tl') ? '-' + q.get('tl') : ''}.json`, { cache: 'no-store' }).then(r => r.json());
+const stage = new Stage(tl, { base, scale, samples: parseInt(q.get('samples') || (capture ? '64' : '40')), debug: q.has('debug') });
+if (q.has('nosubs')) stage.subtitles = false; // кадр без субтитров (постер сайта)
+await stage.load();
+const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+
+// API для захвата кадров (tools/capture.mjs)
+window.STAGE = {
+  stage, duration: tl.duration, fps: tl.fps, width: stage.W, height: stage.H, shots: tl.shots.map(s => ({ id: s.id, t0: s.t0, t1: s.t1 })),
+  frame(t, type = 'image/jpeg', quality = 0.93) { stage.renderAt(t); return stage.out.toDataURL(type, quality); },
+};
+
+if (capture) {
+  document.body.className = 'capture';
+  document.body.innerHTML = '';
+  document.body.appendChild(stage.out);
+  window.STAGE.ready = true;
+} else {
+  const frame = document.getElementById('frame');
+  frame.prepend(stage.out);
+  frame.style.aspectRatio = `${tl.width} / ${tl.height}`;
+  if (tl.width > tl.height) { frame.style.height = 'auto'; frame.style.width = 'min(100%, calc((100vh - 110px) * 16 / 9))'; document.getElementById('bar').style.width = '100%'; }
+  document.getElementById('safe').classList.toggle('land', tl.width > tl.height);
+  const scrub = document.getElementById('scrub');
+  scrub.max = tl.duration;
+  document.getElementById('meta').innerHTML = `<b>${story}</b> · ${fmt(tl.duration)} · ${tl.shots.length} кадров · время: ${tl.timing}`;
+  document.getElementById('errors').textContent = (tl.errors || []).join('\n');
+  const list = document.getElementById('shots');
+  let scene = null;
+  for (const s of tl.shots) {
+    if (s.scene !== scene) { scene = s.scene; const h = document.createElement('h2'); h.textContent = s.scene; list.append(h); }
+    const d = document.createElement('div');
+    d.className = 'shot'; d.dataset.id = s.id;
+    d.innerHTML = `<b>${s.id}</b><span>${fmt(s.t0)} · ${s.at} · ${s.camera.name || ''}</span><i>${s.note || ''}</i>`;
+    d.onclick = () => seek(s.t0 + 0.05);
+    list.append(d);
+  }
+  let t = parseFloat(q.get('t') || '0');
+  const sh = q.get('shot') && tl.shots.find(s => s.id === q.get('shot'));
+  if (sh) t = sh.t0 + 0.05;
+  let playing = false, last = 0, cur = null;
+  // звук ролика (make sound [F=…]): если собран — играет синхронно, время берётся из него
+  const tlName = q.get('tl') || '';
+  const audio = new Audio();
+  audio.preload = 'auto';
+  const soundUrl = base + `build/sound${tlName ? '-' + tlName : ''}.wav`;
+  let hasAudio = false;
+  fetch(soundUrl, { method: 'HEAD' }).then(r => {
+    hasAudio = r.ok;
+    if (hasAudio) audio.src = soundUrl;
+    document.getElementById('meta').insertAdjacentHTML('beforeend', hasAudio ? ' · 🔊 звук' : ` · без звука (make sound${tlName ? ' F=…' : ''})`);
+  });
+  function draw() {
+    stage.renderAt(t);
+    scrub.value = t;
+    document.getElementById('info').textContent = `${fmt(t)} / ${fmt(tl.duration)}`;
+    const s = stage.shot;
+    if (s !== cur) {
+      cur = s;
+      document.querySelectorAll('.shot').forEach(e => e.classList.toggle('cur', e.dataset.id === s.id));
+      document.querySelector('.shot.cur')?.scrollIntoView({ block: 'nearest' });
+    }
+  }
+  function seek(x) { t = Math.max(0, Math.min(tl.duration, x)); if (hasAudio) audio.currentTime = t; draw(); }
+  function loop(now) {
+    if (!playing) return;
+    if (hasAudio && !audio.paused) t = audio.currentTime; else t += (now - last) / 1000;
+    last = now;
+    if (t >= tl.duration) { t = tl.duration; playing = false; audio.pause(); play.textContent = '▶'; }
+    draw();
+    requestAnimationFrame(loop);
+  }
+  const play = document.getElementById('play');
+  play.onclick = () => {
+    playing = !playing; play.textContent = playing ? '❚❚' : '▶'; last = performance.now();
+    if (hasAudio) { if (playing) { audio.currentTime = t; audio.play().catch(() => {}); } else audio.pause(); }
+    if (playing) requestAnimationFrame(loop);
+  };
+  scrub.oninput = () => seek(parseFloat(scrub.value));
+  const step = d => { const i = tl.shots.indexOf(stage.shotAt(t)); const s = tl.shots[Math.max(0, Math.min(tl.shots.length - 1, i + d))]; seek(s.t0 + 0.05); };
+  document.getElementById('prev').onclick = () => step(-1);
+  document.getElementById('next').onclick = () => step(1);
+  document.getElementById('guides').onclick = () => document.getElementById('safe').classList.toggle('on');
+  addEventListener('keydown', e => {
+    if (e.key === ' ') { e.preventDefault(); play.click(); }
+    if (e.key === 'ArrowRight') step(1);
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'g') document.getElementById('guides').click();
+  });
+  draw();
+}
+</script>
+</body>
+</html>
