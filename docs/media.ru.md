@@ -89,6 +89,21 @@ make media-status          # скачаны ли, что изменено лок
 по https — по https. Пока репозитории приватные, https спрашивает логин GitHub (и токен, а не пароль) — лучше
 клонировать по ssh. `MEDIA_REMOTE` в `local.mk` задаёт адрес явно (например, зеркало на своём сервере).
 
+`make media-pull` / `media-push` пишут, что делают (`↓ media … from …`, прогресс самого git, `· stories/: writing N files`).
+Если ssh на каждом запуске спрашивает `Enter passphrase for key`, пусть агент запомнит пароль (macOS — в Связке ключей):
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_rsa
+```
+
+и в `~/.ssh/config`:
+
+```
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+```
+
 ## Чего делать не нужно
 
 - **Клонировать `grin-media` отдельно.** Он живёт внутри папки `grin` как `.media.git`, его создаёт `make media-pull`.

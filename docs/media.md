@@ -88,6 +88,21 @@ Code — `engine/media.py`, tests — `tests/test_media.py`, hook — `tools/hoo
 over https → https. While the repositories are private, https asks for a GitHub login (a token, not the password) —
 clone over ssh instead. `MEDIA_REMOTE` in `local.mk` overrides it (e.g. a mirror on your own server).
 
+`make media-pull` / `media-push` say what they do (`↓ media … from …`, git's own progress, `· stories/: writing N files`).
+If ssh asks `Enter passphrase for key` on every run, let the agent remember it (macOS — in the Keychain):
+
+```bash
+ssh-add --apple-use-keychain ~/.ssh/id_rsa
+```
+
+and in `~/.ssh/config`:
+
+```
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+```
+
 ## What not to do
 
 - clone `grin-media` separately — it lives inside the `grin` folder as `.media.git`, `make media-pull` creates it;

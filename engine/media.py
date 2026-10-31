@@ -136,17 +136,34 @@ def changes() -> dict[str, list[str]]:
             'deleted': sorted(p for p in tracked if p not in on_disk and is_media(p))}
 
 
+def _net(*args: str) -> tuple[int, str]:
+    """A git command that talks to the remote (fetch, push): its progress goes to the terminal as it happens
+    (ssh may ask for the key passphrase first), and its messages are also returned for the caller to inspect."""
+    tty = sys.stderr.isatty()
+    p = subprocess.Popen(['git', f'--git-dir={git_dir()}', f'--work-tree={ROOT}', args[0],
+                          '--progress' if tty else '-q', *args[1:]], cwd=ROOT, stderr=subprocess.PIPE)
+    seen = bytearray()
+    while chunk := os.read(p.stderr.fileno(), 4096):
+        seen += chunk
+        if tty:
+            sys.stderr.buffer.write(chunk)
+            sys.stderr.flush()
+    return p.wait(), seen.decode(errors='replace')
+
+
 def _fetch(what: str, depth: int = 1) -> str:
     """Fetch a commit (sha) or a branch from the media remote; returns the commit id."""
-    if len(what) == 40:  # a pinned commit: remember it came from the remote (status, pre-push)
-        git('fetch', '-q', f'--depth={depth}', 'origin', what)
+    sha = len(what) == 40
+    rc, err = _net('fetch', f'--depth={depth}', 'origin', what if sha else f'+refs/heads/{what}:refs/remotes/origin/{what}')
+    if rc:
+        raise MediaError(f'fetch {what[:10]} from {remote_url()}: {err.strip().splitlines()[-1] if err.strip() else rc}')
+    if sha:  # a pinned commit: remember it came from the remote (status, pre-push)
         git('update-ref', 'refs/remotes/origin/pulled', what)
         return what
-    git('fetch', '-q', f'--depth={depth}', 'origin', f'+refs/heads/{what}:refs/remotes/origin/{what}')
     return git('rev-parse', f'refs/remotes/origin/{what}').strip()
 
 
-def _apply(old: str | None, new: str, force: bool = False) -> int:
+def _apply(old: str | None, new: str, force: bool = False, log=print) -> int:
     """Make stories/ media on disk equal to commit `new` (coming from `old`); never touches other paths.
     Local edits that would be overwritten stop it (unless force) — they may be paid generations not pushed yet."""
     target = _tree(new)
@@ -161,6 +178,8 @@ def _apply(old: str | None, new: str, force: bool = False) -> int:
         raise MediaError(f'{len(blocked)} local media files differ and are not pushed ({", ".join(blocked[:3])}…) — '
                          f'make media-push first (or pull with --force to discard them)')
     git('read-tree', new)
+    if write or drop:
+        log(f'· stories/: writing {len(write)} files' + (f', deleting {len(drop)}' if drop else ''))
     if write:
         git('checkout-index', '-f', '-z', '--stdin', input='\0'.join(write) + '\0')
     for p in drop:
@@ -173,8 +192,11 @@ def _apply(old: str | None, new: str, force: bool = False) -> int:
 def pull(latest: bool = False, force: bool = False, log=print) -> str:
     init()
     rev = None if latest else pinned()
-    new = _fetch(rev) if rev else _fetch(code_branch() if latest else 'main')
-    n = _apply(head(), new, force=force)
+    what = rev or (code_branch() if latest else 'main')
+    first = head() is None
+    log(f"↓ media {what[:10]} from {remote_url()}" + (' — the first pull is ≈ 0.3 GB' if first else ''))
+    new = _fetch(what)
+    n = _apply(head(), new, force=force, log=log)
     if latest and new != pinned():
         rev_file().write_text(new + '\n')
         log(f'media.rev → {new[:10]} (commit it)')
@@ -184,6 +206,7 @@ def pull(latest: bool = False, force: bool = False, log=print) -> str:
 
 def push(message: str | None = None, log=print) -> str:
     init()
+    log(f'· comparing {len(media_files())} media files with {(head() or "nothing")[:10]}…')
     ch = changes()
     paths = ch['changed'] + ch['new']
     if paths:
@@ -194,17 +217,18 @@ def push(message: str | None = None, log=print) -> str:
         stories = sorted({p.split('/')[1] for p in paths + ch['deleted']})
         msg = message or f"{', '.join(stories)}: {len(ch['new'])} new, {len(ch['changed'])} changed, {len(ch['deleted'])} deleted"
         git('commit', '-q', '--no-verify', '-m', msg)
+        log(f'· committed: {msg}')
     h = head()
     if not h:
         raise MediaError('nothing to push: no media yet')
     branch = code_branch()
     for _ in range(3):
-        r = subprocess.run(['git', f'--git-dir={git_dir()}', 'push', '-q', 'origin', f'HEAD:refs/heads/{branch}'],
-                           capture_output=True, text=True)
-        if r.returncode == 0:
+        log(f'↑ media {h[:10]} → {remote_url()} ({branch})')
+        rc, err = _net('push', 'origin', f'HEAD:refs/heads/{branch}')
+        if rc == 0:
             break
-        if 'rejected' not in r.stderr and 'fetch first' not in r.stderr and 'non-fast-forward' not in r.stderr:
-            raise MediaError(f'push: {r.stderr.strip()}')
+        if 'rejected' not in err and 'fetch first' not in err and 'non-fast-forward' not in err:
+            raise MediaError(f'push: {err.strip()}')
         theirs = _fetch(branch, depth=200)  # someone pushed media meanwhile: merge without touching the work tree
         m = subprocess.run(['git', f'--git-dir={git_dir()}', 'merge-tree', '--write-tree', h, theirs],
                            capture_output=True, text=True)
@@ -212,7 +236,7 @@ def push(message: str | None = None, log=print) -> str:
             raise MediaError(f'media conflict with {branch} (the same files changed on both sides):\n{m.stdout.strip()}')
         tree = m.stdout.split()[0]
         merged = git('commit-tree', tree, '-p', h, '-p', theirs, '-m', f'Merge media of {branch}').strip()
-        _apply(h, merged)
+        _apply(h, merged, log=log)
         h = merged
         log(f'· merged media pushed meanwhile to {branch}')
     else:
