@@ -24,15 +24,14 @@ make media-pull                                       # pictures and narration (
 make video-demo S=mate-in-3 F=horizontal START=s12a   # a try-out: from shot s12a to the end, a couple of minutes
 make video S=mate-in-3 F=horizontal                   # the whole film; timeline and sound are built by itself
 make youtube S=mate-in-3 F=horizontal                 # .srt subtitles and chapters for the description
-# for YouTube — without burnt-in subtitles: make video … SUBS=0 (see Subtitles below)
 ```
 
 Results in `out/<story>/`:
 
 | file | what | where to |
 |---|---|---|
-| `<story>-<F>[-<L>][-nosubs].mp4` | master (`-nosubs` — `SUBS=0`, no burnt-in subtitles): 1080p, H.264 High, ≈ 16 Mbit/s on a Mac (videotoolbox; elsewhere x264 CRF 17), AAC 160k | **YouTube** |
-| `<story>-<F>[-<L>]-share.mp4` | 720p, ≈ 3.5 Mbit/s, AAC 128k, faststart — made right after the master (`--no-share` — skip) | Telegram, Reels, TikTok |
+| `<story>-<F>[-<L>][-subs].mp4` | master, without subtitles (`-subs` — `SUBS=1`, burnt in): 1080p, H.264 High, ≈ 16 Mbit/s on a Mac (videotoolbox; elsewhere x264 CRF 17), AAC 160k | **YouTube** |
+| `<story>-<F>[-<L>]-share.mp4` | 720p, ≈ 3.5 Mbit/s, AAC 128k, faststart — made right after the master, gently: hardware decoding/encoding on a Mac, low priority, 2 threads (`--no-share` — skip) | Telegram, Reels, TikTok |
 | `<story>-<F>[-<L>].srt` | subtitles (`make youtube`) | YouTube Studio → Subtitles |
 | `<story>-<F>[-<L>]-chapters.txt` | chapters by scene, `0:00 …` (`make youtube`) | the video description as is |
 
@@ -40,23 +39,21 @@ E.g. `make video S=mate-in-3 F=horizontal L=ru` → `out/mate-in-3/mate-in-3-hor
 `make youtube` needs a full narration (`время: voicing` in the timeline line), otherwise chapters and subtitles
 drift from the film — it warns.
 
-## Subtitles: burnt in or a separate file
+## Subtitles: a separate file by default
 
-By default subtitles are **burnt into the picture** — right for Shorts, Reels, Telegram, where there is no separate
-subtitle track. For YouTube render without them and upload the `.srt` (viewers turn them off, YouTube indexes them,
-several languages):
+A film is rendered **without burnt-in subtitles**: for YouTube upload the `.srt` of `make youtube` (viewers turn them
+off, YouTube indexes them, several languages). In YouTube Studio: upload the `.mp4`, then Subtitles → add a language →
+upload file → `.srt` (English; and Russian — `make youtube … L=ru`, for the same English film).
+
+Where there is no separate subtitle track — Shorts, Reels, Telegram — burn them in with `SUBS=1`:
 
 ```bash
-make video S=mate-in-3 F=horizontal SUBS=0     # → out/mate-in-3/mate-in-3-horizontal-nosubs.mp4 (+ -share)
-make youtube S=mate-in-3 F=horizontal          # → mate-in-3-horizontal.srt and -chapters.txt
-make youtube S=mate-in-3 F=horizontal L=ru     # → a Russian .srt for the same English film
+make video S=mate-in-3 SUBS=1     # → out/mate-in-3/mate-in-3-subs.mp4 (+ -subs-share.mp4)
 ```
 
-In YouTube Studio: upload `…-nosubs.mp4`, then Subtitles → add a language → upload file → `.srt` (English; and Russian
-from the `L=ru` run). `SUBS=0` changes only this render; the site keeps its subtitles (the CC button). Intertitles of the
-silent film (`sila-nepost`) are part of the picture, not subtitles — they stay.
-
-Don't use `"subtitles": {"burn": false}` in `story.json` for this: it removes subtitles from the site's player too.
+This is only about the rendered film: the site's player keeps its subtitles (the CC button), and stills show them
+(`--no-subs` — without). Intertitles of the silent film (`sila-nepost`) are part of the picture — they stay.
+Don't use `"subtitles": {"burn": false}` in `story.json`: it removes subtitles from the site's player too.
 
 ## Time and hardware
 
@@ -78,15 +75,15 @@ Don't let the laptop sleep during a render — capture stops.
 
 ```bash
 # horizontal, English, subtitles as .srt — for YouTube
-make video S=mate-in-3 F=horizontal SUBS=0           && make youtube S=mate-in-3 F=horizontal
-make video S=mate-in-3-tarkovsky F=horizontal SUBS=0 && make youtube S=mate-in-3-tarkovsky F=horizontal
-make video S=sila-nepost SUBS=0                      && make youtube S=sila-nepost
-make video S=leaf-story SUBS=0                       && make youtube S=leaf-story
+make video S=mate-in-3 F=horizontal           && make youtube S=mate-in-3 F=horizontal
+make video S=mate-in-3-tarkovsky F=horizontal && make youtube S=mate-in-3-tarkovsky F=horizontal
+make video S=sila-nepost                      && make youtube S=sila-nepost
+make video S=leaf-story                       && make youtube S=leaf-story
 
 # vertical, subtitles burnt in — for Shorts / Reels
-make video S=mate-in-3
-make video S=mate-in-3-tarkovsky
-make video S=leaf-story F=vertical
+make video S=mate-in-3 SUBS=1
+make video S=mate-in-3-tarkovsky SUBS=1
+make video S=leaf-story F=vertical SUBS=1
 ```
 
 Add `L=ru` to any of them for the Russian version. A share version of an existing file: `make share FILE=out/…/x.mp4`.

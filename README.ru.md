@@ -67,7 +67,9 @@ make preview F=horizontal   # то же для 16:9 (&tl=horizontal); &debug —
 
 После рендера рядом с мастером (1080×1920, высокий битрейт — для монтажа и архива) появляется
 **`…-share.mp4` — версия для соцсетей**: 720×1280, H.264, ≈ 3,5 Мбит/с, AAC 128k, faststart — Reels, Shorts,
-TikTok, Telegram принимают её без перекодирования (≈ 25 МБ на минуту). Для готового файла —
+TikTok, Telegram принимают её без перекодирования (≈ 25 МБ на минуту); делается бережно (на маке — аппаратно, низкий
+приоритет, 2 потока), вентиляторы не раскручивает. Ролик — без вшитых субтитров (для YouTube — `.srt` из `make youtube`);
+для соцсетей их лучше вшить: `make video SUBS=1` → `…-subs.mp4` и `…-subs-share.mp4`. Для готового файла —
 `make share FILE=out/mate-in-3/mate-in-3-demo.mp4`; не делать — `--no-share`.
 Всё сгенерированное уже есть — **ассеты и озвучка всех постановок** лежат в репозитории медиа (`make media-pull`),
 так что ключ для рендера не нужен: `make video` (вертикаль, 18,7 мин) и `make video F=horizontal`.
@@ -112,7 +114,8 @@ make stills F=horizontal         # стоп-кадры для проверки �
 ```
 
 Предпросмотр формата: `http://127.0.0.1:8720/stage/?story=mate-in-3&tl=horizontal` (после `make timeline F=horizontal`).
-Для YouTube можно не вшивать субтитры, а загрузить `.srt`: `make video … SUBS=0` (→ `…-nosubs.mp4`) и `make youtube` — см. [docs/video.ru.md](docs/video.ru.md).
+Ролик рендерится без вшитых субтитров — для YouTube к нему загружается `.srt` из `make youtube`; вшить (Shorts, Reels,
+Telegram) — `make video … SUBS=1` (→ `…-subs.mp4`), см. [docs/video.ru.md](docs/video.ru.md).
 
 ## Языки ролика
 

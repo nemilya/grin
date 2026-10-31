@@ -2,8 +2,9 @@
 //
 //   node tools/capture.mjs stills [story] [--scale 0.5] [--shots s01a,s05g] [--at 0.5]
 //        → out/<story>/stills/<кадр>.jpg + contact.jpg (лист всех кадров)
-//   node tools/capture.mjs video  [story] [--scale 1] [--from 0] [--to 30] [--fps 24] [--tl demo] [--no-share] [--no-subs]
-//        --no-subs — without burnt-in subtitles (YouTube: upload the .srt of make youtube) → …-nosubs.mp4
+//   node tools/capture.mjs video  [story] [--scale 1] [--from 0] [--to 30] [--fps 24] [--tl demo] [--no-share] [--subs]
+//        a film has no burnt-in subtitles (YouTube: upload the .srt of make youtube); --subs — burn them in → …-subs.mp4
+//        (Shorts, Reels, Telegram); stills show subtitles unless --no-subs
 //        → out/<story>/<story>[-demo].mp4 + …-share.mp4 (облегчённая для соцсетей); звук — build/sound[-demo].wav
 //   node tools/capture.mjs share <файл.mp4>   → <файл>-share.mp4
 //
@@ -95,7 +96,7 @@ async function launch() {
   return { browser, gl: await renderer(browser), mode: 'cpu' };
 }
 
-async function open(scale, samples) {
+async function open(scale, samples, subs = true) {
   const { browser, gl, mode } = await launch();
   console.log(`  WebGL: ${gl} — ${mode === 'gpu' ? 'видеокарта' : 'программный рендер (видеокарта не найдена)'}`);
   const srv = await serve();
@@ -103,7 +104,7 @@ async function open(scale, samples) {
   page.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !/GL Driver Message/.test(m.text())) console.log('  [page]', m.text()); });
   page.on('pageerror', e => console.log('  [page error]', e.message));
   const tl = opt('tl', '');
-  const url = `http://127.0.0.1:${srv.address().port}/stage/index.html?story=${story}&capture&scale=${scale}&samples=${samples}${args.includes('--debug') ? '&debug' : ''}${args.includes('--no-subs') ? '&nosubs' : ''}${tl ? '&tl=' + tl : ''}`;
+  const url = `http://127.0.0.1:${srv.address().port}/stage/index.html?story=${story}&capture&scale=${scale}&samples=${samples}${args.includes('--debug') ? '&debug' : ''}${subs ? '' : '&nosubs'}${tl ? '&tl=' + tl : ''}`;
   await page.goto(url);
   await page.waitForFunction(() => window.STAGE && window.STAGE.ready, null, { timeout: 120000 });
   const info = await page.evaluate(() => ({ duration: STAGE.duration, fps: STAGE.fps, w: STAGE.width, h: STAGE.height, shots: STAGE.shots }));
@@ -125,16 +126,16 @@ function hwEncoder() {
   const has = /h264_videotoolbox/.test(_encoders);
   return want === 'videotoolbox' ? has : has && process.platform === 'darwin';
 }
-function videoArgs({ w, h, master }) {
-  const px = w * h;
+function videoArgs({ w, h, master, gentle = false }) {
+  const px = w * h, cool = COOL || gentle;
   if (hwEncoder()) { // битрейт по площади кадра: мастер 1080×1920 ≈ 16 Мбит/с, версия для соцсетей ≈ 3,5 Мбит/с
     const rate = master ? Math.round(px / 2073600 * 16000) : 3500;
     return ['-c:v', 'h264_videotoolbox', '-profile:v', 'high', '-b:v', `${rate}k`, '-maxrate', `${Math.round(rate * 1.5)}k`,
       '-bufsize', `${rate * 2}k`, '-allow_sw', '1', '-pix_fmt', 'yuv420p'];
   }
-  const x = master ? ['-preset', COOL ? 'medium' : 'slow', '-crf', '17'] : ['-preset', COOL ? 'medium' : 'slow', '-crf', '23',
+  const x = master ? ['-preset', cool ? 'medium' : 'slow', '-crf', '17'] : ['-preset', cool ? 'medium' : 'slow', '-crf', '23',
     '-maxrate', '3500k', '-bufsize', '7000k'];
-  return ['-c:v', 'libx264', '-profile:v', 'high', ...x, ...(COOL ? ['-threads', '2'] : []), '-pix_fmt', 'yuv420p'];
+  return ['-c:v', 'libx264', '-profile:v', 'high', ...x, ...(cool ? ['-threads', '2'] : []), '-pix_fmt', 'yuv420p'];
 }
 function ffmpeg(argv, opts) { // в режиме COOL — с низким приоритетом
   return COOL && process.platform !== 'win32' ? ['nice', ['-n', '15', 'ffmpeg', ...argv], opts] : ['ffmpeg', argv, opts];
@@ -145,7 +146,7 @@ async function stills() {
   const scale = parseFloat(opt('scale', '0.5'));
   const at = parseFloat(opt('at', '0.55'));
   const only = opt('shots', '') ? opt('shots').split(',') : null;
-  const { browser, srv, page, info } = await open(scale, opt('samples', '40'));
+  const { browser, srv, page, info } = await open(scale, opt('samples', '40'), !args.includes('--no-subs'));
   const dir = path.join(ROOT, 'out', story, (opt('tl', '') ? opt('tl') + '-' : '') + (args.includes('--debug') ? 'stills-debug' : 'stills'));
   fs.mkdirSync(dir, { recursive: true });
   const shots = info.shots.filter(s => !only || only.includes(s.id));
@@ -174,14 +175,16 @@ function contact(dir, ids, landscape = false) {
 
 async function video() {
   const scale = parseFloat(opt('scale', '1'));
-  const { browser, srv, page, info } = await open(scale, opt('samples', '64'));
+  const subs = args.includes('--subs');  // a film has no burnt-in subtitles unless asked: YouTube takes the .srt of make youtube
+  console.log(`  субтитры: ${subs ? 'вшиты в картинку (--subs)' : 'нет (отдельно — make youtube → .srt; вшить — SUBS=1)'}`);
+  const { browser, srv, page, info } = await open(scale, opt('samples', '64'), subs);
   const fps = parseFloat(opt('fps', String(info.fps || 24)));
   const from = parseFloat(opt('from', '0')), to = Math.min(info.duration, parseFloat(opt('to', String(info.duration))));
   const dir = path.join(ROOT, 'out', story);
   fs.mkdirSync(dir, { recursive: true });
   const tlName = opt('tl', '');
   const name = opt('out', (tlName ? `${story}-${tlName}` : story) + (from > 0 || to < info.duration ? `-${from}-${to}` : '')
-    + (args.includes('--no-subs') ? '-nosubs' : '') + '.mp4');  // without burnt-in subtitles: for YouTube + .srt
+    + (subs ? '-subs' : '') + '.mp4');
   const voice = path.join(ROOT, 'stories', story, 'build', tlName ? `sound-${tlName}.wav` : 'sound.wav');
   const audio = fs.existsSync(voice) ? ['-ss', String(from), '-t', String(to - from), '-i', voice] : [];
   const enc = videoArgs({ w: info.w, h: info.h, master: true });
@@ -210,10 +213,18 @@ async function video() {
 // Версия для соцсетей: короткая сторона 720 (720×1280 / 1280×720, не больше исходника), H.264 high, ≈ 3,5 Мбит/с, AAC 128k,
 // moov в начале (faststart) — Reels / Shorts / TikTok / Telegram принимают без перекодирования; ≈ 25 МБ/мин.
 function share(src) {
+  // Gentle by design — it runs right after a long render and must not spin the fans: the master is decoded by the
+  // hardware decoder on a Mac (videotoolbox; elsewhere 2 threads), scaled in one thread (bicubic — at 720p it looks
+  // the same as lanczos), encoded by the hardware encoder (or x264 in 2 threads), all at low priority (nice 15).
   const dst = src.replace(/\.mp4$/, '-share.mp4');
-  const r = spawnSync(...ffmpeg(['-y', '-loglevel', 'error', '-i', src,
-    '-vf', "scale='if(gt(iw,ih),-2,min(720,iw))':'if(gt(iw,ih),min(720,ih),-2)':flags=lanczos", ...videoArgs({ master: false }),
-    '-c:a', 'aac', '-b:a', '128k', '-ar', '48000', '-movflags', '+faststart', dst], { stdio: 'inherit' }));
+  const hw = hwEncoder();
+  console.log(`  версия для соцсетей: 720p, ${hw ? 'аппаратное декодирование и кодирование' : 'x264 в 2 потока'}, низкий приоритет`);
+  const argv = ['-y', '-hide_banner', '-loglevel', 'error', '-stats', ...(hw ? ['-hwaccel', 'videotoolbox'] : []), '-threads', '2',
+    '-i', src, '-filter_threads', '1',
+    '-vf', "scale='if(gt(iw,ih),-2,min(720,iw))':'if(gt(iw,ih),min(720,ih),-2)':flags=bicubic", ...videoArgs({ master: false, gentle: true }),
+    '-c:a', 'aac', '-b:a', '128k', '-ar', '48000', '-movflags', '+faststart', dst];
+  const r = process.platform === 'win32' ? spawnSync('ffmpeg', argv, { stdio: 'inherit' })
+    : spawnSync('nice', ['-n', '15', 'ffmpeg', ...argv], { stdio: 'inherit' });
   if (r.status) { console.error('✗ share: ffmpeg'); return; }
   const mb = n => (fs.statSync(n).size / 1048576).toFixed(1);
   console.log(`✓ для соцсетей → ${path.relative(ROOT, dst)} (${mb(dst)} МБ; мастер ${mb(src)} МБ)`);
