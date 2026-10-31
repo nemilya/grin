@@ -152,6 +152,8 @@ docs/      pipeline, new styles, the site, directing notes, story analyses
 
 `make test` — tests without network; `make check` — tests + JS syntax.
 
+Open work and implementation notes — [TODO.md](TODO.md) ([по-русски](TODO.ru.md)).
+
 ## License
 
 Code — [MIT](LICENSE). Everything generated for the project — pictures, narration, translations, bibles,

@@ -26,4 +26,6 @@ format — README.md (most detailed: README.ru.md); the paper-theatre treatment 
   change other productions' prompts (all their assets would go stale) — compare `assets.plan(<story>)` before/after.
 - Rendering films (YouTube/Shorts: formats, subtitles, chapters, thumbnails) — docs/video.md; renders run on the maintainer's Mac
   (GPU), not in a cloud session.
+- Open work with implementation notes — TODO.md (start a session there; when an item is done, delete it and update
+  the docs it touches).
 - Tests: `make check`.
