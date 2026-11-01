@@ -1,15 +1,15 @@
-// Захват кадров сцены (stage/) браузером: стоп-кадры раскадровки или ролик целиком.
+// Capturing frames of the stage (stage/) in a browser: storyboard stills or the whole film.
 //
 //   node tools/capture.mjs stills [story] [--scale 0.5] [--shots s01a,s05g] [--at 0.5]
-//        → out/<story>/stills/<кадр>.jpg + contact.jpg (лист всех кадров)
+//        → out/<story>/stills/<shot>.jpg + contact.jpg (a sheet of all shots)
 //   node tools/capture.mjs video  [story] [--scale 1] [--from 0] [--to 30] [--fps 24] [--tl demo] [--no-share] [--subs]
 //        a film has no burnt-in subtitles (YouTube: upload the .srt of make youtube); --subs — burn them in → …-subs.mp4
 //        (Shorts, Reels, Telegram); stills show subtitles unless --no-subs
-//        → out/<story>/<story>[-demo].mp4 + …-share.mp4 (облегчённая для соцсетей); звук — build/sound[-demo].wav
-//   node tools/capture.mjs share <файл.mp4>   → <файл>-share.mp4
+//        → out/<story>/<story>[-demo].mp4 + …-share.mp4 (a lighter one for social media); sound — build/sound[-demo].wav
+//   node tools/capture.mjs share <file.mp4>   → <file>-share.mp4
 //   node tools/capture.mjs thumbnail <story> [--tl horizontal] [--shot s01a] …   → a YouTube thumbnail (see thumbnail())
 //
-// Сервер статики — свой (корень репозитория), браузер — Playwright Chromium (видеокарта, если есть, иначе SwiftShader). Каждый кадр рисуется из времени t, поэтому любой отрезок можно перерисовать отдельно.
+// The static server is our own (the repository root), the browser is Playwright Chromium (the GPU if there is one, otherwise SwiftShader). Every frame is drawn from time t, so any excerpt can be redrawn on its own.
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -43,44 +43,44 @@ function playwright() {
   try {
     return require('playwright');
   } catch {
-    console.error('Нет playwright. Один раз в корне проекта:  make setup   (или: npm install && npx playwright install chromium)');
+    console.error('No playwright. Once, in the project root:  make setup   (or: npm install && npx playwright install chromium)');
     process.exit(1);
   }
 }
 
-// Где рисовать WebGL. По умолчанию (auto) — пробуем видеокарту: новый headless-режим Chromium (в старом
-// headless-shell GPU обычно нет), на macOS — ANGLE через Metal; если вышел программный рендер — перезапуск
-// в SwiftShader (он работает везде, ≈ 1 с/кадр при 720×1280). CAPTURE_GL=gpu / cpu — задать режим явно.
+// Where to draw WebGL. By default (auto) we try the GPU: Chromium's new headless mode (the old
+// headless-shell usually has no GPU), on macOS — ANGLE over Metal; if a software renderer came out — restart
+// in SwiftShader (it works everywhere, ≈ 1 s/frame at 720×1280). CAPTURE_GL=gpu / cpu — set the mode explicitly.
 const GPU_ARGS = ['--ignore-gpu-blocklist', '--enable-gpu', '--enable-gpu-rasterization',
   ...(process.platform === 'darwin' ? ['--use-angle=metal'] : [])];
 const CPU_ARGS = ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'];
-const SOFTWARE = /swiftshader|llvmpipe|softpipe|software|нет webgl/i;
+const SOFTWARE = /swiftshader|llvmpipe|softpipe|software|no webgl/i;
 
 async function renderer(browser) {
   const page = await browser.newPage();
   const r = await page.evaluate(() => {
     const gl = document.createElement('canvas').getContext('webgl2');
     const ext = gl && gl.getExtension('WEBGL_debug_renderer_info');
-    return gl ? (ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)) : 'нет WebGL2';
+    return gl ? (ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)) : 'no WebGL2';
   });
   await page.close();
   return r;
 }
 
-// Браузер: Chromium Playwright'а (npx playwright install chromium), иначе — установленный Google Chrome / Edge
-// (на macOS 13 новые Playwright свой Chromium уже не ставят).
+// The browser: Playwright's Chromium (npx playwright install chromium), otherwise an installed Google Chrome / Edge
+// (on macOS 13 new Playwright versions no longer install their own Chromium).
 async function start(chromium, args, gpu) {
   const tries = [...(gpu ? [{ channel: 'chromium' }] : []), {}, { channel: 'chrome' }, { channel: 'msedge' }];
   let last;
   for (const o of tries) {
     try {
       const b = await chromium.launch({ ...o, args });
-      if (o.channel === 'chrome' || o.channel === 'msedge') console.log(`  браузер: установленный ${o.channel === 'chrome' ? 'Google Chrome' : 'Edge'}`);
+      if (o.channel === 'chrome' || o.channel === 'msedge') console.log(`  browser: the installed ${o.channel === 'chrome' ? 'Google Chrome' : 'Edge'}`);
       return b;
     } catch (e) { last = e; }
   }
-  console.error('✗ не запустился ни Chromium Playwright, ни Google Chrome:', last.message.split('\n')[0]);
-  console.error('  поставьте Google Chrome или выполните: npx playwright install chromium');
+  console.error('✗ neither Playwright Chromium nor Google Chrome started:', last.message.split('\n')[0]);
+  console.error('  install Google Chrome or run: npx playwright install chromium');
   process.exit(1);
 }
 
@@ -91,7 +91,7 @@ async function launch() {
     const browser = await start(chromium, GPU_ARGS, true);
     const gl = await renderer(browser);
     if (mode === 'gpu' || !SOFTWARE.test(gl)) return { browser, gl, mode: 'gpu' };
-    await browser.close(); // видеокарты не нашлось — надёжный программный режим
+    await browser.close(); // no GPU found — the reliable software mode
   }
   const browser = await start(chromium, CPU_ARGS, false);
   return { browser, gl: await renderer(browser), mode: 'cpu' };
@@ -99,7 +99,7 @@ async function launch() {
 
 async function open(scale, samples, subs = true) {
   const { browser, gl, mode } = await launch();
-  console.log(`  WebGL: ${gl} — ${mode === 'gpu' ? 'видеокарта' : 'программный рендер (видеокарта не найдена)'}`);
+  console.log(`  WebGL: ${gl} — ${mode === 'gpu' ? 'GPU' : 'software renderer (no GPU found)'}`);
   const srv = await serve();
   const page = await browser.newPage({ viewport: { width: 400, height: 400 } });
   page.on('console', m => { if ((m.type() === 'error' || m.type() === 'warning') && !/GL Driver Message/.test(m.text())) console.log('  [page]', m.text()); });
@@ -109,15 +109,15 @@ async function open(scale, samples, subs = true) {
   await page.goto(url);
   await page.waitForFunction(() => window.STAGE && window.STAGE.ready, null, { timeout: 120000 });
   const info = await page.evaluate(() => ({ duration: STAGE.duration, fps: STAGE.fps, w: STAGE.width, h: STAGE.height, shots: STAGE.shots }));
-  console.log(`  кадр ${info.w}×${info.h}, ${info.duration.toFixed(1)} с`);
+  console.log(`  frame ${info.w}×${info.h}, ${info.duration.toFixed(1)} s`);
   return { browser, srv, page, info };
 }
 
 const frame = (page, t) => page.evaluate(t => STAGE.frame(t), t).then(d => Buffer.from(d.split(',')[1], 'base64'));
 
-// Кодирование. На macOS — аппаратный энкодер Apple (h264_videotoolbox): медиаблок чипа, процессор почти не занят;
-// иначе libx264. CAPTURE_COOL=1 (make … COOL=1) — без перегрева: ffmpeg с низким приоритетом и в 2 потока,
-// пауза между кадрами (видеокарта не молотит без передышки). CAPTURE_ENCODER=x264 / videotoolbox — задать явно.
+// Encoding. On macOS — Apple's hardware encoder (h264_videotoolbox): the chip's media engine, the CPU is almost idle;
+// otherwise libx264. CAPTURE_COOL=1 (make … COOL=1) — no overheating: ffmpeg at low priority with 2 threads,
+// a pause between frames (the GPU doesn't grind without a break). CAPTURE_ENCODER=x264 / videotoolbox — set explicitly.
 const COOL = ['1', 'true', 'yes'].includes(String(process.env.CAPTURE_COOL || '').toLowerCase()) || args.includes('--cool');
 let _encoders = null;
 function hwEncoder() {
@@ -129,7 +129,7 @@ function hwEncoder() {
 }
 function videoArgs({ w, h, master, gentle = false }) {
   const px = w * h, cool = COOL || gentle;
-  if (hwEncoder()) { // битрейт по площади кадра: мастер 1080×1920 ≈ 16 Мбит/с, версия для соцсетей ≈ 3,5 Мбит/с
+  if (hwEncoder()) { // bitrate by frame area: the master 1080×1920 ≈ 16 Mbit/s, the social media version ≈ 3.5 Mbit/s
     const rate = master ? Math.round(px / 2073600 * 16000) : 3500;
     return ['-c:v', 'h264_videotoolbox', '-profile:v', 'high', '-b:v', `${rate}k`, '-maxrate', `${Math.round(rate * 1.5)}k`,
       '-bufsize', `${rate * 2}k`, '-allow_sw', '1', '-pix_fmt', 'yuv420p'];
@@ -138,7 +138,7 @@ function videoArgs({ w, h, master, gentle = false }) {
     '-maxrate', '3500k', '-bufsize', '7000k'];
   return ['-c:v', 'libx264', '-profile:v', 'high', ...x, ...(cool ? ['-threads', '2'] : []), '-pix_fmt', 'yuv420p'];
 }
-function ffmpeg(argv, opts) { // в режиме COOL — с низким приоритетом
+function ffmpeg(argv, opts) { // in COOL mode — at low priority
   return COOL && process.platform !== 'win32' ? ['nice', ['-n', '15', 'ffmpeg', ...argv], opts] : ['ffmpeg', argv, opts];
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -157,13 +157,13 @@ async function stills() {
     fs.writeFileSync(path.join(dir, `${s.id}.jpg`), await frame(page, t));
     process.stdout.write(`\r  ${s.id} (${shots.indexOf(s) + 1}/${shots.length})   `);
   }
-  console.log(`\n✓ ${shots.length} кадров, ${((Date.now() - t0) / shots.length / 1000).toFixed(2)} с/кадр → ${path.relative(ROOT, dir)}`);
+  console.log(`\n✓ ${shots.length} shots, ${((Date.now() - t0) / shots.length / 1000).toFixed(2)} s/shot → ${path.relative(ROOT, dir)}`);
   await browser.close(); srv.close();
   if (!only || shots.length > 1) contact(dir, shots.map(s => s.id), info.w > info.h);
 }
 
 function contact(dir, ids, landscape = false) {
-  // лист: 8 в ряд (горизонталь — 5), подпись — id кадра
+  // the sheet: 8 in a row (horizontal — 5), the label is the shot id
   const cols = landscape ? 5 : 8, list = path.join(dir, 'list.txt');
   const tile = landscape ? '480:270' : '270:480';
   fs.writeFileSync(list, ids.map(i => `file '${i}.jpg'`).join('\n'));
@@ -171,13 +171,13 @@ function contact(dir, ids, landscape = false) {
   const r = spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list,
     '-vf', `scale=${tile},drawtext=text='%{metadata\\:id}':x=8:y=8:fontsize=18:fontcolor=white,tile=${cols}x${rows}:padding=6:color=0x14110e`,
     '-frames:v', '1', path.join(dir, 'contact.jpg')], { stdio: 'inherit' });
-  if (r.status === 0) console.log(`✓ лист → ${path.relative(ROOT, path.join(dir, 'contact.jpg'))}`);
+  if (r.status === 0) console.log(`✓ sheet → ${path.relative(ROOT, path.join(dir, 'contact.jpg'))}`);
 }
 
 async function video() {
   const scale = parseFloat(opt('scale', '1'));
   const subs = args.includes('--subs');  // a film has no burnt-in subtitles unless asked: YouTube takes the .srt of make youtube
-  console.log(`  субтитры: ${subs ? 'вшиты в картинку (--subs)' : 'нет (отдельно — make youtube → .srt; вшить — SUBS=1)'}`);
+  console.log(`  subtitles: ${subs ? 'burnt into the picture (--subs)' : 'none (separately — make youtube → .srt; to burn in — SUBS=1)'}`);
   const { browser, srv, page, info } = await open(scale, opt('samples', '64'), subs);
   const fps = parseFloat(opt('fps', String(info.fps || 24)));
   const from = parseFloat(opt('from', '0')), to = Math.min(info.duration, parseFloat(opt('to', String(info.duration))));
@@ -189,7 +189,7 @@ async function video() {
   const voice = path.join(ROOT, 'stories', story, 'build', tlName ? `sound-${tlName}.wav` : 'sound.wav');
   const audio = fs.existsSync(voice) ? ['-ss', String(from), '-t', String(to - from), '-i', voice] : [];
   const enc = videoArgs({ w: info.w, h: info.h, master: true });
-  console.log(`  кодек: ${enc[1]}${COOL ? ' · режим без перегрева (COOL)' : ''}`);
+  console.log(`  codec: ${enc[1]}${COOL ? ' · no-overheating mode (COOL)' : ''}`);
   const ff = spawn(...ffmpeg(['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', 'pipe:0',
     ...audio, ...enc, '-movflags', '+faststart',
     ...(audio.length ? ['-c:a', 'aac', '-b:a', '160k', '-shortest'] : []), path.join(dir, name)], { stdio: ['pipe', 'inherit', 'inherit'] }));
@@ -201,7 +201,7 @@ async function video() {
     if (COOL) await sleep(60);
     if (i % 24 === 0) {
       const el = (Date.now() - t0) / 1000, eta = el / (i + 1) * (n - i - 1);
-      process.stdout.write(`\r  кадр ${i + 1}/${n}  ${(el / (i + 1)).toFixed(2)} с/кадр  осталось ~${Math.round(eta / 60)} мин   `);
+      process.stdout.write(`\r  frame ${i + 1}/${n}  ${(el / (i + 1)).toFixed(2)} s/frame  ~${Math.round(eta / 60)} min left   `);
     }
   }
   ff.stdin.end();
@@ -211,15 +211,15 @@ async function video() {
   await browser.close(); srv.close();
 }
 
-// Версия для соцсетей: короткая сторона 720 (720×1280 / 1280×720, не больше исходника), H.264 high, ≈ 3,5 Мбит/с, AAC 128k,
-// moov в начале (faststart) — Reels / Shorts / TikTok / Telegram принимают без перекодирования; ≈ 25 МБ/мин.
+// The social media version: the short side 720 (720×1280 / 1280×720, no larger than the source), H.264 high, ≈ 3.5 Mbit/s, AAC 128k,
+// moov at the start (faststart) — Reels / Shorts / TikTok / Telegram accept it without re-encoding; ≈ 25 MB/min.
 function share(src) {
   // Gentle by design — it runs right after a long render and must not spin the fans: the master is decoded by the
   // hardware decoder on a Mac (videotoolbox; elsewhere 2 threads), scaled in one thread (bicubic — at 720p it looks
   // the same as lanczos), encoded by the hardware encoder (or x264 in 2 threads), all at low priority (nice 15).
   const dst = src.replace(/\.mp4$/, '-share.mp4');
   const hw = hwEncoder();
-  console.log(`  версия для соцсетей: 720p, ${hw ? 'аппаратное декодирование и кодирование' : 'x264 в 2 потока'}, низкий приоритет`);
+  console.log(`  social media version: 720p, ${hw ? 'hardware decoding and encoding' : 'x264 with 2 threads'}, low priority`);
   const argv = ['-y', '-hide_banner', '-loglevel', 'error', '-stats', ...(hw ? ['-hwaccel', 'videotoolbox'] : []), '-threads', '2',
     '-i', src, '-filter_threads', '1',
     '-vf', "scale='if(gt(iw,ih),-2,min(720,iw))':'if(gt(iw,ih),min(720,ih),-2)':flags=bicubic", ...videoArgs({ master: false, gentle: true }),
@@ -228,7 +228,7 @@ function share(src) {
     : spawnSync('nice', ['-n', '15', 'ffmpeg', ...argv], { stdio: 'inherit' });
   if (r.status) { console.error('✗ share: ffmpeg'); return; }
   const mb = n => (fs.statSync(n).size / 1048576).toFixed(1);
-  console.log(`✓ для соцсетей → ${path.relative(ROOT, dst)} (${mb(dst)} МБ; мастер ${mb(src)} МБ)`);
+  console.log(`✓ for social media → ${path.relative(ROOT, dst)} (${mb(dst)} MB; master ${mb(src)} MB)`);
 }
 
 // YouTube thumbnail: one shot without subtitles, 1280 px on the long side, with the title over it (site fonts).
@@ -240,7 +240,7 @@ async function thumbnail() {
   const readJSON = f => JSON.parse(fs.readFileSync(f, 'utf8'));
   const tlName = opt('tl', '');
   const tlFile = path.join(ROOT, 'stories', story, 'build', tlName ? `timeline-${tlName}.json` : 'timeline.json');
-  if (!fs.existsSync(tlFile)) throw new Error(`нет ${path.relative(ROOT, tlFile)} — сначала make timeline`);
+  if (!fs.existsSync(tlFile)) throw new Error(`no ${path.relative(ROOT, tlFile)} — run make timeline first`);
   const tl = readJSON(tlFile);
   let st = readJSON(path.join(ROOT, 'stories', story, 'story.json'));
   if (st.base) st = { ...readJSON(path.join(ROOT, 'stories', st.base, 'story.json')), ...st };
@@ -253,7 +253,7 @@ async function thumbnail() {
   const scale = 1280 / Math.max(tl.width, tl.height);
   const { browser, srv, page, info } = await open(scale, opt('samples', '96'), false);
   const shot = info.shots.find(x => x.id === shotId);
-  if (!shot) { await browser.close(); srv.close(); throw new Error(`нет кадра ${shotId}; есть: ${info.shots.map(x => x.id).join(' ')}`); }
+  if (!shot) { await browser.close(); srv.close(); throw new Error(`no shot ${shotId}; there are: ${info.shots.map(x => x.id).join(' ')}`); }
   const raw = await frame(page, shot.t0 + (shot.t1 - shot.t0) * at);
   const base = path.join(ROOT, 'out', story, `${tlName ? `${story}-${tlName}` : story}-thumb-${shotId}`);
   fs.mkdirSync(path.dirname(base), { recursive: true });
@@ -290,7 +290,7 @@ async function thumbnail() {
   await card.evaluate(() => document.fonts.ready);
   await card.screenshot({ path: `${base}.jpg`, type: 'jpeg', quality: 92 });
   await browser.close(); srv.close();
-  console.log(`✓ обложка → ${path.relative(ROOT, base)}.jpg (${info.w}×${info.h}; кадр ${shotId} @ ${at}; без текста — -raw.jpg)`);
+  console.log(`✓ thumbnail → ${path.relative(ROOT, base)}.jpg (${info.w}×${info.h}; shot ${shotId} @ ${at}; without text — -raw.jpg)`);
 }
 
 const run = { video, stills, thumbnail, share: async () => share(path.resolve(args[1] || '')) }[mode] || stills;
