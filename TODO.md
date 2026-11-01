@@ -5,26 +5,7 @@
 Open work, in rough order. Each item: what, why, and implementation notes gathered so far. When an item is done —
 delete it here (the history is in git) and update the docs it touches.
 
-## 1. Translate the sources to English — what is left
-
-Code, comments, CLI messages, `make help`, the admin, JSON `"_"` fields (`site.json`, `styles/*`, `directors/*`,
-`story.json`), `docs/*.md` (Russian in `*.ru.md`), `README.md` and the `storyboard` skill are in English. Russian that
-stays on purpose (it is Russian-language data): abbreviations and regexes in `engine/text.py`, `engine/prepare.py`;
-chapter words and `ё/е` in `engine/translate.py`; the TTS lead `'Этот фрагмент:'` in `engine/voicing.py` and the Russian
-default manner in `engine/pricing.py` (both enter the take key); `UI['ru']` in `engine/site.py`; Russian test data.
-Find what is left in code (≈ 70 lines, all of them data):
-
-```bash
-python3 -c "import re,pathlib as P; [print(f'{p}:{n}: {l.strip()[:90]}') for d in 'engine stage/js site tools tests admin'.split() for p in sorted(P.Path(d).rglob('*.*')) if p.suffix in ('.py','.js','.mjs','.css','.html') for n,l in enumerate(p.read_text(errors='ignore').splitlines(),1) if re.search('[а-яёА-ЯЁ]',l)]"
-```
-
-- `docs/stories/*.md` (Russian analyses of the stories, ≈ 450 lines) — decide: keep Russian, translate, or drop.
-- Story data: `"_"` and `role` in `stories/*/bible.json`, `note` in `glossary.json` and `storyboard*.json` (≈ 290
-  working notes) are Russian. Bible fields can enter asset prompts — before a bulk edit compare `assets.plan(<story>)`
-  for every production (nothing may turn stale); storyboard notes don't enter fingerprints.
-- `brief.md` — the original Russian brief; keep as a historical document or translate.
-
-## 2. "About the project" page on the site
+## 1. "About the project" page on the site
 
 `/<lang>/about/` next to "About the author", linked from the landing header and every page's footer.
 
@@ -42,7 +23,7 @@ python3 -c "import re,pathlib as P; [print(f'{p}:{n}: {l.strip()[:90]}') for d i
 
 **Open question**: the Telegram nick.
 
-## 3. Make the repositories public
+## 2. Make the repositories public
 
 - Before: run GitHub secret scanning on both; `grep -rn "sk-or-\|OPENROUTER_API_KEY *=" .` (only the example in
   `local.mk.example` should match); the history of `grin` is fresh (since the move), `grin-media` holds only media.
@@ -50,7 +31,7 @@ python3 -c "import re,pathlib as P; [print(f'{p}:{n}: {l.strip()[:90]}') for d i
   descriptions and to the about page; mention in `README` how to contribute (media are pushed only by the maintainer).
 - Archive nemilya/mate-in-3 (Settings → Archive) — it keeps the full old history with the media.
 
-## 4. Publish the other films
+## 3. Publish the other films
 
 Recipe — `docs/video.md` (render without burnt-in subtitles, `make youtube` for `.srt` + chapters, `make thumbnail`).
 Published: *Mate in Three Moves*, paper theatre, horizontal, English. Next: `mate-in-3-tarkovsky F=horizontal`,
@@ -66,7 +47,7 @@ Published: *Mate in Three Moves*, paper theatre, horizontal, English. Next: `mat
 - **Link videos from the site**: `site.json → videos[].youtube` (URL per language) → a "Watch on YouTube" link on the
   story page.
 
-## 5. Media housekeeping (not urgent)
+## 4. Media housekeeping (not urgent)
 
 - **Mirrors** on the maintainer's servers: cron `git clone --mirror` once, then `git remote update` — a full backup
   of `grin-media` with history; `MEDIA_REMOTE` can point to a mirror if GitHub becomes unreachable.
@@ -75,7 +56,7 @@ Published: *Mate in Three Moves*, paper theatre, horizontal, English. Next: `mat
   `media.rev`. Old `media.rev` pins then point to commits that are only in the archive — document that in
   `docs/media.md` when it happens.
 
-## 6. Small things noticed
+## 5. Small things noticed
 
 - Paper theatre, horizontal shot `s04i`: a stray white "D"-shaped card behind the doctor's chair (seen in the
   thumbnail candidates) — check the storyboard/state for that shot.
@@ -83,8 +64,10 @@ Published: *Mate in Three Moves*, paper theatre, horizontal, English. Next: `mat
 - The first `make site` on a new machine takes ≈ 30 min (video sound for every production × language) — could
   cache `sound-*.m4a` by fingerprint in `grin-media` or on the server to skip it.
 - Deploy runs only from the maintainer's machine (ssh); a cloud session can build `dist/` but not deploy.
+- `node tools/capture.mjs stills sila-nepost` (without pulled media, in a cloud session) fails with the page error
+  "boolean true is not iterable" and times out; `mate-in-3` works. It was there before the translation — check with media.
 
-## 7. Later: a pipeline without an agent
+## 6. Later: a pipeline without an agent
 
 Everything an agent did (Claude Code) is either API calls or creative decisions that can be expressed as a prompt
 with checks. For the next stories the same path could become `make` steps:

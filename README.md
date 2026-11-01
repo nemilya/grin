@@ -261,7 +261,7 @@ stage/     the scene: index.html, js/stage.js, paper.js, post.js, geometry.js, f
 site/      website styles, scripts, fonts, texts (site.json — what is published)
 tools/     capture.mjs (stills and video), admin, serve, style_lab, hooks/
 styles/ directors/   visual styles of assets and directing presets
-docs/      pipeline, new styles, the site, directing notes, story analyses
+docs/      pipeline, new styles, the site, directing notes, story analyses (docs/stories/, in Russian)
 ```
 
 `make test` — tests without network; `make check` — tests + JS syntax.
