@@ -1,7 +1,7 @@
-/* Видео в браузере, без mp4: сцена (stage.js, WebGL) рисует кадр по таймлайну в момент t, время берётся
- * из звука (<audio> — голос, фон, музыка). Вертикаль на телефоне и узком/портретном экране, горизонталь —
- * на широком; переключатель ⇄ (позиция сохраняется). Разрешение и число лучей фокуса — по экрану:
- * сцена считается во время просмотра. Место просмотра запоминается (localStorage). */
+/* Video in the browser, without mp4: the scene (stage.js, WebGL) draws the frame from the timeline at moment t, the time comes
+ * from the sound (<audio> — voice, ambience, music). Vertical on a phone and a narrow/portrait screen, horizontal —
+ * on a wide one; the ⇄ switch (the position is kept). The resolution and the number of focus rays — by the screen:
+ * the scene is computed while it is watched. The viewing position is remembered (localStorage). */
 (() => {
   const D = JSON.parse(document.getElementById('data').textContent);
   const $ = (s) => document.querySelector(s);
@@ -10,7 +10,7 @@
   const watch = $('#watch');
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* приватный режим */ } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } },
   };
   const coarse = matchMedia('(pointer: coarse)').matches;
   const narrow = () => matchMedia('(orientation: portrait), (max-width: 760px)').matches;
@@ -33,7 +33,7 @@
     try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch { return false; }
   }
 
-  // сцена текущей ориентации: таймлайн → Stage (разрешение под экран) → загрузка слоёв
+  // the scene of the current orientation: timeline → Stage (resolution for the screen) → loading the layers
   async function makeStage() {
     if (!webgl()) { loading.hidden = false; loading.textContent = D.ui.no_webgl; throw new Error('webgl'); }
     const f = D.formats[orient];
@@ -132,7 +132,7 @@
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
   }
 
-  // продолжить с места, где остановились
+  // continue from where we stopped
   const t0 = store.get(`video:${D.key}`, 0);
   if (t0 > 2 && t0 < D.duration - 5) {
     audio.addEventListener('loadedmetadata', () => { audio.currentTime = t0; seek.value = t0; cur.textContent = clock(t0); }, { once: true });

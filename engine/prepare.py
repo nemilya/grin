@@ -1,18 +1,18 @@
-"""Подготовка: исходник истории → stories/<slug>/prepared/<язык>.json — разделы, абзацы, предложения, слова.
+"""Preparation: a story's source → stories/<slug>/prepared/<lang>.json — sections, paragraphs, sentences, words.
 
-Модель текста — как в mountain-rock (абзац → предложения → слова со смещениями), её используют перевод,
-озвучка, раскадровка (якоря кадров — абзац и номер предложения) и субтитры.
+The text model (paragraph → sentences → words with offsets) is used by translation,
+narration, the storyboard (a shot is anchored to a paragraph and a sentence number) and subtitles.
 
-Форматы исходника (story.json → source.format):
-  text      абзацы через пустую строку, один раздел «story»; первые source.skip блоков (автор, название) —
-            не озвучиваются (в ролике их нет)
-  markdown  разделы — заголовки «#» (как в mountain-rock), для историй с главами
-  libru     текст с lib.ru: строки жёстко перенесены, абзац — со строки с отступом, внутри — двойные пробелы;
-            блок, где все строки с большим отступом, — эпиграф (курсив); блок из одной римской цифры — заголовок
-            главы (kind heading внутри раздела «story»: в ролике не озвучивается, на сайте — «Глава первая»);
-            первые source.skip блоков — автор и название
-Id абзацев: «<раздел>-001», …; «-000» зарезервирован под заголовок раздела.
-Правки абзацев для озвучки (текст для TTS, манера, пропуск) — overrides/<язык>.json, подготовка их не трогает.
+Source formats (story.json → source.format):
+  text      paragraphs separated by a blank line, one section "story"; the first source.skip blocks (author, title)
+            are not narrated (the film doesn't have them)
+  markdown  sections are "#" headings, for stories with chapters
+  libru     a text from lib.ru: hard-wrapped lines, a paragraph starts with an indented line, double spaces inside;
+            a block whose lines are all deeply indented is an epigraph (italic); a block of a single Roman numeral is a
+            chapter heading (kind heading inside the "story" section: not narrated in the film, "Chapter one" on the site);
+            the first source.skip blocks are the author and the title
+Paragraph ids: "<section>-001", …; "-000" is reserved for the section heading.
+Paragraph edits for narration (the TTS text, manner, skip) live in overrides/<lang>.json; preparation doesn't touch them.
 """
 from __future__ import annotations
 
@@ -50,7 +50,7 @@ def paragraph(pid: str, kind: str, body: str, *, speech: str | None = None, ital
 
 
 def _blocks(raw: str) -> list[str]:
-    """Абзацы текста: через пустую строку; строки внутри абзаца склеиваются."""
+    """Paragraphs of a text: separated by blank lines; lines inside a paragraph are joined."""
     return [re.sub(r'\s*\n\s*', ' ', b).strip() for b in re.split(r'\n\s*\n', raw.replace('\r', '')) if b.strip()]
 
 
@@ -59,7 +59,7 @@ EPIGRAPH_INDENT = 20
 
 
 def _libru_blocks(raw: str) -> list[tuple[str, str]]:
-    """lib.ru → [(вид, текст)]: вид — text, epigraph, heading. Абзац начинается строкой с отступом."""
+    """lib.ru → [(kind, text)]: kind — text, epigraph, heading. A paragraph starts with an indented line."""
     out = []
     for group in re.split(r'\n\s*\n', raw.replace('\r', '').replace('\t', '    ')):
         lines = [ln.rstrip() for ln in group.split('\n') if ln.strip()]
@@ -83,10 +83,10 @@ def _libru_blocks(raw: str) -> list[tuple[str, str]]:
 
 def _libru_clean(s: str) -> str:
     s = re.sub(r'\s+', ' ', s).strip()
-    s = re.sub(r'\b([А-ЯЁA-Z])\.(?=[А-ЯЁA-Z][а-яёa-z])', r'\1. ', s)   # «Ф.Купер» → «Ф. Купер»
-    s = re.sub(r'"([^"]*)"', r'«\1»', s)                             # прямые кавычки → ёлочки
-    s = re.sub(r'^"', '«', s)                                        # цитата на несколько абзацев:
-    s = re.sub(r'"(?=[.,!?…]*$)', '»', s)                            # открыта в одном, закрыта в другом
+    s = re.sub(r'\b([А-ЯЁA-Z])\.(?=[А-ЯЁA-Z][а-яёa-z])', r'\1. ', s)   # "Ф.Купер" → "Ф. Купер"
+    s = re.sub(r'"([^"]*)"', r'«\1»', s)                             # straight quotes → guillemets
+    s = re.sub(r'^"', '«', s)                                        # a quote over several paragraphs:
+    s = re.sub(r'"(?=[.,!?…]*$)', '»', s)                            # opened in one, closed in another
     return s
 
 
@@ -149,7 +149,7 @@ def load(slug: str, lang: str) -> dict | None:
 
 
 def paragraphs(slug: str, lang: str) -> dict[str, dict]:
-    """{id: абзац} по всем разделам."""
+    """{id: paragraph} across all sections."""
     prep = load(slug, lang) or {'sections': []}
     return {p['id']: p for s in prep['sections'] for p in s['paragraphs']}
 
@@ -170,7 +170,7 @@ def set_override(slug: str, lang: str, pid: str, patch: dict) -> dict:
 
 
 def speech_text(story: dict, para: dict, ov: dict | None = None) -> str:
-    """Текст, который уходит в TTS: правка (overrides), иначе текст абзаца с поправками произношения."""
+    """The text that goes to TTS: the edit (overrides), otherwise the paragraph text with pronunciation fixes."""
     if ov and ov.get('speech'):
         return ov['speech']
     return text.apply_replacements(para.get('speech') or para['text'], story.get('speech_replacements', []))
@@ -180,4 +180,4 @@ if __name__ == '__main__':
     import sys
     for slug in sys.argv[1:] or [s['slug'] for s in config.stories()]:
         r = prepare(slug)
-        print(f"{slug}: {len(r['sections'])} разд., {r['stats']['paragraphs']} абз., {r['stats']['chars']} знаков")
+        print(f"{slug}: {len(r['sections'])} sections, {r['stats']['paragraphs']} paragraphs, {r['stats']['chars']} chars")

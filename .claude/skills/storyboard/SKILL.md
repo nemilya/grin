@@ -1,23 +1,25 @@
 ---
 name: storyboard
-description: Разработать или поправить библию (герои, позы, декорации) и раскадровку (сцены, кадры, камера, фокус, свет, звук) бумажного театра; использовать для новых сцен, правки композиции кадров, после просмотра стоп-кадров.
+description: Develop or fix a paper-theatre bible (characters, poses, sets) and storyboard (scenes, shots, camera, focus, light, sound); use for new scenes, fixing shot composition, after looking at stills.
 ---
 
-# Библия и раскадровка
+# Bible and storyboard
 
-Формат — README.ru.md («Раскадровка»), пример — `stories/mate-in-3/bible.json`, `storyboard.json`, правила — docs/treatment.md.
+Format — README.md ("Storyboard"), the full vocabulary — docs/new-style.md, an example — `stories/mate-in-3/bible.json`,
+`storyboard.json`, rules — docs/treatment.md.
 
-## Библия
-- Герой: `look` (канон, англ., без стиля), позы с `desc`, `h` (см), `aspect`, `facing`. Позы сидя — со стулом в той же
-  вырезке. Шарнирная кукла — `parts` (pivot/attach в долях карточки; детали генерируются без листа героя).
-- Декорация: куски с `kind` (backdrop / floor / cutout / procedural), `size` или `h`, `pos`; проём — `hole`;
-  источник света внутри карточки — `cast: false`.
+## Bible
+- A character: `look` (the canon, in English, style-free), poses with `desc`, `h` (cm), `aspect`, `facing`. Sitting poses —
+  with the chair in the same cut-out. A jointed puppet — `parts` (pivot/attach in fractions of the card; parts are
+  generated without the character sheet).
+- A set: pieces with `kind` (backdrop / floor / cutout / procedural), `size` or `h`, `pos`; an opening — `hole`;
+  a light source inside a card — `cast: false`.
 
-## Раскадровка
-- Сначала выписать предложения с индексами (prepared/<lang>.json) и оценкой времени; кадр — на смысловой единице,
-  5–12 с; длиннее 14 с — только если есть движение (наезд, проход), короче 1,5 с — только как удар.
-- Вертикаль: одиночные планы, вертикальные формы, процессии — по одной фигуре через узкий проём.
-- Каждому кадру — `note` (что и зачем по-русски). Смена места — `"in": "dip"`. После вставки в другой декорации
-  явно вернуть `"set"`.
-- Проверка: `make timeline` (без ошибок), стоп-кадры `--debug` для композиции, без — для света; править `cams`,
-  `pos`, `push`, `focus`. Ключевой свет — спереди-сверху.
+## Storyboard
+- First write out the sentences with their indices (prepared/<lang>.json) and a time estimate; a shot sits on a unit of
+  meaning, 5–12 s; longer than 14 s — only if there is movement (a push-in, a walk), shorter than 1.5 s — only as a hit.
+- Vertical: single shots, vertical shapes, processions — one figure at a time through a narrow opening.
+- Every shot gets a `note` (what and why). A change of place — `"in": "dip"`. After an insert in another set,
+  return the `"set"` explicitly.
+- Check: `make timeline` (no errors), stills with `--debug` for composition, without it for light; fix `cams`,
+  `pos`, `push`, `focus`. The key light is front-top.

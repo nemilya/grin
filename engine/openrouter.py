@@ -1,8 +1,8 @@
-"""OpenRouter: синтез речи (/audio/speech), распознавание с временем слов (/audio/transcriptions), цены моделей.
+"""OpenRouter: speech synthesis (/audio/speech), transcription with word timings (/audio/transcriptions), model prices.
 
-Ключ — только из окружения OPENROUTER_API_KEY (или .env / local.mk, см. config.load_env), никуда не пишется.
-Прокси — OPENROUTER_PROXY (socks5h://…, http://…): тогда запросы идут через curl (как в infographics/video-kit),
-ключ — во временном конфиге curl (права 600), не в аргументах команды. Повтор при 429, 5xx и обрыве — до 4 попыток.
+The key comes only from the environment OPENROUTER_API_KEY (or .env / local.mk, see config.load_env) and is never written.
+Proxy — OPENROUTER_PROXY (socks5h://…, http://…): requests then go through curl,
+the key in a temporary curl config (mode 600), not in the command arguments. Retries on 429, 5xx and dropped connections — up to 4 attempts.
 """
 from __future__ import annotations
 
@@ -25,17 +25,17 @@ class ApiError(RuntimeError):
 def _key() -> str:
     key = os.environ.get('OPENROUTER_API_KEY')
     if not key:
-        raise ApiError('нет OPENROUTER_API_KEY: задайте в окружении, в .env или local.mk (см. README)')
+        raise ApiError('no OPENROUTER_API_KEY: set it in the environment, in .env or local.mk (see README)')
     return key
 
 
 def proxy() -> str:
-    """OPENROUTER_PROXY — читается при каждом запросе (local.mk / .env подгружаются после импорта)."""
+    """OPENROUTER_PROXY — read on every request (local.mk / .env are loaded after import)."""
     return (os.environ.get('OPENROUTER_PROXY') or '').strip()
 
 
 def _send(url: str, headers: dict, body: bytes | None, method: str, timeout: int) -> tuple[int, str, bytes]:
-    """Один запрос → (HTTP-статус, content-type, тело). Обрыв соединения — ConnectionError."""
+    """One request → (HTTP status, content-type, body). A dropped connection — ConnectionError."""
     if not proxy():
         req = urllib.request.Request(url, data=body, headers=headers, method=method)
         try:
@@ -57,7 +57,7 @@ def _send(url: str, headers: dict, body: bytes | None, method: str, timeout: int
             f.write('\n'.join(lines) + '\n')
         r = subprocess.run(['curl', '--config', conf], input=body or b'', capture_output=True)
         if r.returncode:
-            raise ConnectionError(f'curl через {proxy()}: {r.stderr.decode("utf8", "replace").strip()[:300]}')
+            raise ConnectionError(f'curl via {proxy()}: {r.stderr.decode("utf8", "replace").strip()[:300]}')
         code, _, ctype = r.stdout.decode().strip().partition(' ')
         data = open(out, 'rb').read() if os.path.exists(out) else b''
         return int(code or 0), ctype, data
@@ -88,7 +88,7 @@ def _request(path: str, *, body: bytes | None = None, ctype: str | None = None, 
 
 def speech(text: str, *, model: str, voice: str, instructions: str | None = None, speed: float | None = None,
            response_format: str = 'pcm') -> tuple[bytes, str]:
-    """Синтез → (байты, content-type). Для pcm тип вида audio/pcm;rate=24000;channels=1."""
+    """Synthesis → (bytes, content-type). For pcm the type looks like audio/pcm;rate=24000;channels=1."""
     payload = {'model': model, 'input': text, 'voice': voice, 'response_format': response_format}
     if instructions:
         payload['instructions'] = instructions
@@ -98,7 +98,7 @@ def speech(text: str, *, model: str, voice: str, instructions: str | None = None
 
 
 def transcribe(path: str, *, model: str, language: str | None = None) -> dict:
-    """Распознавание файла → {text, words: [{word, start, end}], usage: {cost}}."""
+    """Transcribe a file → {text, words: [{word, start, end}], usage: {cost}}."""
     fields = {'model': model, 'response_format': 'verbose_json', 'timestamp_granularities[]': 'word'}
     if language:
         fields['language'] = language
@@ -120,7 +120,7 @@ _models_cache: dict = {}
 
 
 def speech_models() -> list[dict]:
-    """Модели синтеза речи с ценами (кеш на час)."""
+    """Speech synthesis models with prices (cached for an hour)."""
     now = time.time()
     if _models_cache.get('t', 0) > now - 3600:
         return _models_cache['data']

@@ -1,29 +1,29 @@
-"""Текст: очистка markdown-источника, деление на предложения и слова.
+"""Text: cleaning a markdown source, splitting into sentences and words.
 
-Модель текста (общая для показа, озвучки и подсветки):
-    абзац → предложения → слова; у слова — смещения в тексте абзаца [a, b).
-Озвучивается абзац целиком (или несколькими кусками по границам предложений, если он очень длинный),
-а время слов и предложений находится обратным распознаванием (align.py).
+The text model (shared by display, narration and highlighting):
+    paragraph → sentences → words; a word has offsets [a, b) into the paragraph text.
+A paragraph is narrated whole (or in several pieces at sentence boundaries if it is very long),
+and the timings of words and sentences come from back-transcription (align.py).
 """
 from __future__ import annotations
 
 import re
 import unicodedata
 
-# ---------------------------------------------------------------- очистка markdown
+# ---------------------------------------------------------------- cleaning markdown
 
 IMAGE_RE = re.compile(r'!\[[^\]]*\]\[[^\]]*\]|!\[[^\]]*\]\([^)]*\)')
 ESCAPE_RE = re.compile(r'\\([\\`*_{}\[\]()#+\-.!:|<>~=])')
 EMPH_RE = re.compile(r'(\*\*|__|\*|_)(?=\S)(.+?)(?<=\S)\1')
-# номер сноски: цифры сразу после буквы или закрывающего знака, дальше — пробел, знак или конец строки.
-# «лет1 до», «(Ван Чагма)2,», «Дью-ла12» → убираются; «800 лет», «V4B», «1949», даты «12.08.1955» — остаются
-# (цифры после «цифра.» или «цифра,» — часть числа, не сноска).
+# a footnote number: digits right after a letter or a closing mark, followed by a space, a mark or the end of the line.
+# «лет1 до», «(Ван Чагма)2,», «Дью-ла12» → removed; «800 лет», «V4B», «1949», dates «12.08.1955» — kept
+# (digits after "digit." or "digit," are part of a number, not a footnote).
 FOOTNOTE_RE = re.compile(r'(?<=[^\W\d_]|[»”")\].,;:!?*])(?<!\d[.,])\d{1,3}(?:,\d{1,3})*(?=[\s.,;:!?»”")\]*\\]|$)')
 SPACES_RE = re.compile(r'[ \t ]+')
 
 
 def strip_markdown(s: str, *, footnotes: bool = True) -> tuple[str, bool]:
-    """Строка markdown → (чистый текст, весь ли абзац курсивом)."""
+    """A markdown line → (clean text, whether the whole paragraph is italic)."""
     s = IMAGE_RE.sub(' ', s)
     if footnotes:
         s = FOOTNOTE_RE.sub('', s)
@@ -34,15 +34,15 @@ def strip_markdown(s: str, *, footnotes: bool = True) -> tuple[str, bool]:
         s = EMPH_RE.sub(r'\2', s)
     s = s.replace('**', '')
     s = SPACES_RE.sub(' ', s).strip()
-    # реплика диалога: «- Отец!» / «– Отец!» → «— Отец!»
+    # a dialogue line: «- Отец!» / «– Отец!» → «— Отец!»
     s = re.sub(r'^[-–]\s', '— ', s)
     s = re.sub(r'\s[-–]\s', ' — ', s)
     return s, italic
 
 
-# ---------------------------------------------------------------- предложения
+# ---------------------------------------------------------------- sentences
 
-# сокращения, после которых точка не конец предложения
+# abbreviations after which a period does not end a sentence
 ABBR = {
     'г', 'гг', 'в', 'вв', 'т', 'е', 'п', 'н', 'э', 'др', 'см', 'ср', 'им', 'св', 'стр', 'тыс', 'млн', 'ок',
     'mr', 'mrs', 'dr', 'st', 'vs', 'etc', 'e', 'i', 'g',
@@ -51,26 +51,26 @@ SENT_END_RE = re.compile(r'[.!?…]+[»”’")\]]*(?=\s+)')
 
 
 def split_sentences(text: str) -> list[tuple[int, int]]:
-    """Границы предложений [a, b) в строке (пробелы между ними не входят)."""
+    """Sentence boundaries [a, b) in a string (the spaces between them are not included)."""
     out, start = [], 0
     for m in SENT_END_RE.finditer(text):
         end = m.end()
         nxt = text[end:].lstrip()
         if not nxt:
             continue
-        # предложение начинается с заглавной, тире или кавычки
+        # a sentence starts with a capital, a dash or a quote
         if not (nxt[0].isupper() or nxt[0] in '—–-«"“‘(' or nxt[0].isdigit()):
             continue
-        # «— Отец! — испуганно вскрикнув…» — слова автора после реплики: то же предложение
+        # «— Отец! — испуганно вскрикнув…» — the author's words after a line of dialogue: the same sentence
         if nxt[0] in '—–-' and nxt[1:].lstrip()[:1].islower():
             continue
-        # “Father!” I cried out… / “Wait,” he said — то же в английской прозе: после закрывающей кавычки
+        # “Father!” I cried out… / “Wait,” he said — the same in English prose: after a closing quote
         if m.group(0)[-1:] in '”"’' and (nxt[:1].islower() or re.match(r"I\b(?!')", nxt)):
             continue
         if m.group(0).startswith('.') and len(m.group(0).rstrip('»”")]')) == 1:
             word = re.search(r'(\w+)$', text[start:m.start()])
             w = word.group(1) if word else ''
-            if w != 'I' and (w.lower() in ABBR or (len(w) == 1 and w.isalpha())):  # «he and I.» — конец
+            if w != 'I' and (w.lower() in ABBR or (len(w) == 1 and w.isalpha())):  # "he and I." — an end
                 continue
         out.append((start, end))
         start = end + (len(text[end:]) - len(nxt))
@@ -79,26 +79,26 @@ def split_sentences(text: str) -> list[tuple[int, int]]:
     return [(a, b) for a, b in out if text[a:b].strip()]
 
 
-# ---------------------------------------------------------------- слова
+# ---------------------------------------------------------------- words
 
 WORD_RE = re.compile(r"[\ẃ]+(?:[-‐'’][\ẃ]+)*", re.UNICODE)
 
 
 def split_words(text: str, a: int = 0, b: int | None = None) -> list[tuple[int, int]]:
-    """Слова (буквы/цифры, с дефисами внутри) в text[a:b] → смещения в text."""
+    """Words (letters/digits, with hyphens inside) in text[a:b] → offsets into text."""
     b = len(text) if b is None else b
     return [(a + m.start(), a + m.end()) for m in WORD_RE.finditer(text[a:b])]
 
 
 def norm_word(w: str) -> str:
-    """Слово для сравнения с распознанным: нижний регистр, ё→е, без ударений и дефисов."""
+    """A word for comparison with the transcript: lower case, ё→е, no stress marks or hyphens."""
     w = unicodedata.normalize('NFD', w.lower())
     w = ''.join(c for c in w if unicodedata.category(c) != 'Mn')
     w = unicodedata.normalize('NFC', w).replace('ё', 'е')
     return re.sub(r'[^\w]', '', w)
 
 
-# ---------------------------------------------------------------- для озвучки
+# ---------------------------------------------------------------- for narration
 
 ORDINAL_F = ['', 'первая', 'вторая', 'третья', 'четвёртая', 'пятая', 'шестая', 'седьмая', 'восьмая', 'девятая',
              'десятая', 'одиннадцатая', 'двенадцатая', 'тринадцатая', 'четырнадцатая', 'пятнадцатая',
@@ -109,7 +109,7 @@ ROMAN = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100}
 
 
 def roman(s: str) -> int | None:
-    """«XIV» → 14; не римское число — None."""
+    """A Roman numeral "XIV" → 14; anything else — None."""
     if not s or any(c not in ROMAN for c in s):
         return None
     n = 0
@@ -119,7 +119,7 @@ def roman(s: str) -> int | None:
 
 
 def heading_speech(title: str, lang: str) -> str:
-    """Как произнести заголовок: «ГЛАВА 1» → «Глава первая.»; номер главы «II» → «Глава вторая.» / «Chapter 2.»"""
+    """How to pronounce a heading: «ГЛАВА 1» → «Глава первая.»; a chapter number «II» → «Глава вторая.» / «Chapter 2.»"""
     t = title.strip().rstrip('.')
     n = roman(t)
     if n:
@@ -139,7 +139,7 @@ def heading_display(title: str) -> str:
 
 
 def apply_replacements(text: str, rules: list[dict]) -> str:
-    """Поправки произношения (только для озвучки): [{"from": regex, "to": str}]."""
+    """Pronunciation fixes (narration only): [{"from": regex, "to": str}]."""
     for r in rules or []:
         text = re.sub(r['from'], r['to'], text)
     return text

@@ -1,17 +1,17 @@
-// Процедурная геометрия сцены («Отпавший Лист», docs/stories/leaf-story.md): супрематические фигуры, линии, которые
-// рисуются во времени, вращение со шлейфом и падение карточки (лист). Всё — из времени кадра, без состояния.
+// Procedural scene geometry ("The Fallen Leaf", docs/stories/leaf-story.md): suprematist shapes, lines that
+// draw themselves over time, rotation with a trail and a falling card (the leaf). Everything from the frame time, no state.
 //
-//   фигура   draw: "shape", shape: disc | ring | rect | wedge | cross | burst (лучи от центра, гаснут к краю; rays — число),
-//            size [w, h], color, width (кольцо, крест — доля; burst — ширина луча),
-//            soft (0..1 — размытый край: уголь, огонь), add (сложение света); начало координат — центр фигуры
-//   линия    draw: "trace", points [[x, y(, z)], …] (в единицах сцены от pos), smooth (кривая через точки), width,
-//            color, dash [штрих, пробел], grow [a, b] — доли кадра: линия дорисовывается; wave {amp, freq, speed, fade [a, b]}
-//            — дрожит, как струна (fade — амплитуда гаснет к нулю); soft (0..1 — мягкий край), add — сложение света
-//            (светящаяся нить)
-//   вращение spin {axis: x|y|z, speed, speed_to, ramp [a, b]} — градусы в секунду (разгон за ramp), trail: n — шлейф из n
-//            следов: быстро вращающееся кольцо читается сферой
-//   падение  fall {to [x, y, z], at [a, b], sway, swings, tumble, flutter, rot_to} — карточка падает из pos в to,
-//            качаясь маятником (sway — размах вбок, tumble — наклон, flutter — кувырок вокруг x), садится в rot_to
+//   shape    draw: "shape", shape: disc | ring | rect | wedge | cross | burst (rays from the centre, fading to the edge; rays — count),
+//            size [w, h], color, width (ring, cross — a share; burst — the ray width),
+//            soft (0..1 — a blurred edge: charcoal, fire), add (additive light); the origin is the shape's centre
+//   line     draw: "trace", points [[x, y(, z)], …] (in scene units from pos), smooth (a curve through the points), width,
+//            color, dash [stroke, gap], grow [a, b] — shares of the shot: the line draws itself; wave {amp, freq, speed, fade [a, b]}
+//            — trembles like a string (fade — the amplitude dies to zero); soft (0..1 — a soft edge), add — additive light
+//            (a glowing thread)
+//   rotation spin {axis: x|y|z, speed, speed_to, ramp [a, b]} — degrees per second (accelerating over ramp), trail: n — a trail of n
+//            copies: a fast-spinning ring reads as a sphere
+//   fall     fall {to [x, y, z], at [a, b], sway, swings, tumble, flutter, rot_to} — the card falls from pos to to,
+//            swinging like a pendulum (sway — sideways amplitude, tumble — tilt, flutter — a somersault around x), lands at rot_to
 import * as THREE from 'three';
 import { depthMaterial } from './post.js';
 
@@ -20,7 +20,7 @@ const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, k) => a + (b - a) * k;
 const smooth = (a, b, x) => { const k = clamp((x - a) / ((b - a) || 1e-6), 0, 1); return k * k * (3 - 2 * k); };
 
-// ---------------------------------------------------------------- фигуры: холст → текстура (гладкий край, глубина по альфе)
+// ---------------------------------------------------------------- shapes: canvas → texture (smooth edge, depth by alpha)
 
 export function shapeCanvas(spec) {
   const [w, h] = spec.size || [10, 10];
@@ -44,7 +44,7 @@ export function shapeCanvas(spec) {
     case 'cross':
       x.fillRect(0, (H - lw) / 2, W, lw); x.fillRect((W - lw) / 2, 0, lw, H);
       break;
-    case 'burst': {  // супрематическое солнце: тонкие лучи из центра, к краю гаснут
+    case 'burst': {  // a suprematist sun: thin rays from the centre, fading to the edge
       const n = spec.rays || 24, R = Math.min(W, H) / 2, half = PI / n * (spec.width ?? 0.35);
       const c = new THREE.Color(spec.color || '#f2c14e');
       const rgba = a => `rgba(${Math.round(c.r * 255)},${Math.round(c.g * 255)},${Math.round(c.b * 255)},${a})`;
@@ -52,7 +52,7 @@ export function shapeCanvas(spec) {
       g.addColorStop(0, rgba(1)); g.addColorStop(0.45, rgba(0.7)); g.addColorStop(1, rgba(0));
       x.fillStyle = g;
       for (let i = 0; i < n; i++) {
-        const a = i / n * 2 * PI, r = R * (i % 2 ? 0.78 : 1);  // лучи через один короче
+        const a = i / n * 2 * PI, r = R * (i % 2 ? 0.78 : 1);  // every other ray is shorter
         x.beginPath(); x.moveTo(W / 2, H / 2);
         x.lineTo(W / 2 + r * Math.cos(a - half), H / 2 + r * Math.sin(a - half));
         x.lineTo(W / 2 + r * Math.cos(a + half), H / 2 + r * Math.sin(a + half));
@@ -66,7 +66,7 @@ export function shapeCanvas(spec) {
   return c;
 }
 
-// меш фигуры: плоскость с текстурой фигуры (центр — в начале координат), + шлейф (копии для вращения)
+// the shape's mesh: a plane with the shape's texture (centred at the origin), + a trail (copies for rotation)
 export function shapeMesh(spec, tex, padUnits, trail = 0) {
   const [w, h] = spec.size || [10, 10];
   const mk = () => {
@@ -87,7 +87,7 @@ export function shapeMesh(spec, tex, padUnits, trail = 0) {
   return { mesh, ghosts, w, h };
 }
 
-// ---------------------------------------------------------------- линии: лента вдоль кривой, рост и пунктир — в шейдере
+// ---------------------------------------------------------------- lines: a ribbon along a curve, growth and dashes — in the shader
 
 function curvePoints(pts, smoothIt) {
   const v = pts.map(p => new THREE.Vector3(p[0], p[1], p[2] || 0));
@@ -99,11 +99,11 @@ function curvePoints(pts, smoothIt) {
 
 const TRACE_VERT = `
   attribute float dist; attribute float side; attribute vec3 nrm;
-  uniform float time; uniform float total; uniform vec4 wave;  // amp, freq (волн на длину), speed, —
+  uniform float time; uniform float total; uniform vec4 wave;  // amp, freq (waves per length), speed, —
   varying float vDist; varying float vSide;
   void main() {
     vDist = dist; vSide = side;
-    float env = sin(3.14159 * clamp(dist / max(total, 1e-3), 0.0, 1.0));  // концы струны закреплены
+    float env = sin(3.14159 * clamp(dist / max(total, 1e-3), 0.0, 1.0));  // the string's ends are fixed
     vec3 p = position + nrm * (wave.x * env * sin(6.28318 * (wave.y * dist / max(total, 1e-3)) - time * wave.z));
     gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
   }`;
@@ -114,7 +114,7 @@ const TRACE_FRAG = `
     if (vDist > progress * total) discard;
     if (dash.x > 0.0 && mod(vDist, dash.x + dash.y) > dash.x) discard;
     float aa = fwidth(vSide) * 1.5;
-    float a = 1.0 - smoothstep(1.0 - aa - soft, 1.0, abs(vSide));  // soft — к краю гаснет: светящаяся нить
+    float a = 1.0 - smoothstep(1.0 - aa - soft, 1.0, abs(vSide));  // soft — fades to the edge: a glowing thread
     gl_FragColor = vec4(color, opacity * a);
   }`;
 
@@ -128,7 +128,7 @@ export function traceMesh(spec) {
   for (let i = 0; i < n; i++) {
     if (i) d += P[i].distanceTo(P[i - 1]);
     t.subVectors(P[Math.min(n - 1, i + 1)], P[Math.max(0, i - 1)]).normalize();
-    nv.crossVectors(Z, t).normalize();  // нормаль в плоскости линии (x, y)
+    nv.crossVectors(Z, t).normalize();  // the normal in the line's plane (x, y)
     for (let s = 0; s < 2; s++) {
       const k = s ? -1 : 1, j = i * 2 + s;
       pos[j * 3] = P[i].x + nv.x * half * k; pos[j * 3 + 1] = P[i].y + nv.y * half * k; pos[j * 3 + 2] = P[i].z;
@@ -155,7 +155,7 @@ export function traceMesh(spec) {
   });
   const mesh = new THREE.Mesh(geo, mat);
   mesh.frustumCulled = false;
-  mesh.userData.noDepth = true;  // тонкая линия: резкость — как у того, что за ней
+  mesh.userData.noDepth = true;  // a thin line: its sharpness follows whatever is behind it
   return { mesh, total: d };
 }
 
@@ -168,7 +168,7 @@ export function updateTrace(mesh, el, t, u, gk) {
   if (w) U.wave.value.x = (w.amp || 0) * (w.fade ? 1 - smooth(w.fade[0], w.fade[1], u) : 1);
 }
 
-// ---------------------------------------------------------------- вращение: угол из скорости с разгоном (интеграл)
+// ---------------------------------------------------------------- rotation: the angle from the speed with acceleration (an integral)
 
 export function spinAngle(spin, lt, dur) {
   const s0 = spin.speed || 0, s1 = spin.speed_to ?? s0;
@@ -180,19 +180,19 @@ export function spinAngle(spin, lt, dur) {
   return { ang: (spin.phase || 0) + ang, speed };
 }
 
-// ---------------------------------------------------------------- падение листа: маятник, кувырок, мягкая посадка
+// ---------------------------------------------------------------- a falling leaf: a pendulum, a somersault, a soft landing
 
 export function fallPose(el, p0, r0, u) {
   const f = el.fall;
   const [a, b] = f.at || [0, 1];
   const k = clamp((u - a) / ((b - a) || 1e-6), 0, 1);
-  const land = 1 - smooth(0.78, 1, k);          // у земли качание стихает
-  const env = smooth(0, 0.12, k) * land;        // и не начинается рывком
+  const land = 1 - smooth(0.78, 1, k);          // near the ground the swinging subsides
+  const env = smooth(0, 0.12, k) * land;        // and doesn't start with a jerk
   const ph = 2 * PI * (f.swings ?? 2.5) * k;
-  const down = k < 0.85 ? k / 0.85 * 0.92 : 0.92 + 0.08 * smooth(0.85, 1, k);  // ровно, у колен — притормаживает
+  const down = k < 0.85 ? k / 0.85 * 0.92 : 0.92 + 0.08 * smooth(0.85, 1, k);  // steady, slowing near the knees
   const to = f.to || p0;
   const p = [lerp(p0[0], to[0], down) + (f.sway ?? 3) * Math.sin(ph) * env,
-    lerp(p0[1], to[1], down) - Math.abs(Math.cos(ph)) * (f.dip ?? 0.6) * env,  // в крайних точках маятника лист «подвисает»
+    lerp(p0[1], to[1], down) - Math.abs(Math.cos(ph)) * (f.dip ?? 0.6) * env,  // at the pendulum's extremes the leaf "hangs"
     lerp(p0[2], to[2], down)];
   const rt = f.rot_to || r0;
   const r = [lerp(r0[0], rt[0], smooth(0.6, 1, k)) + (f.flutter ?? 35) * Math.sin(ph * 2 + 0.7) * env,

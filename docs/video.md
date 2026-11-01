@@ -38,7 +38,7 @@ Results in `out/<story>/`:
 | `<story>-<F>[-<L>]-chapters.txt` | chapters by scene, `0:00 …` (`make youtube`) | the video description as is |
 
 E.g. `make video S=mate-in-3 F=horizontal L=ru` → `out/mate-in-3/mate-in-3-horizontal-ru.mp4`.
-`make youtube` needs a full narration (`время: voicing` in the timeline line), otherwise chapters and subtitles
+`make youtube` needs a full narration (`timing: voicing` in the timeline line), otherwise chapters and subtitles
 drift from the film — it warns.
 
 ## Subtitles: a separate file by default
@@ -86,8 +86,8 @@ Compare in Studio can A/B-test two or three thumbnails.
 | Mac, Apple M2 (GPU, `h264_videotoolbox`) | ≈ 0.04 s/frame at 1920×1080 (measured) | ≈ 20 min |
 | no GPU (SwiftShader) | ≈ 1 s/frame at 720×1280 | hours |
 
-The first lines of a render say what it runs on: `WebGL: … Apple M2 … — видеокарта` (GPU) or `SwiftShader` (software),
-and `кодек: h264_videotoolbox` (hardware encoder). Options (`local.mk` or the command line):
+The first lines of a render say what it runs on: `WebGL: … Apple M2 … — GPU` or `SwiftShader` (software),
+and `codec: h264_videotoolbox` (hardware encoder). Options (`local.mk` or the command line):
 
 - `COOL=1` (`CAPTURE_COOL = 1`) — no overheating: low-priority ffmpeg, 2 threads, pauses between frames;
 - `CAPTURE_GL = gpu | cpu`, `CAPTURE_ENCODER = videotoolbox | x264` — force the choice;

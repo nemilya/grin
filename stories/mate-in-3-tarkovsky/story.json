@@ -1,5 +1,5 @@
 {
- "_": "Постановка «Мата в три хода» рукой Тарковского — «киноизображение»: фотографичные слои в объёмной сцене (styles/tarkovsky-film.json), длинные планы, паузы, стихии (directors/tarkovsky.json в раскадровке). Текст, перевод и голос — базовой истории (base); свои — библия, раскадровка, ассеты, сборка.",
+ "_": "A production of “Mate in Three Moves” by the hand of Tarkovsky — the “film image”: photographic layers in a 3D scene (styles/tarkovsky-film.json), long takes, pauses, the elements (directors/tarkovsky.json in the storyboard). Text, translation and voice come from the base story (base); its own — the bible, storyboard, assets, build.",
  "base": "mate-in-3",
  "film": {
   "style": "tarkovsky-film",
@@ -14,7 +14,7 @@
    "height": 1080,
    "fps": 24,
    "storyboard": "storyboard-16x9.json",
-   "_": "горизонталь 16:9 (YouTube): те же реплики, свет, звук, ассеты; камеры под широкий кадр — storyboard-16x9.json"
+   "_": "horizontal 16:9 (YouTube): the same cues, light, sound, assets; cameras for the wide frame — storyboard-16x9.json"
   }
  }
 }

@@ -1,12 +1,12 @@
-"""Таймлайн: раскадровка + время речи → stories/<slug>/build/timeline.json — всё, что нужно сцене (stage/).
+"""Timeline: storyboard + speech timing → stories/<slug>/build/timeline.json — everything the stage (stage/) needs.
 
-Время речи: из озвучки (film.voicing, когда озвучены все абзацы — время каждого предложения и слова
-по обратному распознаванию), иначе — оценка по темпу чтения (CHARS_PER_SEC, паузы между абзацами как в озвучке).
-Поменялась озвучка — пересобрать таймлайн, раскадровка остаётся та же: кадры привязаны к предложениям, не к секундам.
+Speech timing: from the narration (film.voicing, when every paragraph is narrated — the time of every sentence and word
+from back-transcription), otherwise an estimate from the reading pace (CHARS_PER_SEC, pauses between paragraphs as in narration).
+The narration changed — rebuild the timeline; the storyboard stays the same: shots are anchored to sentences, not seconds.
 
-Раскадровка (storyboard.json) пишется дельтами: состояние сцены (элементы, их карточки и места, текущая
-декорация) переходит из кадра в кадр, кадр меняет только то, что указал. Здесь дельты разворачиваются:
-у каждого кадра в таймлайне — полный список видимых элементов, камера (откуда → куда), фокус, свет.
+The storyboard (storyboard.json) is written in deltas: the scene state (elements, their cards and places, the current
+set) carries over from shot to shot, a shot changes only what it names. Here the deltas are unfolded:
+every shot in the timeline has the full list of visible elements, the camera (from → to), focus, light.
 """
 from __future__ import annotations
 
@@ -16,9 +16,9 @@ from pathlib import Path
 
 from . import config, pricing, prepare, voicing
 
-CUT_LEAD = 0.25       # с: склейка чуть раньше начала фразы — как монтирует монтажёр
-PARA_GAP = 0.8        # с: пауза между абзацами при оценке (как gaps.paragraph в озвучке)
-SUB_MAX_CHARS = 64    # знаков в субтитре (две строки по ~32 в вертикальном кадре)
+CUT_LEAD = 0.25       # s: the cut lands slightly before the phrase starts — as an editor cuts
+PARA_GAP = 0.8        # s: the pause between paragraphs in the estimate (like gaps.paragraph in narration)
+SUB_MAX_CHARS = 64    # chars per subtitle (two lines of ~32 in a vertical frame)
 SUB_MIN_DUR = 1.1
 PERSIST = ('card', 'pos', 'rot', 'h', 'fx', 'glow', 'parts', 'hidden', 'shadow_only', 'k', 'color', 'size', 'box', 'set')
 CUE_RE = re.compile(r'^(?P<p>\d{3})\.(?P<s>\d+)(?:\+(?P<f>0?\.\d+|0|1(?:\.0+)?))?(?:-(?P<b>\d+(?:\.\d+)?))?$')
@@ -29,27 +29,27 @@ def build_dir(slug: str) -> Path:
     return config.story_dir(slug) / 'build'
 
 
-SUBS = {  # раскладка субтитров по ориентации кадра: y — центр блока (доля высоты), width — доля ширины, size — кегль
+SUBS = {  # subtitle layout by frame orientation: y — block centre (share of height), width — share of width, size — font size
     'portrait': {'y': 0.735, 'width': 0.82, 'size': 0.0285, 'max_chars': 64},
     'landscape': {'y': 0.885, 'width': 0.72, 'size': 0.046, 'max_chars': 84},
 }
 
 
 def film(slug: str, fmt: str | None = None, lang: str | None = None) -> dict:
-    """Параметры ролика: story.json → film, поверх — formats.<fmt> (горизонталь и т. п.);
-    lang — другой язык ролика: голос и субтитры этого языка (film.voicings.<lang>), раскадровка та же."""
+    """Film parameters: story.json → film, with formats.<fmt> on top (horizontal, etc.);
+    lang — another film language: that language's voice and subtitles (film.voicings.<lang>), the same storyboard."""
     st = config.story(slug)
     f = dict(st.get('film', {}))
     f.setdefault('lang', st['source']['lang'])
-    f['storyboard_lang'] = f['lang']  # язык, на предложения которого ссылаются реплики раскадровки
+    f['storyboard_lang'] = f['lang']  # the language whose sentences the storyboard cues refer to
     if fmt:
         if fmt not in (st.get('formats') or {}):
-            raise KeyError(f'нет формата {fmt} в story.json → formats')
+            raise KeyError(f'no format {fmt} in story.json → formats')
         f.update(st['formats'][fmt])
     if lang and lang != f['lang']:
         vid = (f.get('voicings') or {}).get(lang)
         if not vid:
-            raise KeyError(f'нет озвучки {lang}: story.json → film.voicings.{lang}')
+            raise KeyError(f'no narration for {lang}: story.json → film.voicings.{lang}')
         f.update(lang=lang, voicing=vid)
     orient = 'landscape' if f.get('width', 1080) > f.get('height', 1920) else 'portrait'
     f['subtitles'] = {**SUBS[orient], **(f.get('subtitles') or {})}
@@ -58,9 +58,9 @@ def film(slug: str, fmt: str | None = None, lang: str | None = None) -> dict:
 
 
 def storyboard(slug: str, fmt: str | None = None) -> dict:
-    """Раскадровка формата. Своя раскадровка формата может наследовать основную (\"extends\") и менять:
-    cams / lights (по ключам), shots — правки кадров по id (cast — по элементам; null — убрать ключ),
-    drop — убрать кадры, add — новые кадры ({"after": id, …кадр})."""
+    """The storyboard of a format. A format's own storyboard can inherit the main one (\"extends\") and change:
+    cams / lights (by key), shots — shot edits by id (cast — by element; null — remove the key),
+    drop — remove shots, add — new shots ({"after": id, …shot})."""
     sdir = config.story_dir(slug)
     name = film(slug, fmt).get('storyboard', 'storyboard.json') if fmt else 'storyboard.json'
     sb = config.read_json(sdir / name, {}) or {}
@@ -100,22 +100,22 @@ def bible(slug: str) -> dict:
     return config.read_json(config.story_dir(slug) / 'bible.json', {}) or {}
 
 
-# ---------------------------------------------------------------- время речи
+# ---------------------------------------------------------------- speech timing
 
 def speech_times(slug: str, holds: dict | None = None, lang: str | None = None) -> tuple[dict, str]:
-    """{id абзаца: {t0, t1, text, sentences: [[a, b, t0, t1]], words: [[a, b, t0, t1]], take?, cuts?}}, источник.
-    Время — от начала речи (без preroll). Озвученный абзац (актуальный дубль в film.voicing) — по дублю:
-    длительность и время слов из обратного распознавания; остальные — оценка по темпу. Так раскадровку можно
-    смотреть и до озвучки, и с частью озвученных абзацев.
-    holds — тишина, с. «018»: после абзаца 18; «018.3»: после его предложения 3 — дубль режется между
-    предложениями, cuts: [[с от начала дубля, пауза]] (звук вставляет тишину).
-    lang — язык ролика (по умолчанию film.lang); паузы, заданные по предложениям языка раскадровки,
-    переносятся на ближайший промежуток между предложениями этого языка."""
+    """{paragraph id: {t0, t1, text, sentences: [[a, b, t0, t1]], words: [[a, b, t0, t1]], take?, cuts?}}, source.
+    Time is from the start of speech (no preroll). A narrated paragraph (a current take in film.voicing) — from the take:
+    duration and word timings from back-transcription; the rest — an estimate from the pace. So the storyboard can be
+    watched both before narration and with only some paragraphs narrated.
+    holds — silence, s. "018": after paragraph 18; "018.3": after its sentence 3 — the take is cut between
+    sentences, cuts: [[s from the take's start, pause]] (the sound inserts silence).
+    lang — the film language (film.lang by default); pauses given by sentences of the storyboard language
+    move to the nearest gap between sentences of this language."""
     fm = film(slug, lang=lang)
     lang, vid = fm['lang'], fm.get('voicing')
     prep = prepare.load(slug, lang)
     if not prep:
-        raise RuntimeError(f'нет prepared/{lang}.json: сначала make prepare / перевод')
+        raise RuntimeError(f'no prepared/{lang}.json: run make prepare / translation first')
     holds = _map_holds(holds or {}, slug, fm['storyboard_lang'], lang, prep)
     film_ = fm
     voiced = {}
@@ -156,7 +156,7 @@ def speech_times(slug: str, holds: dict | None = None, lang: str | None = None) 
                     continue
                 rec = out[p['id']]
                 a_end, b_start = rec['sentences'][k][3], rec['sentences'][k + 1][2]
-                at = (a_end + b_start) / 2                      # середина промежутка между предложениями
+                at = (a_end + b_start) / 2                      # the middle of the gap between sentences
                 cuts.append([round(at - rec['t0'], 3), h])
                 for lst in (rec['sentences'], rec['words']):
                     for x in lst:
@@ -176,8 +176,8 @@ def _paras(prep: dict) -> dict:
 
 
 def _map_holds(holds: dict, slug: str, src_lang: str, lang: str, prep: dict) -> dict:
-    """Паузы «018.16» (после предложения языка раскадровки) → предложение языка ролика с ближайшим концом
-    по доле текста абзаца. Паузы после абзаца («018») — как есть."""
+    """Pauses "018.16" (after a sentence of the storyboard language) → the film-language sentence whose end is nearest
+    by share of the paragraph text. Pauses after a paragraph ("018") — as is."""
     if not holds or lang == src_lang:
         return holds
     src = _paras(prepare.load(slug, src_lang) or {'sections': []})
@@ -198,54 +198,54 @@ def _map_holds(holds: dict, slug: str, src_lang: str, lang: str, prep: dict) -> 
 
 
 def _time_at(para: dict, x: float) -> float:
-    """Время в абзаце (по словам) в точке x — доля длины его текста."""
+    """The time within a paragraph (by words) at point x — a share of its text length."""
     c = x * len(para['text'])
     prev = None
     for a, b, t0, t1 in para['words']:
         if a >= c:
             if prev is None:
                 return t0
-            pa, pb, p0, p1 = prev  # между словами — по доле промежутка
+            pa, pb, p0, p1 = prev  # between words — by share of the gap
             return p1 + (t0 - p1) * min(1.0, max(0.0, (c - pb) / max(1, a - pb)))
         if b > c:
             return t0 + (t1 - t0) * (c - a) / max(1, b - a)
         prev = (a, b, t0, t1)
-    return prev[3] if prev else para['t1']  # после последнего слова — его конец (дальше в дубле тишина)
+    return prev[3] if prev else para['t1']  # after the last word — its end (the take is silent after it)
 
 
 def cue_time(cue: str, times: dict, src: dict | None = None) -> float:
-    """«018.13+0.4» → секунды от начала речи; «start» → 0; «002.0-4» — за 4 с до реплики (интертитр в паузе).
-    src — абзацы языка раскадровки, если ролик на другом языке: место реплики — по доле текста абзаца."""
+    """A cue "018.13+0.4" → seconds from the start of speech; "start" → 0; "002.0-4" — 4 s before the cue (an intertitle in a pause).
+    src — the paragraphs of the storyboard language if the film is in another language: the cue's place — by share of the paragraph text."""
     if cue == 'start':
         return 0.0
     m = CUE_RE.match(cue or '')
     if not m:
-        raise ValueError(f'реплика «{cue}»: нужен вид 018.13, 018.13+0.4 или 018.13-4')
+        raise ValueError(f'cue "{cue}": expected the form 018.13, 018.13+0.4 or 018.13-4')
     pid = f"story-{m.group('p')}"
     para = times.get(pid)
     if para is None:
-        raise ValueError(f'реплика «{cue}»: нет абзаца {pid}')
+        raise ValueError(f'cue "{cue}": no paragraph {pid}')
     k = int(m.group('s'))
     f = float(m.group('f') or 0)
     back = float(m.group('b') or 0)
     if src and pid in src and src[pid]['text'] != para['text']:
         sp = src[pid]
         if k >= len(sp['sentences']):
-            raise ValueError(f'реплика «{cue}»: в {pid} предложений {len(sp["sentences"])}')
+            raise ValueError(f'cue "{cue}": {pid} has {len(sp["sentences"])} sentences')
         a, b = sp['sentences'][k]
         n = max(1, len(sp['text']))
         t0, t1 = _time_at(para, a / n), _time_at(para, b / n)
         return t0 + f * (t1 - t0) - (CUT_LEAD if not f else 0) - back
     if k >= len(para['sentences']):
-        raise ValueError(f'реплика «{cue}»: в {pid} предложений {len(para["sentences"])}')
+        raise ValueError(f'cue "{cue}": {pid} has {len(para["sentences"])} sentences')
     _, _, t0, t1 = para['sentences'][k]
     return t0 + f * (t1 - t0) - (CUT_LEAD if not f else 0) - back
 
 
-# ---------------------------------------------------------------- ассеты
+# ---------------------------------------------------------------- assets
 
 def asset_spec(b: dict, key: str, story_dir: Path) -> dict:
-    """Ключ карточки → описание для сцены: вид, размер, цвет заглушки, файл (если сгенерирован), шарниры."""
+    """A card key → its description for the stage: kind, size, placeholder colour, file (if generated), joints."""
     if key in BUILTIN:
         spec = dict(BUILTIN[key])
     else:
@@ -261,7 +261,7 @@ def asset_spec(b: dict, key: str, story_dir: Path) -> dict:
                 if 'parts' in spec:
                     spec['parts'] = {n: {k: v for k, v in pt.items() if k != 'desc'} | {'card': f'{head}/{n}'}
                                      for n, pt in spec['parts'].items()}
-            else:  # часть шарнирной куклы
+            else:  # a part of a jointed puppet
                 for pose in poses.values():
                     if tail in (pose.get('parts') or {}):
                         spec = {k: v for k, v in pose['parts'][tail].items() if k not in ('desc', 'attach')}
@@ -272,7 +272,7 @@ def asset_spec(b: dict, key: str, story_dir: Path) -> dict:
         elif head in (b.get('sets') or {}):
             spec = {k: v for k, v in (b['sets'][head]['pieces'].get(tail) or {}).items() if k not in ('desc', 'pos', 'rot')}
         if not spec:
-            raise KeyError(f'нет ассета {key} в библии')
+            raise KeyError(f'no asset {key} in the bible')
     spec.setdefault('kind', 'cutout')
     spec.setdefault('label', key)
     got = ((config.read_json(story_dir / 'assets' / 'assets.json', {}) or {}).get('items') or {}).get(key)
@@ -281,15 +281,15 @@ def asset_spec(b: dict, key: str, story_dir: Path) -> dict:
     return spec
 
 
-# ---------------------------------------------------------------- разворачивание раскадровки
+# ---------------------------------------------------------------- unfolding the storyboard
 
 def _ease_last(v):
-    """Значение шарнира: число или ключевые кадры [[доля, градусы], …] → последнее."""
+    """A joint value: a number or keyframes [[share, degrees], …] → the last one."""
     return v[-1][1] if isinstance(v, list) else v
 
 
 def _settle(el: dict) -> dict:
-    """Конец кадра → начальное состояние следующего: движения доехали, переходы закончились."""
+    """The end of a shot → the starting state of the next: moves have arrived, transitions are finished."""
     el = dict(el)
     mv = el.pop('move', None)
     if mv:
@@ -300,11 +300,11 @@ def _settle(el: dict) -> dict:
         if 'rot_to' in mv:
             el['rot'] = mv['rot_to']
     fall = el.pop('fall', None)
-    if fall:  # лист упал — лежит, где упал
+    if fall:  # a fallen leaf stays where it fell
         el['pos'] = fall.get('to', el.get('pos'))
         if 'rot_to' in fall:
             el['rot'] = fall['rot_to']
-    el.pop('grow', None)  # линия дорисована
+    el.pop('grow', None)  # the line is fully drawn
     if 'k_to' in el:
         el['k'] = el.pop('k_to')
     el.pop('ramp', None)
@@ -322,7 +322,7 @@ def _piece_id(b: dict, set_id: str, key: str) -> str | None:
 
 
 def _ensure_set(state: dict, b: dict, set_id: str) -> None:
-    """Куски декорации — элементы состояния «<декорация>:<кусок>» (один раз, дальше их меняет раскадровка)."""
+    """Set pieces — state elements "<set>:<piece>" (once; after that the storyboard changes them)."""
     for name, pc in ((b.get('sets') or {}).get(set_id, {}).get('pieces') or {}).items():
         pid = f'{set_id}:{name}'
         if pid not in state:
@@ -337,12 +337,12 @@ def _apply(state: dict, b: dict, set_id: str, delta: dict | None, where: str, er
             state.pop(eid, None)
             continue
         cur = dict(state.get(eid) or {})
-        if val.get('reset') and cur.get('piece'):  # кусок декорации — на место из библии
+        if val.get('reset') and cur.get('piece'):  # a set piece — back to its place from the bible
             pc = b['sets'][set_id]['pieces'][key]
             state[eid] = {'card': cur['card'], 'pos': pc.get('pos', [0, 0, 0]), 'rot': pc.get('rot', [0, 0, 0]), 'set': set_id, 'piece': True}
             continue
         if not cur and 'card' not in val:
-            errors.append(f'{where}: элемент «{key}» появляется без card')
+            errors.append(f'{where}: element "{key}" appears without a card')
             continue
         if 'card' in val and cur.get('card') and val['card'] != cur['card'] and 'swap_at' in val:
             cur['card_prev'] = cur['card']
@@ -358,21 +358,21 @@ def _apply(state: dict, b: dict, set_id: str, delta: dict | None, where: str, er
 
 
 def _cam(sb: dict, shot: dict, prev: dict | None, where: str, errors: list, cont: bool = False) -> dict:
-    """cont — продолжить с места, где камера закончила прошлый план (та же камера, без перехода): без скачка назад."""
+    """cont — continue from where the camera ended the previous shot (the same camera, no transition): no jump back."""
     base = shot.get('cam')
     if (base is None or cont) and prev:
         c = {'pos': prev['to']['pos'], 'look': prev['to']['look'], 'fov': prev['to']['fov']}
     else:
         c = copy.deepcopy((sb.get('cams') or {}).get(base) or {})
         if not c:
-            errors.append(f'{where}: нет камеры «{base}»')
+            errors.append(f'{where}: no camera "{base}"')
             c = {'pos': [0, 15, 60], 'look': [0, 10, 0], 'fov': 34}
     c.setdefault('fov', 34)
     to = copy.deepcopy(c)
-    if shot.get('cam_to'):  # переезд: от камеры cam к камере cam_to за кадр
+    if shot.get('cam_to'):  # a move: from camera cam to camera cam_to over the shot
         to = copy.deepcopy((sb.get('cams') or {}).get(shot['cam_to']) or {})
         if not to:
-            errors.append(f"{where}: нет камеры «{shot['cam_to']}»")
+            errors.append(f"{where}: no camera \"{shot['cam_to']}\"")
             to = copy.deepcopy(c)
         to.setdefault('fov', c['fov'])
     push = float(shot.get('push', 0))
@@ -390,16 +390,16 @@ def _cam(sb: dict, shot: dict, prev: dict | None, where: str, errors: list, cont
 
 
 def _smooth_chains(shots: list) -> None:
-    """Цепочка планов, где камера продолжает движение (cam_continue): на стыках не тормозить — разгон только в начале
-    цепочки, торможение — в конце (ease in / out / linear вместо inOut у каждого плана)."""
+    """A chain of shots where the camera keeps moving (cam_continue): don't brake at the joins — accelerate only at the
+    chain's start, decelerate at its end (ease in / out / linear instead of inOut for each shot)."""
     moving = lambda c: any(abs(a - b) > 1e-3 for k in ('pos', 'look') for a, b in zip(c['from'][k], c['to'][k]))  # noqa: E731
     for i, s in enumerate(shots):
         c = s['camera']
         if c.get('ease', 'inOut') != 'inOut' or not moving(c):
             continue
-        start = c.get('cont') and moving(shots[i - 1]['camera'])                     # въезжает на ходу
+        start = c.get('cont') and moving(shots[i - 1]['camera'])                     # enters while moving
         nxt = shots[i + 1]['camera'] if i + 1 < len(shots) else None
-        end = bool(nxt and nxt.get('cont') and moving(nxt))                          # уезжает на ходу
+        end = bool(nxt and nxt.get('cont') and moving(nxt))                          # leaves while moving
         c['ease'] = {(True, True): 'linear', (True, False): 'out', (False, True): 'in'}.get((start, end), 'inOut')
 
 
@@ -408,13 +408,13 @@ def _light(sb: dict, b: dict, set_id: str, shot: dict, where: str, errors: list)
     name = ov.get('preset') or (b.get('sets') or {}).get(set_id, {}).get('light') or 'lamp'
     preset = copy.deepcopy((sb.get('lights') or {}).get(name))
     if preset is None:
-        errors.append(f'{where}: нет света «{name}»')
+        errors.append(f'{where}: no light "{name}"')
         preset = copy.deepcopy(next(iter((sb.get('lights') or {'x': {}}).values())))
     return {'preset': name, **preset, **{k: v for k, v in ov.items() if k != 'preset'}}
 
 
 def subtitles(times: dict, offset: float, max_chars: int = SUB_MAX_CHARS) -> list[dict]:
-    """Субтитры из слов со временем: не длиннее max_chars, рвём по концу предложения и по знакам."""
+    """Subtitles from timed words: no longer than max_chars, broken at sentence ends and punctuation."""
     subs = []
     for pid, p in times.items():
         text, words = p['text'], p['words']
@@ -425,7 +425,7 @@ def subtitles(times: dict, offset: float, max_chars: int = SUB_MAX_CHARS) -> lis
             if not cur:
                 return
             a, b = cur[0][0], cur[-1][1]
-            while b < len(text) and not text[b].isspace():  # знаки и кавычки после слова
+            while b < len(text) and not text[b].isspace():  # punctuation and quotes after the word
                 b += 1
             subs.append({'t0': round(cur[0][2] + offset, 3), 't1': round(cur[-1][3] + offset, 3),
                          'text': text[a:b].strip(), 'p': pid})
@@ -443,14 +443,14 @@ def subtitles(times: dict, offset: float, max_chars: int = SUB_MAX_CHARS) -> lis
             elif re.search(r'[,;:—…]', tail) and size > max_chars * 0.62:
                 flush()
         flush()
-    for i, s in enumerate(subs):  # держать до следующего, но не больше 0.6 с после конца речи
+    for i, s in enumerate(subs):  # hold until the next one, but no more than 0.6 s after speech ends
         nxt = subs[i + 1]['t0'] if i + 1 < len(subs) else s['t1'] + 1.5
         s['t1'] = round(min(max(s['t1'] + 0.35, s['t0'] + SUB_MIN_DUR), nxt - 0.04, s['t1'] + 0.6) if nxt > s['t0'] else s['t1'], 3)
     return subs
 
 
 def tag(fmt: str | None = None, name: str | None = None, lang: str | None = None) -> str:
-    """Имя сборки: '' (основной формат целиком), 'demo', 'horizontal', 'horizontal-demo', 'ru', 'horizontal-ru-demo'."""
+    """The build name: '' (the main format, whole), 'demo', 'horizontal', 'horizontal-demo', 'ru', 'horizontal-ru-demo'."""
     return '-'.join(x for x in (fmt, lang, name) if x)
 
 
@@ -458,7 +458,7 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
           fmt: str | None = None, lang: str | None = None) -> dict:
     sdir = config.story_dir(slug)
     fm = film(slug, fmt, lang)
-    lang = fm['lang'] if fm['lang'] != fm['storyboard_lang'] else None  # другой язык ролика (сборка «-ru»)
+    lang = fm['lang'] if fm['lang'] != fm['storyboard_lang'] else None  # another film language (the "-ru" build)
     sb, b = storyboard(slug, fmt), bible(slug)
     times, source = speech_times(slug, sb.get('holds'), fm['lang'])
     src = _paras(prepare.load(slug, fm['storyboard_lang']) or {'sections': []}) if lang else None
@@ -467,7 +467,7 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
     errors: list[str] = []
     director = config.read_json(config.DIRECTORS / f"{sb['director']}.json", {}) if sb.get('director') else {}
     if sb.get('director') and not director:
-        errors.append(f"нет режиссёра directors/{sb['director']}.json")
+        errors.append(f"no director directors/{sb['director']}.json")
     state: dict = {}
     shots, cues, assets = [], [], {}
     set_id = None
@@ -477,7 +477,7 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
         _ensure_set(state, b, set_id)
         _apply(state, b, set_id, sc.get('cast'), sc['id'], errors)
         for sh in sc.get('shots', []):
-            sh = {**(director.get('defaults') or {}), **sh}  # умолчания режиссёра (штатив, ход камеры…)
+            sh = {**(director.get('defaults') or {}), **sh}  # the director's defaults (tripod, camera move…)
             where = f"{sc['id']}/{sh.get('id')}"
             try:
                 t0 = round(cue_time(sh['at'], times, src) + (pre if sh['at'] != 'start' else 0), 3)
@@ -487,7 +487,7 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
             if sh.get('set'):
                 set_id = sh['set']
                 if set_id not in (b.get('sets') or {}):
-                    errors.append(f'{where}: нет декорации «{set_id}»')
+                    errors.append(f'{where}: no set "{set_id}"')
                 _ensure_set(state, b, set_id)
             state = {k: _settle(v) for k, v in state.items()}
             _apply(state, b, set_id, sh.get('cast'), where, errors)
@@ -509,7 +509,7 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
             cont = bool(sb.get('cam_continue') and prev_cam and shots and sh.get('cam') == prev_cam['name']
                         and shots[-1]['set'] == set_id and sh.get('in', 'cut') == 'cut' and not sh.get('cam_to'))
             cam = _cam(sb, sh, prev_cam, where, errors, cont)
-            if cont:  # только у продолжений: описание кадра других постановок (отпечатки постеров) не меняется
+            if cont:  # only for continuations: the shot description of other productions (poster fingerprints) doesn't change
                 cam['cont'] = True
             prev_cam = cam
             shots.append({'id': sh.get('id'), 'scene': sc['id'], 'scene_title': sc.get('title', ''), 'at': sh['at'], 't0': t0, 'set': set_id,
@@ -521,19 +521,19 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
     _smooth_chains(shots)
     for (a, wa), (bb, wb) in zip(cues, cues[1:]):
         if bb <= a:
-            errors.append(f'{wb}: начинается не позже {wa} ({bb:.2f} ≤ {a:.2f} с)')
+            errors.append(f'{wb}: starts no later than {wa} ({bb:.2f} ≤ {a:.2f} s)')
     duration = round(speech_end + float(sb.get('tail', 4)), 3)
     for i, s in enumerate(shots):
         s['t1'] = shots[i + 1]['t0'] if i + 1 < len(shots) else duration
     _title_texts(assets, slug, fm['lang'])
     style = config.read_json(config.STYLES / f"{fm.get('style', 'paper-theatre')}.json", {}) or {}
-    for spec in assets.values():  # слои стиля: мягкий край, без тени (кино) — у вырезок
+    for spec in assets.values():  # style layers: a soft edge, no shadow (cinema) — for cut-outs
         if spec.get('kind') == 'cutout':
             for k, v in (style.get('layers') or {}).items():
                 spec.setdefault(k, v)
     warnings = []
     if director.get('min_shot'):
-        warnings += [f"{s['id']}: план {s['t1'] - s['t0']:.1f} с — короче {director['min_shot']} с ({sb['director']})"
+        warnings += [f"{s['id']}: shot {s['t1'] - s['t0']:.1f} s — shorter than {director['min_shot']} s ({sb['director']})"
                      for s in shots if s['t1'] - s['t0'] < director['min_shot']]
     paras = [{'id': pid, 't0': round(p['t0'] + pre, 3), 't1': round(p['t1'] + pre, 3), **({'take': p['take']} if p.get('take') else {}),
               **({'cuts': p['cuts']} if p.get('cuts') else {})} for pid, p in times.items()]
@@ -545,7 +545,7 @@ def build(slug: str, *, save: bool = True, start: str | None = None, end: str | 
                          if x['p'].rsplit('-', 1)[-1] not in set(sb.get('no_subtitles') or [])], 'errors': errors,
            **({'fade_out': float(sb['fade_out'])} if sb.get('fade_out') else {}),
            **({'warnings': warnings} if warnings else {})}
-    if start == 'demo':  # демо-отрезок раскадровки (demo_start), по умолчанию — финал
+    if start == 'demo':  # the storyboard's demo excerpt (demo_start), the finale by default
         start = sb.get('demo_start', 's12a')
     if start or end:
         out = cut(out, start, end)
@@ -559,8 +559,8 @@ ATTR_RE = re.compile(r'\s(?=(?:[A-ZА-ЯЁ]\.\s?)+(?:[A-ZА-ЯЁ][\w-]+\s?)+[.,]
 
 
 def _title_texts(assets: dict, slug: str, lang: str) -> None:
-    """Интертитры (draw: title) — текст на языке ролика: para — абзац (эпиграф: подпись «Ф. Купер. …» — отдельно),
-    story_title — автор и название из story.json."""
+    """Intertitles (draw: title) — text in the film language: para — a paragraph (an epigraph: the attribution «Ф. Купер. …» — separate),
+    story_title — the author and title from story.json."""
     paras = None
     st = config.story(slug)
     for spec in assets.values():
@@ -579,7 +579,7 @@ def _title_texts(assets: dict, slug: str, lang: str) -> None:
 
 
 def chapters(tl: dict, min_len: float = 10.0) -> list[tuple[float, str]]:
-    """Главы для YouTube по сценам: первая — с 0:00, короче min_len — сливаются с предыдущей."""
+    """YouTube chapters by scene: the first one at 0:00, shorter than min_len — merged into the previous one."""
     out: list[list] = []
     for s in tl['shots']:
         if not out or out[-1][2] != s['scene']:
@@ -603,7 +603,7 @@ def srt(tl: dict) -> str:
 
 
 def cut(tl: dict, start: str | None, end: str | None, lead: float = 1.2) -> dict:
-    """Отрезок таймлайна: от кадра start до кадра end (не включая), время — с нуля (затемнение в начале)."""
+    """A timeline excerpt: from shot start to shot end (exclusive), time from zero (a fade-in at the start)."""
     ids = [s['id'] for s in tl['shots']]
     i = ids.index(start) if start else 0
     j = ids.index(end) if end else len(ids)

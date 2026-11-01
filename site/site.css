@@ -1,4 +1,4 @@
-/* Сайт grin.nemilya.me: об авторе, рассказы, чтение с озвучкой, видео в браузере. Шрифты — Source Serif 4, Golos Text (OFL). */
+/* The site grin.nemilya.me: about the author, stories, reading with narration, video in the browser. Fonts — Source Serif 4, Golos Text (OFL). */
 @font-face { font-family: Serif; font-weight: 400; font-display: swap; src: url(fonts/serif-400-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
 @font-face { font-family: Serif; font-weight: 400; font-display: swap; src: url(fonts/serif-400-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
 @font-face { font-family: Serif; font-weight: 400; font-style: italic; font-display: swap; src: url(fonts/serif-400i-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
@@ -19,7 +19,7 @@
   --fs: clamp(17px, 1rem + 0.45vw, 21px);
   color-scheme: light;
 }
-/* ночная схема: по системе, если читатель не выбрал сам (кнопка ☀/☾ → data-theme на <html>) */
+/* the night scheme: by the system unless the reader chose (the ☀/☾ button → data-theme on <html>) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme=light]) {
     --bg: #17140F; --paper: #1E1A15; --ink: #E9E1D4; --muted: #A2968A; --line: #3A3229;
@@ -51,15 +51,15 @@ button { font: inherit; color: inherit; }
 .tools select { font-weight: 400; background: var(--paper); }
 .tools .theme { width: 34px; }
 
-/* субтитры сцены (stage.js рисует их шрифтом «Paper Serif») */
+/* the scene's subtitles (stage.js draws them with the "Paper Serif" font) */
 @font-face { font-family: "Paper Serif"; font-weight: 400; src: url(fonts/serif-400-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
 @font-face { font-family: "Paper Serif"; font-weight: 400; src: url(fonts/serif-400-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
 @font-face { font-family: "Paper Serif"; font-weight: 400; font-style: italic; src: url(fonts/serif-400i-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
 @font-face { font-family: "Paper Serif"; font-weight: 400; font-style: italic; src: url(fonts/serif-400i-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0100-024F, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
-/* интертитры «авангарда» (paper.js: look suprematist) — рубленый шрифт */
+/* the "avant-garde" intertitles (paper.js: look suprematist) — a blocky typeface */
 @font-face { font-family: "Stage Sans"; font-weight: 600; src: url(fonts/golos-600-cyr.woff2) format('woff2'); unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
 @font-face { font-family: "Stage Sans"; font-weight: 600; src: url(fonts/golos-600-lat.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2190-21FF, U+2212; }
-/* чтение: страница без прокрутки, плеер внизу */
+/* reading: a page without scrolling, the player at the bottom */
 body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
 .reader { flex: 1; min-height: 0; display: flex; flex-direction: column; }
 .reader .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px;
@@ -73,8 +73,8 @@ body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: col
 .page h2 { font-size: 1.2em; margin: 1em 0 .5em; }
 .page p { margin: 0 0 .7em; text-indent: 1.4em; hyphens: auto; -webkit-hyphens: auto; text-align: justify; }
 .page p.it { font-style: italic; text-align: right; text-indent: 0; color: var(--muted); }
-/* подсветка за голосом: предложение — лёгкая тёплая подложка, слово — плашкой. День — плашка светлая
-   (цвет подсветки стиля наполовину с бумагой), текст обычный; ночь — насыщенная плашка, текст тёмный. */
+/* highlighting after the voice: the sentence — a light warm underlay, the word — a label. Day — a light label
+   (the style's highlight colour half-mixed with paper), normal text; night — a saturated label, dark text. */
 :root {
   --hl-s-bg: color-mix(in srgb, var(--hl-s) 60%, transparent);
   --hl-w-color: var(--ink);
@@ -102,7 +102,7 @@ body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: col
   background: var(--paper); border-top: 1px solid var(--line); font: 13px/1 var(--sans); }
 .player > * { flex: none; }
 .player .pp { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-ink); font-size: 18px; cursor: pointer; }
-/* шкала по центру круглой кнопки: время слева и справа от неё, в одну линию */
+/* the scale centred on the round button: time to its left and right, in one line */
 .player .track { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
 .player input[type=range] { flex: 1; min-width: 0; margin: 0; accent-color: var(--accent); }
 .player .tm { flex: none; min-width: 3.2em; color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -114,12 +114,12 @@ body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: col
 .player .fl[hidden] { display: none; }
 @media (max-width: 520px) { .pager .nav { display: none; } .pager { justify-content: center; } }
 
-/* поделиться местом: кнопка в плеере и подсказка «Ссылка скопирована» */
+/* sharing the place: a button in the player and the "Link copied" hint */
 .player button.dl { border: 0; background: none; padding: 0; cursor: pointer; position: relative; }
 .player .share.tip::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); right: 0; white-space: nowrap;
   font: 12px/1 var(--sans); padding: 6px 10px; border-radius: 6px; background: var(--ink); color: var(--paper); }
 
-/* подсказка «нажмите, чтобы слушать»: мягкий пульс вокруг кнопки; первому слушателю — плашка над ней */
+/* the "tap to listen" hint: a soft pulse around the button; the first listener gets a label above it */
 .player { position: relative; }
 .player .pp { position: relative; }
 .player .pp.hint { animation: pp-breathe 2.4s ease-out infinite; }
@@ -138,7 +138,7 @@ body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: col
 @keyframes pp-tip-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
 
-/* витрина: рассказ за рассказом — и сразу все его видеоверсии (по две в ряд: одна не растягивается на всю ширину) */
+/* the showcase: story after story — and right away all its video versions (two per row: a single one doesn't stretch full width) */
 .landing { max-width: 60rem; margin: 0 auto; padding: 36px 20px 80px; }
 .hero { max-width: 46rem; margin-bottom: 8px; }
 .hero .years, .story .year, .show .year { font: 400 13px/1.3 var(--sans); color: var(--muted); letter-spacing: .12em; margin: 0; }
@@ -166,13 +166,13 @@ body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: col
 .vcard h3 a:hover { color: var(--accent); }
 .vcard p { margin: 0 0 4px; font-size: .95em; }
 .vcard .vmeta { font: 13px/1.4 var(--sans); color: var(--muted); }
-/* телефон, портретный экран: одна колонка, постер — вертикальный кадр в 4:5 (видео там тоже вертикальное) */
+/* a phone, a portrait screen: one column, the poster — a vertical frame in 4:5 (the video is vertical there too) */
 @media (max-width: 700px), (orientation: portrait) {
   .vgrid, .story .vgrid { grid-template-columns: 1fr; gap: 28px; }
   .vcard .pic img { aspect-ratio: 4 / 5; object-position: 50% 40%; }
 }
 
-/* страница рассказа и «Об авторе» */
+/* the story page and "About the author" */
 .story { max-width: 46rem; margin: 0 auto; padding: 40px 16px 72px; }
 .story .back { font: 14px var(--sans); margin: 0 0 24px; }
 .story .back a { text-decoration: none; }
@@ -190,7 +190,7 @@ body.reading { height: 100vh; height: 100dvh; display: flex; flex-direction: col
 .btn.ghost { color: var(--accent); background: transparent; }
 .btn.ghost:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 
-/* видео в браузере: экран во всю высоту, кадр вписан (contain), управление снизу */
+/* video in the browser: the screen at full height, the frame fitted (contain), controls at the bottom */
 body.watching { background: #050505; color: #e9e1d4; height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
 body.watching .top { background: #0c0b0a; border-color: #1f1c18; }
 body.watching .top .brand, body.watching .tools button { color: #e9e1d4; border-color: #2a2621; }

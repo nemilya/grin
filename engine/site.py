@@ -1,20 +1,20 @@
-"""Сборка статического сайта (grin.nemilya.me) → dist/: выкладывается на хостинг как есть.
+"""Building the static site (grin.nemilya.me) → dist/: uploaded to the hosting as is.
 
-    dist/index.html                       → язык по умолчанию (site.json: default_lang)
-    dist/<язык>/                          об авторе и список рассказов
-    dist/<язык>/<рассказ>/                рассказ: о нём, «читать и слушать», MP3, видеоверсии
-    dist/<язык>/<рассказ>/read/           чтение с озвучкой: подсветка предложения и слова (как в mountain-rock)
-    dist/<язык>/<рассказ>/audio/story.mp3 озвучка целиком (+ story.json — разметка времени)
-    dist/<язык>/<рассказ>/<стиль>/        видео в браузере: сцена (WebGL) по таймлайну + звук, без mp4;
-                                          вертикаль на телефоне, горизонталь на широком экране (переключатель)
-    dist/media/<постановка>/              медиа видео: assets/*.webp (слои), <ориентация>-<язык>.json (таймлайн),
-                                          sound-<язык>.m4a (голос + фон + музыка), poster-<ориентация>.webp
-    dist/assets/                          стили, скрипты, шрифты сайта; stage-<штамп>/ — сцена и three.js
+    dist/index.html                       → the default language (site.json: default_lang)
+    dist/<lang>/                          about the author and the list of stories
+    dist/<lang>/<story>/                  a story: about it, "read and listen", MP3, video versions
+    dist/<lang>/<story>/read/             reading with narration: sentence and word highlighting
+    dist/<lang>/<story>/audio/story.mp3   the whole narration (+ story.json — the timing marks)
+    dist/<lang>/<story>/<style>/          video in the browser: the scene (WebGL) by the timeline + sound, no mp4;
+                                          vertical on a phone, horizontal on a wide screen (a switch)
+    dist/media/<production>/              video media: assets/*.webp (layers), <orientation>-<lang>.json (timeline),
+                                          sound-<lang>.m4a (voice + ambience + music), poster-<orientation>.webp
+    dist/assets/                          the site's styles, scripts, fonts; stage-<stamp>/ — the stage and three.js
 
-Что публикуется — site.json (рассказы, озвучки по языкам, видеоверсии = постановки stories/<id>). Видео на
-языке страницы, если у постановки есть полная озвучка этого языка (film.voicings), иначе — на языке раскадровки.
-Повторная сборка пересобирает только изменившееся (dist/.build.json): слои, звук (дольше всего), постеры, MP3.
-Ссылки — относительные, ресурсы — со штампом ?v=<хеш> (их можно кешировать навсегда, страницы — коротко).
+What is published — site.json (stories, narrations by language, video versions = productions stories/<id>). The video is
+in the page's language if the production has a full narration in that language (film.voicings), otherwise in the storyboard's.
+A rebuild redoes only what changed (dist/.build.json): layers, sound (the slowest), posters, MP3.
+Links are relative, resources carry a ?v=<hash> stamp (they can be cached forever, pages — briefly).
 """
 from __future__ import annotations
 
@@ -83,11 +83,11 @@ def _hash(*parts) -> str:
     return h.hexdigest()[:12]
 
 
-# ---------------------------------------------------------------- страница
+# ---------------------------------------------------------------- the page
 
 def page(cfg: dict, lang: str, title: str, body: str, *, depth: int, path: str = '', extra_head: str = '',
          body_class: str = '', author: dict | None = None) -> str:
-    """path — адрес этой страницы внутри языка (для переключателя языков: та же страница на другом языке)."""
+    """path — this page's address inside the language (for the language switch: the same page in another language)."""
     up = '../' * depth
     u = _ui(lang)
     langs = ''.join(f'<a href="{up}{x}/{path}"{" class=on" if x == lang else ""} hreflang="{x}">{x.upper()}</a>'
@@ -120,7 +120,7 @@ def page(cfg: dict, lang: str, title: str, body: str, *, depth: int, path: str =
 '''
 
 
-# ---------------------------------------------------------------- медиа видео
+# ---------------------------------------------------------------- video media
 
 class Build:
     def __init__(self, cfg: dict, log=print):
@@ -138,7 +138,7 @@ class Build:
                 f.touch()
 
     def webp(self, prod: str, file: str) -> str:
-        """Слой постановки (assets/…png|jpg) → media/<постановка>/assets/….webp; путь от папки постановки."""
+        """A production layer (assets/…png|jpg) → media/<production>/assets/….webp; the path is relative to the production folder."""
         src = config.story_dir(prod) / file
         rel = str(Path(file).with_suffix('.webp'))
         out = self.dist / 'media' / prod / rel
@@ -155,20 +155,20 @@ class Build:
         return f'{rel}?v={h}'
 
     def sound(self, prod: str, vlang: str, tl: dict) -> tuple[str, float]:
-        """Звук видео (голос + фон + музыка) → media/<постановка>/sound-<язык>.m4a; общий для вертикали и горизонтали
-        (реплики у форматов общие). Пересобирается, только если поменялись речь, кадры, звук раскадровки или код
-        синтеза, который эта постановка использует (sound.signature)."""
+        """Video sound (voice + ambience + music) → media/<production>/sound-<lang>.m4a; shared by vertical and horizontal
+        (the formats share their cues). Rebuilt only if the speech, the shots, the storyboard's sound or the synthesis
+        code this production uses changed (sound.signature)."""
         if not any(p.get('take') for p in tl['paragraphs']):
-            raise RuntimeError(f'{prod} [{vlang}]: в таймлайне нет дублей озвучки — звук был бы без голоса')
+            raise RuntimeError(f'{prod} [{vlang}]: no narration takes in the timeline — the sound would have no voice')
         sb = timeline.storyboard(prod)
         fp = _hash([{k: p.get(k) for k in ('id', 't0', 't1', 'take', 'cuts')} for p in tl['paragraphs']],
                    [(s['id'], s['t0'], s['t1'], s['set'], s.get('sfx')) for s in tl['shots']],
-                   sb.get('sound'), tl['duration'], tl.get('fade_out'), sound.signature(sb, tl))  # код — только тот, что звучит
+                   sb.get('sound'), tl['duration'], tl.get('fade_out'), sound.signature(sb, tl))  # code — only what is heard
         out = self.dist / 'media' / prod / f'sound-{vlang}.m4a'
         key = f'sound/{prod}/{vlang}'
         if self.state.get(key) != fp or not out.exists():
             wav = timeline.build_dir(prod) / f'sound-site-{vlang}.wav'
-            self.log(f'♪ {prod} [{vlang}]: звук {tl["duration"] / 60:.1f} мин…')
+            self.log(f'♪ {prod} [{vlang}]: sound {tl["duration"] / 60:.1f} min…')
             sound.build(prod, tl, wav, log=lambda *a: None)
             out.parent.mkdir(parents=True, exist_ok=True)
             subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(wav), '-ac', '1', '-c:a', 'aac', '-b:a', '96k',
@@ -178,23 +178,23 @@ class Build:
         return f'sound-{vlang}.m4a?v={fp}', out.stat().st_size
 
     def poster(self, prod: str, orient: str, tag: str, tl: dict, shot: str, at: float) -> str | None:
-        """Постер видео: кадр раскадровки без субтитров (съёмка tools/capture.mjs) → poster-<ориентация>.webp."""
+        """A video poster: a storyboard shot without subtitles (captured by tools/capture.mjs) → poster-<orientation>.webp."""
         sh = next((s for s in tl['shots'] if s['id'] == shot), None)
         if not sh:
-            self.log(f'⚠ {prod}: нет кадра {shot} для постера')
+            self.log(f'⚠ {prod}: no shot {shot} for the poster')
             return None
         man = config.story_dir(prod) / 'assets' / 'assets.json'
         fp = _hash(sh, at, tl['width'], tl['height'], man.read_bytes() if man.exists() else b'')
         out = self.dist / 'media' / prod / f'poster-{orient}.webp'
         key = f'poster/{prod}/{orient}'
-        if self.new.get(key) != fp and (self.state.get(key) != fp or not out.exists()):  # один раз за сборку (не на каждый язык)
-            self.log(f'🖼 {prod}: постер {orient} ({shot})')
+        if self.new.get(key) != fp and (self.state.get(key) != fp or not out.exists()):  # once per build (not per language)
+            self.log(f'🖼 {prod}: poster {orient} ({shot})')
             cmd = ['node', str(config.ROOT / 'tools' / 'capture.mjs'), 'stills', prod, '--shots', shot, '--at', str(at),
                    '--scale', '0.5', '--no-subs'] + (['--tl', tag] if tag else [])
             r = subprocess.run(cmd, cwd=config.ROOT, capture_output=True, text=True)
             jpg = config.OUT / prod / (f'{tag}-stills' if tag else 'stills') / f'{shot}.jpg'
             if r.returncode or not jpg.exists():
-                self.log(f'⚠ постер {prod}/{orient} не снят: {r.stderr.strip()[-300:]}')
+                self.log(f'⚠ poster {prod}/{orient} not captured: {r.stderr.strip()[-300:]}')
                 return None
             out.parent.mkdir(parents=True, exist_ok=True)
             subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', str(jpg), '-c:v', 'libwebp', '-quality', '80', str(out)],
@@ -204,7 +204,7 @@ class Build:
         return f'poster-{orient}.webp?v={fp}'
 
     def video(self, prod: str, vlang: str, poster: list) -> dict | None:
-        """Видео постановки на языке vlang: таймлайны форматов (вертикаль, горизонталь), звук, постеры."""
+        """A production's video in language vlang: the formats' timelines (vertical, horizontal), sound, posters."""
         fm = timeline.film(prod)
         L = vlang if vlang != fm['lang'] else None
         st = config.story(prod)
@@ -213,23 +213,23 @@ class Build:
         for fmt in [None, *(st.get('formats') or {})]:
             tl = timeline.build(prod, save=True, fmt=fmt, lang=L)
             if tl['errors']:
-                self.log(f'⚠ {prod} {fmt or "main"} [{vlang}]: ошибки таймлайна — пропуск: {tl["errors"][:3]}')
+                self.log(f'⚠ {prod} {fmt or "main"} [{vlang}]: timeline errors — skipped: {tl["errors"][:3]}')
                 continue
             if not tl['timing'] == 'voicing':
-                self.log(f'⚠ {prod} [{vlang}]: озвучено не всё ({tl["timing"]}) — пропуск')
+                self.log(f'⚠ {prod} [{vlang}]: not everything is narrated ({tl["timing"]}) — skipped')
                 return None
             orient = 'horizontal' if tl['width'] > tl['height'] else 'vertical'
             for spec in tl['assets'].values():
                 if spec.get('file'):
                     spec['file'] = self.webp(prod, spec['file'])
-            # браузеру дубли озвучки не нужны — но tl остаётся целым: по нему собирается звук (голос — из take)
+            # the browser doesn't need the narration takes — but tl stays whole: the sound is built from it (the voice — from take)
             web = {**tl, 'paragraphs': [{k: v for k, v in p.items() if k not in ('take', 'cuts')} for p in tl['paragraphs']]}
             data = json.dumps(web, ensure_ascii=False, separators=(',', ':'))
             f = self.dist / 'media' / prod / f'{orient}-{vlang}.json'
             f.parent.mkdir(parents=True, exist_ok=True)
             f.write_text(data, encoding='utf8')
             fp = _hash(data.encode())
-            # постер — с кадра раскадровки, на языке раскадровки (субтитров на постере нет)
+            # the poster — from a storyboard shot, in the storyboard's language (posters have no subtitles)
             ptl = tl if not L else timeline.build(prod, save=True, fmt=fmt)
             pst = self.poster(prod, orient, timeline.tag(fmt), ptl, *poster) if poster else None
             out['formats'][orient] = {'timeline': f'{orient}-{vlang}.json?v={fp}', 'width': tl['width'],
@@ -242,14 +242,14 @@ class Build:
         out['audio'], out['audio_size'] = self.sound(prod, vlang, main_tl)
         return out
 
-    # ---------------------------------------------------------------- озвучка рассказа
+    # ---------------------------------------------------------------- the story's narration
 
     def narration(self, slug: str, lang: str, vid: str) -> dict | None:
-        """Озвучка рассказа целиком → <язык>/<рассказ>/audio/story.mp3 + story.json (разметка для чтения)."""
+        """The whole narration of a story → <lang>/<story>/audio/story.mp3 + story.json (marks for reading)."""
         try:
             v = voicing.settings(slug, vid)
         except KeyError:
-            self.log(f'⚠ {slug}/{lang}: нет озвучки {vid}')
+            self.log(f'⚠ {slug}/{lang}: no narration {vid}')
             return None
         pl = voicing.plan(slug, vid)
         sig = [v['gaps']] + [[it['id'], it['status'], it['selected'], it['key'], it['text'], it['times']]
@@ -264,11 +264,11 @@ class Build:
             sid = pl['sections'][0]['id']
             tr = voicing.section_track(slug, vid, sid)
             if tr is None:
-                self.log(f'… {slug}/{lang}: озвучен не полностью — без озвучки')
+                self.log(f'… {slug}/{lang}: not fully narrated — no audio')
                 return None
             pcm, meta = tr
             st = config.story(slug)
-            self.log(f'♪ {slug}/{lang}: озвучка {fmt_dur(meta["duration"], lang)} → mp3')
+            self.log(f'♪ {slug}/{lang}: narration {fmt_dur(meta["duration"], lang)} → mp3')
             audio.encode_mp3(pcm, mp3, title=st['title'].get(lang, slug), album=st['title'].get(lang, slug),
                              artist=st.get('author', {}).get(lang, ''), track='1')
             meta['size'] = mp3.stat().st_size
@@ -280,7 +280,7 @@ class Build:
         return meta
 
 
-# ---------------------------------------------------------------- сборка
+# ---------------------------------------------------------------- the build
 
 def _copy_assets(dist: Path) -> None:
     assets = dist / 'assets'
@@ -294,7 +294,7 @@ def _copy_assets(dist: Path) -> None:
     V['assets'] = h.hexdigest()[:10]
     css = assets / 'site.css'
     css.write_text(css.read_text(encoding='utf8').replace('.woff2)', f".woff2?v={V['assets']})"), encoding='utf8')
-    # сцена (stage/js + three.js): в папке со штампом — модули импортируют друг друга без ?v
+    # the stage (stage/js + three.js): in a stamped folder — the modules import each other without ?v
     h = hashlib.sha256()
     for f in sorted([*(config.ROOT / 'stage' / 'js').rglob('*'), *(config.ROOT / 'stage' / 'vendor').rglob('*')]):
         if f.is_file():
@@ -329,7 +329,7 @@ def build(log=print) -> dict:
                         videos_cache[(prod, vl)] = b.video(prod, vl, v.get('poster'))
                     return videos_cache[(prod, vl)]
                 media = get(lang) if lang in langs_ok else None
-                if media is None:  # нет озвучки языка страницы — видео на языке раскадровки
+                if media is None:  # no narration in the page's language — the video in the storyboard's language
                     media = get(fm['lang'])
                 if media:
                     vids.append({**v, 'media': media, 'path': config.story(prod)['film'].get('style', prod)})
@@ -343,7 +343,7 @@ def build(log=print) -> dict:
             for v in x['videos']:
                 write_watch(cfg, lang, author, x, v)
     (b.dist / 'index.html').write_text(_redirect(f'{cfg["default_lang"]}/'), encoding='utf8')
-    # прочь всё, что сборка не записала и не подтвердила
+    # remove everything the build didn't write or confirm
     for top in [b.dist / x for x in cfg['langs']] + [b.dist / 'media']:
         if not top.exists():
             continue
@@ -354,18 +354,18 @@ def build(log=print) -> dict:
                 f.rmdir()
     config.write_json(b.state_f, b.new)
     n = sum(len(x['videos']) for items in catalog.values() for x in items)
-    log(f'сайт: {sum(len(v) for v in catalog.values())} страниц рассказов, {n} видео → {b.dist}')
+    log(f'site: {sum(len(v) for v in catalog.values())} story pages, {n} videos → {b.dist}')
     return {'stories': len(cfg['stories']), 'videos': n}
 
 
-# ---------------------------------------------------------------- страницы
+# ---------------------------------------------------------------- pages
 
 def _title(x: dict, lang: str) -> str:
     return x['story']['title'].get(lang) or next(iter(x['story']['title'].values()))
 
 
 def _poster_img(v: dict, up: str, cls: str = 'poster') -> str:
-    """Постер видео: вертикальный на узком/портретном экране, горизонтальный — на широком."""
+    """A video poster: vertical on a narrow/portrait screen, horizontal on a wide one."""
     f = v['media']['formats']
     base = f'{up}media/{v["production"]}/'
     vert, hor = (f.get('vertical') or {}).get('poster'), (f.get('horizontal') or {}).get('poster')
@@ -377,7 +377,7 @@ def _poster_img(v: dict, up: str, cls: str = 'poster') -> str:
 
 
 def _video_card(lang: str, v: dict, href: str, up: str) -> str:
-    """Карточка видеоверсии: постер (16:9 на широком экране, 9:16 на узком), стиль, о нём, длительность, форматы."""
+    """A video version card: the poster (16:9 on a wide screen, 9:16 on a narrow one), the style, about it, duration, formats."""
     u, m = _ui(lang), v['media']
     fmts = m['formats']
     alt = ' · '.join(f'<a href="{href}?o={o}">{e(u[o])}</a>' for o in ('vertical', 'horizontal') if o in fmts) if len(fmts) > 1 else ''
@@ -391,8 +391,8 @@ def _video_card(lang: str, v: dict, href: str, up: str) -> str:
 
 
 def write_landing(cfg: dict, lang: str, author: dict, items: list) -> None:
-    """Витрина: рассказ за рассказом — год и название (без пересказа: никаких спойлеров), чтение и аудио, и сразу
-    все видеоверсии."""
+    """The showcase: story after story — the year and the title (no retelling: no spoilers), reading and audio, and right away
+    all the video versions."""
     u = _ui(lang)
     blocks = []
     for x in items:
@@ -426,7 +426,7 @@ def write_landing(cfg: dict, lang: str, author: dict, items: list) -> None:
 
 
 def write_author(cfg: dict, lang: str, author: dict) -> None:
-    """Об авторе — отдельная страница."""
+    """About the author — a separate page."""
     u = _ui(lang)
     bio = ''.join(f'<p>{e(p)}</p>' for p in author.get('bio', {}).get(lang, []))
     body = f'''<main class="story author-page">
@@ -470,7 +470,7 @@ def write_story(cfg: dict, lang: str, author: dict, x: dict) -> None:
 
 
 def write_reader(cfg: dict, lang: str, author: dict, x: dict) -> None:
-    """Чтение с озвучкой — плеер mountain-rock: страницы по высоте экрана, подсветка предложения и слова."""
+    """Reading with narration — the player: pages by screen height, sentence and word highlighting."""
     u = _ui(lang)
     n, slug = x['narration'], x['slug']
     title = _title(x, lang)
@@ -508,7 +508,7 @@ def write_reader(cfg: dict, lang: str, author: dict, x: dict) -> None:
 
 
 def write_watch(cfg: dict, lang: str, author: dict, x: dict, v: dict) -> None:
-    """Видео в браузере: сцена (stage.js) рисует кадры по таймлайну, время — от звука."""
+    """Video in the browser: the scene (stage.js) draws shots by the timeline, time comes from the sound."""
     u = _ui(lang)
     m = v['media']
     title = _title(x, lang)

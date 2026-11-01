@@ -1,5 +1,5 @@
-"""Посмотреть собранный сайт (dist/) как на хостинге: статика с Range-запросами — браузер перематывает звук
-(python -m http.server их не умеет: перемотка видео и чтения не работала бы).
+"""Serve the built site (dist/) as on the hosting: static files with Range requests — the browser seeks in the audio
+(python -m http.server can't do them: seeking in the video and the reader wouldn't work).
 
     make serve   → http://127.0.0.1:8730/
 """
@@ -65,5 +65,5 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == '__main__':
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8730
-    print(f'сайт: http://127.0.0.1:{port}/  (Ctrl+C — выход)')
+    print(f'site: http://127.0.0.1:{port}/  (Ctrl+C — quit)')
     ThreadingHTTPServer(('127.0.0.1', port), Handler).serve_forever()

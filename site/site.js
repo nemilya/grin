@@ -1,9 +1,9 @@
-/* Общее для всех страниц: дневная/ночная схема (☀/☾). Выбор — на <html data-theme> и в localStorage;
- * до отрисовки его ставит строка в <head>; без выбора — как в системе. */
+/* Shared by all pages: the day/night scheme (☀/☾). The choice lives on <html data-theme> and in localStorage;
+ * a line in <head> sets it before rendering; with no choice — follow the system. */
 (() => {
   const root = document.documentElement;
   const store = {
-    set(k, v) { try { localStorage.setItem(k, v); } catch { /* приватный режим */ } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch { /* private mode */ } },
   };
   const dark = () => root.dataset.theme === 'dark'
     || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);

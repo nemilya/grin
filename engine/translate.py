@@ -1,20 +1,19 @@
-"""Перевод истории на другой язык: глоссарий → перевод по абзацам (те же id) → prepared/<язык>.json.
-(Из mountain-rock: тот же формат и те же правила.)
+"""Translating a story into another language: glossary → paragraph-by-paragraph translation (same ids) → prepared/<lang>.json.
 
-stories/<slug>/glossary.json              имена, реалии, повторяющиеся формулы — один перевод на всю историю
-stories/<slug>/translations/<язык>.json   {id абзаца: {text, src (отпечаток исходного абзаца), model, at}}
+stories/<slug>/glossary.json              names, realia, recurring formulas — one translation for the whole story
+stories/<slug>/translations/<lang>.json   {paragraph id: {text, src (fingerprint of the source paragraph), model, at}}
 
-Перевод можно сделать и вручную / в сессии Claude Code (skill translate): тот же файл, model — кто переводил;
-отпечаток src связывает перевод с исходным абзацем (поменялся абзац — перевод «устарел»).
+A translation can also be done by hand / in a Claude Code session: the same file, model — whoever translated;
+the src fingerprint ties a translation to its source paragraph (the paragraph changed — the translation is "stale").
 
-1. Глоссарий: LLM проходит текст кусками и выписывает собственные имена и особые термины с одним вариантом
-   на языке перевода (в основе — герои из библии). Правится руками.
-2. Перевод: абзацы раздела идут кусками (~5 тыс. знаков) вместе со статьями глоссария, которые в куске
-   встречаются, и двумя предыдущими абзацами с их переводом (связность). Ответ — JSON {id: перевод}.
-   Абзац, у которого поменялся исходный текст, — «устаревший» (src), переводится заново.
-3. build(): prepared/<язык>.json — те же разделы и id абзацев, текст — перевод, свои предложения и слова;
-   заголовки разделов — по шаблону («Глава 1» → «Chapter 1»), вступление (front) — тоже переводится.
-Общие id абзацев связывают языки: «этот абзац на другом языке» (переключатель языка на сайте).
+1. Glossary: an LLM walks the text in chunks and lists proper names and special terms with a single rendering
+   in the target language (seeded with the characters from the bible). Edited by hand.
+2. Translation: a section's paragraphs go in chunks (~5k chars) together with the glossary entries that occur
+   in the chunk and the two previous paragraphs with their translation (coherence). The response is JSON {id: translation}.
+   A paragraph whose source text changed is "stale" (src) and gets translated again.
+3. build(): prepared/<lang>.json — the same sections and paragraph ids, the text is the translation, with its own sentences and words;
+   section headings follow a template («Глава 1» → "Chapter 1"); the front matter is translated too.
+Shared paragraph ids link the languages: "this paragraph in the other language" (the site's language switch).
 """
 from __future__ import annotations
 
@@ -29,7 +28,7 @@ from . import config, llm, prepare, text
 MODEL = 'anthropic/claude-opus-5.5'
 GLOSSARY_MODEL = 'anthropic/claude-sonnet-5.5'
 LANG_NAMES = {'en': 'English', 'ru': 'Russian', 'de': 'German', 'fr': 'French', 'es': 'Spanish'}
-TITLES = {  # заголовки разделов по шаблону (исходник ru)
+TITLES = {  # section headings by template (source in ru)
     'en': {'предисловие': 'Foreword', 'введение': 'Introduction', 'послесловие': 'Afterword', 'эпилог': 'Epilogue',
            'пролог': 'Prologue', 'глава': 'Chapter'},
 }
@@ -47,7 +46,7 @@ def save_glossary(slug: str, g: dict) -> None:
     config.write_json(config.text_dir(slug) / 'glossary.json', g)
 
 
-_lock = threading.Lock()  # файл переводов пишут параллельные разделы
+_lock = threading.Lock()  # parallel sections write the translations file
 
 
 def translations(slug: str, lang: str) -> dict:
@@ -58,7 +57,7 @@ def _save_translations(slug: str, lang: str, data: dict) -> None:
     config.write_json(config.text_dir(slug) / 'translations' / f'{lang}.json', data)
 
 
-# ---------------------------------------------------------------- 1. глоссарий
+# ---------------------------------------------------------------- 1. glossary
 
 GLOSSARY_SYSTEM = '''You compile a translation glossary for a story translated from {src} into {dst}.
 Extract every proper name and special term that must be translated the same way everywhere: people and spirits,
@@ -70,7 +69,7 @@ and a short note (who/what it is). Answer with ONE JSON object only: {{"terms": 
 
 
 def build_glossary(slug: str, lang: str, *, model: str = GLOSSARY_MODEL, chunk_chars: int = 60000, log=print) -> float:
-    """Глоссарий по всей книге (дополняет существующий: уже утверждённые термины не меняются)."""
+    """A glossary over the whole book (extends the existing one: already approved terms don't change)."""
     b = config.story(slug)
     src_lang = b['source']['lang']
     prep = prepare.load(slug, src_lang)
@@ -107,7 +106,7 @@ def build_glossary(slug: str, lang: str, *, model: str = GLOSSARY_MODEL, chunk_c
                 added += 1
         g['log'] = {'model': model, 'cost': round(g.get('log', {}).get('cost', 0) + c, 4), 'at': time.strftime('%Y-%m-%d %H:%M')}
         save_glossary(slug, g)
-        log(f'✓ глоссарий, часть {i + 1}/{len(chunks)}: +{added} (всего {len(g["terms"])}), ${c:.4f}')
+        log(f'✓ glossary, part {i + 1}/{len(chunks)}: +{added} (total {len(g["terms"])}), ${c:.4f}')
     return cost
 
 
@@ -117,19 +116,19 @@ def _stem(word: str) -> str:
 
 
 def terms_for(g: dict, chunk: str) -> list[dict]:
-    """Статьи глоссария, которые встречаются в куске (по основе слова — с учётом падежей)."""
+    """Glossary entries that occur in a chunk (by word stem — so inflected forms match)."""
     low = chunk.lower().replace('ё', 'е')
     out = []
     for t in g['terms']:
         parts = re.findall(r'\w+', t['src'])
-        # часть имени — с начала слова (падежи — по основе); короткие части — только целым словом
+        # a part of a name — from the start of a word (inflections — by stem); short parts — only as a whole word
         if parts and all(re.search(rf'\b{re.escape(p.lower().replace("ё", "е"))}\b' if len(p) <= 3
                                    else rf'\b{re.escape(_stem(p))}', low) for p in parts):
             out.append({'src': t['src'], 'dst': t['dst']})
     return out
 
 
-# ---------------------------------------------------------------- 2. перевод
+# ---------------------------------------------------------------- 2. translation
 
 SYSTEM = '''You are a literary translator. Translate a {src} story into {dst} for narration (voice-over and subtitles).
 The story: «{title}» by {author} — {context}
@@ -155,7 +154,7 @@ def chunks(paras: list[dict], max_chars: int = 5000) -> list[list[dict]]:
 
 
 def section_title(title: str, lang: str) -> str | None:
-    """«Глава 7» → «Chapter 7», «Предисловие» → «Foreword»; не по шаблону — None (переведёт модель)."""
+    """«Глава 7» → "Chapter 7", «Предисловие» → "Foreword"; not matching a template — None (the model translates it)."""
     t = title.strip().lower()
     m = re.fullmatch(r'глава\s+(\d+)', t)
     names = TITLES.get(lang, {})
@@ -165,7 +164,7 @@ def section_title(title: str, lang: str) -> str | None:
 
 
 def status(slug: str, lang: str) -> dict:
-    """Сколько абзацев переведено / устарело / осталось по разделам."""
+    """How many paragraphs are translated / stale / pending, per section."""
     src = prepare.load(slug, config.story(slug)['source']['lang'])
     tr = translations(slug, lang)
     out = {}
@@ -188,7 +187,7 @@ def status(slug: str, lang: str) -> dict:
 
 def translate_sections(slug: str, lang: str, sections: list[str], *, model: str = MODEL, force: bool = False,
                        front: bool = False, job=None, log=print) -> float:
-    """Перевести абзацы разделов (непереведённые и устаревшие; force — все). front — и вступление."""
+    """Translate the paragraphs of sections (untranslated and stale; force — all). front — the front matter too."""
     b = config.story(slug)
     src_lang = b['source']['lang']
     prep = prepare.load(slug, src_lang)
@@ -196,12 +195,12 @@ def translate_sections(slug: str, lang: str, sections: list[str], *, model: str 
     system = SYSTEM.format(src=LANG_NAMES.get(src_lang, src_lang), dst=LANG_NAMES.get(lang, lang),
                            title=b['title'].get(lang) or b['title'].get(src_lang), author=b.get('author', {}).get(lang, ''),
                            context=b.get('art_context', ''))  # noqa: E501
-    units = []  # (id раздела, абзацы)
+    units = []  # (section id, paragraphs)
     for s in prep['sections']:
         if s['id'] in sections:
             units.append((s['id'], [p for p in s['paragraphs'] if p['kind'] != 'heading']))
     if front:
-        # номера — по текстовым блокам вступления (картинки не считаются), как в status() и build()
+        # numbering — by the text blocks of the front matter (pictures don't count), as in status() and build()
         fr = [{'id': f'front-{i:03d}', 'text': x['text']}
               for i, x in enumerate([x for x in prep.get('front', []) if x.get('text')])]
         units.insert(0, ('front', fr))
@@ -218,7 +217,7 @@ def translate_sections(slug: str, lang: str, sections: list[str], *, model: str 
             if job:
                 job.check()
             ids = [p['id'] for p in part]
-            # контекст: два предыдущих абзаца раздела с переводом
+            # context: the two previous paragraphs of the section with their translation
             first = next(i for i, p in enumerate(paras) if p['id'] == ids[0])
             ctx = [{'id': p['id'], 'src': p['text'], 'translation': tr[p['id']]['text']}
                    for p in paras[max(0, first - 2):first] if p['id'] in tr]
@@ -235,7 +234,7 @@ def translate_sections(slug: str, lang: str, sections: list[str], *, model: str 
                 missing = [i for i in ids if i not in got]
                 if not missing:
                     break
-                log(f'  {sid}: нет перевода {", ".join(missing)} — повтор')
+                log(f'  {sid}: no translation for {", ".join(missing)} — retrying')
                 user = user.rsplit('Translate these paragraphs', 1)[0] + 'Translate these paragraphs ({}):\n{}'.format(
                     len(missing), '\n\n'.join(f"[{p['id']}] {p['text']}" for p in part if p['id'] in missing))
             with _lock:
@@ -253,14 +252,14 @@ def translate_sections(slug: str, lang: str, sections: list[str], *, model: str 
 
 
 def set_translation(slug: str, lang: str, pid: str, text_: str) -> dict:
-    """Правка перевода абзаца из админки."""
+    """Edit a paragraph's translation from the admin."""
     src = prepare.load(slug, config.story(slug)['source']['lang'])
     para = next((p for s in src['sections'] for p in s['paragraphs'] if p['id'] == pid), None)
     if para is None:
         front = [x for x in src.get('front', []) if x.get('text')]
         i = int(pid.split('-')[1]) if pid.startswith('front-') else -1
         if not 0 <= i < len(front):
-            raise KeyError(f'нет абзаца {pid}')
+            raise KeyError(f'no paragraph {pid}')
         para = {'text': front[i]['text']}
     with _lock:
         tr = translations(slug, lang)
@@ -269,10 +268,10 @@ def set_translation(slug: str, lang: str, pid: str, text_: str) -> dict:
     return tr[pid]
 
 
-# ---------------------------------------------------------------- 3. подготовленный текст на языке перевода
+# ---------------------------------------------------------------- 3. the prepared text in the target language
 
 def build(slug: str, lang: str, *, save: bool = True) -> dict:
-    """prepared/<язык>.json из перевода: разделы, где переведены все абзацы; те же id."""
+    """prepared/<lang>.json from the translation: sections where every paragraph is translated; the same ids."""
     b = config.story(slug)
     src = prepare.load(slug, b['source']['lang'])
     tr = translations(slug, lang)
@@ -283,7 +282,7 @@ def build(slug: str, lang: str, *, save: bool = True) -> dict:
         paras, ok = [], True
         for p in s['paragraphs']:
             if p['kind'] == 'heading':
-                # заголовок раздела (-000) — по шаблону; номер главы внутри раздела («II») — как есть
+                # the section heading (-000) — by template; a chapter number inside a section ("II") — as is
                 h = title if p['id'].endswith('-000') else (section_title(p['text'], lang) or p['text'])
                 paras.append(prepare.paragraph(p['id'], 'heading', h, speech=text.heading_speech(h, lang)))
                 continue
@@ -307,7 +306,7 @@ def build(slug: str, lang: str, *, save: bool = True) -> dict:
         else:
             front.append(x)
     out = {'story': slug, 'lang': lang, 'source': f"translation:{b['source']['lang']}", 'source_sha': src['source_sha'],
-           'sections': sections, 'warnings': [f'{sid}: не переведено абзацев — {n}' for sid, n in missing.items()],
+           'sections': sections, 'warnings': [f'{sid}: untranslated paragraphs — {n}' for sid, n in missing.items()],
            'front': front if k and len(front) == len(src.get('front', [])) else [],
            'stats': {key: sum(s['stats'][key] for s in sections) for key in ('paragraphs', 'chars', 'words')}}
     if save:

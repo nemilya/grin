@@ -1,7 +1,7 @@
 # grin — notes for Claude Code
 
 Alexander Grin's stories: narration, films in several styles, the website grin.nemilya.me. Pipeline and data
-format — README.md (most detailed: README.ru.md); the paper-theatre treatment — docs/treatment.md.
+format — README.md (Russian: README.ru.md); the paper-theatre treatment — docs/treatment.md.
 
 - Talk to the maintainer in Russian. The repository is public and English-first: code, comments, commit
   messages, docs in English (Russian translations of docs — `*.ru.md`). Film content (translation, subtitles,
@@ -17,6 +17,8 @@ format — README.md (most detailed: README.ru.md); the paper-theatre treatment 
   1–2 pictures. Prices: an image $0.018, a minute of narration ≈ $0.01.
 - Don't shift sentence indices silently: editing `engine/text.py` (sentence splitting) moves the `at` cues in
   storyboards — afterwards compare sentence counts per paragraph (`prepared/en.json`).
+- Stay Russian on purpose: the story analyses `docs/stories/*.md`, `brief.md` (the original brief), working notes in
+  story data (`note` in storyboards and glossaries, `role`/`"_"` in bibles).
 - Russian-language data in the code stays Russian (abbreviations and regexes in text.py/prepare.py, chapter words
   in translate.py, the TTS lead 'Этот фрагмент:' in voicing.py — changing it makes all Russian takes stale).
 - Light: the key light of the toy theatre is front-top (the puppeteer's lamp). A source behind the card's plane

@@ -1,16 +1,16 @@
-# Скопируйте в local.mk (в git не попадает; .env с теми же строками тоже подходит)
+# Copy to local.mk (it doesn't go to git; a .env with the same lines works too)
 OPENROUTER_API_KEY = sk-or-...
-# прокси для запросов к OpenRouter (socks5h://… или http://…); тогда они идут через curl
+# a proxy for requests to OpenRouter (socks5h://… or http://…); they then go through curl
 # OPENROUTER_PROXY = socks5h://127.0.0.1:1080
-# где рисовать кадры: по умолчанию auto — видеокарта, если есть, иначе программный SwiftShader;
-# gpu / cpu — задать явно
+# where frames are drawn: auto by default — the GPU if there is one, otherwise the software SwiftShader;
+# gpu / cpu — set explicitly
 # CAPTURE_GL = auto
-# рендер без перегрева: ffmpeg с низким приоритетом и в 2 потока, паузы между кадрами (или make video COOL=1)
+# rendering without overheating: ffmpeg at low priority with 2 threads, pauses between frames (or make video COOL=1)
 # CAPTURE_COOL = 1
-# кодек: по умолчанию на macOS — аппаратный h264_videotoolbox, иначе libx264; задать явно: videotoolbox / x264
+# the codec: by default on macOS — the hardware h264_videotoolbox, otherwise libx264; set explicitly: videotoolbox / x264
 # CAPTURE_ENCODER = x264
 
-# сайт (make site → make deploy): папка на сервере, которую раздаёт nginx (deploy/README.md)
+# the site (make site → make deploy): the folder on the server that nginx serves (deploy/README.md)
 # DEPLOY = ssh://nemilya-me/var/www/grin
 # SITE_URL = https://grin.nemilya.me
 

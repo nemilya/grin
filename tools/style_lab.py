@@ -1,10 +1,10 @@
-"""Проба стиля: одна сцена «по Тарковскому» в двух изображениях — картонные вырезки и «киноизображение»
-(те же слои по глубине, но нарисованные как кадр из фильма: без кромки и бумаги, мягкий край, туман).
-Камера, свет, палитра, дождь — общие, различается только то, как нарисованы слои.
+"""A style test: one scene "after Tarkovsky" in two renderings — cardboard cut-outs and a "film image"
+(the same layers by depth, but drawn as a film still: no rim or paper, a soft edge, fog).
+Camera, light, palette, rain are shared; only how the layers are drawn differs.
 
-    python3 tools/style_lab.py            # недостающие картинки (8 × $0.018) + таймлайны
-    python3 tools/style_lab.py --redo doctor   # новый вариант слоя (в обоих изображениях)
-    make preview  →  http://127.0.0.1:8720/stage/?story=_lab-tarkovsky&tl=cut   (или &tl=film)
+    python3 tools/style_lab.py            # missing pictures (8 × $0.018) + timelines
+    python3 tools/style_lab.py --redo doctor   # a new variant of a layer (in both renderings)
+    make preview  →  http://127.0.0.1:8720/stage/?story=_lab-tarkovsky&tl=cut   (or &tl=film)
     node tools/capture.mjs stills _lab-tarkovsky --tl cut --at 0.5
 """
 from __future__ import annotations
@@ -35,7 +35,7 @@ FILM_LOOK = ('Rendered photographically, like a figure from a 1970s Soviet art-h
              "(the cinematography of Andrei Tarkovsky's films): natural soft overcast light, muted colours, fine film grain. "
              'Natural photographic edges: no outline, no white border, no paper margin, not a drawing, not a cut-out. ' + MOOD)
 
-# слои сцены: что нарисовать (без стиля), форма, место в сцене
+# the scene's layers: what to draw (no style), the shape, the place in the scene
 LAYERS = {
     'garden': {'kind': 'plate', 'aspect': '3:4', 'seed': 4101,
                'desc': 'View out into an overgrown provincial garden in steady rain on an overcast day: wet birch trunks '
@@ -80,7 +80,7 @@ def prompt(variant: str, layer: dict) -> str:
 
 
 def soft_key(data: bytes, out: Path, crop: bool) -> None:
-    """Ключ для «кино»: край мягкий (растушёвка), под прозрачным — цвет соседей, а не белая кромка."""
+    """The "film" key: a soft edge (feathering), under the transparent part — the neighbours' colour, not a white rim."""
     assets.key_out(data, out, crop=crop, soft=True)
 
 
@@ -116,9 +116,9 @@ def timeline(variant: str) -> dict:
     ar = {n: (lambda w, h: w / h)(*size(out_file(variant, n))) for n in LAYERS}
     lay = lambda n, **kw: {'kind': 'cutout', 'file': f'assets/{variant}/{out_file(variant, n).name}',  # noqa: E731
                            **({'soft': True, 'cast': False} if film else {}), **kw}
-    th = min(14.0, 17 / ar['table'])                                   # стол — ~17 см шириной
+    th = min(14.0, 17 / ar['table'])                                   # the table is ~17 cm wide
     tx, ty, tz = 9.5, -2, 9
-    lamp = [tx + (0.29 - 0.5) * th * ar['table'], ty + 0.74 * th, tz + 0.3]   # огонёк лампы на столе
+    lamp = [tx + (0.29 - 0.5) * th * ar['table'], ty + 0.74 * th, tz + 0.3]   # the lamp's flame on the table
     A = {
         'garden': {'kind': 'backdrop', 'draw': 'screen', 'file': f'assets/{variant}/garden.jpg', 'size': [78, 78 / ar['garden']]},
         'wall': lay('wall', kind='backdrop', size=[46 * ar['wall'], 46], soft=False),
@@ -169,10 +169,10 @@ def main() -> None:
             if name in redo or not out_file(variant, name).exists():
                 jobs.append((variant, name, seed))
     if jobs:
-        print(f'картинок: {len(jobs)} (≈ ${len(jobs) * assets.COST:.2f})')
+        print(f'pictures: {len(jobs)} (≈ ${len(jobs) * assets.COST:.2f})')
         with ThreadPoolExecutor(4) as ex:
             total = sum(ex.map(lambda j: make(*j), jobs))
-        print(f'итого ${total:.3f}')
+        print(f'total ${total:.3f}')
     (LAB / 'build').mkdir(parents=True, exist_ok=True)
     for variant in ('cut', 'film'):
         f = LAB / 'build' / f'timeline-{variant}.json'

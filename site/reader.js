@@ -1,7 +1,7 @@
-/* Чтение с озвучкой: текст раздела делится на страницы по высоте экрана (без прокрутки), звучащее
- * предложение и слово подсвечены, страница перелистывается за голосом. Клик по слову — слушать с него.
- * Разметка времени — в <script id="data">: абзацы → предложения [a, b, t0, t1] и слова [a, b, t0, t1]
- * (смещения в тексте абзаца, секунды в mp3 раздела). */
+/* Reading with narration: a section's text is split into pages by screen height (no scrolling), the sentence
+ * and word being heard are highlighted, the page turns after the voice. A click on a word — listen from it.
+ * The timing marks are in <script id="data">: paragraphs → sentences [a, b, t0, t1] and words [a, b, t0, t1]
+ * (offsets in the paragraph text, seconds in the section's mp3). */
 (() => {
   const D = JSON.parse(document.getElementById('data').textContent);
   const $ = (s) => document.querySelector(s);
@@ -10,14 +10,14 @@
   const speedBtn = $('#speed'), followBtn = $('#follow');
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return d; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* приватный режим */ } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* private mode */ } },
   };
-  // прогресс книги — одна закладка на книгу (глава и секунда), прослушанные главы, максимум по главам.
-  // Закладка двигается только когда слушают: открыть другую главу, не слушая, — закладку не трогает.
+  // book progress — one bookmark per book (chapter and second), the chapters listened to, the maximum per chapter.
+  // The bookmark moves only while listening: opening another chapter without listening doesn't touch it.
   const bookKey = `book:${D.book}/${D.lang}`;
   const progress = () => ({ cur: null, done: {}, max: {}, ...store.get(bookKey, {}) });
   let listening = false;
-  try { Object.keys(localStorage).filter((k) => k.startsWith('pos:')).forEach((k) => localStorage.removeItem(k)); } catch { /* прежний формат — по позиции на главу */ }
+  try { Object.keys(localStorage).filter((k) => k.startsWith('pos:')).forEach((k) => localStorage.removeItem(k)); } catch { /* the old format — a position per chapter */ }
   function saveProgress(ended = false) {
     const p = progress(), t = Math.round(audio.currentTime);
     p.max[D.id] = Math.max(p.max[D.id] || 0, ended ? Math.round(D.duration) : t);
@@ -26,7 +26,7 @@
     store.set(bookKey, p);
   }
 
-  // ---------------------------------------------------------------- текст → предложения и слова
+  // ---------------------------------------------------------------- text → sentences and words
   const words = [], sents = [], blocks = [];
   D.paragraphs.forEach((p, pi) => {
     const el = document.getElementById(p.id);
@@ -61,14 +61,14 @@
     blocks.push({ el, t0: p.t0, t1: p.t1 });
   });
 
-  // ---------------------------------------------------------------- страницы по высоте экрана
+  // ---------------------------------------------------------------- pages by screen height
   let pages = [], pageNo = 0, follow = true;
   function paginate() {
     const keep = blocks[pages[pageNo]?.[0]]?.el;
     blocks.forEach((b) => { b.el.hidden = false; });
     pageEl.classList.remove('overflow');
-    // картинка главы — только на первой странице (телефон: полосой сверху, широкий экран: разворот,
-    // текст в колонке уже). Высоты абзацев меряются в обеих раскладках: первая страница и остальные.
+    // the chapter picture — only on the first page (a phone: a strip at the top, a wide screen: a spread,
+    // the text column narrower). Paragraph heights are measured in both layouts: the first page and the rest.
     const measure = (first) => {
       reader.classList.toggle('first', first);
       return [pageEl.clientHeight, blocks.map((b) => {
@@ -82,8 +82,8 @@
     let start = 0, acc = 0;
     hs.forEach((_, i) => {
       const h = pages.length ? hs[i] : hs0[i];
-      // заголовок не остаётся на странице один: следующий абзац — с ним (не влезет — страница прокручивается)
-      // (кроме первой страницы с картинкой: картинка и заголовок главы — как титульный лист)
+      // a heading is not left alone on a page: the next paragraph goes with it (if it doesn't fit, the page scrolls)
+      // (except the first page with a picture: the picture and the chapter heading are like a title page)
       const lone = i - start === 1 && /^H[12]$/.test(blocks[start].el.tagName) && !(pages.length === 0 && hs0 !== hs);
       if (i > start && !lone && acc + h > (pages.length ? H : H0)) { pages.push([start, i - 1]); start = i; acc = 0; }
       acc += h;
@@ -104,11 +104,11 @@
     prevP.disabled = pageNo === 0;
     nextP.disabled = pageNo === pages.length - 1;
     if (user && !audio.paused && activeBlock() !== null && pageOf(activeBlock()) !== pageNo) setFollow(false);
-    // листают вручную, не слушая, — в адресе начало первого предложения страницы
+    // paging by hand without listening — the address holds the start of the page's first sentence
     if (user && audio.paused) { const first = sents.find((x) => x.pi >= a && x.pi <= b); if (first) placeInUrl(first.t0); }
   }
 
-  // кнопки страниц в строке под текстом
+  // page buttons in the row under the text
   const pager = $('.pager'), pnum = $('#pnum');
   const box = document.createElement('span');
   box.className = 'pages';
@@ -119,8 +119,8 @@
   prevP.onclick = () => show(pageNo - 1);
   nextP.onclick = () => show(pageNo + 1);
 
-  // ---------------------------------------------------------------- подсветка за голосом
-  const find = (list, t) => { // последний элемент с t0 <= t (запас 80 мс: перемотка mp3 неточна, ~26 мс)
+  // ---------------------------------------------------------------- highlighting after the voice
+  const find = (list, t) => { // the last element with t0 <= t (an 80 ms margin: mp3 seeking is imprecise, ~26 ms)
     let lo = 0, hi = list.length - 1, r = -1;
     while (lo <= hi) { const m = (lo + hi) >> 1; if (list[m].t0 <= t + 0.08) { r = m; lo = m + 1; } else hi = m - 1; }
     return r;
@@ -131,7 +131,7 @@
     const t = audio.currentTime;
     const si = find(sents, t), wi = find(words, t);
     const s = si >= 0 ? sents[si] : null;
-    const w = wi >= 0 ? words[wi] : null; // маркер не гаснет в паузах — остаётся на последнем слове до следующего
+    const w = wi >= 0 ? words[wi] : null; // the marker doesn't go out in pauses — it stays on the last word until the next
     if (s !== onS) { onS?.el.classList.remove('on'); s?.el.classList.add('on'); onS = s; if (s && !audio.paused) placeInUrl(s.t0); }
     if (w !== onW) { onW?.el.classList.remove('on'); w?.el.classList.add('on'); onW = w; }
     if (s && follow) {
@@ -166,8 +166,8 @@
   });
   setInterval(() => { if (!audio.paused) saveProgress(); }, 5000);
 
-  // подсказка «нажмите, чтобы слушать»: пульс у кнопки, пока на странице не нажимали ▶ (и если браузер
-  // не дал продолжить автоматически); первому слушателю книги — ещё и плашка с текстом
+  // the "tap to listen" hint: a pulse at the button until ▶ has been pressed on the page (and if the browser
+  // didn't allow continuing automatically); the book's first listener also gets a label with text
   const tip = document.createElement('span');
   tip.className = 'pp-tip';
   tip.textContent = D.ui.tap_to_listen;
@@ -189,9 +189,9 @@
     play();
   });
 
-  // место в адресе: /ru/ch01/#t=588.4 — ссылку можно скопировать и переслать, откроется та же страница
+  // the place in the address: /ru/ch01/#t=588.4 — the link can be copied and shared, it opens the same page
   function placeInUrl(t) {
-    try { history.replaceState(null, '', `#t=${t.toFixed(1)}`); } catch { /* file:// и т.п. */ }
+    try { history.replaceState(null, '', `#t=${t.toFixed(1)}`); } catch { /* file:// etc. */ }
   }
   const shareBtn = $('#share');
   shareBtn?.addEventListener('click', async () => {
@@ -199,7 +199,7 @@
     placeInUrl(t);
     const url = location.href, title = `${D.bookTitle} — ${D.title}`;
     if (navigator.share && matchMedia('(pointer: coarse)').matches) {
-      try { await navigator.share({ title, url }); } catch { /* отменили */ }
+      try { await navigator.share({ title, url }); } catch { /* cancelled */ }
       return;
     }
     try { await navigator.clipboard.writeText(url); } catch { prompt(D.ui.copy_link, url); return; }
@@ -208,21 +208,21 @@
     setTimeout(() => shareBtn.classList.remove('tip'), 1600);
   });
 
-  // переключатель языка: тот же абзац на другом языке
+  // the language switch: the same paragraph in another language
   document.querySelectorAll('.langs a').forEach((a) => a.addEventListener('click', () => {
     if (a.classList.contains('on') || !/\/[\w-]+\/$/.test(a.getAttribute('href'))) return;
     const pi = onS ? onS.pi : (pages[pageNo] ? pages[pageNo][0] : 0);
     a.href = a.href.split('#')[0] + `#p=${D.paragraphs[pi].id}`;
   }));
 
-  // скорость
+  // speed
   const speeds = [1, 1.15, 1.3, 1.5, 0.85];
   let sp = store.get('speed', 1);
   const setSpeed = (v) => { sp = v; audio.playbackRate = v; speedBtn.textContent = `${v}×`; store.set('speed', v); };
   setSpeed(speeds.includes(sp) ? sp : 1);
   speedBtn.onclick = () => setSpeed(speeds[(speeds.indexOf(sp) + 1) % speeds.length]);
 
-  // клавиши и свайпы
+  // keys and swipes
   const jumpSent = (d) => {
     const i = Math.min(Math.max(find(sents, audio.currentTime) + d, 0), sents.length - 1);
     audio.currentTime = sents[i].t0;
@@ -246,7 +246,7 @@
     if (Math.abs(dx) > 60) show(pageNo + (dx < 0 ? 1 : -1));
   });
 
-  // экран блокировки / гарнитура
+  // the lock screen / headset
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({ title: D.title, artist: D.author, album: D.bookTitle });
     const ms = navigator.mediaSession;
@@ -257,16 +257,16 @@
     try { ms.setActionHandler('previoustrack', () => jumpSent(-1)); ms.setActionHandler('nexttrack', () => jumpSent(1)); } catch { /* */ }
   }
 
-  // старт: страницы, сохранённое место; #play — продолжить (переход с прошлой главы)
+  // start: pages, the saved place; #play — continue (coming from the previous chapter)
   let rt = 0;
   addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(paginate, 120); });
   const begin = () => {
     paginate();
     const m = /t=([\d.]+)/.exec(location.hash);
-    // #p=<абзац> — пришли с другого языка: тот же абзац (id абзацев у языков общие)
+    // #p=<paragraph> — came from another language: the same paragraph (paragraph ids are shared by the languages)
     const pm = /p=([\w-]+)/.exec(location.hash);
     const pp = pm ? D.paragraphs.find((x) => x.id === pm[1]) : null;
-    // своя закладка — продолжить; иначе (другая глава или прослушано) — с начала
+    // our own bookmark — continue; otherwise (another chapter or finished) — from the start
     const cur = progress().cur;
     const t = m ? +m[1] : pp ? (pp.sentences[0]?.[2] ?? pp.t0) : (cur && cur.s === D.id ? cur.t : 0);
     if (t > 0 && t < D.duration - 1) { audio.currentTime = t; }

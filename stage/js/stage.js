@@ -1,9 +1,9 @@
-// Бумажный театр: таймлайн (build/timeline.json) → кадр в момент t. Всё вычисляется из t —
-// любой кадр можно отрисовать отдельно (захват кадров — tools/capture.mjs), предпросмотр — тот же код.
+// Paper theatre: the timeline (build/timeline.json) → the frame at moment t. Everything is computed from t —
+// any frame can be drawn on its own (frame capture — tools/capture.mjs), the preview is the same code.
 //
-// Карточки: вырезки с альфой (сгенерированные PNG или заглушки) на слегка изогнутой бумаге с фактурой,
-// отбрасывают тени по силуэту. Свет — лампа (spot) + заполняющий; камера — «с рук» (детерминированный шум);
-// фокус — своя глубина резкости. Поверх — субтитры (2D-холст): кадр для захвата — композит.
+// Cards: cut-outs with alpha (generated PNGs or placeholders) on slightly curved textured paper,
+// casting shadows by their silhouette. Light — a lamp (spot) + fill; the camera is "handheld" (deterministic noise);
+// focus — our own depth of field. On top — subtitles (a 2D canvas): the captured frame is a composite.
 import * as THREE from 'three';
 import { EffectComposer } from '../vendor/three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from '../vendor/three/examples/jsm/postprocessing/RenderPass.js';
@@ -28,7 +28,7 @@ const EASE = {
 const ease = (name, x) => (EASE[name] || EASE.inOut)(clamp(x, 0, 1));
 const rot3 = r => (Array.isArray(r) ? r : [0, r || 0, 0]);
 
-// ---------------------------------------------------------------- шум «ручной камеры»
+// ---------------------------------------------------------------- "handheld camera" noise
 
 function wave(t, seed, freqs) {
   let v = 0, norm = 0;
@@ -40,16 +40,16 @@ function wave(t, seed, freqs) {
   });
   return v / norm;
 }
-const HAND_F = [0.07, 0.13, 0.23, 0.37, 0.61, 0.97]; // камера в руках: плавное покачивание и дыхание, без дрожи (> 1 Гц)
+const HAND_F = [0.07, 0.13, 0.23, 0.37, 0.61, 0.97]; // a handheld camera: smooth sway and breathing, no jitter (> 1 Hz)
 
-// ---------------------------------------------------------------- сцена
+// ---------------------------------------------------------------- the scene
 
 export class Stage {
   constructor(tl, { base, scale = 1, samples = 48, debug = false, onProgress = null }) {
-    this.subtitles = true;           // сайт: субтитры можно выключить
-    this.onProgress = onProgress;    // загрузка ассетов: (готово, всего)
+    this.subtitles = true;           // the site: subtitles can be turned off
+    this.onProgress = onProgress;    // asset loading: (done, total)
     this.tl = tl;
-    this.debug = debug; // рабочий свет: видно композицию, без фокуса и виньетки
+    this.debug = debug; // work light: the composition is visible, no focus or vignette
     this.base = base;
     this.W = Math.round(tl.width * scale);
     this.H = Math.round(tl.height * scale);
@@ -93,12 +93,12 @@ export class Stage {
     this.items = {};
   }
 
-  // ---------------------------------------------------------------- загрузка ассетов
+  // ---------------------------------------------------------------- loading assets
 
   async load() {
     const loader = new THREE.TextureLoader();
     const all = Object.entries(this.tl.assets);
-    if (document.fonts) { // шрифт — до процедурных карточек: интертитры пишут им текст
+    if (document.fonts) { // the font before the procedural cards: intertitles write their text with it
       const sample = 'Aa Аа';
       await Promise.all([document.fonts.load(`${this._subSize()}px "Paper Serif"`, sample), document.fonts.load(`italic ${this._subSize()}px "Paper Serif"`, sample),
         document.fonts.load('600 40px "Stage Sans"', sample)]).catch(() => {});
@@ -107,7 +107,7 @@ export class Stage {
     const jobs = all.map(async ([key, spec]) => {
       let img = null;
       if (spec.file) {
-        try { img = (await loader.loadAsync(this.base + spec.file)).image; } catch (e) { console.warn('нет файла', spec.file); }
+        try { img = (await loader.loadAsync(this.base + spec.file)).image; } catch (e) { console.warn('no file', spec.file); }
       }
       if (!img && spec.kind === 'procedural') img = procedural(spec);
       if (!img) img = placeholder(key, spec);
@@ -117,7 +117,7 @@ export class Stage {
     await Promise.all(jobs);
     paperTextures();
     if (document.fonts) {
-      const sample = 'Aa Аа'; // латиница и кириллица — разные файлы шрифта (unicode-range): грузим оба заранее
+      const sample = 'Aa Аа'; // Latin and Cyrillic are different font files (unicode-range): load both in advance
       await Promise.all([document.fonts.load(`${this._subSize()}px "Paper Serif"`, sample), document.fonts.load(`italic ${this._subSize()}px "Paper Serif"`, sample)]).catch(() => {});
     }
   }
@@ -136,7 +136,7 @@ export class Stage {
     return this.tex[key];
   }
 
-  // ---------------------------------------------------------------- построение кадра (один раз на кадр-шот)
+  // ---------------------------------------------------------------- building a shot (once per shot)
 
   shotAt(t) {
     const shots = this.tl.shots;
@@ -186,7 +186,7 @@ export class Stage {
     for (let i = 0; i < pos.count; i++) {
       const x = pos.getX(i) / (w / 2);
       pos.setZ(i, -bend * w * 0.5 * x * x);
-      if (!isFloor) pos.setY(i, pos.getY(i) + h / 2); // опора — нижний край
+      if (!isFloor) pos.setY(i, pos.getY(i) + h / 2); // the support is the bottom edge
     }
     geo.computeVertexNormals();
     const tex = entry.tex;
@@ -199,7 +199,7 @@ export class Stage {
       normal.repeat.set(Math.max(1, w / 14), Math.max(1, h / 14));
       normal.needsUpdate = true;
       mat = new THREE.MeshStandardMaterial({
-        map: tex, alphaTest: spec.soft ? 0.02 : 0.5, transparent: !!spec.soft, depthWrite: !spec.soft, // soft — слой с мягким краем
+        map: tex, alphaTest: spec.soft ? 0.02 : 0.5, transparent: !!spec.soft, depthWrite: !spec.soft, // soft — a layer with a soft edge
         side: THREE.DoubleSide, roughness: this.paper.paper_roughness ?? 0.92, metalness: 0,
         normalMap: spec.kind === 'silhouette' || this.paper.paper_normal === false ? null : normal, normalScale: new THREE.Vector2(0.45, 0.45),
         color: spec.kind === 'silhouette' ? new THREE.Color('#0a0908') : new THREE.Color('#ffffff'),
@@ -255,7 +255,7 @@ export class Stage {
     return out;
   }
 
-  // шарнирная кукла: части цепочкой (плечо → локоть → кисть), латунные скрепки — оси вращения
+  // a jointed puppet: parts in a chain (shoulder → elbow → hand), brass fasteners are the rotation axes
   _parts(spec, body, group) {
     const parts = {};
     let parent = { obj: body.mesh, w: body.w, h: body.h };
@@ -270,12 +270,12 @@ export class Stage {
       pivot.add(card.mesh);
       parent.obj.add(pivot);
       parts[name] = pivot;
-      parent = { obj: card.mesh, w: card.w, h: card.h }; // следующая часть (attach) — в долях этой карточки
+      parent = { obj: card.mesh, w: card.w, h: card.h }; // the next part (attach) — in fractions of this card
     }
     return parts;
   }
 
-  // супрематическая фигура (geometry.js): текстура — по параметрам (у элемента может быть свой цвет, размер)
+  // a suprematist shape (geometry.js): the texture from parameters (an element may have its own colour, size)
   _shape(el0, spec, out) {
     const el = { ...spec, ...el0 };
     const p = { shape: el.shape, size: el.size, color: el.color, width: el.width, soft: el.soft, add: el.add, rays: el.rays };
@@ -287,7 +287,7 @@ export class Stage {
     return out;
   }
 
-  // линия, которая рисуется во времени (geometry.js)
+  // a line that draws itself over time (geometry.js)
   _trace(el0, spec, out) {
     const m = traceMesh({ ...spec, ...el0 });
     out.group.add(m.mesh);
@@ -297,7 +297,7 @@ export class Stage {
 
   _stars(el, spec, out) {
     const [w, h] = spec.size || [120, 90];
-    if (spec.backing !== false) { // чёрный картон с проколами; ближний слой звёзд — без картона (параллакс)
+    if (spec.backing !== false) { // black cardboard with pin-pricks; the nearest star layer has no cardboard (parallax)
       const back = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshStandardMaterial({ color: '#030304', roughness: 1 }));
       back.position.y = h / 2;
       back.userData.depthMat = depthMaterial(null);
@@ -345,9 +345,9 @@ export class Stage {
     return out;
   }
 
-  // дождь: косые нити, падают в коробке box [x, y, z] вокруг pos; fx.rain — сила (0..1)
+  // rain: slanted threads falling in a box [x, y, z] around pos; fx.rain — intensity (0..1)
   _rain(el0, spec, out) {
-    const el = { ...spec, ...el0 };  // параметры — в библии (кусок декорации) или в кадре
+    const el = { ...spec, ...el0 };  // parameters — in the bible (a set piece) or in the shot
     const [bx, by, bz] = el.box || [40, 40, 10];
     const N = el.n || 900;
     const r = rng(hashStr(el.id + 'rain'));
@@ -459,7 +459,7 @@ export class Stage {
       this.key = s;
     }
     this.practical = null;
-    if (L.practical) { // светящаяся лампа в кадре: тёплый ореол вокруг абажура
+    if (L.practical) { // a lit lamp in the shot: a warm halo around the shade
       const pr = L.practical;
       const pl = new THREE.PointLight(new THREE.Color(pr.color), 0, 0, 2);
       pl.position.set(...pr.pos);
@@ -476,10 +476,10 @@ export class Stage {
     this.fill = new THREE.HemisphereLight(fc, new THREE.Color(f.ground || fc.clone().multiplyScalar(0.35)), 0);
     this.root.add(this.fill);
     this.scene.background = new THREE.Color(L.bg || '#000000');
-    // туман и цвет плёнки — у сцены свои (свет пресета) или общие (стиль)
+    // fog and film colour — the scene's own (the light preset) or shared (the style)
     const fog = L.fog === undefined ? this.paper.fog : L.fog;
     this.scene.fog = fog ? new THREE.FogExp2(new THREE.Color(fog.color || '#808080'), fog.density ?? 0.005) : null;
-    // цвет плёнки: стиль → пресет света (grade); grade_to — переход за кадр (grade_at — доли кадра, как ramp)
+    // film colour: style → light preset (grade); grade_to — a transition over the shot (grade_at — shares of the shot, like ramp)
     const gr = { saturation: this.paper.saturation ?? 1, tint: this.paper.tint || '#ffffff', autochrome: this.paper.autochrome ?? 0, ...(L.grade || {}) };
     this.gradeFrom = { saturation: gr.saturation, tint: new THREE.Color(gr.tint), autochrome: gr.autochrome };
     this.gradeTo = L.grade_to ? { saturation: L.grade_to.saturation ?? gr.saturation, tint: new THREE.Color(L.grade_to.tint || gr.tint),
@@ -498,7 +498,7 @@ export class Stage {
     U.autochrome.value = b ? lerp(a.autochrome, b.autochrome, k) : a.autochrome;
   }
 
-  // ирис немого кино: in: 'iris' — круг раскрывается из темноты; следующий кадр с ирисом — этот закрывается
+  // a silent-film iris: in: 'iris' — a circle opens out of darkness; the next shot with an iris — this one closes
   _iris(shot, t) {
     const D = 1.3;
     let r = 10;
@@ -513,11 +513,11 @@ export class Stage {
     return r;
   }
 
-  // ---------------------------------------------------------------- кадр в момент t
+  // ---------------------------------------------------------------- the frame at moment t
 
   renderAt(t) {
     const tReal = t;
-    // «ручная» частота немого кино (stage.fps_look, напр. 18): сцена движется рывками, плёнка (зерно, пыль) — каждый кадр
+    // the "hand-cranked" frame rate of silent cinema (stage.fps_look, e.g. 18): the scene moves in jerks, the film (grain, dust) — every frame
     if (this.paper.fps_look) t = Math.floor(t * this.paper.fps_look + 1e-6) / this.paper.fps_look;
     const shot = this.shotAt(t);
     if (shot !== this.shot) this._build(shot);
@@ -525,10 +525,10 @@ export class Stage {
     const u = clamp((t - shot.t0) / dur, 0, 1);
     const lt = t - shot.t0;
 
-    // элементы
+    // elements
     for (const it of Object.values(this.items)) this._updateElement(it, t, u, lt);
 
-    // камера
+    // camera
     const cam = shot.camera;
     const e = ease(cam.ease, u);
     const pos = new THREE.Vector3(...lerp3(cam.from.pos, cam.to.pos, e));
@@ -539,7 +539,7 @@ export class Stage {
     this.camera.lookAt(look);
     const hand = cam.hand ?? 1;
     if (hand > 0) {
-      const a = hand * (this.paper.hand ?? 1); // stage.hand стиля — сила «рук» для всех кадров
+      const a = hand * (this.paper.hand ?? 1); // the style's stage.hand — the strength of the "hands" for all shots
       this.camera.rotateY(wave(t, 'yaw', HAND_F) * 0.4 * DEG * a);
       this.camera.rotateX(wave(t, 'pitch', HAND_F) * 0.34 * DEG * a);
       this.camera.rotateZ(wave(t, 'roll', HAND_F) * 0.5 * DEG * a);
@@ -549,19 +549,19 @@ export class Stage {
     this.camera.updateProjectionMatrix();
     this.camera.updateMatrixWorld();
 
-    // свет и экспозиция
+    // light and exposure
     const k = this._lightK(shot, t, u, lt);
     this._updateLight(shot, t, u, lt, k);
     this.renderer.toneMappingExposure = this.debug ? 1 : this._exposure(shot, t);
 
-    // фокус
+    // focus
     this._focus(shot, u);
     this._grade(u);
     this.grade.uniforms.iris.value = this._iris(shot, tReal);
     const fr = Math.floor(tReal * (this.tl.fps || 24));
     this.grade.uniforms.seed.value = (fr % 997) / 97.0;
     this.grade.uniforms.flicker.value = (this.paper.flicker || 0) * (wave(fr * 0.37, 'flick', [1.7, 2.9, 5.3]) * 0.5 + (((fr * 7919) % 13) / 13 - 0.5));
-    const wv = (this.paper.weave || 0) * this.H / 1080; // кадр «гуляет» в фильмовом канале (пиксели)
+    const wv = (this.paper.weave || 0) * this.H / 1080; // the frame "weaves" in the film channel (pixels)
     this.grade.uniforms.weave.value.set(wave(fr * 0.5, 'wx', [0.9, 1.7]) * wv * 0.4, wave(fr * 0.5, 'wy', [1.1, 2.3]) * wv);
 
     this.composer.render();
@@ -574,7 +574,7 @@ export class Stage {
     let p = el.pos || [0, 0, 0];
     let r = rot3(el.rot);
     const mv = el.move;
-    if (mv && mv.keys) { // маршрут: [[доля кадра, [x, y, z]], …] — вышел, постоял, ушёл
+    if (mv && mv.keys) { // a route: [[share of the shot, [x, y, z]], …] — came out, stood, left
       const ks = mv.keys;
       p = ks[0][1];
       for (let i = 1; i < ks.length; i++) {
@@ -600,9 +600,9 @@ export class Stage {
     let dy = 0, rz = 0, sc = 1, dx = 0;
     const seed = el.id;
     if (fx.bob) dy += Math.abs(Math.sin(t * PI * (fx.bob_hz || 1.7) + (hashStr(seed) % 7))) * fx.bob;
-    // шаг бумажной куклы: карточку ведут рукой — она покачивается с носка на пятку, не подпрыгивая
+    // a paper puppet's step: the card is moved by hand — it rocks from toe to heel without hopping
     if (fx.walk) rz += Math.sin(t * PI * (fx.walk_hz || 1.4) + (hashStr(seed) % 7)) * fx.walk;
-    if (fx.jitter) rz += (wave(t * 2.5, seed + 'j', [1.1, 1.7, 2.9]) * fx.jitter * 0.45); // дрожь руки — мягче
+    if (fx.jitter) rz += (wave(t * 2.5, seed + 'j', [1.1, 1.7, 2.9]) * fx.jitter * 0.45); // a trembling hand — softer
     if (fx.sway) rz += Math.sin(t * 2 * PI * 0.32 + (hashStr(seed) % 5)) * fx.sway;
     if (fx.wobble) dx += Math.sin(t * 2 * PI * 3.2) * fx.wobble * 0.5;
     if (fx.breathe) sc += Math.sin(t * 2 * PI * 0.22) * fx.breathe;
@@ -613,7 +613,7 @@ export class Stage {
       const sw = (u >= (el.swap_at ?? 0));
       it.prev.visible = !sw; it.mesh.visible = sw;
     }
-    // свечение (тонировка карточки или светящийся элемент)
+    // glow (a card's tint or a glowing element)
     let gk = el.k ?? 1;
     if (el.k_to !== undefined) { const [a, b] = el.ramp || [0, 1]; gk = lerp(el.k ?? 1, el.k_to, smooth(a, b, u)); }
     if (fx.flicker) gk *= 1 - fx.flicker * 0.5 * (0.5 + 0.5 * wave(t * 3, seed + 'f', [1.3, 2.1, 3.7]));
@@ -622,12 +622,12 @@ export class Stage {
       it.mesh.visible = gk > 0.01;
       if (it.light) it.light.intensity = gk * 60 * PI;
     }
-    if (it.spec.draw === 'screen' && it.mesh) it.mesh.material.color.setScalar(0.55 * gk); // просвеченная бумага — не до белого
+    if (it.spec.draw === 'screen' && it.mesh) it.mesh.material.color.setScalar(0.55 * gk); // backlit paper — not up to white
     if (it.spec.draw === 'title' && it.mesh) it.mesh.material.color.setScalar(gk);
     if (it.spec.draw === 'shape' && it.mesh) {
       it.mesh.material.opacity = clamp(gk, 0, 1);
       it.mesh.visible = gk > 0.005;
-      const n = it.ghosts.length;  // шлейф: следы позади по ходу вращения, ярче — чем быстрее
+      const n = it.ghosts.length;  // a trail: copies behind along the rotation, brighter the faster it spins
       const ax = (el.spin && el.spin.axis) || 'y';
       const sp = spin ? spin.speed : 0;
       it.ghosts.forEach((g, i) => {
@@ -672,7 +672,7 @@ export class Stage {
     let k = L.k ?? 1;
     if (L.k_to !== undefined) { const [a, b] = L.ramp || [0, 1]; k = lerp(L.k ?? 1, L.k_to, smooth(a, b, u)); }
     const fx = L.fx || {};
-    if (fx.heartbeat) { // тук-тук, пропуск, барабанная дробь
+    if (fx.heartbeat) { // thump-thump, a skip, a drum roll
       const beat = 0.86, ph = (lt % beat) / beat, n = Math.floor(lt / beat);
       const skip = (hashStr('hb' + n) % 5) === 0;
       const pulse = Math.exp(-Math.pow((ph - 0.08) / 0.05, 2)) + 0.7 * Math.exp(-Math.pow((ph - 0.3) / 0.05, 2));
@@ -688,7 +688,7 @@ export class Stage {
     if (L.target_to) target = lerp3(target, L.target_to, smooth(0, 1, u));
     let pos = key.pos || [0, 30, 30];
     const fx = L.fx || {};
-    if (fx.swing) { // лампу задели: качание с затуханием
+    if (fx.swing) { // the lamp was knocked: a swing that dies away
       const s = fx.swing * Math.sin(2 * PI * 0.55 * lt) * Math.exp(-lt / 7);
       target = [target[0] + s * 9, target[1], target[2] + s * 3];
       pos = [pos[0] + s * 0.6, pos[1], pos[2]];
@@ -723,7 +723,7 @@ export class Stage {
     const lt = t - shot.t0;
     if (shot.in === 'fade') ex *= smooth(0, 1.6, lt);
     if (shot.in === 'dip') ex *= smooth(0, 0.6, lt);
-    if (this.tl.fade_out) ex *= 1 - smooth(this.tl.duration - this.tl.fade_out, this.tl.duration, t); // конец фильма — в темноту
+    if (this.tl.fade_out) ex *= 1 - smooth(this.tl.duration - this.tl.fade_out, this.tl.duration, t); // the end of the film — into darkness
     const i = this.tl.shots.indexOf(shot);
     const next = this.tl.shots[i + 1];
     if (next && next.in === 'dip') ex *= 1 - smooth(next.t0 - 0.45, next.t0, t);
@@ -740,8 +740,8 @@ export class Stage {
     if (!it) return null;
     const p = new THREE.Vector3();
     if (it.points && !it.mesh) { it.group.getWorldPosition(p); return p.add(new THREE.Vector3(0, (it.h || 0) * 0.6, 0)); }
-    if (!it.mesh || it.spec.draw === 'shape') { it.group.updateWorldMatrix(true, false); return it.group.getWorldPosition(p); }  // линия, фигура — их центр
-    // точка на самой карточке (в её плоскости — и для повёрнутых и лежащих): 62% высоты — уровень лица
+    if (!it.mesh || it.spec.draw === 'shape') { it.group.updateWorldMatrix(true, false); return it.group.getWorldPosition(p); }  // a line, a shape — their centre
+    // a point on the card itself (in its plane — for turned and lying ones too): 62% of the height is face level
     const isFloor = it.spec.kind === 'floor';
     it.mesh.updateWorldMatrix(true, false);
     return it.mesh.localToWorld(p.set(0, isFloor ? 0 : (it.h || 0) * 0.62, 0));
@@ -769,7 +769,7 @@ export class Stage {
     this.dof.material.uniforms.maxCoc.value = 30 * k;
   }
 
-  // ---------------------------------------------------------------- субтитры поверх
+  // ---------------------------------------------------------------- subtitles on top
 
   _sub() { return { y: 0.735, width: 0.82, size: 0.0285, ...(this.tl.subtitle_style || {}) }; }
 
@@ -778,7 +778,7 @@ export class Stage {
   _composite(t) {
     const ctx = this.ctx;
     ctx.drawImage(this.renderer.domElement, 0, 0);
-    const sub = this._sub().burn === false || !this.subtitles ? null : this.subAt(t); // burn: false — субтитры отдельно (.srt)
+    const sub = this._sub().burn === false || !this.subtitles ? null : this.subAt(t); // burn: false — subtitles separately (.srt)
     if (!sub) return;
     const fs = this._subSize();
     const a = smooth(sub.t0, sub.t0 + 0.14, t) * (1 - smooth(sub.t1 - 0.14, sub.t1, t));
@@ -819,7 +819,7 @@ function wrap(ctx, text, maxW) {
     if (ctx.measureText(tryL).width > maxW && cur) { lines.push(cur); cur = w; } else cur = tryL;
   }
   if (cur) lines.push(cur);
-  if (lines.length === 2 && lines[1].split(' ').length === 1 && lines[0].includes(' ')) { // без «вдовы» во второй строке
+  if (lines.length === 2 && lines[1].split(' ').length === 1 && lines[0].includes(' ')) { // no "widow" in the second line
     const ws = lines[0].split(' ');
     lines[1] = ws.pop() + ' ' + lines[1];
     lines[0] = ws.join(' ');

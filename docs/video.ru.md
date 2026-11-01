@@ -38,7 +38,7 @@ make thumbnail S=mate-in-3 F=horizontal SHOT=s01a     # обложка: кадр
 | `<история>-<F>[-<L>]-chapters.txt` | главы по сценам, `0:00 …` (`make youtube`) | в описание ролика как есть |
 
 Например, `make video S=mate-in-3 F=horizontal L=ru` → `out/mate-in-3/mate-in-3-horizontal-ru.mp4`.
-`make youtube` нужна полная озвучка (`время: voicing` в строке таймлайна), иначе главы и субтитры разойдутся с роликом —
+`make youtube` нужна полная озвучка (`timing: voicing` в строке таймлайна), иначе главы и субтитры разойдутся с роликом —
 он предупредит.
 
 ## Субтитры: по умолчанию — отдельным файлом
@@ -86,8 +86,8 @@ make thumbnail S=mate-in-3 F=horizontal SHOT=s01a SUB="a paper theatre film"   #
 | Mac, Apple M2 (видеокарта, `h264_videotoolbox`) | ≈ 0,04 с/кадр при 1920×1080 (замер) | ≈ 20 мин |
 | без видеокарты (SwiftShader) | ≈ 1 с/кадр при 720×1280 | часы |
 
-Первые строки рендера говорят, на чём он идёт: `WebGL: … Apple M2 … — видеокарта` или `SwiftShader` (программный),
-и `кодек: h264_videotoolbox` (аппаратный). Настройки (`local.mk` или в команде):
+Первые строки рендера говорят, на чём он идёт: `WebGL: … Apple M2 … — GPU` или `SwiftShader` (программный),
+и `codec: h264_videotoolbox` (аппаратный). Настройки (`local.mk` или в команде):
 
 - `COOL=1` (`CAPTURE_COOL = 1`) — без перегрева: ffmpeg с низким приоритетом, 2 потока, паузы между кадрами;
 - `CAPTURE_GL = gpu | cpu`, `CAPTURE_ENCODER = videotoolbox | x264` — задать явно;

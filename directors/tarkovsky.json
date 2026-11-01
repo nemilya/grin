@@ -1,15 +1,15 @@
 {
  "name": {"ru": "Андрей Тарковский", "en": "Andrei Tarkovsky"},
- "_": "Режиссёрский профиль: киноязык, по которому пишется раскадровка (агентом или LLM), и умолчания движка. defaults — поля кадра по умолчанию (кадр их переопределяет); min_shot — короче этого план считается нарушением языка (предупреждение в make timeline).",
+ "_": "A director profile: the film language a storyboard is written in (by an agent or an LLM), and the engine defaults. defaults — shot fields by default (a shot overrides them); min_shot — a shot shorter than this breaks the language (a warning in make timeline).",
  "defaults": {"hand": 0, "ease": "inOut"},
  "min_shot": 12,
  "language": {
-  "editing": "Длинные планы 20–90 с, на фильм 25–40 планов. Склейки простые; переход часто делает сама камера (cam → cam_to): из комнаты к окну, от лица к предмету. Наплывов нет. Внутри плана — несколько реплик подряд.",
-  "camera": "Штатив и рельсы: тряски нет (hand 0). Медленный боковой проезд (drift 6–15 см за план), очень медленный наезд (push 4–12 см за 30–60 с), долгий взгляд на предмет. Камера чуть ниже глаз, симметрия, глубокая мизансцена: передний план — предмет, середина — человек, даль — окно/сад/туман.",
-  "people": "Люди почти неподвижны: спиной, в профиль, у окна, в глубине кадра; изредка взгляд в камеру. Движение — медленный проход через кадр. Крупные планы лиц — долгие и статичные.",
-  "light_color": "Естественный свет: окно, пасмурный день, дождь; лампа — живое пламя. Приглушённая плёнка (зелёно-коричневая). Внутренний мир доктора и пустота — монохром или сепия (grade в пресете света).",
-  "elements": "Вода (капли, лужи, дождь за окном), ветер (трава, занавеска), огонь (лампа, свеча), туман (fog в пресете), пух и пыль в луче, зеркало/отражение, левитация (медленный подъём в пустоте).",
-  "time": "Тишина: после важных абзацев — паузы 4–12 с (holds), кадр длится, голос молчит; природные звуки продолжаются.",
-  "sound": "Капли, дождь, ветер, дальний поезд, часы; музыка редко — органный хорал или низкий электронный гул (drone)."
+  "editing": "Long takes of 20–90 s, 25–40 shots per film. Simple cuts; the transition is often made by the camera itself (cam → cam_to): from the room to the window, from a face to an object. No dissolves. Several cues in a row inside one shot.",
+  "camera": "Tripod and rails: no shake (hand 0). A slow lateral track (drift 6–15 cm per shot), a very slow push-in (push 4–12 cm over 30–60 s), a long gaze at an object. The camera slightly below eye level, symmetry, deep staging: foreground — an object, middle — a person, distance — a window/garden/fog.",
+  "people": "People are almost still: from behind, in profile, by the window, deep in the frame; an occasional look into the camera. Movement — a slow walk across the frame. Close-ups of faces — long and static.",
+  "light_color": "Natural light: a window, an overcast day, rain; the lamp is a living flame. Muted film stock (green-brown). The doctor's inner world and the void — monochrome or sepia (grade in the light preset).",
+  "elements": "Water (drops, puddles, rain outside the window), wind (grass, a curtain), fire (a lamp, a candle), fog (fog in the preset), down and dust in a beam, a mirror/reflection, levitation (a slow rise in the void).",
+  "time": "Silence: after important paragraphs — pauses of 4–12 s (holds), the shot lasts, the voice is silent; natural sounds go on.",
+  "sound": "Drops, rain, wind, a distant train, a clock; music rarely — an organ chorale or a low electronic hum (drone)."
  }
 }
