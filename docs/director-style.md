@@ -1,82 +1,85 @@
-# Режиссёрский стиль: тот же рассказ — другой киноязык
+# A director's style: the same story — a different film language
 
-Идея: поставить тот же рассказ «рукой» другого режиссёра. Первый — Андрей Тарковский. Меняется всё, что
-составляет киноязык: монтаж и длина планов, движение камеры, свет и цвет, стихии в кадре, паузы, звук,
-акценты сцен — и изображение. Голос сохраняется (те же файлы озвучки), позже его можно заменить.
+**English** · [Русский](director-style.ru.md)
 
-Выбрано **«киноизображение»** (проба двух вариантов — `stories/_lab-tarkovsky`, `tools/style_lab.py`):
-та же объёмная сцена из слоёв по глубине (камера, параллакс, фокус), но слои нарисованы как части кадра
-советского авторского кино 70-х на 35-мм плёнке — фотографично, без кромки и бумаги, с мягким краем,
-туманом и плёночной цветокоррекцией. Картонные вырезки остаются у бумажного театра (`mate-in-3`).
+The idea: stage the same story "by the hand" of another director. The first one is Andrei Tarkovsky. Everything that
+makes up a film language changes: editing and shot length, camera movement, light and colour, the elements in the frame,
+pauses, sound, the accents of scenes — and the image. The voice stays (the same narration files); it can be replaced later.
 
-## Слои фильма
+The chosen look is the **"film image"** (two variants were tried — `stories/_lab-tarkovsky`, `tools/style_lab.py`):
+the same 3D scene of layers by depth (camera, parallax, focus), but the layers are drawn as parts of a frame from
+1970s Soviet auteur cinema on 35 mm film — photographic, no rim or paper, with a soft edge, fog and film colour
+grading. The cardboard cut-outs stay with the paper theatre (`mate-in-3`).
+
+## The layers of a film
 
 ```
-рассказ + перевод + голос   stories/<рассказ>/                текст, перевод, voicings/<голос>/
-постановка                  stories/<постановка>/story.json   "base": <рассказ> — текст и голос берутся оттуда;
-                                                              свои: bible.json, storyboard.json, assets/, build/
-режиссёр                    directors/<имя>.json              киноязык + умолчания кадра (storyboard → "director")
-изобразительный стиль       styles/<имя>.json                 как рисуются слои + параметры сцены (film.style)
+story + translation + voice  stories/<story>/                  text, translation, voicings/<voice>/
+production                   stories/<production>/story.json   "base": <story> — text and voice are taken from there;
+                                                               its own: bible.json, storyboard.json, assets/, build/
+director                     directors/<name>.json             the film language + shot defaults (storyboard → "director")
+visual style                 styles/<name>.json                how the layers are drawn + scene parameters (film.style)
 ```
 
-`stories/mate-in-3` — бумажный театр (без режиссёра: ручная камера — умолчание движка);
-`stories/mate-in-3-tarkovsky` — постановка по Тарковскому. Движок один: туман, дождь, монохром, паузы,
-мягкие слои достаются всем постановкам. Отдельный репозиторий — только если понадобится публиковать
-постановки раздельно (движок — git submodule).
+`stories/mate-in-3` — the paper theatre (no director: the handheld camera is the engine default);
+`stories/mate-in-3-tarkovsky` — the Tarkovsky production. There is one engine: fog, rain, monochrome, pauses,
+soft layers are available to every production. A separate repository only if the productions ever need to be
+published separately (the engine as a git submodule).
 
 ```bash
 make status S=mate-in-3-tarkovsky
-make preview S=mate-in-3-tarkovsky     # плеер: http://127.0.0.1:8720/stage/?story=mate-in-3-tarkovsky
-make video-demo S=mate-in-3-tarkovsky  # финал (с кадра demo_start раскадровки — t13a «Рука»)
-make video S=mate-in-3-tarkovsky       # фильм целиком, 20 мин
+make preview S=mate-in-3-tarkovsky     # the player: http://127.0.0.1:8720/stage/?story=mate-in-3-tarkovsky
+make video-demo S=mate-in-3-tarkovsky  # the finale (from the storyboard's demo_start shot — t13a "The hand")
+make video S=mate-in-3-tarkovsky       # the whole film, 20 min
 make preview S=mate-in-3-tarkovsky F=horizontal   # 16:9 (&tl=horizontal)
-make video S=mate-in-3-tarkovsky F=horizontal     # 1920×1080 для YouTube (+ -share.mp4, 1280×720)
-make youtube S=mate-in-3-tarkovsky F=horizontal   # субтитры .srt и главы по сценам
+make video S=mate-in-3-tarkovsky F=horizontal     # 1920×1080 for YouTube (+ -share.mp4, 1280×720)
+make youtube S=mate-in-3-tarkovsky F=horizontal   # .srt subtitles and chapters by scene
 ```
 
-Горизонталь 16:9 — `formats.horizontal` + `storyboard-16x9.json` (наследует раскадровку постановки): те же
-реплики, паузы, свет и звук; свои камеры — уже по вертикали, чтобы широкий кадр не выходил за края
-слоёв-декораций (стена кабинета 64 см, ночное небо в 16:9 увеличено), процессия в тумане стартует из-за кадра.
+Horizontal 16:9 — `formats.horizontal` + `storyboard-16x9.json` (it inherits the production's storyboard): the same
+cues, pauses, light and sound; its own cameras — tighter vertically, so that the wide frame doesn't go past the edges of
+the set layers (the office wall is 64 cm, the night sky is enlarged in 16:9), the procession in the fog starts off-frame.
 
-## Тарковский — `directors/tarkovsky.json`
+## Tarkovsky — `directors/tarkovsky.json`
 
-| | бумажный театр | Тарковский |
+| | paper theatre | Tarkovsky |
 |---|---|---|
-| монтаж | 134 кадра, ~8 с | 45 планов по 15–90 с; переход часто делает сама камера (`cam` → `cam_to`) |
-| камера | ручная, «дыхание» рук | штатив (`hand: 0` — умолчание режиссёра); медленный проезд (`drift`), наезд (`push`) |
-| фигуры | двигаются, покачиваются | почти неподвижны, в профиль, у окна, в глубине; левитация — в пустоте и в спальне |
-| свет | лампа кукловода | дождливые сумерки из окна, лампа на столе; в финале — электрический свет сверху |
-| цвет | тёплая гуашь | приглушённая плёнка; воспоминания — сепия, пустота — ч/б, ночь — синяя, мысли — серый туман |
-| стихии | — | дождь за окном, тополиный пух в луче, ветер в траве, туман, звёзды, занавеска, яблоки на ветке |
-| время | реплики подряд | паузы `holds`: после абзаца («018») или предложения («018.16») — тишина, кадр длится |
-| звук | шкатулка, часы | дождь, капли, ветер, ночной сад; орган (хорал) в начале и в конце, гул в пустоте |
+| editing | 134 shots, ~8 s | 45 shots of 15–90 s; the transition is often made by the camera itself (`cam` → `cam_to`) |
+| camera | handheld, the "breathing" of hands | a tripod (`hand: 0` — the director's default); a slow track (`drift`), a push-in (`push`) |
+| figures | move, sway | almost still, in profile, by the window, deep in the frame; levitation — in the void and in the bedroom |
+| light | the puppeteer's lamp | rainy dusk from the window, a lamp on the table; in the finale — electric light from above |
+| colour | warm gouache | muted film stock; memories — sepia, the void — b/w, night — blue, thoughts — grey fog |
+| elements | — | rain outside the window, poplar fluff in a beam, wind in the grass, fog, stars, a curtain, apples on a branch |
+| time | cues one after another | `holds` pauses: after a paragraph ("018") or a sentence ("018.16") — silence, the shot lasts |
+| sound | a music box, a clock | rain, drops, wind, a night garden; an organ (a chorale) at the start and the end, a drone in the void |
 
-## Что есть в движке
+## What the engine has
 
-- **Постановка** (`story.json → base`): `config.text_dir` — текст, перевод, голос базовой истории;
-  `config.story` — поля базовой + свои (film — по ключам).
-- **Режиссёр** (`storyboard.json → director`): `defaults` — поля кадра по умолчанию, `min_shot` —
-  предупреждения в `make timeline` о слишком коротких планах.
-- **Паузы** (`storyboard.json → holds`): таймлайн сдвигает реплики, звук режет дубль между предложениями
-  (`paragraphs[].cuts`) — озвучка не переделывается.
-- **Камера**: `cam_to` — переезд от одной камеры к другой за план.
-- **Стиль** (`styles/tarkovsky-film.json`): формулировки промптов (`figure`, `piece`, `object`, `part`,
-  `sheet…`), мягкий ключ (`key: soft` — растушёванный край, под прозрачным — цвет соседей), `layers`
-  (мягкий край и без теней у вырезок), `stage` (без изгиба и фактуры бумаги, зерно, мерцание, насыщенность,
-  тон, туман).
-- **Сцена**: туман и цветокоррекция по пресету света (`fog`, `grade: {saturation, tint}`); дождь нитями
-  (`draw: rain`, параметры — в библии); кусок декорации может взять чужую карточку (`card`) — без генерации.
-- **Звук**: фоны `rain`, `drips`, `wind`, `wind-night`; музыка `organ` (аккорды «D3+A3+F4:4 …»).
+- **A production** (`story.json → base`): `config.text_dir` — the base story's text, translation, voice;
+  `config.story` — the base story's fields + its own (film — key by key).
+- **A director** (`storyboard.json → director`): `defaults` — shot fields by default, `min_shot` —
+  warnings in `make timeline` about shots that are too short.
+- **Pauses** (`storyboard.json → holds`): the timeline shifts the cues, the sound cuts the take between sentences
+  (`paragraphs[].cuts`) — the narration is not redone.
+- **The camera**: `cam_to` — a move from one camera to another over a shot.
+- **The style** (`styles/tarkovsky-film.json`): prompt wordings (`figure`, `piece`, `object`, `part`,
+  `sheet…`), a soft key (`key: soft` — a feathered edge, the neighbours' colour under the transparent part), `layers`
+  (a soft edge and no shadows for cut-outs), `stage` (no bend or paper texture, grain, flicker, saturation,
+  tint, fog).
+- **The scene**: fog and colour grading per light preset (`fog`, `grade: {saturation, tint}`); rain as threads
+  (`draw: rain`, parameters in the bible); a set piece can take someone else's card (`card`) — no generation.
+- **Sound**: ambience `rain`, `drips`, `wind`, `wind-night`; music `organ` (chords "D3+A3+F4:4 …").
 
-## Ассеты постановки
+## The production's assets
 
-62 картинок (потрачено $1.30 с переделками): листы героев (тот же канон лиц и костюмов), 32 позы, декорации-слои (кабинет с дверью
-и окном, коридор, сад под дождём за окном, комната с окном на пыльную улицу, ночной сад с крыльцом, спальня,
-стол), предметы. Шарнирная рука бумажной куклы в фотографии не работает (модель не убирает руку с
-тела, кисть выходит зелёной) — «рука, что поднимается и падает» снята крупным планом в темноте (`patient/hand-raised`,
-поза `closeup` — промпт детали без фигуры). Переделать слой: `python3 -m engine assets mate-in-3-tarkovsky --redo <ключ>`.
+62 pictures ($1.30 spent, with redos): character sheets (the same canon of faces and costumes), 32 poses, set layers
+(the office with a door and a window, a corridor, a garden in the rain outside the window, a room with a window onto a
+dusty street, a night garden with a porch, a bedroom, a table), props. The paper puppet's jointed arm doesn't work in a
+photograph (the model doesn't take the arm off the body, the hand comes out green) — "the hand that rises and falls" is
+shot as a close-up in the dark (`patient/hand-raised`, a `closeup` pose — the prompt of a detail without a figure).
+Redo a layer: `python3 -m engine assets mate-in-3-tarkovsky --redo <key>`.
 
-## Дальше
+## Next
 
-- Свой голос постановки: `film.voicing` в её `story.json` (голоса лежат у базовой истории).
-- Следующий режиссёр — новый `directors/<имя>.json` + стиль + постановка.
+- The production's own voice: `film.voicing` in its `story.json` (the voices live with the base story).
+- The next director — a new `directors/<name>.json` + a style + a production.

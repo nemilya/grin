@@ -1,5 +1,5 @@
 {
- "_": "История для движка бумажного театра. source — исходник (язык lang — основной; первые skip блоков — автор и название, не озвучиваются). film — параметры ролика: язык озвучки и субтитров, формат, стиль; formats — другие форматы того же фильма (поверх film). Этапы — make status / make <этап> (README).",
+ "_": "A story for the paper-theatre engine. source — the source text (lang is the main language; the first skip blocks are the author and the title, not narrated). film — the film's parameters: the language of narration and subtitles, format, style; formats — other formats of the same film (on top of film). Stages — make status / make <stage> (README).",
  "title": {
   "ru": "Мат в три хода",
   "en": "Mate in Three Moves"
@@ -35,7 +35,7 @@
    "height": 1080,
    "fps": 24,
    "storyboard": "storyboard-16x9.json",
-   "_": "горизонталь 16:9 (YouTube): те же перевод, озвучка, звук, ассеты; камеры и правки кадров — storyboard-16x9.json"
+   "_": "horizontal 16:9 (YouTube): the same translation, narration, sound, assets; cameras and shot edits — storyboard-16x9.json"
   }
  },
  "year": 1908

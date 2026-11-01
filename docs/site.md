@@ -1,37 +1,39 @@
-# Сайт grin.nemilya.me
+# The site grin.nemilya.me
 
-Статический сайт об Александре Грине: рассказы вслух и на экране. Английский — по умолчанию (`/en/`), русский —
-`/ru/`. Собирается из репозитория одной командой, выкладывается как есть (`deploy/README.ru.md`).
+**English** · [Русский](site.ru.md)
+
+A static site about Alexander Grin: stories read aloud and on screen. English is the default (`/en/`), Russian is
+`/ru/`. It is built from the repository with one command and uploaded as is ([deploy/README.md](../deploy/README.md)).
 
 ```bash
-make site      # → dist/ (повторная сборка — только изменившееся; первая — несколько минут: звук видео ≈ 1,5 мин на постановку и язык)
+make site      # → dist/ (a rebuild redoes only what changed; the first build takes a while: video sound ≈ 1.5 min per production and language)
 make serve     # → http://127.0.0.1:8730/
-make deploy    # → сервер (DEPLOY в local.mk)
+make deploy    # → the server (DEPLOY in local.mk)
 ```
 
-## Что на сайте
+## What is on the site
 
-| страница | адрес | что |
+| page | address | what |
 |---|---|---|
-| витрина | `/<язык>/` | рассказ за рассказом: год и название (без пересказа), «Читать и слушать», MP3 — и сразу все видеоверсии крупными постерами (16:9 на широком экране, на телефоне — одна колонка, вертикальный кадр в 4:5) |
-| об авторе | `/<язык>/author/` | имя, годы, биография (`site/author.json`); ссылка — в шапке витрины |
-| рассказ | `/<язык>/<рассказ>/` | год, название, «Читать и слушать», «Скачать аудио» (MP3), видеоверсии (постер, коротко о стиле, длительность, вертикаль/горизонталь) |
-| чтение | `/<язык>/<рассказ>/read/` | текст страницами по высоте экрана, подсветка звучащего предложения и слова, клик по слову — слушать с него, скорость, ссылка на место (`#t=…`), продолжить с места; плеер — из mountain-rock |
-| видео | `/<язык>/<рассказ>/<стиль>/` | сцена рисуется в браузере (WebGL, stage.js) по таймлайну, время — от звука; без mp4 |
+| showcase | `/<lang>/` | story after story: the year and the title (no retelling), "Read and listen", MP3 — and right away all the video versions as large posters (16:9 on a wide screen; on a phone one column, a vertical frame in 4:5) |
+| about the author | `/<lang>/author/` | name, years, biography (`site/author.json`); linked from the showcase header |
+| story | `/<lang>/<story>/` | the year, the title, "Read and listen", "Download audio" (MP3), video versions (poster, a line about the style, duration, vertical/horizontal) |
+| reading | `/<lang>/<story>/read/` | the text in pages by screen height, highlighting of the sentence and word being heard, a click on a word — listen from it, speed, a link to the place (`#t=…`), continue where you stopped |
+| video | `/<lang>/<story>/<style>/` | the scene is drawn in the browser (WebGL, stage.js) by the timeline, time comes from the sound; no mp4 |
 
-Видео:
-- **формат по экрану:** телефон, портретный или узкий экран — вертикаль 9:16, широкий — горизонталь 16:9; кнопка ⇄
-  переключает (место сохраняется), `?o=vertical|horizontal` — явно;
-- **язык:** на языке страницы, если у постановки есть полная озвучка этого языка (`film.voicings`), иначе — на языке
-  раскадровки (на странице рассказа — пометка «Видео на языке: …»);
-- **качество по устройству:** разрешение сцены — по размеру экрана и плотности пикселей (на телефоне не больше
-  540×960), лучей фокуса меньше на телефоне;
-- субтитры (CC) включаются и выключаются, полноэкранный режим, клавиши: пробел, ← →, C, F; место просмотра запоминается;
-- перед первым кадром — постер (кадр раскадровки без субтитров) и кнопка ▶: звук стартует от нажатия (так требуют браузеры).
+Video:
+- **format by screen:** a phone, a portrait or narrow screen — vertical 9:16, a wide one — horizontal 16:9; the ⇄ button
+  switches (the position is kept), `?o=vertical|horizontal` — explicitly;
+- **language:** the page's language if the production has a full narration in it (`film.voicings`), otherwise the
+  storyboard's language (the story page says "Video in: …");
+- **quality by device:** the scene resolution follows the screen size and pixel density (no more than 540×960 on a
+  phone), fewer focus rays on a phone;
+- subtitles (CC) can be turned on and off, fullscreen, keys: space, ← →, C, F; the viewing position is remembered;
+- before the first frame — a poster (a storyboard shot without subtitles) and a ▶ button: the sound starts on a tap (browsers require it).
 
-Тема ☀/☾ — по системе, выбор запоминается; страница видео — всегда тёмная.
+The ☀/☾ theme follows the system, the choice is remembered; the video page is always dark.
 
-## Откуда что берётся — `site.json`
+## Where things come from — `site.json`
 
 ```json
 {"url": "https://grin.nemilya.me", "langs": ["en", "ru"], "default_lang": "en", "author": "site/author.json",
@@ -40,29 +42,30 @@ make deploy    # → сервер (DEPLOY в local.mk)
                          {"production": "mate-in-3", "name": {…}, "about": {…}, "poster": ["s03a", 0.5]}]}]}
 ```
 
-Новый рассказ: история в `stories/` (текст → перевод → озвучка, `docs/pipeline.md`) + строка в `stories`.
-Новая видеоверсия: постановка (`docs/new-style.md`) + строка в `videos`.
+A new story: a story in `stories/` (text → translation → narration, [pipeline.md](pipeline.md)) + an entry in `stories`.
+A new video version: a production ([new-style.md](new-style.md)) + an entry in `videos`.
 
-## Устройство `dist/`
+## The layout of `dist/`
 
 ```
 index.html                         → en/
-en/ ru/                            страницы (см. выше)
-<язык>/<рассказ>/audio/story.mp3   озвучка целиком (+ story.json — разметка времени для чтения)
-media/<постановка>/                assets/*.webp (слои: WebP с прозрачностью, ≤ 1400 px),
-                                   <ориентация>-<язык>.json (таймлайн), sound-<язык>.m4a (AAC 96k, моно),
-                                   poster-<ориентация>.webp
+en/ ru/                            pages (see above)
+<lang>/<story>/audio/story.mp3     the whole narration (+ story.json — timing marks for reading)
+media/<production>/                assets/*.webp (layers: WebP with transparency, ≤ 1400 px),
+                                   <orientation>-<lang>.json (timeline), sound-<lang>.m4a (AAC 96k, mono),
+                                   poster-<orientation>.webp
 assets/                            site.css, site.js, reader.js, watch.js, fonts/ (Source Serif 4, Golos — OFL)
-assets/stage-<хеш>/                сцена: js/ (stage.js, paper.js, post.js) и vendor/three
+assets/stage-<hash>/               the stage: js/ (stage.js, paper.js, post.js, geometry.js) and vendor/three
 ```
 
-Код: `engine/site.py` (сборка), `site/` (стили, скрипты, шрифты, `author.json`). Сборка помнит отпечатки
-(`dist/.build.json`): слой перекодируется, только если поменялась картинка; звук видео — если поменялись речь,
-кадры, звук раскадровки или код синтеза, который она звучит (`sound.signature`: сведение + её фоны, музыка, шумы — новый фон для одной постановки не пересчитывает другие); постер — если поменялся его кадр или ассеты; MP3 озвучки —
-если поменялись дубли. Всё, что сборка не подтвердила, удаляется.
+Code: `engine/site.py` (the build), `site/` (styles, scripts, fonts, `author.json`). The build remembers fingerprints
+(`dist/.build.json`): a layer is re-encoded only if its picture changed; the video sound — if the speech, the shots,
+the storyboard's sound or the synthesis code it sounds with changed (`sound.signature`: the mix + its ambience, music,
+effects — a new ambience for one production doesn't recompute the others); a poster — if its shot or assets changed;
+the narration MP3 — if the takes changed. Everything the build didn't confirm is deleted.
 
-## Позже
+## Later
 
-- озвучка и видео других рассказов (тот же пайплайн);
-- выбор голоса/озвучки на странице, если их несколько;
-- подсказки «продолжить смотреть» на странице рассказа (прогресс видео уже хранится в localStorage).
+- narration and video for other stories (the same pipeline);
+- choosing a voice/narration on the page if there are several;
+- "continue watching" hints on the story page (video progress is already stored in localStorage).

@@ -1,5 +1,5 @@
 {
- "_": "«Преступление Отпавшего Листа» (Грин, 1918). Разбор и план — docs/stories/leaf-story.md. Каждая строка исходника — абзац с отступом (format libru); первые два — автор и название; главы I–III — заголовки; ответы Посвящения — строки в кавычках.",
+ "_": "“The Crime of the Fallen Leaf” (Grin, 1918). Analysis and plan — docs/stories/leaf-story.md. Every line of the source is an indented paragraph (format libru); the first two are the author and the title; chapters I–III are headings; the answers of the Initiation are lines in quotes.",
  "title": {
   "ru": "Преступление Отпавшего Листа",
   "en": "The Crime of the Fallen Leaf"
@@ -36,7 +36,7 @@
    "height": 1920,
    "fps": 24,
    "storyboard": "storyboard-9x16.json",
-   "_": "вертикаль 9:16 (телефон): те же реплики, свет, звук, ассеты; камеры и правки кадров под узкий кадр — storyboard-9x16.json"
+   "_": "vertical 9:16 (phone): the same cues, light, sound, assets; cameras and shot edits for the narrow frame — storyboard-9x16.json"
   }
  }
 }

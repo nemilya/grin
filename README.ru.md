@@ -13,11 +13,11 @@ WebGL-сцене (three.js): слои по глубине, свет, глуби�
 |---|---|
 | [`docs/video.ru.md`](docs/video.ru.md) | рендер фильма для YouTube, Shorts, соцсетей: форматы постановок, субтитры, главы, обложки, время |
 | [`docs/media.ru.md`](docs/media.ru.md) | медиа: как связаны `grin` и `grin-media` (`media.rev`, `make media-pull` / `media-push`) |
-| [`docs/pipeline.md`](docs/pipeline.md) | пайплайн ролика по этапам (вход, выход, проверка, цена, кто решает) и план автоматизации |
-| [`docs/new-style.md`](docs/new-style.md) | как добавить новый стиль видео (стиль, режиссёр, постановка → сайт) |
-| [`docs/site.md`](docs/site.md) | сайт: страницы, видео в браузере, `site.json`, устройство `dist/`; деплой — [`deploy/README.ru.md`](deploy/README.ru.md) |
-| [`docs/director-style.md`](docs/director-style.md) | постановка по Тарковскому: киноязык, что добавлено в движок |
-| [`docs/treatment.md`](docs/treatment.md) | режиссёрская разработка бумажного театра; задание — [`brief.md`](brief.md) |
+| [`docs/pipeline.ru.md`](docs/pipeline.ru.md) | пайплайн ролика по этапам (вход, выход, проверка, цена, кто решает) и план автоматизации |
+| [`docs/new-style.ru.md`](docs/new-style.ru.md) | как добавить новый стиль видео (стиль, режиссёр, постановка → сайт) |
+| [`docs/site.ru.md`](docs/site.ru.md) | сайт: страницы, видео в браузере, `site.json`, устройство `dist/`; деплой — [`deploy/README.ru.md`](deploy/README.ru.md) |
+| [`docs/director-style.ru.md`](docs/director-style.ru.md) | постановка по Тарковскому: киноязык, что добавлено в движок |
+| [`docs/treatment.ru.md`](docs/treatment.ru.md) | режиссёрская разработка бумажного театра; задание — [`brief.md`](brief.md) |
 
 ```bash
 make site && make serve     # сайт → http://127.0.0.1:8730/  (make deploy — на сервер)
@@ -62,7 +62,7 @@ make preview         # плеер без рендера — кадры + гол�
 make preview F=horizontal   # то же для 16:9 (&tl=horizontal); &debug — рабочий свет, &shot=s05g — с кадра
 ```
 
-В начале рендера печатается строка `WebGL: … — видеокарта / программный рендер`: имя видеокарты
+В начале рендера печатается строка `WebGL: … — GPU / software renderer`: имя видеокарты
 (Apple M…, NVIDIA…) — GPU; `SwiftShader` — программный.
 
 После рендера рядом с мастером (1080×1920, высокий битрейт — для монтажа и архива) появляется

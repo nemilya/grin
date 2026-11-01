@@ -1,57 +1,59 @@
-# Новый стиль видео: как добавить
+# A new video style: how to add one
 
-Видеоверсия рассказа = **постановка**: тот же текст и голос, свои картинки, раскадровка и звук. Её «стиль»
-складывается из трёх независимых частей — их можно комбинировать:
+**English** · [Русский](new-style.ru.md)
 
-| часть | файл | отвечает за |
+A video version of a story = a **production**: the same text and voice, its own pictures, storyboard and sound. Its
+"style" is made of three independent parts that can be combined:
+
+| part | file | responsible for |
 |---|---|---|
-| изобразительный стиль | `styles/<стиль>.json` | как рисуются картинки (промпты), ключ, материал и цвет сцены |
-| режиссёр (необязательно) | `directors/<имя>.json` | киноязык: длины планов, камера, умолчания кадра, правила для раскадровки |
-| постановка | `stories/<рассказ>-<стиль>/` | библия, раскадровка (+16:9), звук, ассеты — конкретный фильм |
+| visual style | `styles/<style>.json` | how pictures are drawn (prompts), the key, the scene's material and colour |
+| director (optional) | `directors/<name>.json` | the film language: shot lengths, camera, shot defaults, rules for the storyboard |
+| production | `stories/<story>-<style>/` | bible, storyboard (+16:9), sound, assets — a concrete film |
 
-Готовые примеры: `paper-theatre` (бумажный театр, без режиссёра — `stories/mate-in-3`) и `tarkovsky-film` +
-`directors/tarkovsky.json` (`stories/mate-in-3-tarkovsky`). Подробно про второй — [director-style.md](director-style.md).
+Ready examples: `paper-theatre` (paper theatre, no director — `stories/mate-in-3`) and `tarkovsky-film` +
+`directors/tarkovsky.json` (`stories/mate-in-3-tarkovsky`). More on the second one — [director-style.md](director-style.md).
 
-## 0. Проба (≈ $0.15, полчаса)
+## 0. A test (≈ $0.15, half an hour)
 
-Прежде чем делать постановку, сравнить стиль на одной сцене: `tools/style_lab.py` — одна сцена (доктор у окна,
-дождь, стол с лампой) в нескольких изображениях на одном движке (камера, свет, палитра общие). Добавить вариант
-промптов в скрипт → `python3 tools/style_lab.py` → `make preview` с `?story=_lab-tarkovsky&tl=<вариант>`
-или ролики `node tools/capture.mjs video _lab-tarkovsky --tl <вариант>`.
+Before making a production, compare the style on one scene: `tools/style_lab.py` — one scene (the doctor at the window,
+rain, a table with a lamp) in several renderings on the same engine (camera, light, palette are shared). Add a prompt
+variant to the script → `python3 tools/style_lab.py` → `make preview` with `?story=_lab-tarkovsky&tl=<variant>`
+or films `node tools/capture.mjs video _lab-tarkovsky --tl <variant>`.
 
-## 1. Изобразительный стиль — `styles/<стиль>.json`
+## 1. The visual style — `styles/<style>.json`
 
-Промпты движка собираются из **описания без стиля** (библия) + **техники из стиля**. Поля:
+The engine's prompts are built from a **style-free description** (the bible) + **the technique from the style**. Fields:
 
-| поле | что | пример (кино) |
+| field | what | example (cinema) |
 |---|---|---|
-| `name` | название (ru, en) | «Киноизображение (Тарковский)» |
-| `cutout` | техника фигуры/предмета на хромакее | «Rendered photographically, like a figure from a 1970s Soviet art-house film…» |
-| `cutout_bg` | фон для ключа | «Isolated on a perfectly flat, uniform pure chroma-green (#00FF00)…» |
-| `backdrop` | техника задника (без людей) | «A wide background plate for a multi-plane film composite…» |
-| `texture` | пол, столешница — вид сверху | «A seamless flat texture seen straight from above…» |
-| `silhouette` | силуэты (тени, процессия в тумане) | — |
-| `figure` | начало промпта позы: «… <имя> (<возраст>): <внешность>» | «A single isolated figure (nothing else in the image, only this one person) of» |
-| `piece`, `object`, `part` | кусок декорации, предмет, деталь куклы | по умолчанию — из `cutout` с «puppet» → «piece of toy-theatre scenery» |
-| `sheet`, `sheet_each`, `sheet_bg` | лист героя (4 вида — референс всех поз) | «for a film (costume and casting reference photographs)» |
-| `no_text` | без надписей | — |
-| `key` | `soft` — растушёванный край, под прозрачным — цвет соседей (кино); нет — край с белой кромкой (бумага) | `soft` |
-| `layers` | что добавить вырезкам в сцене: `soft` (мягкий край), `cast: false` (без теней) | `{"soft": true, "cast": false}` |
-| `stage` | материал и плёнка: `curl` (изгиб картона), `paper_normal`, `paper_roughness`, `grain`, `vignette`, `saturation`, `tint`, `flicker`, `fog` | без изгиба и фактуры, зерно 0.075, туман |
-| `stage` (немое кино) | `autochrome` (цветное крахмальное зерно и мягкость пластинки, 0–1), `scratches`, `dust` (царапины и пыль, 0–1), `weave` (кадр «гуляет», пиксели), `fps_look` (сцена движется с частотой 18 к/с), `hand` (сила «рук» камеры) | `silent-autochrome` |
+| `name` | the name (ru, en) | "Film image (Tarkovsky)" |
+| `cutout` | the technique of a figure/object on chroma key | "Rendered photographically, like a figure from a 1970s Soviet art-house film…" |
+| `cutout_bg` | the background for the key | "Isolated on a perfectly flat, uniform pure chroma-green (#00FF00)…" |
+| `backdrop` | the backdrop technique (no people) | "A wide background plate for a multi-plane film composite…" |
+| `texture` | a floor, a tabletop — seen from above | "A seamless flat texture seen straight from above…" |
+| `silhouette` | silhouettes (shadows, a procession in fog) | — |
+| `figure` | the start of a pose prompt: "… <name> (<age>): <appearance>" | "A single isolated figure (nothing else in the image, only this one person) of" |
+| `piece`, `object`, `part` | a set piece, a prop, a puppet part | by default — from `cutout` with "puppet" → "piece of toy-theatre scenery" |
+| `sheet`, `sheet_each`, `sheet_bg` | the character sheet (4 views — the reference for every pose) | "for a film (costume and casting reference photographs)" |
+| `no_text` | no lettering | — |
+| `key` | `soft` — a feathered edge, the neighbours' colour under the transparent part (cinema); absent — an edge with a white rim (paper) | `soft` |
+| `layers` | what to add to cut-outs in the scene: `soft` (a soft edge), `cast: false` (no shadows) | `{"soft": true, "cast": false}` |
+| `stage` | material and film: `curl` (cardboard bend), `paper_normal`, `paper_roughness`, `grain`, `vignette`, `saturation`, `tint`, `flicker`, `fog` | no bend or texture, grain 0.075, fog |
+| `stage` (silent film) | `autochrome` (coloured starch grain and the softness of the plate, 0–1), `scratches`, `dust` (scratches and dust, 0–1), `weave` (the frame "weaves", pixels), `fps_look` (the scene moves at 18 fps), `hand` (the strength of the camera's "hands") | `silent-autochrome` |
 
-Правила, которые выяснились на практике:
-- **Деталь без человека** (рука, руки, предмет крупно): поза с `"closeup": true` (и `"ref": false`) — промпт детали
-  без фигуры и внешности, иначе модель рисует человека целиком.
-- Для стиля «фото» описания поз не должны говорить «вырезка»/«cut-out» (`REWRITE` в генераторе библии постановки).
-- **Предмет в другой манере** (натуральный лист в живописном фильме): у пропа `"technique"` — заменяет `object`
-  стиля; зелёный предмет — `"key": "magenta"` (фон-маджента, ключ по нему).
-- **Шарнирные части** (рука из трёх кусков) работают для куклы, но не для фотографии — там движение лучше
-  решить монтажом (крупный план руки в темноте).
-- Правка промптов движка не должна менять промпты других стилей (иначе их ассеты станут stale): сверять
-  `assets.plan('<рассказ>')` до и после.
+Rules learned in practice:
+- **A detail without a person** (a hand, hands, an object in close-up): a pose with `"closeup": true` (and `"ref": false`) —
+  the prompt of a detail without a figure or appearance, otherwise the model draws the whole person.
+- For a "photo" style, pose descriptions must not say "cut-out".
+- **A prop in a different manner** (a natural leaf in a painted film): the prop's `"technique"` replaces the style's
+  `object`; a green prop — `"key": "magenta"` (a magenta background, keyed on it).
+- **Jointed parts** (an arm in three pieces) work for a puppet but not for a photograph — there movement is better
+  solved by editing (a close-up of a hand in the dark).
+- Edits to the engine's prompts must not change other styles' prompts (otherwise their assets go stale): compare
+  `assets.plan('<story>')` before and after.
 
-## 2. Режиссёр (если нужен свой киноязык) — `directors/<имя>.json`
+## 2. A director (if you need your own film language) — `directors/<name>.json`
 
 ```json
 {"name": {"ru": "…", "en": "…"},
@@ -60,55 +62,58 @@
  "language": {"editing": "…", "camera": "…", "people": "…", "light_color": "…", "elements": "…", "time": "…", "sound": "…"}}
 ```
 
-- `defaults` — поля кадра по умолчанию (кадр их переопределяет): `hand` (ручная камера, 0 — штатив), `ease`…;
-- `min_shot` — короче — предупреждение в `make timeline`;
-- `language` — описание для того, кто пишет раскадровку (агент, LLM): монтаж, камера, люди, свет, стихии, паузы, звук.
+- `defaults` — shot fields by default (a shot overrides them): `hand` (a handheld camera, 0 — a tripod), `ease`…;
+- `min_shot` — a shorter shot gets a warning in `make timeline`;
+- `language` — a description for whoever writes the storyboard (an agent, an LLM): editing, camera, people, light,
+  elements, pauses, sound.
 
-Без режиссёра — умолчания движка (бумажный театр: ручная камера кукловода).
+Without a director — the engine defaults (paper theatre: the puppeteer's handheld camera).
 
-## 3. Постановка — `stories/<рассказ>-<стиль>/`
+## 3. The production — `stories/<story>-<style>/`
 
 1. **`story.json`**:
    ```json
-   {"base": "mate-in-3", "film": {"style": "<стиль>", "width": 1080, "height": 1920, "fps": 24},
+   {"base": "mate-in-3", "film": {"style": "<style>", "width": 1080, "height": 1920, "fps": 24},
     "formats": {"horizontal": {"width": 1920, "height": 1080, "fps": 24, "storyboard": "storyboard-16x9.json"}},
-    "art_context": "…эпоха и мир в этом стиле…"}
+    "art_context": "…the era and the world in this style…"}
    ```
-   Текст, перевод, озвучки (`film.voicings`) — из `base`.
-2. **`bible.json`** — герои: канон из базовой библии (лица и костюмы те же — `look` копируется, формулировки поз
-   переводятся на язык стиля), позы — какие нужны раскадровке; декорации — **слоями по глубине** (задник
-   `draw: screen` — светящаяся даль за окном, стена с проёмом `hole: true`, пол `kind: floor`, предметы); чужая
-   карточка без генерации — `"card": "office/floor"`.
-3. **`storyboard.json`** — `"director": "<имя>"`, `"lang": "en"`, свет (пресеты с `fog` и `grade`; `grade_to` + `grade_at: [a, b]` —
-   переход цвета за кадр: `saturation`, `tint`, `autochrome`), ирис (`"in": "iris"`, `end.iris_out`, `iris.center`), интертитры (процедурная карточка `draw: title`:
-   `story_title`, `para` + `attr`, `big`; `no_subtitles` — абзацы без субтитров), процедурная геометрия
-   (`stage/js/geometry.js`): фигуры `draw: shape` (disc, ring, rect, wedge, cross; `soft`, `add`), линии `draw: trace`
-   (`points`, `dash`, `wave`; в кадре `grow: [a, b]` — дорисовывается), у элемента `spin` (+ `trail` — шлейф: сфера) и
-   `fall` (падение карточки маятником; в следующем кадре лежит в `to`), камеры, сцены
-   и кадры, `holds`, `sound` (фоны: `rain`, `drips`, `wind`, `wind-night`, `clock`, `crickets`, `room`; музыка:
-   `organ`, `drone`, `musicbox`, `piano` — тапёр, `loop` — фраза повторяется, `motor` — аэроплан: ключи `env`/`pitch` по
-   кадрам `["j04+0.5", -2]`; фоны `projector`, `crowd`, `birds`, `tram`, смесь `"birds+crowd*0.5"`, `bed` в кадре — свой
-   фон кадра; шумы `bell`, `boom`, `tram-bell`; `bed_gain`, `bed_duck`), `fade_out`, `demo_start`.
-4. **Ассеты:** `python3 -m engine assets <постановка> --keys refs/<герой>,<герой>/<поза>,<декорация>/<кусок>` —
-   2–3 пробные → посмотреть → `python3 -m engine assets <постановка>` — остальные (≈ $1.2).
-5. **Кадры:** `make timeline S=<постановка>` → `node tools/capture.mjs stills <постановка> --scale 0.25 --at 0.5` → лист;
-   края слоёв не должны попадать в кадр (особенно в начале/конце проездов: `--at 0.02` и `--at 0.98`).
-6. **16:9:** `storyboard-16x9.json` (`extends`, `cams` под широкий кадр, правки кадров) →
-   `make timeline S=<постановка> F=horizontal` → лист.
-7. **Другие языки:** `make timeline S=<постановка> L=ru` — реплики переносятся сами; посмотреть 2–3 кадра.
-8. **Звук:** `make preview S=<постановка>` — послушать фон, музыку, паузы, финал.
-9. **Тест:** в `tests/test_engine.py` — сборка без ошибок, горизонталь с теми же репликами (как `ProductionTest`).
+   Text, translation, narrations (`film.voicings`) — from `base`.
+2. **`bible.json`** — characters: the canon from the base bible (the same faces and costumes — `look` is copied, the pose
+   wordings are translated into the style's language), poses — whichever the storyboard needs; sets — **in layers by
+   depth** (a backdrop `draw: screen` — the glowing distance behind the window, a wall with an opening `hole: true`, a floor
+   `kind: floor`, furniture); someone else's card without generation — `"card": "office/floor"`.
+3. **`storyboard.json`** — `"director": "<name>"`, `"lang": "en"`, light (presets with `fog` and `grade`; `grade_to` +
+   `grade_at: [a, b]` — a colour transition over the shot: `saturation`, `tint`, `autochrome`), the iris (`"in": "iris"`,
+   `end.iris_out`, `iris.center`), intertitles (the procedural card `draw: title`: `story_title`, `para` + `attr`, `big`;
+   `no_subtitles` — paragraphs without subtitles), procedural geometry (`stage/js/geometry.js`): shapes `draw: shape`
+   (disc, ring, rect, wedge, cross; `soft`, `add`), lines `draw: trace` (`points`, `dash`, `wave`; in a shot
+   `grow: [a, b]` — it draws itself), an element's `spin` (+ `trail` — a trail: a sphere) and `fall` (a card falling like a
+   pendulum; in the next shot it lies at `to`), cameras, scenes and shots, `holds`, `sound` (ambience: `rain`, `drips`,
+   `wind`, `wind-night`, `clock`, `crickets`, `room`; music: `organ`, `drone`, `musicbox`, `piano` — a silent-film pianist,
+   `loop` — the phrase repeats, `motor` — an aeroplane: `env`/`pitch` keys by shot `["j04+0.5", -2]`; ambience
+   `projector`, `crowd`, `birds`, `tram`, a mix `"birds+crowd*0.5"`, `bed` in a shot — the shot's own ambience; effects
+   `bell`, `boom`, `tram-bell`; `bed_gain`, `bed_duck`), `fade_out`, `demo_start`.
+4. **Assets:** `python3 -m engine assets <production> --keys refs/<character>,<character>/<pose>,<set>/<piece>` —
+   2–3 test ones → look → `python3 -m engine assets <production>` — the rest (≈ $1.2).
+5. **Shots:** `make timeline S=<production>` → `node tools/capture.mjs stills <production> --scale 0.25 --at 0.5` → the sheet;
+   layer edges must not get into the frame (especially at the start/end of camera moves: `--at 0.02` and `--at 0.98`).
+6. **16:9:** `storyboard-16x9.json` (`extends`, `cams` for the wide frame, shot edits) →
+   `make timeline S=<production> F=horizontal` → the sheet.
+7. **Other languages:** `make timeline S=<production> L=ru` — the cues move by themselves; look at 2–3 shots.
+8. **Sound:** `make preview S=<production>` — listen to the ambience, music, pauses, the finale.
+9. **A test:** in `tests/test_engine.py` — builds without errors, the horizontal format with the same cues (like `ProductionTest`).
 
-## 4. На сайт
+## 4. To the site
 
-В `site.json` → `stories[].videos` добавить:
+In `site.json` → `stories[].videos` add:
 ```json
-{"production": "<постановка>", "name": {"en": "…", "ru": "…"}, "about": {"en": "…", "ru": "…"}, "poster": ["<кадр>", 0.5]}
+{"production": "<production>", "name": {"en": "…", "ru": "…"}, "about": {"en": "…", "ru": "…"}, "poster": ["<shot>", 0.5]}
 ```
-`make site` соберёт видео во всех форматах постановки и на языках с полной озвучкой (иначе — на языке
-раскадровки), постеры, звук; адрес видео — `/<язык>/<рассказ>/<стиль>/`. Затем `make serve` → `make deploy`.
+`make site` builds the video in all the production's formats and in the languages with a full narration (otherwise in
+the storyboard's language), the posters, the sound; the video's address is `/<lang>/<story>/<style>/`. Then
+`make serve` → `make deploy`.
 
-## Цена и время
+## Cost and time
 
-Проба ≈ $0.15; постановка: библия + раскадровка (агент или LLM) + ≈ 60–75 картинок (≈ $1.2), переделки ≈ $0.1;
-звук и рендер — локально. Сборка сайта с новой постановкой: звук ≈ 1,5 мин на язык, постеры, слои webp.
+A test ≈ $0.15; a production: bible + storyboard (an agent or an LLM) + ≈ 60–75 pictures (≈ $1.2), redos ≈ $0.1;
+sound and rendering are local. A site build with a new production: sound ≈ 1.5 min per language, posters, webp layers.

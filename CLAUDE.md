@@ -1,7 +1,7 @@
 # grin — notes for Claude Code
 
 Alexander Grin's stories: narration, films in several styles, the website grin.nemilya.me. Pipeline and data
-format — README.md (most detailed: README.ru.md); the paper-theatre treatment — docs/treatment.md.
+format — README.md (Russian: README.ru.md); the paper-theatre treatment — docs/treatment.md.
 
 - Talk to the maintainer in Russian. The repository is public and English-first: code, comments, commit
   messages, docs in English (Russian translations of docs — `*.ru.md`). Film content (translation, subtitles,

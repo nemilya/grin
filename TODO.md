@@ -5,35 +5,24 @@
 Open work, in rough order. Each item: what, why, and implementation notes gathered so far. When an item is done —
 delete it here (the history is in git) and update the docs it touches.
 
-## 1. Translate the sources to English
+## 1. Translate the sources to English — what is left
 
-The repository is English-first, but most comments, docstrings, CLI messages, `make help` and `docs/` are still
-Russian. Inventory (lines with Cyrillic, autumn 2026): Python ≈ 585 (comments 235, docstrings 152, strings 198 —
-≈ 100 of those strings must stay), JS/CSS/HTML ≈ 200, docs ≈ 900, Makefile 40, JSON `"_"` comment fields ≈ 50.
-Find them (works on macOS too; ≈ 930 lines in code today):
+Code, comments, CLI messages, `make help`, the admin, JSON `"_"` fields (`site.json`, `styles/*`, `directors/*`,
+`story.json`), `docs/*.md` (Russian in `*.ru.md`), `README.md` and the `storyboard` skill are in English. Russian that
+stays on purpose (it is Russian-language data): abbreviations and regexes in `engine/text.py`, `engine/prepare.py`;
+chapter words and `ё/е` in `engine/translate.py`; the TTS lead `'Этот фрагмент:'` in `engine/voicing.py` and the Russian
+default manner in `engine/pricing.py` (both enter the take key); `UI['ru']` in `engine/site.py`; Russian test data.
+Find what is left in code (≈ 70 lines, all of them data):
 
 ```bash
-python3 -c "import re,pathlib as P; [print(f'{p}:{n}: {l.strip()[:90]}') for d in 'engine stage/js site tools tests'.split() for p in sorted(P.Path(d).rglob('*.*')) if p.suffix in ('.py','.js','.mjs','.css','.html') for n,l in enumerate(p.read_text(errors='ignore').splitlines(),1) if re.search('[а-яёА-ЯЁ]',l)]"
+python3 -c "import re,pathlib as P; [print(f'{p}:{n}: {l.strip()[:90]}') for d in 'engine stage/js site tools tests admin'.split() for p in sorted(P.Path(d).rglob('*.*')) if p.suffix in ('.py','.js','.mjs','.css','.html') for n,l in enumerate(p.read_text(errors='ignore').splitlines(),1) if re.search('[а-яёА-ЯЁ]',l)]"
 ```
 
-- **Stays Russian** (it is Russian-language data, not prose): abbreviations, alphabet and regexes in
-  `engine/text.py`, `engine/prepare.py`; chapter words and `ё/е` in `engine/translate.py`; the TTS lead
-  `'Этот фрагмент:'` in `engine/voicing.py` (changing it makes every Russian take stale ≈ $0.25 per story);
-  Russian UI strings of the site (`UI['ru']` in `engine/site.py`); story texts, `prepared/ru.json`, Russian subtitles.
-- **Fingerprints** — check before/after each module: `assets.plan(<story>)` statuses for every production,
-  `voicing.plan`, `translate.status` — nothing may turn stale. The sound fingerprint already ignores comments and
-  docstrings (`sound._code_only`); translating the log f-strings inside `sound.build` rebuilds the site's video sound
-  once (local, free, ≈ 30 min of `make site`).
-- **Order**: one module per commit, `make check` after each — `engine/*.py` (start with small ones: config, llm,
-  openrouter, audio, pricing), then `stage/js`, `site/*.js`, `tools/`, `tests/`; CLI messages (`print` in
-  `engine/__main__.py`, `tools/capture.mjs`) and `make help`; JSON `"_"` fields (`site.json`, `site/author.json`,
-  `styles/*`, `directors/*`, `story.json`).
-- **Docs**: `docs/*.md` → English, the current Russian text moves to `*.ru.md` (as done for `media`, `video`,
-  `deploy/README`). `README.md` is still shorter than `README.ru.md` — bring it to parity (formats, languages,
-  storyboard format, assets, stage). `docs/stories/*.md` (Russian analyses of the stories) — decide: keep Russian,
-  translate, or drop. `.claude/skills/storyboard/SKILL.md` — still Russian.
-- Storyboard `note` fields in `stories/*/storyboard*.json` are Russian working notes — not urgent; they don't enter
-  fingerprints (verify before bulk edits).
+- `docs/stories/*.md` (Russian analyses of the stories, ≈ 450 lines) — decide: keep Russian, translate, or drop.
+- Story data: `"_"` and `role` in `stories/*/bible.json`, `note` in `glossary.json` and `storyboard*.json` (≈ 290
+  working notes) are Russian. Bible fields can enter asset prompts — before a bulk edit compare `assets.plan(<story>)`
+  for every production (nothing may turn stale); storyboard notes don't enter fingerprints.
+- `brief.md` — the original Russian brief; keep as a historical document or translate.
 
 ## 2. "About the project" page on the site
 
