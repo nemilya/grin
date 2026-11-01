@@ -1,4 +1,4 @@
-"""Текстовая модель через OpenRouter (/chat/completions): глоссарий, перевод, анализ."""
+"""A text model via OpenRouter (/chat/completions): glossary, translation, analysis."""
 from __future__ import annotations
 
 import json
@@ -12,7 +12,7 @@ MODELS = ['anthropic/claude-haiku-5.5', 'anthropic/claude-sonnet-5.5', 'anthropi
 
 def chat(messages: list[dict], *, model: str = DEFAULT_MODEL, max_tokens: int = 8000,
          temperature: float = 0.3) -> tuple[str, float]:
-    """→ (текст ответа, стоимость $)."""
+    """→ (response text, cost $)."""
     body = {'model': model, 'messages': messages, 'max_tokens': max_tokens, 'temperature': temperature}
     raw, _ = _request('/chat/completions', body=json.dumps(body).encode(), ctype='application/json')
     r = json.loads(raw)
@@ -22,7 +22,7 @@ def chat(messages: list[dict], *, model: str = DEFAULT_MODEL, max_tokens: int = 
 
 
 def chat_json(messages: list[dict], *, retries: int = 2, **kw) -> tuple[dict, float]:
-    """Ответ — JSON-объект (из ```json …``` или первого {…}); при неразборчивом ответе — повтор."""
+    """The response is a JSON object (from ```json …``` or the first {…}); an unparseable response is retried."""
     cost, last = 0.0, ''
     for _ in range(retries + 1):
         text, c = chat(messages, **kw)
@@ -35,4 +35,4 @@ def chat_json(messages: list[dict], *, retries: int = 2, **kw) -> tuple[dict, fl
                 last = f'{e}: {text[:200]}'
         else:
             last = text[:200]
-    raise ApiError(f'модель не вернула JSON: {last}')
+    raise ApiError(f'the model returned no JSON: {last}')

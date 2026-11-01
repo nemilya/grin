@@ -1,11 +1,11 @@
-"""ffmpeg: перевод ответа TTS в моно PCM, обрезка тишины, хранение дублей (opus), сборка дорожек (mp3)."""
+"""ffmpeg: TTS response → mono PCM, silence trimming, take storage (opus), track assembly (mp3)."""
 from __future__ import annotations
 
 import re
 import subprocess
 from pathlib import Path
 
-RATE = 24000  # Гц, моно, s16le — рабочий формат
+RATE = 24000  # Hz, mono, s16le — the working format
 
 
 def ff(*args: str, data: bytes | None = None) -> bytes:
@@ -16,7 +16,7 @@ def ff(*args: str, data: bytes | None = None) -> bytes:
 
 
 def to_pcm(raw: bytes, ctype: str) -> bytes:
-    """Ответ TTS (pcm с rate=… или любой контейнер) → s16le моно RATE."""
+    """A TTS response (pcm with rate=… or any container) → s16le mono RATE."""
     if 'pcm' in ctype or not ctype:
         rate = re.search(r'rate=(\d+)', ctype)
         src = ['-f', 's16le', '-ar', rate.group(1) if rate else '24000', '-ac', '1']
@@ -26,7 +26,7 @@ def to_pcm(raw: bytes, ctype: str) -> bytes:
 
 
 def trim(pcm: bytes, tempo: float = 1.0) -> bytes:
-    """Тишина по краям — прочь (паузы между абзацами ставит сборка); tempo — ускорение без смены высоты."""
+    """Trim silence at the edges (pauses between paragraphs are added at assembly); tempo — speed-up without a pitch change."""
     af = 'silenceremove=start_periods=1:start_threshold=-50dB,areverse,' \
          'silenceremove=start_periods=1:start_threshold=-50dB,areverse'
     if tempo and tempo != 1:
@@ -40,7 +40,7 @@ def silence(sec: float) -> bytes:
 
 
 def silences(pcm: bytes, db: int = -40, min_len: float = 0.15) -> list[tuple[float, float]]:
-    """Паузы в речи: [(начало, конец)] — для разметки предложений, когда распознавание подвело."""
+    """Pauses in speech: [(start, end)] — for sentence marks when transcription fails."""
     r = subprocess.run(['ffmpeg', '-v', 'info', '-f', 's16le', '-ar', str(RATE), '-ac', '1', '-i', 'pipe:0',
                         '-af', f'silencedetect=n={db}dB:d={min_len}', '-f', 'null', '-'], input=pcm, capture_output=True)
     starts = [float(x) for x in re.findall(r'silence_start: ([\d.]+)', r.stderr.decode())]
@@ -53,7 +53,7 @@ def dur(pcm: bytes) -> float:
 
 
 def save_take(pcm: bytes, path: Path, bitrate: str = '40k') -> None:
-    """Дубль абзаца → Opus (речь, ~5 КБ/с): компактно, можно хранить в git."""
+    """A paragraph take → Opus (speech, ~5 KB/s): compact enough to keep in git."""
     path.parent.mkdir(parents=True, exist_ok=True)
     ff('-f', 's16le', '-ar', str(RATE), '-ac', '1', '-i', 'pipe:0', '-c:a', 'libopus', '-b:a', bitrate,
        '-application', 'voip', str(path), data=pcm)
