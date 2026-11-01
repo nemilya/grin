@@ -1,11 +1,11 @@
-"""Локальная админка (только просмотр): что сделано для ролика — истории и постановки, листы героев, позы,
-декорации и предметы (картинка, промпт, статус, цена), раскадровка (кадры со стоп-кадрами из out/), озвучка
-(дубли с оценкой распознавания и прослушиванием), стиль и режиссёр.
+"""The local admin (view only): what has been made for a film — stories and productions, character sheets, poses,
+sets and props (picture, prompt, status, price), the storyboard (shots with stills from out/), narration
+(takes with the transcription score and playback), style and director.
 
     make admin            → http://127.0.0.1:8740/admin/
 
-Сервер — стандартная библиотека: файлы репозитория как есть (картинки, звук дублей, out/…) и два JSON:
-/api/stories — список историй, /api/story?slug=… — всё по истории. Ничего не пишет и не генерирует.
+The server is the standard library: repository files as they are (pictures, take audio, out/…) and two JSON endpoints:
+/api/stories — the list of stories, /api/story?slug=… — everything about a story. It writes and generates nothing.
 """
 from __future__ import annotations
 
@@ -124,7 +124,7 @@ class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *a, **kw):
         super().__init__(*a, directory=str(ROOT), **kw)
 
-    def log_message(self, fmt, *args):  # тихо
+    def log_message(self, fmt, *args):  # quiet
         pass
 
     def do_GET(self):
@@ -157,7 +157,7 @@ class Handler(SimpleHTTPRequestHandler):
 def main() -> None:
     port = int(sys.argv[1]) if len(sys.argv) > 1 else PORT
     srv = ThreadingHTTPServer(('127.0.0.1', port), Handler)
-    print(f'админка: http://127.0.0.1:{port}/admin/  ({time.strftime("%H:%M")}, Ctrl+C — выход)')
+    print(f'admin: http://127.0.0.1:{port}/admin/  ({time.strftime("%H:%M")}, Ctrl+C — quit)')
     srv.serve_forever()
 
 
