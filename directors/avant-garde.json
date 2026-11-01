@@ -1,15 +1,15 @@
 {
  "name": {"ru": "Авангард 1918", "en": "Avant-garde 1918"},
- "_": "Киноязык «Преступления Отпавшего Листа» (docs/stories/leaf-story.md): штатив; сквер — фронтально, как полотно; внутренний мир — белое поле и супрематическая геометрия, которую рисует движок (shape, trace, spin, fall — stage/js/geometry.js).",
+ "_": "The film language of “The Crime of the Fallen Leaf” (docs/stories/leaf-story.md): tripod; the square — frontal, like a canvas; the inner world — a white field and suprematist geometry drawn by the engine (shape, trace, spin, fall — stage/js/geometry.js).",
  "defaults": {"hand": 0, "ease": "inOut"},
  "min_shot": 4,
  "language": {
-  "editing": "Город — короткие планы (3–6 с), пёстрый ритм; внутренний мир — долгие планы (15–30 с), без склеек внутри мысли. Переход «внутрь» — сквер обесцвечивается и уходит в белое (свет white).",
-  "camera": "Штатив (hand 0). Сквер — фронтально, как живописное полотно; внутренний мир — медленные осевые наезды сквозь слои геометрии; переход Ранума в лётчика — один долгий пролёт камеры.",
-  "people": "Ранум неподвижен: решение, суд и прощение — в неподвижной фигуре; двигаются мир, линии, аэроплан, лист.",
-  "light_color": "Внешний мир — пёстрая яркая живопись; внутренний — белое поле, чёрное и красное; финал — живопись приглушена, лист — единственная живая зелень (glow).",
-  "elements": "Линии, которые рисуются (trace + grow): арабески на песке, огненный круг, путь прохожего, пунктир кривой бомбы; фигуры (shape): точка, уголь, кольцо, полосы улиц; вращение со шлейфом (spin, trail) — сфера; падение листа (fall).",
-  "time": "Паузы после ответов Посвящения и после «Я не дам совершиться этому».",
-  "sound": "Город — шум, звонки трамвая; внутренний мир — бурдон; аэроплан — сверлящий гул; финал — шорох клёна."
+  "editing": "The city — short shots (3–6 s), a motley rhythm; the inner world — long shots (15–30 s), no cuts inside a thought. The transition “inwards” — the square loses its colour and goes to white (light white).",
+  "camera": "Tripod (hand 0). The square — frontal, like a painted canvas; the inner world — slow axial push-ins through layers of geometry; Ranum's turning into the pilot — one long camera flight.",
+  "people": "Ranum is still: the decision, the judgement and the forgiveness are in a motionless figure; what moves is the world, the lines, the aeroplane, the leaf.",
+  "light_color": "The outer world — motley bright painting; the inner one — a white field, black and red; the finale — the painting muted, the leaf the only living green (glow).",
+  "elements": "Lines that draw themselves (trace + grow): arabesques in the sand, a fiery circle, a passer-by's path, the dashed curve of a bomb; shapes (shape): a point, coal, a ring, street stripes; rotation with a trail (spin, trail) — a sphere; the leaf's fall (fall).",
+  "time": "Pauses after the answers of the Initiation and after “I will not let it come to pass”.",
+  "sound": "The city — noise, tram bells; the inner world — a drone; the aeroplane — a drilling roar; the finale — the rustle of a maple."
  }
 }

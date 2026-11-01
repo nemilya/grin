@@ -1,15 +1,15 @@
 {
  "name": {"ru": "Немое кино 1910-х", "en": "1910s silent film"},
- "_": "Киноязык «Силы непостижимого» (docs/stories/sila-nepost.md): немое кино 1910-х — штатив, фронтальные мизансцены, ирис, крупные планы лиц, интертитры; автохромный цвет — только когда звучит та музыка.",
+ "_": "The film language of “The Power of the Incomprehensible” (docs/stories/sila-nepost.md): 1910s silent cinema — tripod, frontal staging, the iris, close-ups of faces, intertitles; autochrome colour — only while that music plays.",
  "defaults": {"hand": 0, "ease": "inOut"},
  "min_shot": 5,
  "language": {
-  "editing": "Планы 8–30 с, склейки простые; сцены открываются и закрываются ирисом (in: iris), главы и эпиграф — интертитры на чёрном. Наплывов нет; ритм — как у тапёра: медленно, с паузами.",
-  "camera": "Штатив, тряски нет (hand 0). Камера фронтально, на уровне груди, как в театре: общий план-«сцена», затем крупные планы лиц (диафрагма-ирис может сжаться на лице). Движение камеры редкое и короткое — лёгкий наезд (push 4–8) на лицо в кульминации.",
-  "people": "Актёрская пантомима немого кино: позы ясные и выразительные, в профиль или ¾, жест читается без слов. Лица — грим: бледные, с тёмными глазами.",
-  "light_color": "Реальность — ч/б с вирированием по сценам (grade: saturation 0 + tint): янтарь — интерьер, синий — ночь, сепия — улица, зелёный — лечебница. Нарисованные свет и тени на декорациях. Когда звучит та музыка (сон, гипноз, вспышки в лечебнице), изображение проступает цветом автохрома (grade_to: saturation 1, autochrome 1); музыку вырвали — цвет гаснет.",
-  "elements": "Мерцание проектора, царапины и пыль плёнки, «ручные» 18 к/с — у всего фильма (stage стиля). Открытое окно, свет из него, занавес.",
-  "time": "Паузы после ключевых фраз (holds) 2–6 с; в кульминации — тишина и цвет вместо звука.",
-  "sound": "Тапёр: тихое фортепиано или фисгармония, треск проектора; ту самую музыку не играть — гул (drone) и тишина; ложь про Шуберта — фраза шкатулки."
+  "editing": "Shots of 8–30 s, simple cuts; scenes open and close with an iris (in: iris), chapters and the epigraph are intertitles on black. No dissolves; the rhythm is like a silent-film pianist's: slow, with pauses.",
+  "camera": "Tripod, no shake (hand 0). The camera frontal, at chest height, as in a theatre: a wide “stage” shot, then close-ups of faces (the iris may close in on a face). Camera movement is rare and short — a slight push-in (push 4–8) on a face at the climax.",
+  "people": "The acting pantomime of silent film: clear, expressive poses, in profile or ¾, a gesture reads without words. Faces — make-up: pale, with dark eyes.",
+  "light_color": "Reality — b/w toned per scene (grade: saturation 0 + tint): amber — interiors, blue — night, sepia — the street, green — the asylum. Light and shadows painted on the sets. When that music plays (a dream, hypnosis, flashes in the asylum), the image comes through in autochrome colour (grade_to: saturation 1, autochrome 1); the music is torn away — the colour fades.",
+  "elements": "Projector flicker, film scratches and dust, a “hand-cranked” 18 fps — for the whole film (the style's stage). An open window, the light from it, a curtain.",
+  "time": "Pauses after key phrases (holds) of 2–6 s; at the climax — silence and colour instead of sound.",
+  "sound": "A silent-film pianist: a quiet piano or harmonium, the projector's rattle; that music itself is never played — a hum (drone) and silence; the lie about Schubert — a music-box phrase."
  }
 }

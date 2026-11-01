@@ -1,5 +1,5 @@
 {
- "_": "Тексты об авторе для лендинга (site.json → author): name, years, lead — подзаголовок, bio — абзацы.",
+ "_": "Texts about the author for the landing page (site.json → author): name, years, lead — the subtitle, bio — paragraphs.",
  "name": {"en": "Alexander Grin", "ru": "Александр Грин"},
  "years": "1880–1932",
  "lead": {
