@@ -1,17 +1,17 @@
-"""Харнес ролика: этапы и их статус. python -m engine <команда> [история] [опции] (обёртки — в Makefile).
+"""The film harness: stages and their status. python -m engine <command> [story] [options] (wrappers — in the Makefile).
 
-  status     что готово по этапам: текст → перевод → библия/раскадровка → ассеты → озвучка → таймлайн → звук
-  prepare    исходник → prepared/<язык>.json
-  glossary   глоссарий перевода (LLM)          translate  перевод абзацев (LLM; можно и в сессии Claude Code)
-  assets     сгенерировать недостающие ассеты (Seedream); --used — только те, что в таймлайне; --keys a,b;
-             --redo a,b — новый вариант (прежний — в takes/); --accept a,b — устаревшее принять как есть;
-             --rekey a,b — пересобрать вырезку из исходника (ключ, подчистка erase из библии), без генерации
-  voice      озвучить абзацы (TTS + проверка распознаванием); --from 040 --to 046 — диапазон абзацев
-  timeline   раскадровка + время речи → build/timeline.json; --start s12a --end s14c --name demo — отрезок;
-             --format horizontal — другой формат (story.json → formats) → build/timeline-horizontal[-demo].json
-  sound      звук для таймлайна → build/sound[-формат][-name].wav
-  youtube    субтитры .srt и главы по сценам для описания → out/<история>/<история>[-формат].srt, -chapters.txt
-Рендер — браузером: node tools/capture.mjs stills|video (см. README).
+  status     what is ready, stage by stage: text → translation → bible/storyboard → assets → narration → timeline → sound
+  prepare    source → prepared/<lang>.json
+  glossary   translation glossary (LLM)        translate  paragraph translation (LLM; can also be done in a Claude Code session)
+  assets     generate missing assets (Seedream); --used — only those in the timeline; --keys a,b;
+             --redo a,b — a new variant (the previous one goes to takes/); --accept a,b — accept stale ones as they are;
+             --rekey a,b — rebuild the cut-out from the source image (key, erase clean-up from the bible), no generation
+  voice      narrate paragraphs (TTS + transcription check); --from 040 --to 046 — a paragraph range
+  timeline   storyboard + speech timing → build/timeline.json; --start s12a --end s14c --name demo — an excerpt;
+             --format horizontal — another format (story.json → formats) → build/timeline-horizontal[-demo].json
+  sound      sound for the timeline → build/sound[-format][-name].wav
+  youtube    .srt subtitles and chapters by scene for the description → out/<story>/<story>[-format].srt, -chapters.txt
+Rendering is done in the browser: node tools/capture.mjs stills|video (see README).
 """
 from __future__ import annotations
 
@@ -29,29 +29,29 @@ def status(slug: str) -> None:
     lang, src = film.get('lang', 'en'), st['source']['lang']
     p = prepare.load(slug, src)
     print(f"{slug}: «{st['title'].get(lang) or st['title'].get(src)}» → {lang}, {film.get('width')}×{film.get('height')} @ {film.get('fps')}")
-    print(f"  1 текст        {'✓ ' + str(p['stats']['paragraphs']) + ' абз., ' + str(p['stats']['chars']) + ' зн.' if p else '— make prepare'}")
+    print(f"  1 text         {'✓ ' + str(p['stats']['paragraphs']) + ' paragraphs, ' + str(p['stats']['chars']) + ' chars' if p else '— make prepare'}")
     if lang != src and p:
         s = translate.status(slug, lang)
         done = sum(v.get('done', 0) for k, v in s.items() if k != 'front')
         rest = sum(v.get('stale', 0) + v.get('pending', 0) for k, v in s.items() if k != 'front')
-        print(f"  2 перевод      {done} готово, {rest} осталось/устарело" + (' ✓' if not rest else ''))
+        print(f"  2 translation  {done} done, {rest} pending/stale" + (' ✓' if not rest else ''))
     b = timeline.bible(slug)
     sb = timeline.storyboard(slug)
     n_shots = sum(len(s['shots']) for s in sb.get('scenes', []))
-    print(f"  3 библия       {len(b.get('characters', {}))} героев, "
-          f"{sum(len(c.get('poses', {})) for c in b.get('characters', {}).values())} поз, {len(b.get('sets', {}))} декораций")
-    print(f"    раскадровка  {len(sb.get('scenes', []))} сцен, {n_shots} кадров")
+    print(f"  3 bible        {len(b.get('characters', {}))} characters, "
+          f"{sum(len(c.get('poses', {})) for c in b.get('characters', {}).values())} poses, {len(b.get('sets', {}))} sets")
+    print(f"    storyboard   {len(sb.get('scenes', []))} scenes, {n_shots} shots")
     for fmt in (st.get('formats') or {}):
         try:
             th = timeline.build(slug, save=False, fmt=fmt)
-            print(f"    формат {fmt:10} {th['width']}×{th['height']}, {len(th['shots'])} кадров, ошибок {len(th['errors'])}"
+            print(f"    format {fmt:10} {th['width']}×{th['height']}, {len(th['shots'])} shots, {len(th['errors'])} errors"
                   f" (make timeline F={fmt})")
         except Exception as e:  # noqa: BLE001
-            print(f'    ✗ формат {fmt}: {e}')
+            print(f'    ✗ format {fmt}: {e}')
     try:
         tl = timeline.build(slug, save=False)
     except Exception as e:  # noqa: BLE001
-        print(f'    ✗ таймлайн: {e}')
+        print(f'    ✗ timeline: {e}')
         return
     used = assets.used_keys(tl)
     pl = assets.plan(slug)
@@ -59,15 +59,15 @@ def status(slug: str) -> None:
     for it in pl:
         if it['key'] in used or it['kind'] == 'ref':
             by[it['status']] = by.get(it['status'], 0) + 1
-    print(f"  4 ассеты       {by.get('ok', 0)} готово, {by.get('stale', 0)} устарело, {by.get('pending', 0)} заглушек "
-          f"(в таймлайне карточек {len(used)}), потрачено ${assets.manifest(slug).get('cost', 0):.2f}")
+    print(f"  4 assets       {by.get('ok', 0)} done, {by.get('stale', 0)} stale, {by.get('pending', 0)} placeholders "
+          f"({len(used)} cards in the timeline), spent ${assets.manifest(slug).get('cost', 0):.2f}")
     vid = film.get('voicing')
     if vid and (config.text_dir(slug) / 'voicings' / vid / 'voicing.json').exists():
         s = voicing.summary(slug, vid)
-        print(f"  5 озвучка      {vid}: {s['counts']}, {s['duration'] / 60:.1f} мин, ${s['cost']:.3f}")
+        print(f"  5 narration    {vid}: {s['counts']}, {s['duration'] / 60:.1f} min, ${s['cost']:.3f}")
     else:
-        print('  5 озвучка      —')
-    print(f"  6 таймлайн     {tl['duration'] / 60:.1f} мин, время: {tl['timing']}, ошибок {len(tl['errors'])}")
+        print('  5 narration    —')
+    print(f"  6 timeline     {tl['duration'] / 60:.1f} min, timing: {tl['timing']}, {len(tl['errors'])} errors")
     media.status()
     for e in tl['errors'][:10]:
         print('      ✗', e)
@@ -100,11 +100,11 @@ def main(argv=None) -> None:
         status(slug)
     elif a.cmd == 'prepare':
         r = prepare.prepare(slug)
-        print(f"✓ {r['stats']['paragraphs']} абз., {r['stats']['chars']} знаков")
+        print(f"✓ {r['stats']['paragraphs']} paragraphs, {r['stats']['chars']} chars")
         lang = film.get('lang')
         if lang and lang != r['lang'] and translate.translations(slug, lang):
             translate.build(slug, lang)
-            print(f'✓ prepared/{lang}.json из перевода')
+            print(f'✓ prepared/{lang}.json from the translation')
     elif a.cmd == 'glossary':
         translate.build_glossary(slug, a.lang or film['lang'])
     elif a.cmd == 'translate':
@@ -121,50 +121,50 @@ def main(argv=None) -> None:
             return
         if a.redo:
             items = {it['key']: it for it in assets.plan(slug, set(a.redo.split(',')))}
-            print(f"потрачено ${sum(assets.generate(slug, items[k], redo=True) for k in a.redo.split(',') if k in items):.3f}")
+            print(f"spent ${sum(assets.generate(slug, items[k], redo=True) for k in a.redo.split(',') if k in items):.3f}")
             return
         if a.keys:
             keys = set(a.keys.split(','))
-        elif a.used:  # карточки всех форматов
+        elif a.used:  # cards of every format
             st = config.story(slug)
             keys = set().union(*(assets.used_keys(timeline.build(slug, save=False, fmt=f))
                                  for f in [None, *(st.get('formats') or {})]))
         else:
             keys = None
-        print(f'потрачено ${assets.generate_all(slug, keys):.3f}')
+        print(f'spent ${assets.generate_all(slug, keys):.3f}')
     elif a.cmd == 'voice':
-        vid = (film.get('voicings') or {}).get(a.lang) if a.lang else film['voicing']  # --lang ru — озвучка языка
+        vid = (film.get('voicings') or {}).get(a.lang) if a.lang else film['voicing']  # --lang ru — that language's narration
         if not vid:
-            sys.exit(f'нет озвучки для {a.lang}: story.json → film.voicings')
+            sys.exit(f'no narration for {a.lang}: story.json → film.voicings')
         pl = voicing.plan(slug, vid)
         ids = [it['id'] for s in pl['sections'] for it in s['items'] if it['status'] in ('pending', 'stale') or a.force]
         if a.frm or a.to:
             lo, hi = int(a.frm or 0), int(a.to or 999)
             ids = [i for i in ids if lo <= int(i.rsplit('-', 1)[1]) <= hi]
         est = voicing.estimate(slug, vid)
-        print(f"абзацев {len(ids)}; оценка всего недостающего: {est['minutes']} мин, ${est['total_with_retries']}")
+        print(f"{len(ids)} paragraphs; estimate for everything missing: {est['minutes']} min, ${est['total_with_retries']}")
         failed = []
         for pid in ids:
             try:
                 stt = voicing.generate_item(slug, vid, pid, force=a.force)
-            except Exception as e:  # noqa: BLE001 — сбой провайдера (429, пустой звук): дальше, этот — в повтор
+            except Exception as e:  # noqa: BLE001 — a provider failure (429, empty audio): go on, retry this one later
                 print(f'✗ {pid}: {e}', flush=True)
                 failed.append(pid)
                 time.sleep(3)
                 continue
             t = voicing.selected_take(stt)
-            print(f"✓ {pid} {t['dur']:.1f} с, совпадение {t['score']}, ${sum(t['cost'].values()):.4f}", flush=True)
+            print(f"✓ {pid} {t['dur']:.1f} s, match {t['score']}, ${sum(t['cost'].values()):.4f}", flush=True)
         if failed:
-            sys.exit(f"не озвучены: {', '.join(failed)} — запустить ещё раз")
+            sys.exit(f"not narrated: {', '.join(failed)} — run again")
     elif a.cmd == 'site':
         from . import site
         site.build()
     elif a.cmd == 'timeline':
-        L = a.lang if a.lang and a.lang != timeline.film(slug)['lang'] else None  # --lang ru — ролик на другом языке
+        L = a.lang if a.lang and a.lang != timeline.film(slug)['lang'] else None  # --lang ru — the film in another language
         tl = timeline.build(slug, start=a.start, end=a.end, name=a.name, fmt=a.fmt, lang=L)
         t = timeline.tag(a.fmt, a.name, L)
-        print(f"✓ build/timeline{'-' + t if t else ''}.json: {tl['width']}×{tl['height']}, {tl['duration'] / 60:.1f} мин, "
-              f"{len(tl['shots'])} кадров, время: {tl['timing']}")
+        print(f"✓ build/timeline{'-' + t if t else ''}.json: {tl['width']}×{tl['height']}, {tl['duration'] / 60:.1f} min, "
+              f"{len(tl['shots'])} shots, timing: {tl['timing']}")
         for w in tl.get('warnings', []):
             print('  ·', w)
         for e in tl['errors']:
@@ -186,13 +186,13 @@ def main(argv=None) -> None:
             ch = timeline.chapters(tl)
             fmt_t = lambda x: f'{int(x // 60)}:{int(x % 60):02d}'  # noqa: E731
             (out / f'{base}-chapters.txt').write_text('\n'.join(f'{fmt_t(t0)} {title}' for t0, title in ch) + '\n', encoding='utf8')
-            print(f'✓ out/{slug}/{base}.srt ({len(tl["subtitles"])} субтитров), {base}-chapters.txt ({len(ch)} глав):')
+            print(f'✓ out/{slug}/{base}.srt ({len(tl["subtitles"])} subtitles), {base}-chapters.txt ({len(ch)} chapters):')
             for t0, title in ch:
                 print(f'   {fmt_t(t0)} {title}')
             if tl.get('timing') != 'voicing':
-                print(f"   ⚠ время — {tl.get('timing')}: озвучьте всё (make voice) и пересоберите, иначе главы и субтитры разойдутся с роликом")
+                print(f"   ⚠ timing — {tl.get('timing')}: narrate everything (make voice) and rebuild, or the chapters and subtitles will drift from the film")
     else:
-        ap.error(f'нет команды {a.cmd}')
+        ap.error(f'no command {a.cmd}')
 
 
 if __name__ == '__main__':

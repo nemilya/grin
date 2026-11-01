@@ -1,20 +1,20 @@
-"""Ассеты бумажного театра: библия + стиль → промпты → картинки (Seedream через OpenRouter) → вырезки с альфой.
+"""Paper-theatre assets: bible + style → prompts → pictures (Seedream via OpenRouter) → cut-outs with alpha.
 
 stories/<slug>/assets/
-    refs/<герой>.jpg            лист героя (разворот: спереди, ¾, профиль, сзади) — рисуется первым,
-                                 идёт референсом во все позы героя: лицо и костюм узнаваемы
-    <герой>/<поза>.webp          вырезка позы (хромакей → альфа, обрезка по силуэту)
-    <декорация>/<кусок>.webp     задники, полы (текстуры), предметы обстановки
-    prop/<предмет>.webp
-    assets.json                 манифест: отпечаток (модель, промпт, seed, референсы), цена, размер
-    takes/                      прежние варианты (не в git)
+    refs/<character>.jpg        the character sheet (turnaround: front, ¾, profile, back) — drawn first,
+                                 goes as a reference into every pose of the character: the face and costume stay recognizable
+    <character>/<pose>.webp      a pose cut-out (chroma key → alpha, cropped to the silhouette)
+    <set>/<piece>.webp           backdrops, floors (textures), furniture
+    prop/<prop>.webp
+    assets.json                 the manifest: fingerprint (model, prompt, seed, references), price, size
+    takes/                      previous variants (not in git)
 
-Как в mountain-rock/illustrate: статус ok / stale (поменялся промпт или лист героя) / pending;
-«redo» — новый seed, прежний вариант — в takes/. Процедурные карточки (звёзды, лист с «10», шахматная
-вырезка…) рисует сама сцена — здесь их нет.
+Status ok / stale (the prompt or the character sheet changed) / pending;
+"redo" — a new seed, the previous variant goes to takes/. Procedural cards (stars, the sheet with "10", the chess
+cut-out…) are drawn by the stage itself — they are not here.
 
-Вырезки генерируются на ровном хромакее (#00FF00) с белой бумажной кромкой вокруг фигуры; ключ —
-по «зелёности» (g − max(r, b)), мягкий край и подавление зелёного ореола; потом обрезка по альфе.
+Cut-outs are generated on a flat chroma key (#00FF00) with a white paper rim around the figure; the key is
+by "greenness" (g − max(r, b)), a soft edge and green spill suppression; then a crop by alpha.
 """
 from __future__ import annotations
 
@@ -32,16 +32,16 @@ from . import config
 from .openrouter import _request
 
 MODEL = 'bytedance-seed/seedream-5-0-flash'
-COST = 0.018  # $ за картинку 2K (usage.cost; если не пришёл)
+COST = 0.018  # $ per 2K picture (usage.cost, if it didn't arrive)
 RATIOS = {'1:1': 1, '4:3': 4 / 3, '3:4': 3 / 4, '16:9': 16 / 9, '9:16': 9 / 16, '3:2': 1.5, '2:3': 2 / 3, '21:9': 21 / 9,
           '4:5': 0.8, '5:4': 1.25}
 MAX_SIDE = 1600
 CUT = '.webp'  # cut-outs: lossless WebP with alpha — the same pixels as PNG at ≈ 45 % of the size
-MATCH_GREEN = 50  # key_match: «зелёное» (g − max(r, b)) — кандидат в фон, и в тени
-MATCH_HUE = 22    # key_match: фон — только оттенка фона (±°): жёлто-зелёное (поднос, яблоки) и сине-зелёное — не фон
-MATCH_HOLE = 0.0005  # key_match: замкнутая зелёная область внутри фигуры — просвет фона, если она не меньше этой доли картинки…
-MATCH_SAT = 0.75     # …и зелёная почти как фон (доля «зелёности» фона): просвет в тени — 0,8–1,1, мазок на одежде — 0,5–0,7.
-                     # Мазок цвета хромакея (полоса на подносе) закрывает keep в библии, бледный просвет — cut
+MATCH_GREEN = 50  # key_match: "green" (g − max(r, b)) — a background candidate, in shadow too
+MATCH_HUE = 22    # key_match: background — only of the background's hue (±°): yellow-green (a tray, apples) and blue-green are not background
+MATCH_HOLE = 0.0005  # key_match: a closed green area inside the figure is a see-through hole if it is at least this share of the picture…
+MATCH_SAT = 0.75     # …and nearly as green as the background (share of the background's "greenness"): a hole in shadow — 0.8–1.1, a stroke on clothes — 0.5–0.7.
+                     # A chroma-coloured stroke (a stripe on a tray) is covered by keep in the bible, a pale hole — by cut
 MAGENTA_BG = ('Isolated on a perfectly flat, uniform pure magenta (#FF00FF) background — nothing else in the image: '
               'no table, no surface, no ground, no shadow.')
 
@@ -59,14 +59,14 @@ def ratio(aspect: float) -> str:
     return min(RATIOS, key=lambda k: abs(RATIOS[k] / aspect - 1) if aspect else 0)
 
 
-# ---------------------------------------------------------------- план
+# ---------------------------------------------------------------- plan
 
 def plan(slug: str, keys: set | None = None) -> list[dict]:
-    """Что рисовать: листы героев → позы и части → декорации и предметы. keys — только эти карточки
-    (и листы их героев)."""
+    """What to draw: character sheets → poses and parts → sets and props. keys — only these cards
+    (and their characters' sheets)."""
     b = config.read_json(config.story_dir(slug) / 'bible.json', {}) or {}
     st = style(slug)
-    # формулировки «что это за картинка» — из стиля; по умолчанию — бумажный театр
+    # wording for "what this picture is" comes from the style; the default is paper theatre
     piece_kind = st.get('piece') or st.get('cutout', '').replace('puppet', 'piece of toy-theatre scenery')
     sheet_kind = st.get('sheet', 'for a paper toy theatre')
     sheet_each = st.get('sheet_each', 'Each figure is a separate paper cut-out.')
@@ -83,8 +83,8 @@ def plan(slug: str, keys: set | None = None) -> list[dict]:
         if not need:
             continue
         silhouettes = all(p.get('kind') == 'silhouette' for p in poses.values())
-        no_ref = all(p.get('ref', True) is False for p in poses.values())  # прохожие толпы: по одной картинке, без листа
-        cutout = ch.get('technique') or st.get('cutout', '')  # technique — своя манера героя (белый халат без лучей)
+        no_ref = all(p.get('ref', True) is False for p in poses.values())  # passers-by in a crowd: one picture each, no sheet
+        cutout = ch.get('technique') or st.get('cutout', '')  # technique — the character's own manner (a white coat without rays)
         sheet = None
         if not silhouettes and not no_ref:
             sheet = f'refs/{cid}'
@@ -101,13 +101,13 @@ def plan(slug: str, keys: set | None = None) -> list[dict]:
             if want(f'{cid}/{pid}'):
                 if p.get('kind') == 'silhouette':
                     prompt = f"{st.get('silhouette', '')} The silhouette shows: {ch['look']}. Pose: {p['desc']}. {no_text}"
-                elif p.get('closeup'):  # деталь крупно (рука, руки): без фигуры и внешности — иначе модель рисует человека целиком
+                elif p.get('closeup'):  # a close-up detail (a hand, hands): no figure or appearance — otherwise the model draws the whole person
                     obj = st.get('object') or st.get('cutout', '').replace('puppet', 'object')
                     prompt = f"{obj} ONE single detail only, not a whole person: {p['desc']}. {st.get('cutout_bg', '')} {no_text}"
                 else:
                     prompt = (f"{legend}{figure} {ch.get('name', cid)} ({ch.get('age', '')}): {look}. "
                               f"Pose and expression: {p['desc']}. {cutout} {st.get('cutout_bg', '')} {no_text}")
-                use = sheet if p.get('ref', True) else None  # ref: false — без листа (крупный план рук и т. п.)
+                use = sheet if p.get('ref', True) else None  # ref: false — no sheet (a close-up of hands, etc.)
                 if not use:
                     prompt = prompt.replace(legend, '')
                 items.append({'key': f'{cid}/{pid}', 'kind': p.get('kind', 'cutout'), 'out': f'{cid}/{pid}{CUT}',
@@ -115,7 +115,7 @@ def plan(slug: str, keys: set | None = None) -> list[dict]:
                               'erase': p.get('erase'), 'keep': p.get('keep'), 'cut': p.get('cut')})
             for n, part in (p.get('parts') or {}).items():
                 if want(f'{cid}/{n}'):
-                    # без листа героя: с ним модель рисует фигуру целиком вместо детали
+                    # without the character sheet: with it the model draws the whole figure instead of the detail
                     items.append({'key': f'{cid}/{n}', 'kind': 'cutout', 'out': f'{cid}/{n}{CUT}', 'aspect': ratio(part.get('aspect', 0.4)),
                                   'refs': [],
                                   'prompt': (f"{part_kind}: {part['desc']}. "
@@ -124,21 +124,21 @@ def plan(slug: str, keys: set | None = None) -> list[dict]:
     for sid, s in (b.get('sets') or {}).items():
         for pid, pc in (s.get('pieces') or {}).items():
             key = f'{sid}/{pid}'
-            if pc.get('kind') == 'procedural' or pc.get('card') or not want(key):  # card — чужая карточка, не рисуем
+            if pc.get('kind') == 'procedural' or pc.get('card') or not want(key):  # card — someone else's card, not drawn
                 continue
             kind = pc.get('kind', 'cutout')
             aspect = pc['size'][0] / pc['size'][1] if pc.get('size') else pc.get('aspect', 1)
             hole = ' The opening is filled with flat pure chroma green (#00FF00).' if pc.get('hole') else ''
             if kind == 'backdrop':
-                ctx = f" World: {world}" if pc.get('world', True) else ''  # world: false — место вне мира рассказа (пустыня)
+                ctx = f" World: {world}" if pc.get('world', True) else ''  # world: false — a place outside the story's world (a desert)
                 prompt = f"{st.get('backdrop', '')} {pc['desc']}. Setting: {s.get('look', '')}.{hole}{ctx} {no_text}"
             elif kind == 'floor':
                 prompt = f"{st.get('texture', '')} {pc['desc']}. {no_text}"
             else:
-                if pc.get('hole'):  # стена с проёмом — это всё-таки кусок декорации целиком
+                if pc.get('hole'):  # a wall with an opening is still a whole piece of the set
                     prompt = (f"{piece_kind} The piece: {pc['desc']}."
                               f"{hole} {st.get('cutout_bg', '')} {no_text}")
-                else:  # отдельный предмет: только он, без комнаты вокруг
+                else:  # a separate prop: only it, no room around it
                     prompt = (f"{piece_kind} ONE single object only: "
                               f"{pc['desc']}. Just this object on its own, no room, no walls, no floor, no other furniture. "
                               f"{st.get('cutout_bg', '')} {no_text}")
@@ -150,12 +150,12 @@ def plan(slug: str, keys: set | None = None) -> list[dict]:
         key = f'prop/{pid}'
         if pr.get('kind') == 'procedural' or not want(key):
             continue
-        # technique — своя манера предмета (натуральный лист в живописном фильме); key: magenta — фон-маджента для зелёного предмета
+        # technique — the prop's own manner (a natural leaf in a painted film); key: magenta — a magenta background for a green prop
         obj = pr.get('technique') or st.get('object') or st.get('cutout', '').replace('puppet', 'object')
         bg = MAGENTA_BG if pr.get('key') == 'magenta' else st.get('cutout_bg', '')
         items.append({'key': key, 'kind': 'cutout', 'out': f'{key}{CUT}', 'aspect': ratio(pr.get('aspect', 1)), 'refs': [],
                       'prompt': f"{obj} The object: {pr['desc']}. {bg} {no_text}", 'key_color': pr.get('key', 'green'),
-                      'erase': pr.get('erase'), 'keep': pr.get('keep'), 'cut': pr.get('cut')})  # подчистка (бумажная кромка в углах), keep — см. key_out
+                      'erase': pr.get('erase'), 'keep': pr.get('keep'), 'cut': pr.get('cut')})  # clean-up (the paper rim in the corners), keep — see key_out
 
     m = manifest(slug)
     for it in items:
@@ -180,7 +180,7 @@ def manifest(slug: str) -> dict:
 
 
 def used_keys(timeline: dict) -> set:
-    """Карточки, которые реально появляются в таймлайне (с частями шарнирных кукол)."""
+    """Cards that actually appear in the timeline (with the parts of jointed puppets)."""
     keys = set()
     for s in timeline['shots']:
         for el in s['elements']:
@@ -192,7 +192,7 @@ def used_keys(timeline: dict) -> set:
     return keys
 
 
-# ---------------------------------------------------------------- генерация
+# ---------------------------------------------------------------- generation
 
 def _image(prompt: str, aspect: str, seed: int, refs: list[Path]) -> tuple[bytes, float]:
     body = {'model': MODEL, 'prompt': prompt, 'n': 1, 'seed': seed, 'resolution': '2K', 'aspect_ratio': aspect}
@@ -202,7 +202,7 @@ def _image(prompt: str, aspect: str, seed: int, refs: list[Path]) -> tuple[bytes
     r = json.loads(raw)
     img = (r.get('data') or [{}])[0]
     if not img.get('b64_json'):
-        raise RuntimeError(f'в ответе нет картинки: {str(r)[:300]}')
+        raise RuntimeError(f'no picture in the response: {str(r)[:300]}')
     return base64.b64decode(img['b64_json']), float((r.get('usage') or {}).get('cost') or COST)
 
 
@@ -213,7 +213,7 @@ def _data_url(f: Path) -> str:
 
 
 def _decode(data: bytes) -> tuple[bytes, int, int]:
-    """Картинка → RGBA (≤ MAX_SIDE по длинной стороне)."""
+    """A picture → RGBA (≤ MAX_SIDE on the long side)."""
     w, h = map(int, subprocess.run(['ffprobe', '-v', 'error', '-show_entries', 'stream=width,height', '-of', 'csv=p=0', '-i', 'pipe:0'],
                                    input=data, capture_output=True, check=True).stdout.decode().strip().split(',')[:2])
     k = min(1.0, MAX_SIDE / max(w, h))
@@ -224,7 +224,7 @@ def _decode(data: bytes) -> tuple[bytes, int, int]:
 
 
 def _blur(x, rad: int):
-    """Box-размытие по двум осям (numpy, края — повтором)."""
+    """Box blur along both axes (numpy, edges repeated)."""
     import numpy as np
     for ax in (0, 1):
         pad = [(rad + 1, rad) if i == ax else (0, 0) for i in range(x.ndim)]
@@ -235,9 +235,9 @@ def _blur(x, rad: int):
 
 
 def _holes(rest, rgb, bgc, keep=None, cut=None):
-    """Замкнутые зелёные области внутри фигуры: просветы фона — не мелкие (≥ MATCH_HOLE картинки) и почти точно цвета
-    фона (≥ MATCH_SAT его «зелёности»); центр в прямоугольнике keep ([[x0, y0, x1, y1]] в долях картинки, сверху
-    слева) — мазок на одежде (не вырезать), в cut — просвет (вырезать). Метки — на сетке 1/4 (быстро), маска — в полном размере."""
+    """Closed green areas inside the figure: background holes are not small (≥ MATCH_HOLE of the picture) and almost exactly
+    the background colour (≥ MATCH_SAT of its "greenness"); a centre inside a keep rectangle ([[x0, y0, x1, y1]] in picture
+    fractions, from the top left) is a stroke on clothes (keep it), inside cut — a hole (cut it). Labels on a 1/4 grid (fast), the mask at full size."""
     import numpy as np
     h, w = rest.shape
     small = rest[::4, ::4]
@@ -271,40 +271,40 @@ def _holes(rest, rgb, bgc, keep=None, cut=None):
 def key_out(data: bytes, out: Path, *, crop: bool = True, silhouette: bool = False,
             erase: list | None = None, soft: bool = False, key: str = 'green', match: bool = False,
             keep: list | None = None, cut: list | None = None) -> tuple[int, int]:
-    """Хромакей: зелёный фон → прозрачность (мягкий край, без зелёного ореола), обрезка по силуэту → PNG.
-    silhouette — чёрный силуэт: альфа по яркости (фон — зелёный или белый, модель рисует и так, и так).
-    soft — слой «кино»: край растушёван, под прозрачным — цвет соседей (не белая кромка).
-    key: magenta — фон-маджента (для зелёного предмета: листа).
-    match — прозрачен фон: зелёное оттенка фона, связанное с краем картинки, и замкнутые просветы цвета фона; зелёные
-    мазки на одежде живописной фигуры не вырезаются (стиль: key_match); keep — где замкнутое цвета фона — мазок (_holes)."""
+    """Chroma key: green background → transparency (soft edge, no green spill), crop to the silhouette → PNG.
+    silhouette — a black silhouette: alpha by brightness (the background is green or white, the model draws both).
+    soft — the "cinema" layer: a feathered edge, under the transparent part — the neighbours' colour (not a white rim).
+    key: magenta — a magenta background (for a green prop: a leaf).
+    match — the background is transparent: green of the background's hue connected to the picture's edge, and closed holes of
+    the background colour; green strokes on a painted figure's clothes are not cut (style: key_match); keep — where a closed background-coloured area is a stroke (_holes)."""
     import numpy as np
     raw, w, h = _decode(data)
     a = np.frombuffer(raw, np.uint8).reshape(h, w, 4).astype(np.float32)
-    if key == 'magenta':  # маджента → зелёный: дальше тот же ключ; цвет предмета вернём после
+    if key == 'magenta':  # magenta → green: then the same key; the prop's colour is restored afterwards
         orig = a[..., :3].copy()
         g0, m = orig[..., 1], np.minimum(orig[..., 0], orig[..., 2])
         a[..., 0], a[..., 1], a[..., 2] = g0, m, g0
     r, g, b = a[..., 0], a[..., 1], a[..., 2]
-    green = g - np.maximum(r, b)                       # насколько пиксель «зелёный»
-    alpha = 1 - np.clip((green - 40) / 70, 0, 1)       # 40 и ниже — непрозрачно, 110+ — фон
+    green = g - np.maximum(r, b)                       # how "green" a pixel is
+    alpha = 1 - np.clip((green - 40) / 70, 0, 1)       # 40 and below — opaque, 110+ — background
     if soft:
-        alpha = _blur(1 - np.clip((green - 30) / 80, 0, 1), 2) ** 1.4   # растушёвка ~4 px, край тоньше
+        alpha = _blur(1 - np.clip((green - 30) / 80, 0, 1), 2) ** 1.4   # feathering ~4 px, a thinner edge
     wide = 1.0
     if match and not silhouette:
-        # фон — зелёное оттенка фона, связанное с краем картинки; замкнутое внутри фигуры — просвет (между ножками скамьи,
-        # рукой и телом), только если оно большое и почти точно цвета фона; остальное — мазки на одежде (модель рисует их
-        # и цветом хромакея: полоса на подносе, юбка), не вырезаются
+        # background — green of the background's hue connected to the picture's edge; a closed area inside the figure is a hole
+        # (between bench legs, an arm and the body) only if it is large and almost exactly the background colour; the rest are strokes
+        # on clothes (the model paints them in the chroma colour too: a stripe on a tray, a skirt), not cut
         from PIL import Image, ImageFilter
         mn = np.minimum(r, b)
-        hue = 120 + 60 * (b - r) / np.maximum(g - mn, 1)       # оттенок там, где зелёный — наибольший
+        hue = 120 + 60 * (b - r) / np.maximum(g - mn, 1)       # the hue where green is the largest
         band = np.zeros(green.shape, bool)
         band[:3], band[-3:], band[:, :3], band[:, -3:] = True, True, True, True
         eg = band & (green > 60)
-        bgh = float(np.median(hue[eg])) if eg.sum() > 100 else 115.0               # оттенок и цвет фона — по краю
+        bgh = float(np.median(hue[eg])) if eg.sum() > 100 else 115.0               # the background's hue and colour — from the edge
         bgc = np.median(a[..., :3][eg], axis=0) if eg.sum() > 100 else np.array([40, 220, 20], np.float32)
-        like = (green > MATCH_GREEN) & (np.abs(hue - bgh) < MATCH_HUE)  # жёлто-зелёные яблоки, изумрудные мазки — не фон
+        like = (green > MATCH_GREEN) & (np.abs(hue - bgh) < MATCH_HUE)  # yellow-green apples, emerald strokes — not background
         reach = like & band
-        for _ in range(4000):  # реконструкция: растим фон от края по «похожему на фон», пока растёт
+        for _ in range(4000):  # reconstruction: grow the background from the edge over "background-like", while it grows
             grown = reach.copy()
             grown[1:] |= reach[:-1]; grown[:-1] |= reach[1:]; grown[:, 1:] |= reach[:, :-1]; grown[:, :-1] |= reach[:, 1:]
             grown &= like
@@ -312,28 +312,28 @@ def key_out(data: bytes, out: Path, *, crop: bool = True, silhouette: bool = Fal
                 break
             reach = grown
         reach |= _holes(like & ~reach, a[..., :3], bgc, keep, cut)
-        wide = np.asarray(Image.fromarray((reach * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5)), np.float32) / 255  # +2 px — край
-        t = np.clip((green - (MATCH_GREEN - 15)) / 40, 0, 1) * wide     # у фона — и тёмная тень прозрачна
+        wide = np.asarray(Image.fromarray((reach * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(5)), np.float32) / 255  # +2 px — the edge
+        t = np.clip((green - (MATCH_GREEN - 15)) / 40, 0, 1) * wide     # near the background a dark shadow is transparent too
         alpha = _blur(1 - t, 2) ** 1.4 if soft else 1 - t
     if silhouette:
         lum = (0.3 * r + 0.59 * g + 0.11 * b) / 255
         alpha = np.clip((0.55 - lum) / 0.25, 0, 1)
         a[..., :3] = np.minimum(a[..., :3], 20)
     if key == 'magenta':
-        pink = (np.minimum(orig[..., 0], orig[..., 2]) > orig[..., 1])[..., None]   # ореол и тень на мадженте:
-        orig = np.where(pink, np.minimum(orig, orig[..., 1:2]), orig)              # r, b — не выше g (серое)
+        pink = (np.minimum(orig[..., 0], orig[..., 2]) > orig[..., 1])[..., None]   # spill and shadow on magenta:
+        orig = np.where(pink, np.minimum(orig, orig[..., 1:2]), orig)              # r, b no higher than g (grey)
         a[..., :3] = orig
     else:
         spill = np.maximum(r, b)
-        sup = np.where(g > spill, spill + (g - spill) * 0.15, g)          # подавить зелёный ореол
-        a[..., 1] = sup if not match else g + (sup - g) * wide            # match — только у фона, не на одежде
+        sup = np.where(g > spill, spill + (g - spill) * 0.15, g)          # suppress the green spill
+        a[..., 1] = sup if not match else g + (sup - g) * wide            # match — only near the background, not on clothes
     if soft:
         hard = (alpha > 0.6).astype(np.float32)
         den = _blur(hard, 12)[..., None]
         fill = np.where(den > 1e-3, _blur(a[..., :3] * hard[..., None], 12) / np.maximum(den, 1e-3), a[..., :3])
         a[..., :3] = np.where((alpha < 0.6)[..., None], fill, a[..., :3])
     else:
-        a[..., :3] = np.where((alpha < 0.5)[..., None], np.array([244, 239, 228], np.float32), a[..., :3])  # под прозрачным — цвет кромки
+        a[..., :3] = np.where((alpha < 0.5)[..., None], np.array([244, 239, 228], np.float32), a[..., :3])  # under the transparent part — the rim colour
     a[..., 3] = alpha * 255
     img = a.clip(0, 255).astype(np.uint8)
     def trim(img):
@@ -345,7 +345,7 @@ def key_out(data: bytes, out: Path, *, crop: bool = True, silhouette: bool = Fal
         return img[max(0, ys.min() - pad):min(hh, ys.max() + pad + 1), max(0, xs.min() - pad):min(ww, xs.max() + pad + 1)]
     if crop:
         img = trim(img)
-    if erase:  # подчистка: [[x0, y0, x1, y1], …] в долях обрезанной вырезки (снизу слева) — стереть (провод лампы и т. п.)
+    if erase:  # clean-up: [[x0, y0, x1, y1], …] in fractions of the cropped cut-out (from the bottom left) — erase (a lamp cord, etc.)
         img = img.copy()
         hh, ww = img.shape[:2]
         for x0, y0, x1, y1 in erase:
@@ -389,15 +389,15 @@ def generate(slug: str, it: dict, *, redo: bool = False, log=print) -> float:
         it['hash'] = _hash(slug, it)
     missing = [r for r in it['refs'] if not (d / f'{r}.jpg').exists()]
     if missing:
-        raise RuntimeError(f'нет листов: {", ".join(missing)} — сначала они')
+        raise RuntimeError(f'no sheets: {", ".join(missing)} — draw them first')
     data, cost = _image(it['prompt'], it['aspect'], it['seed'], [d / f'{r}.jpg' for r in it['refs']])
     out = d / it['out']
-    if out.exists():  # прежний вариант — в черновики
+    if out.exists():  # the previous variant goes to drafts
         t = d / 'takes' / f"{it['key'].replace('/', '__')}@{int(time.time())}{out.suffix}"
         t.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(out, t)
     (d / 'raw').mkdir(parents=True, exist_ok=True)
-    (d / 'raw' / f"{it['key'].replace('/', '__')}.jpg").write_bytes(data)  # исходник до ключа (не в git)
+    (d / 'raw' / f"{it['key'].replace('/', '__')}.jpg").write_bytes(data)  # the source before keying (not in git)
     if out.suffix != '.jpg':
         w, h = key_out(data, out, crop=not it.get('hole'), silhouette=it['kind'] == 'silhouette', erase=it.get('erase'),
                        soft=style(slug).get('key') == 'soft', key=it.get('key_color', 'green'), match=bool(style(slug).get('key_match')),
@@ -415,39 +415,39 @@ def generate(slug: str, it: dict, *, redo: bool = False, log=print) -> float:
 
 
 def rekey(slug: str, keys: list[str], log=print) -> None:
-    """Пересобрать вырезку из исходника (assets/raw) с текущими настройками: ключ, подчистка erase. Без генерации."""
+    """Rebuild a cut-out from its source image (assets/raw) with the current settings: key, erase clean-up. No generation."""
     d = adir(slug)
     items = {it['key']: it for it in plan(slug, set(keys))}
     m = manifest(slug)
     for k in keys:
         it, raw = items.get(k), d / 'raw' / f"{k.replace('/', '__')}.jpg"
         if not it or not raw.exists() or it['out'].endswith('.jpg'):
-            log(f'✗ {k}: нет исходника или это не вырезка')
+            log(f'✗ {k}: no source image, or not a cut-out')
             continue
         w, h = key_out(raw.read_bytes(), d / it['out'], crop=not it.get('hole'), silhouette=it['kind'] == 'silhouette',
                        erase=it.get('erase'), soft=style(slug).get('key') == 'soft', key=it.get('key_color', 'green'),
                        match=bool(style(slug).get('key_match')), keep=it.get('keep'), cut=it.get('cut'))
         m['items'][k].update(w=w, h=h)
-        log(f'✓ {k}: пересобрана ({w}×{h})')
+        log(f'✓ {k}: rebuilt ({w}×{h})')
     config.write_json(d / 'assets.json', m)
 
 
 def accept(slug: str, keys: list[str], log=print) -> None:
-    """Принять текущую картинку как актуальную (stale → ok): промпт поменялся, а перерисовывать незачем."""
+    """Accept the current picture as current (stale → ok): the prompt changed, but there is no reason to redraw it."""
     items = {it['key']: it for it in plan(slug, set(keys))}
     with _lock:
         m = manifest(slug)
         for k in keys:
             if k in m['items'] and k in items:
                 m['items'][k]['hash'] = items[k]['hash']
-                log(f'✓ {k}: принят как есть')
+                log(f'✓ {k}: accepted as is')
             else:
-                log(f'✗ {k}: нет картинки')
+                log(f'✗ {k}: no picture')
         config.write_json(adir(slug) / 'assets.json', m)
 
 
 def generate_all(slug: str, keys: set | None = None, *, workers: int = 4, log=print) -> float:
-    """Недостающее и устаревшее: сначала листы героев, потом всё остальное (параллельно)."""
+    """Missing and stale ones: character sheets first, then everything else (in parallel)."""
     total = 0.0
     for stage in ('ref', 'rest'):
         todo = [it for it in plan(slug, keys) if it['status'] != 'ok' and ((it['kind'] == 'ref') == (stage == 'ref'))]
