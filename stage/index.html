@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,18 +45,18 @@ aside h2 { font: 600 13px system-ui; color: var(--muted); text-transform: upperc
  <section id="view">
   <div id="frame"><div id="safe"></div></div>
   <div id="bar">
-   <button id="play" title="пробел">▶</button>
+   <button id="play" title="space">▶</button>
    <button id="prev" title="←">⏮</button>
    <button id="next" title="→">⏭</button>
    <input id="scrub" type="range" min="0" max="1" step="0.01" value="0">
    <span id="info">0:00</span>
-   <button id="guides" title="g — безопасная зона Reels/Shorts">▭</button>
+   <button id="guides" title="g — the Reels/Shorts safe area">▭</button>
   </div>
  </section>
  <aside>
   <div id="meta"></div>
   <div id="errors"></div>
-  <h2>Кадры</h2>
+  <h2>Shots</h2>
   <div id="shots"></div>
  </aside>
 </main>
@@ -73,11 +73,11 @@ const capture = q.has('capture');
 const scale = parseFloat(q.get('scale') || (capture ? '1' : '0.5'));
 const tl = await fetch(base + `build/timeline${q.get('tl') ? '-' + q.get('tl') : ''}.json`, { cache: 'no-store' }).then(r => r.json());
 const stage = new Stage(tl, { base, scale, samples: parseInt(q.get('samples') || (capture ? '64' : '40')), debug: q.has('debug') });
-if (q.has('nosubs')) stage.subtitles = false; // кадр без субтитров (постер сайта)
+if (q.has('nosubs')) stage.subtitles = false; // a frame without subtitles (the site's poster)
 await stage.load();
 const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
 
-// API для захвата кадров (tools/capture.mjs)
+// the API for frame capture (tools/capture.mjs)
 window.STAGE = {
   stage, duration: tl.duration, fps: tl.fps, width: stage.W, height: stage.H, shots: tl.shots.map(s => ({ id: s.id, t0: s.t0, t1: s.t1 })),
   frame(t, type = 'image/jpeg', quality = 0.93) { stage.renderAt(t); return stage.out.toDataURL(type, quality); },
@@ -96,7 +96,7 @@ if (capture) {
   document.getElementById('safe').classList.toggle('land', tl.width > tl.height);
   const scrub = document.getElementById('scrub');
   scrub.max = tl.duration;
-  document.getElementById('meta').innerHTML = `<b>${story}</b> · ${fmt(tl.duration)} · ${tl.shots.length} кадров · время: ${tl.timing}`;
+  document.getElementById('meta').innerHTML = `<b>${story}</b> · ${fmt(tl.duration)} · ${tl.shots.length} shots · timing: ${tl.timing}`;
   document.getElementById('errors').textContent = (tl.errors || []).join('\n');
   const list = document.getElementById('shots');
   let scene = null;
@@ -112,7 +112,7 @@ if (capture) {
   const sh = q.get('shot') && tl.shots.find(s => s.id === q.get('shot'));
   if (sh) t = sh.t0 + 0.05;
   let playing = false, last = 0, cur = null;
-  // звук ролика (make sound [F=…]): если собран — играет синхронно, время берётся из него
+  // the film's sound (make sound [F=…]): if built, it plays in sync and the time comes from it
   const tlName = q.get('tl') || '';
   const audio = new Audio();
   audio.preload = 'auto';
@@ -121,7 +121,7 @@ if (capture) {
   fetch(soundUrl, { method: 'HEAD' }).then(r => {
     hasAudio = r.ok;
     if (hasAudio) audio.src = soundUrl;
-    document.getElementById('meta').insertAdjacentHTML('beforeend', hasAudio ? ' · 🔊 звук' : ` · без звука (make sound${tlName ? ' F=…' : ''})`);
+    document.getElementById('meta').insertAdjacentHTML('beforeend', hasAudio ? ' · 🔊 sound' : ` · no sound (make sound${tlName ? ' F=…' : ''})`);
   });
   function draw() {
     stage.renderAt(t);
