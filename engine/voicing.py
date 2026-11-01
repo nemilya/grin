@@ -1,17 +1,17 @@
-"""Озвучка — харнес: настройки (модель, голос, манера) + список абзацев выбранных разделов → дубли.
+"""Narration — the harness: settings (model, voice, manner) + the paragraphs of the chosen sections → takes.
 
-stories/<история>/voicings/<id>/
-    voicing.json        настройки
-    items/<абзац>.json  дубли абзаца: время слов, распознанный текст, оценка, стоимость; выбранный, утверждён
-    takes/<абзац>-<n>.opus  звук дублей
+stories/<story>/voicings/<id>/
+    voicing.json        settings
+    items/<paragraph>.json  a paragraph's takes: word timings, transcript, score, cost; the selected one, approved
+    takes/<paragraph>-<n>.opus  the takes' audio
 
-Абзац озвучивается целиком (одна интонация); очень длинный — кусками по границам предложений
-(не длиннее max_chars), куски склеиваются с короткой паузой. Каждый кусок распознаётся обратно:
-пропуски и обрывы → синтез заново (до verify.retries раз). По распознанным словам — время каждого
-слова и предложения (align.py) для подсветки на сайте.
+A paragraph is narrated whole (one intonation); a very long one in pieces at sentence boundaries
+(no longer than max_chars), joined with a short pause. Every piece is transcribed back:
+skips and cut-offs → synthesize again (up to verify.retries times). The transcribed words give the time of every
+word and sentence (align.py) for highlighting on the site.
 
-Статус абзаца: pending — нет дубля для текущего текста и настроек; stale — дубль есть, но текст или
-настройки поменялись; warn — дубль с низкой оценкой; ok; approved — утверждён.
+Paragraph status: pending — no take for the current text and settings; stale — there is a take, but the text or
+settings changed; warn — a take with a low score; ok; approved — approved.
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ DEFAULTS = {
     'gaps': {'heading': 1.4, 'paragraph': 0.8, 'chunk': 0.3},
     'verify': {'enabled': True, 'model': pricing.DEFAULT_VERIFY_MODEL, 'min_score': 0.85, 'retries': 3},
     'sections': [],
-    'mode': 'single',  # single — один голос; roles — по дорожкам голосов (впереди, см. README)
+    'mode': 'single',  # single — one voice; roles — voice tracks per role (later, see README)
 }
 
 _locks: dict[str, threading.Lock] = {}
@@ -50,7 +50,7 @@ def _lock(key: str) -> threading.Lock:
 
 def vdir(slug: str, vid: str) -> Path:
     if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', vid or ''):
-        raise KeyError(f'нет озвучки {vid}')
+        raise KeyError(f'no narration {vid}')
     return config.text_dir(slug) / 'voicings' / vid
 
 
@@ -64,7 +64,7 @@ def _merge(base: dict, patch: dict) -> dict:
 def settings(slug: str, vid: str) -> dict:
     v = config.read_json(vdir(slug, vid) / 'voicing.json')
     if v is None:
-        raise KeyError(f'нет озвучки {vid}')
+        raise KeyError(f'no narration {vid}')
     v = _merge(DEFAULTS, v)
     v['id'] = vid
     v['instructions'] = v['instructions'] or pricing.DEFAULT_INSTRUCTIONS.get(v['lang'], '')
@@ -99,13 +99,14 @@ def update(slug: str, vid: str, patch: dict) -> dict:
     return settings(slug, vid)
 
 
-# ---------------------------------------------------------------- план: абзацы и их статус
+# ---------------------------------------------------------------- plan: paragraphs and their status
 
 def with_manner(v: dict, ov: dict | None) -> dict:
-    """Манера абзаца (правка из админки: эпиграф — проще, письмо — тише…) дописывается к общей манере озвучки."""
+    """A paragraph's manner (an edit from the admin: an epigraph — plainer, a letter — quieter…) is appended to the narration's manner."""
     manner = (ov or {}).get('manner')
+    # the lead is Russian-language data for Russian takes: changing it makes every Russian take stale
     lead = 'This passage:' if v.get('lang') == 'en' else 'Этот фрагмент:'
-    if (ov or {}).get('max_chars'):  # длинный абзац, на котором модель сбоит, — куски покороче (по предложениям)
+    if (ov or {}).get('max_chars'):  # a long paragraph the model stumbles on — shorter pieces (by sentence)
         v = {**v, 'max_chars': int(ov['max_chars'])}
     return {**v, 'instructions': f"{v['instructions']} {lead} {manner}"} if manner else v
 
@@ -116,8 +117,8 @@ def _key(v: dict, speech: str) -> str:
 
 
 def passed(score: float | None, words: int, tail: bool | None, min_score: float) -> bool:
-    """Дубль годен: конец не оборван и совпадение не ниже порога или расходится не больше одного слова
-    (в коротком абзаце одно «не так» распознанное слово — числа, имена — не повод переделывать)."""
+    """A take is good: the end is not cut off and the match is at or above the threshold, or at most one word differs
+    (in a short paragraph one "wrongly" transcribed word — numbers, names — is no reason to redo it)."""
     if score is None:
         return True
     misses = round((1 - score) * words)
@@ -125,12 +126,12 @@ def passed(score: float | None, words: int, tail: bool | None, min_score: float)
 
 
 def chunks(speech: str, max_chars: int) -> list[str]:
-    """Текст абзаца → куски по границам предложений, каждый не длиннее max_chars (если можно)."""
+    """Paragraph text → pieces at sentence boundaries, each no longer than max_chars (when possible)."""
     if len(speech) <= max_chars:
         return [speech]
     sents = [speech[a:b] for a, b in text.split_sentences(speech)]
-    n = -(-len(speech) // max_chars)  # сколько кусков нужно
-    target = len(speech) / n          # куски примерно поровну
+    n = -(-len(speech) // max_chars)  # how many pieces are needed
+    target = len(speech) / n          # pieces of roughly equal length
     out, cur = [], ''
     for s in sents:
         if cur and (len(cur) + 1 + len(s) > max_chars or len(cur) >= target):
@@ -159,12 +160,12 @@ def selected_take(st: dict) -> dict | None:
 
 
 def plan(slug: str, vid: str, sections: list[str] | None = None) -> dict:
-    """Список работ: разделы → абзацы с текстом для озвучки, ключом и статусом."""
+    """The work list: sections → paragraphs with the text to narrate, the key and the status."""
     v = settings(slug, vid)
     b = config.story(slug)
     prep = prepare.load(slug, v['lang'])
     if not prep:
-        raise RuntimeError('история не подготовлена: сначала make prepare')
+        raise RuntimeError('the story is not prepared: run make prepare first')
     ov = prepare.overrides(slug, v['lang'])
     want = sections or v['sections'] or [s['id'] for s in prep['sections']]
     out = []
@@ -195,7 +196,7 @@ def plan(slug: str, vid: str, sections: list[str] | None = None) -> dict:
                 'edited': bool(o.get('speech')), 'manner': o.get('manner', ''), 'chars': len(speech), 'chunks': len(chunks(speech, with_manner(v, o)['max_chars'])),
                 'key': key, 'status': status, 'approved': bool(st.get('approved')),
                 'selected': st.get('selected'), 'takes': [_take_brief(slug, vid, t) for t in st.get('takes', [])],
-                # для проверки подсветки в админке: слова абзаца и их время в выбранном дубле
+                # for checking the highlighting in the admin: the paragraph's words and their times in the selected take
                 'words': p['words'], 'times': take['words'] if take else None,
             })
         out.append({'id': s['id'], 'title': s['title'], 'items': items})
@@ -227,7 +228,7 @@ def summary(slug: str, vid: str) -> dict:
 
 
 def chars_per_sec(slug: str, vid: str) -> float | None:
-    """Темп по готовым дублям (для точной оценки остального)."""
+    """The pace from finished takes (for an accurate estimate of the rest)."""
     d = vdir(slug, vid) / 'items'
     chars = sec = 0.0
     if d.exists():
@@ -249,16 +250,16 @@ def estimate(slug: str, vid: str, sections: list[str] | None = None, only_missin
     n = sum(it['chunks'] for it in todo)
     est = pricing.estimate(v['model'], chars, v['lang'], v['instructions'], n, v['verify']['enabled'],
                            chars_per_sec(slug, vid))
-    # повторы при неудачной проверке — запас ~10%
+    # retries after a failed check — a ~10% margin
     est['total_with_retries'] = round(est['total'] * 1.1, 4)
     est['items'] = len(todo)
     return est
 
 
-# ---------------------------------------------------------------- генерация дубля
+# ---------------------------------------------------------------- generating a take
 
 def _transcribe(pcm: bytes, v: dict, log=print, tries: int = 3) -> tuple[dict, float]:
-    """Распознать звук; сбитые метки времени слов (align.timing_ok) — распознать ещё раз (до tries)."""
+    """Transcribe the audio; broken word timings (align.timing_ok) — transcribe again (up to tries)."""
     ver, cost, best = v['verify'], 0.0, None
     with tempfile.TemporaryDirectory() as tmp:
         f = Path(tmp) / 'chunk.flac'
@@ -269,12 +270,12 @@ def _transcribe(pcm: bytes, v: dict, log=print, tries: int = 3) -> tuple[dict, f
             best = best or rec
             if align.timing_ok(rec.get('words') or []):
                 return rec, cost
-            log(f'  ⚠ сбитые метки времени слов — распознаю ещё раз ({k + 1})')
+            log(f'  ⚠ broken word timings — transcribing again ({k + 1})')
     return best, cost
 
 
 def _word_times(para: dict, rec_words: list[dict], pcm: bytes) -> list[list[float]]:
-    """Время слов абзаца: по распознаванию; если метки так и остались сбитыми — по паузам в звуке."""
+    """A paragraph's word timings: from the transcription; if the marks stay broken — from pauses in the audio."""
     src = [para['text'][a:b] for a, b in para['words']]
     times, _, _ = align.align(src, rec_words, audio.dur(pcm))
     if align.bad_spans(times) or not align.timing_ok(rec_words):
@@ -283,7 +284,7 @@ def _word_times(para: dict, rec_words: list[dict], pcm: bytes) -> list[list[floa
 
 
 def retime(slug: str, vid: str, pid: str, log=print) -> dict:
-    """Заново разметить время слов выбранного дубля (без синтеза): распознать его звук ещё раз."""
+    """Re-mark the word timings of the selected take (no synthesis): transcribe its audio again."""
     v = settings(slug, vid)
     prep = prepare.load(slug, v['lang'])
     para = next(p for s in prep['sections'] for p in s['paragraphs'] if p['id'] == pid)
@@ -300,10 +301,10 @@ def retime(slug: str, vid: str, pid: str, log=print) -> dict:
 
 
 def synth_chunk(v: dict, speech: str, log=print) -> tuple[bytes, dict | None, dict]:
-    """Кусок текста → (pcm, распознавание, стоимость). С проверкой и повторами."""
+    """A piece of text → (pcm, transcription, cost). With checking and retries."""
     ver = v['verify']
     tries = max(1, int(ver.get('retries', 3))) if ver['enabled'] else 1
-    best, cost = None, {}  # лучшая попытка; стоимость — всех попыток
+    best, cost = None, {}  # the best attempt; cost — of all attempts
     for attempt in range(1, tries + 1):
         raw, ctype = openrouter.speech(speech, model=v['model'], voice=v['voice'], instructions=v['instructions'],
                                        speed=v['speed'])
@@ -322,19 +323,19 @@ def synth_chunk(v: dict, speech: str, log=print) -> tuple[bytes, dict | None, di
             best = (rank, pcm, rec)
         if passed(score, len(words), tail, ver['min_score']):
             break
-        log(f'  ⚠ попытка {attempt}: совпадение {score}{"" if tail else ", оборван конец"}')
+        log(f'  ⚠ attempt {attempt}: match {score}{"" if tail else ", end cut off"}')
     best[2]['attempts'] = attempt
     return best[1], best[2], cost
 
 
 def generate_item(slug: str, vid: str, pid: str, *, force: bool = False, log=print) -> dict:
-    """Новый дубль абзаца (если нет дубля для текущего текста и настроек, или force)."""
+    """A new take of a paragraph (if there is no take for the current text and settings, or force)."""
     v = settings(slug, vid)
     b = config.story(slug)
     prep = prepare.load(slug, v['lang'])
     para = next((p for s in prep['sections'] for p in s['paragraphs'] if p['id'] == pid), None)
     if para is None:
-        raise KeyError(f'нет абзаца {pid}')
+        raise KeyError(f'no paragraph {pid}')
     o = prepare.overrides(slug, v['lang']).get(pid)
     speech = prepare.speech_text(b, para, o)
     v = with_manner(v, o)
@@ -364,7 +365,7 @@ def generate_item(slug: str, vid: str, pid: str, *, force: bool = False, log=pri
         src_words = [para['text'][a:c] for a, c in para['words']]
         if rec_words:
             times = _word_times(para, rec_words, pcm_all)
-        else:  # без проверки — время слов по доле текста
+        else:  # no check — word timings by text share
             times = _proportional(para, sec)
         n = max([t['n'] for t in st['takes']], default=0) + 1
         fname = f'{pid}-{n}.opus'
@@ -396,7 +397,7 @@ def set_item(slug: str, vid: str, pid: str, *, selected: int | None = None, appr
         st = item_state(slug, vid, pid)
         if selected is not None:
             if not any(t['n'] == selected for t in st['takes']):
-                raise KeyError(f'нет дубля {selected}')
+                raise KeyError(f'no take {selected}')
             if selected != st.get('selected'):
                 st['approved'] = False
             st['selected'] = selected
@@ -420,12 +421,12 @@ def delete_take(slug: str, vid: str, pid: str, n: int) -> dict:
         return st
 
 
-# ---------------------------------------------------------------- дорожка раздела (для сайта)
+# ---------------------------------------------------------------- the section track (for the site)
 
 def section_track(slug: str, vid: str, sid: str, *, require_all: bool = True, with_audio: bool = True) -> tuple[bytes, dict] | None:
-    """Склейка выбранных дублей раздела → (pcm, разметка времени: абзацы, предложения, слова).
-    None — если не у всех абзацев есть актуальный дубль (require_all). with_audio=False — только разметка
-    (длительности дублей — из данных, звук не декодируется; pcm — пустой, но той же длины по времени)."""
+    """Joins the selected takes of a section → (pcm, timing marks: paragraphs, sentences, words).
+    None if not every paragraph has a current take (require_all). with_audio=False — only the marks
+    (take durations come from the data, no audio is decoded; pcm is empty but of the same length in time)."""
     pl = plan(slug, vid, [sid])
     if not pl['sections']:
         return None
