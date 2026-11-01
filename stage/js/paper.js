@@ -1,6 +1,6 @@
-// Бумага: фактура (цвет/рельеф), заглушки ассетов до генерации и процедурные карточки
-// (звёзды-проколы, экран теней, лист с «10», шахматная вырезка, бумажный «?», свечение).
-// Всё детерминировано (seed) — кадр N всегда одинаковый.
+// Paper: texture (colour/relief), asset placeholders before generation and procedural cards
+// (pin-prick stars, the shadow screen, the sheet with "10", the chess cut-out, the paper "?", the glow).
+// Everything is deterministic (seed) — frame N is always the same.
 import * as THREE from 'three';
 
 export function rng(seed) {
@@ -25,15 +25,15 @@ function canvas(w, h) {
   return c;
 }
 
-// ---------------------------------------------------------------- фактура бумаги
+// ---------------------------------------------------------------- paper texture
 
 let _paper = null;
-// Рельеф волокон: шум + короткие волокна → normal map; общий для всех карточек.
+// Fibre relief: noise + short fibres → a normal map; shared by all cards.
 export function paperTextures() {
   if (_paper) return _paper;
   const N = 512, r = rng(7);
   const hgt = new Float32Array(N * N);
-  // крупная зернистость картона
+  // the coarse grain of cardboard
   for (let o = 0; o < 4; o++) {
     const step = 64 >> o, amp = 0.5 / (o + 1);
     const g = [];
@@ -47,7 +47,7 @@ export function paperTextures() {
       hgt[y * N + x] += v * amp;
     }
   }
-  // волокна
+  // fibres
   for (let k = 0; k < 2600; k++) {
     let x = r() * N, y = r() * N;
     const a = r() * Math.PI, len = 6 + r() * 22, d = (r() - 0.5) * 0.35;
@@ -81,9 +81,9 @@ export function paperTextures() {
   return _paper;
 }
 
-// ---------------------------------------------------------------- заглушки
+// ---------------------------------------------------------------- placeholders
 
-const PX = 40; // пикселей на сантиметр заглушки
+const PX = 40; // pixels per centimetre of a placeholder
 
 function shade(hex, k) {
   const c = new THREE.Color(hex || '#888888');
@@ -92,7 +92,7 @@ function shade(hex, k) {
 }
 
 function cutPath(ctx, draw, w, h, border) {
-  // белая кромка «ножниц»: обводка той же формы толще + заливка
+  // the white "scissors" rim: a thicker outline of the same shape + a fill
   ctx.save();
   ctx.lineJoin = 'round';
   ctx.strokeStyle = '#f4efe4';
@@ -149,7 +149,7 @@ function label(ctx, w, h, text, color) {
   ctx.restore();
 }
 
-// Заглушка ассета: силуэт / прямоугольник с подписью — видно композицию до генерации картинок.
+// An asset placeholder: a silhouette / rectangle with a label — the composition is visible before the pictures are generated.
 export function placeholder(key, spec) {
   const hcm = spec.size ? spec.size[1] : (spec.h || 10);
   const wcm = spec.size ? spec.size[0] : hcm * (spec.aspect || 1);
@@ -170,7 +170,7 @@ export function placeholder(key, spec) {
     ctx.strokeRect(6, 6, w - 12, h - 12);
     label(ctx, w, h, spec.label || key, 'rgba(255,245,230,.75)');
   } else {
-    const border = Math.max(3, Math.min(w * 0.025, h * 0.06)); // от меньшей стороны: длинные граунд-ряды тоже
+    const border = Math.max(3, Math.min(w * 0.025, h * 0.06)); // from the shorter side: long ground rows too
     const pad = border * 1.6;
     ctx.translate(pad, pad);
     const iw = w - pad * 2, ih = h - pad * 2;
@@ -186,14 +186,14 @@ export function placeholder(key, spec) {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     if (kind !== 'silhouette') label(ctx, w, h, spec.label || key, 'rgba(255,250,240,.9)');
   }
-  if (spec.hole) { // окно / дверной проём — насквозь
+  if (spec.hole) { // a window / doorway — see-through
     const [x0, y0, x1, y1] = spec.hole;
     ctx.clearRect(x0 * w, (1 - y1) * h, (x1 - x0) * w, (y1 - y0) * h);
   }
   return c;
 }
 
-// ---------------------------------------------------------------- процедурные карточки
+// ---------------------------------------------------------------- procedural cards
 
 function sheet(spec) {
   const w = 720, h = Math.round(720 / (spec.aspect || 0.72));
@@ -203,7 +203,7 @@ function sheet(spec) {
   ctx.strokeStyle = 'rgba(120,140,170,.25)'; ctx.lineWidth = 2;
   for (let y = 120; y < h; y += 46) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
   if (spec.text) {
-    // карандаш: графит, неровный нажим
+    // pencil: graphite, uneven pressure
     ctx.save();
     ctx.translate(w * 0.5, h * 0.52);
     ctx.rotate(-0.06);
@@ -217,7 +217,7 @@ function sheet(spec) {
   }
   if (spec.crumbs) {
     ctx.fillStyle = 'rgba(80,80,90,.10)';
-    ctx.fillRect(w * 0.22, h * 0.32, w * 0.56, h * 0.4); // след стёртого
+    ctx.fillRect(w * 0.22, h * 0.32, w * 0.56, h * 0.4); // the trace of an erasure
     for (let k = 0; k < 90; k++) {
       ctx.fillStyle = `rgba(${170 + r() * 40},${120 + r() * 30},${120 + r() * 30},.9)`;
       ctx.beginPath(); ctx.ellipse(w * (0.2 + r() * 0.6), h * (0.3 + r() * 0.5), 3 + r() * 6, 2 + r() * 3, r() * 3, 0, 7); ctx.fill();
@@ -232,7 +232,7 @@ function chess(spec) {
   const w = 900, h = Math.round(900 / (spec.aspect || 0.78));
   const c = canvas(w, h), ctx = c.getContext('2d');
   ctx.fillStyle = '#ebe2cf'; ctx.fillRect(0, 0, w, h);
-  // неровный край вырезки
+  // the uneven edge of the cut-out
   ctx.globalCompositeOperation = 'destination-in';
   ctx.beginPath();
   const r = rng(11);
@@ -250,7 +250,7 @@ function chess(spec) {
   const S = 680, x0 = (w - S) / 2, y0 = 175, q = S / 8;
   ctx.strokeStyle = '#1d1a16'; ctx.lineWidth = 5; ctx.strokeRect(x0, y0, S, S);
   for (let i = 0; i < 8; i++) for (let j = 0; j < 8; j++) {
-    if ((i + j) % 2 === 1) { // тёмные поля — штриховка, как в журнальной диаграмме
+    if ((i + j) % 2 === 1) { // dark squares — hatching, as in a magazine diagram
       ctx.save(); ctx.beginPath(); ctx.rect(x0 + i * q, y0 + j * q, q, q); ctx.clip();
       ctx.strokeStyle = '#3a342c'; ctx.lineWidth = 2;
       for (let d = -q; d < q * 2; d += 8) { ctx.beginPath(); ctx.moveTo(x0 + i * q + d, y0 + j * q); ctx.lineTo(x0 + i * q + d - q, y0 + j * q + q); ctx.stroke(); }
@@ -302,7 +302,7 @@ function screenTex(spec) {
 function glowTex(spec) {
   const N = 256, c = canvas(N, N), ctx = c.getContext('2d');
   const col = new THREE.Color(spec.color || '#ffcf8a');
-  if (spec.size && spec.size[0] !== spec.size[1] && spec.size[0] > 1) { // дверной проём — ровный свет с мягким краем
+  if (spec.size && spec.size[0] !== spec.size[1] && spec.size[0] > 1) { // a doorway — even light with a soft edge
     ctx.fillStyle = '#' + col.getHexString(); ctx.fillRect(0, 0, N, N);
     return c;
   }
@@ -312,14 +312,14 @@ function glowTex(spec) {
   return c;
 }
 
-// интертитр немого кино: тёмная карточка, двойная рамка с уголками, текст кремовым шрифтом сцены.
-// spec.text — текст (big — крупно: номер главы), spec.attr — подпись (эпиграф), spec.lines — заглавие [автор, название]
-// интертитр русского авангарда 1918 (look: suprematist): белое поле, супрематические фигуры, рубленый шрифт
-// заглавными, строки лесенкой с наклоном; у глав — огромная цифра и своя композиция из красного и чёрного
+// a silent-film intertitle: a dark card, a double frame with corners, the text in the scene's cream font.
+// spec.text — the text (big — large: a chapter number), spec.attr — an attribution (an epigraph), spec.lines — the title [author, title]
+// an intertitle of the 1918 Russian avant-garde (look: suprematist): a white field, suprematist shapes, a blocky typeface
+// in capitals, lines stepped like a ladder and tilted; chapters get a huge numeral and their own composition in red and black
 function suprematistCard(spec) {
   const w = 1920, h = Math.round(1920 * (spec.size ? spec.size[1] / spec.size[0] : 9 / 16));
   const c = canvas(w, h), x = c.getContext('2d');
-  const RED = '#c8281e', BLACK = '#151413', PAPER = '#f3efe4', GREEN = '#2f8f4e';  // зелёный — по элементу на карточку: лист
+  const RED = '#c8281e', BLACK = '#151413', PAPER = '#f3efe4', GREEN = '#2f8f4e';  // green — one element per card: the leaf
   x.fillStyle = PAPER; x.fillRect(0, 0, w, h);
   const sans = px => `600 ${px}px "Stage Sans", "Golos Text", Arial, sans-serif`;
   const rect = (cx, cy, rw, rh, deg, col) => { x.save(); x.translate(cx, cy); x.rotate(deg * Math.PI / 180); x.fillStyle = col; x.fillRect(-rw / 2, -rh / 2, rw, rh); x.restore(); };
@@ -330,12 +330,12 @@ function suprematistCard(spec) {
     if (x.letterSpacing !== undefined) x.letterSpacing = `${track}px`;
     x.fillText(s, 0, 0); x.restore();
   };
-  const u = Math.min(w, h), tall = h > w;  // размеры — от меньшей стороны; вертикаль — своя раскладка
-  if (spec.lines) { // заглавная: автор (красный, в разрядку), название лесенкой, чёрный квадрат и красный круг
+  const u = Math.min(w, h), tall = h > w;  // sizes from the shorter side; vertical — its own layout
+  if (spec.lines) { // the title card: the author (red, letter-spaced), the title as a ladder, a black square and a red circle
     if (tall) { rect(w * 0.66, h * 0.17, u * 0.5, u * 0.5, 12, GREEN); disc(w * 0.22, h * 0.86, u * 0.14, RED); rect(w * 0.5, h * 0.75, w * 1.1, u * 0.012, -6, BLACK); }
     else { rect(w * 0.86, h * 0.3, u * 0.42, u * 0.42, 12, GREEN); disc(w * 0.9, h * 0.8, u * 0.11, RED); rect(w * 0.4, h * 0.88, w * 0.7, u * 0.012, -6, BLACK); }
     const words = (spec.lines[1] || '').toUpperCase().split(/\s+/);
-    const lim = Math.max(15, ...words.map(wd => wd.length)), rows = [];  // строки лесенкой — по длине (≤ 15 знаков)
+    const lim = Math.max(15, ...words.map(wd => wd.length)), rows = [];  // ladder lines — by length (≤ 15 chars)
     for (const wd of words) { if (rows.length && (rows[rows.length - 1] + ' ' + wd).length <= lim) rows[rows.length - 1] += ' ' + wd; else rows.push(wd); }
     const x0 = w * 0.08, top = tall ? h * 0.47 : h * 0.4, maxW = (tall ? 0.84 : 0.6) * w - rows.length * u * 0.05;
     let px = u * (tall ? 0.16 : 0.15);
@@ -345,7 +345,7 @@ function suprematistCard(spec) {
     rows.forEach((r, i) => text(r, x0 + i * u * 0.05, top + i * px * 1.12, px, -6, BLACK));
     return c;
   }
-  if (spec.big) { // глава: огромная цифра; композиция — своя для каждой главы
+  if (spec.big) { // a chapter: a huge numeral; a composition of its own for each chapter
     const n = (spec.text || '').length;
     const comp = [
       () => { rect(w * 0.5, h * 0.55, Math.hypot(w, h) * 1.1, u * 0.07, tall ? -60 : -18, RED); disc(w * 0.78, h * 0.25, u * 0.09, GREEN); },
@@ -380,7 +380,7 @@ function titleCard(spec) {
   const m = h * 0.07, m2 = m + 14;
   ctx.lineWidth = 4; ctx.strokeRect(m, m, w - 2 * m, h - 2 * m);
   ctx.lineWidth = 1.5; ctx.strokeRect(m2, m2, w - 2 * m2, h - 2 * m2);
-  for (const [x, y] of [[m, m], [w - m, m], [m, h - m], [w - m, h - m]]) { // уголки: ромб и завиток
+  for (const [x, y] of [[m, m], [w - m, m], [m, h - m], [w - m, h - m]]) { // the corners: a rhombus and a curl
     ctx.save(); ctx.translate(x, y); ctx.rotate(Math.PI / 4);
     ctx.fillRect(-11, -11, 22, 22);
     ctx.restore();
@@ -389,12 +389,12 @@ function titleCard(spec) {
     ctx.save(); ctx.translate(w / 2, y); ctx.rotate(Math.PI / 4); ctx.fillRect(-7, -7, 14, 14); ctx.restore(); };
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
   const font = (px, it) => `${it ? 'italic ' : ''}${px}px "Paper Serif", Georgia, serif`;
-  if (spec.lines) { // заглавная карточка: автор, линейка, название
+  if (spec.lines) { // the title card: the author, a rule, the title
     ctx.font = font(h * 0.055); ctx.fillText(spec.lines[0] || '', w / 2, h * 0.36);
     rule(h * 0.45, w * 0.12);
     let px = h * 0.1;
     ctx.font = font(px);
-    px *= Math.min(1, w * 0.74 / Math.max(1, ctx.measureText(spec.lines[1] || '').width)); // длинное название — мельче, в рамку
+    px *= Math.min(1, w * 0.74 / Math.max(1, ctx.measureText(spec.lines[1] || '').width)); // a long title — smaller, to fit the frame
     ctx.font = font(px); ctx.fillText(spec.lines[1] || '', w / 2, h * 0.57);
     return c;
   }
@@ -427,7 +427,7 @@ export function procedural(spec) {
     case 'question': return question(spec);
     case 'screen': return screenTex(spec);
     case 'glow': return glowTex(spec);
-    case 'shape': case 'trace': return canvas(2, 2);  // рисует сцена (geometry.js)
+    case 'shape': case 'trace': return canvas(2, 2);  // drawn by the stage (geometry.js)
     case 'stars': { const c = canvas(8, 8); const x = c.getContext('2d'); x.fillStyle = '#020203'; x.fillRect(0, 0, 8, 8); return c; }
     default: return null;
   }

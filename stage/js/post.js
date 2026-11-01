@@ -1,9 +1,9 @@
-// Постобработка: глубина резкости (своя, с учётом альфы вырезок — у BokehPass прозрачные поля карточек
-// портят глубину) и «плёнка» после тонмаппинга: виньетка лампы, зерно, лёгкая хроматика по краям.
+// Post-processing: depth of field (our own, aware of the cut-outs' alpha — BokehPass lets the transparent margins of cards
+// spoil the depth) and "film" after tone mapping: the lamp's vignette, grain, slight chromatic aberration at the edges.
 import * as THREE from 'three';
 import { Pass, FullScreenQuad } from '../vendor/three/examples/jsm/postprocessing/Pass.js';
 
-// глубина пишется как 1/расстояние (см⁻¹): пустота (очистка нулём) — бесконечно далеко; вырезки — по альфе карты
+// depth is written as 1/distance (cm⁻¹): emptiness (cleared to zero) is infinitely far; cut-outs — by the map's alpha
 export function depthMaterial(map) {
   return new THREE.ShaderMaterial({
     uniforms: { map: { value: map }, useMap: { value: map ? 1 : 0 } },
@@ -43,10 +43,10 @@ const DOF_FRAG = `
       vec2 uv = vUv + off * texel;
       float d = 1.0 / max(texture2D(tDepth, uv).r, 1e-5);
       float c = coc(d);
-      if (d > d0) c = min(c, c0 * 2.0);          // резкое переднее не «протекает» назад
+      if (d > d0) c = min(c, c0 * 2.0);          // a sharp foreground doesn't "leak" backwards
       float w = smoothstep(r - 1.5, r + 0.5, c);
       vec3 col = texture2D(tColor, uv).rgb;
-      w *= 1.0 + 0.6 * max(0.0, dot(col, vec3(0.3, 0.59, 0.11)) - 0.8); // яркие точки — заметнее боке
+      w *= 1.0 + 0.6 * max(0.0, dot(col, vec3(0.3, 0.59, 0.11)) - 0.8); // bright points — more visible bokeh
       acc += vec4(col * w, w);
     }
     gl_FragColor = vec4(acc.rgb / acc.a, 1.0);
@@ -102,8 +102,8 @@ export const GradeShader = {
   uniforms: { tDiffuse: { value: null }, vignette: { value: 0.55 }, grain: { value: 0.045 }, seed: { value: 0 },
     texel: { value: new THREE.Vector2() }, aberration: { value: 0.18 },
     saturation: { value: 1 }, tint: { value: new THREE.Color(1, 1, 1) }, flicker: { value: 0 },
-    // немое кино и автохром (по умолчанию выключены): цветное крахмальное зерно и мягкость пластинки, царапины
-    // и пыль плёнки, «дыхание» кадра в фильмовом канале, диафрагма-ирис (радиус от центра, доля полудиагонали)
+    // silent cinema and autochrome (off by default): coloured starch grain and the softness of the plate, scratches
+    // and film dust, the frame "breathing" in the film channel, an iris (radius from the centre, a share of the half-diagonal)
     autochrome: { value: 0 }, scratches: { value: 0 }, dust: { value: 0 }, weave: { value: new THREE.Vector2() },
     iris: { value: 10 }, irisCenter: { value: new THREE.Vector2(0.5, 0.5) } },
   vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
@@ -125,7 +125,7 @@ export const GradeShader = {
       vec2 ab = c * r2 * aberration * texel * 60.0;
       vec3 col = samp(uv, ab);
       if (autochrome > 0.0) {
-        // мягкость пластинки: лёгкое размытие; крахмальные зёрна — оранжевые, зелёные, фиолетовые светофильтры
+        // the softness of the plate: a slight blur; starch grains — orange, green, violet filters
         vec3 soft = (samp(uv + texel * vec2(1.5, 0.0), ab) + samp(uv - texel * vec2(1.5, 0.0), ab)
                    + samp(uv + texel * vec2(0.0, 1.5), ab) + samp(uv - texel * vec2(0.0, 1.5), ab)) * 0.25;
         col = mix(col, soft, 0.6 * autochrome);
@@ -133,11 +133,11 @@ export const GradeShader = {
         float h = hash(cell * 0.013);
         vec3 starch = h < 0.34 ? vec3(1.18, 0.86, 0.72) : (h < 0.67 ? vec3(0.82, 1.12, 0.8) : vec3(0.86, 0.8, 1.2));
         col = mix(col, col * starch, 0.32 * autochrome);
-        col = mix(col, col * 0.86 + vec3(0.075, 0.07, 0.06), 0.55 * autochrome); // пастель: приподнятые тени
+        col = mix(col, col * 0.86 + vec3(0.075, 0.07, 0.06), 0.55 * autochrome); // pastel: lifted shadows
       }
       col = mix(vec3(dot(col, vec3(0.299, 0.587, 0.114))), col, saturation) * tint * (1.0 + flicker * 0.06);
       col *= 1.0 - vignette * smoothstep(0.08, 0.62, r2 * 1.6);
-      if (scratches > 0.0) { // 0–3 вертикальные царапины на кадр: тонкие, светлые (по эмульсии) или тёмные
+      if (scratches > 0.0) { // 0–3 vertical scratches per frame: thin, light (on the emulsion) or dark
         for (int i = 0; i < 3; i++) {
           float fi = float(i);
           if (hash1(fi + 1.0) > scratches * 0.6) continue;
@@ -148,7 +148,7 @@ export const GradeShader = {
           col = mix(col, hash1(fi + 41.0) > 0.5 ? vec3(0.78) : vec3(0.12), clamp(a, 0.0, 1.0) * 0.32);
         }
       }
-      if (dust > 0.0) { // пылинки и волоски на кадре: тёмные пятна, у каждого кадра свои
+      if (dust > 0.0) { // specks and hairs on the frame: dark spots, different in every frame
         for (int i = 0; i < 6; i++) {
           float fi = float(i);
           if (hash1(fi + 51.0) > dust * 0.5) continue;
@@ -159,7 +159,7 @@ export const GradeShader = {
           col *= 1.0 - 0.75 * (1.0 - smoothstep(rad * 0.5, rad, d));
         }
       }
-      if (iris < 2.0) { // ирис: круг от центра, мягкий край; вне — чёрное поле
+      if (iris < 2.0) { // the iris: a circle from the centre, a soft edge; outside — a black field
         vec2 q = (vUv - irisCenter) * vec2(texel.y / texel.x, 1.0);
         float rr = length(q) / length(vec2(0.5 * texel.y / texel.x, 0.5));
         col *= 1.0 - smoothstep(iris - 0.02, iris + 0.01, rr);
