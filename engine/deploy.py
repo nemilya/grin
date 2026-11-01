@@ -1,13 +1,13 @@
-"""Деплой: собранный сайт dist/ → папка на сервере, rsync по ssh (как в coloring-book и nemilya/math).
+"""Deploy: the built site dist/ → a folder on the server, rsync over ssh.
 
-    DEPLOY = ssh://nemilya-me/var/www/grin      (local.mk или .env; или host:/path, или локальная папка)
-    SITE_URL = https://grin.nemilya.me          (необязательно; по умолчанию — site.json → url)
+    DEPLOY = ssh://nemilya-me/var/www/grin      (local.mk or .env; or host:/path, or a local folder)
+    SITE_URL = https://grin.nemilya.me          (optional; defaults to site.json → url)
 
-Два шага: 1) собрать сайт (make site) и посмотреть (make serve); 2) make deploy заливает ровно эту
-сборку — не пересобирает. Если после сборки что-то поменялось (озвучка, текст, раскадровка, ассеты,
-site.json, сцена), деплой откажется: на сервер уходит то, что видели. Сначала медиа и ресурсы (без удаления),
-потом страницы с --delete: новая страница никогда не ссылается на ещё не залитый звук. Все шаги — одно
-ssh-соединение (ControlMaster): пароль, если нужен, спросят один раз.
+Two steps: 1) build the site (make site) and look at it (make serve); 2) make deploy uploads exactly that
+build — it doesn't rebuild. If anything changed after the build (narration, text, storyboard, assets,
+site.json, the stage), deploy refuses: what goes to the server is what was seen. Media and resources first (no deletion),
+then pages with --delete: a new page never links to sound that isn't uploaded yet. All steps share one
+ssh connection (ControlMaster): a password, if needed, is asked once.
 """
 from __future__ import annotations
 
@@ -21,8 +21,8 @@ from pathlib import Path
 from . import config
 
 RSYNC = ['rsync', '-rlptz', '--itemize-changes', '--exclude', '.DS_Store', '--exclude', '.build.json']
-NO_PASSWORD = ('Сервер спросил пароль, а ввести его некуда. Запустите в консоли  make deploy  '
-               '(пароль спросят один раз) или поставьте ssh-ключ:  ssh-copy-id {host}')
+NO_PASSWORD = ('The server asked for a password and there is nowhere to type it. Run  make deploy  in a terminal '
+               '(the password is asked once) or install an ssh key:  ssh-copy-id {host}')
 
 
 class DeployError(RuntimeError):
@@ -30,22 +30,22 @@ class DeployError(RuntimeError):
 
 
 def target() -> str:
-    """DEPLOY как его ждёт rsync: ssh://host/path → host:/path; host:/path и локальная папка — как есть."""
+    """DEPLOY as rsync expects it: ssh://host/path → host:/path; host:/path and a local folder — as is."""
     value = (os.environ.get('DEPLOY') or '').strip().rstrip('/')
     if not value:
-        raise DeployError('Нет адреса сервера. Добавьте в local.mk:  DEPLOY = ssh://nemilya-me/var/www/grin')
+        raise DeployError('No server address. Add to local.mk:  DEPLOY = ssh://nemilya-me/var/www/grin')
     m = re.match(r'^s?sh://([^/]+)(/.*)$', value)
     return f'{m.group(1)}:{m.group(2)}' if m else value
 
 
 def remote(dest: str) -> tuple[str, str] | None:
-    """(host, path) для host:/path; None — локальная папка."""
+    """(host, path) for host:/path; None — a local folder."""
     host, sep, path = dest.partition(':')
     return (host, path) if sep and '/' not in host and len(host) > 1 else None
 
 
 def site_state() -> str:
-    """none — не собран; stale — после сборки что-то менялось; fresh — можно заливать."""
+    """none — not built; stale — something changed after the build; fresh — ready to upload."""
     built_f = config.DIST / '.build.json'
     if not built_f.exists() or not (config.DIST / 'index.html').exists():
         return 'none'
@@ -70,11 +70,11 @@ def site_state() -> str:
 
 
 class Ssh:
-    """Одно ssh-соединение на все шаги. interactive=False (админка): пароль не спрашивать, сразу совет."""
+    """One ssh connection for all steps. interactive=False (admin): don't ask for a password, give advice right away."""
 
     def __init__(self, host: str | None, interactive: bool):
         self.host, self.interactive = host, interactive
-        # /tmp: путь к сокету должен быть коротким (macOS — ~104 знака)
+        # /tmp: the socket path must be short (macOS — ~104 chars)
         self.dir = tempfile.mkdtemp(prefix='grin-ssh-', dir='/tmp') if host else None
         self.opts = (['-o', 'ControlMaster=auto', '-o', f'ControlPath={self.dir}/%C', '-o', 'ControlPersist=120']
                      + ([] if interactive else ['-o', 'BatchMode=yes'])) if host else []
@@ -85,7 +85,7 @@ class Ssh:
             err = (r.stderr or '').strip()
             if not self.interactive and ('Permission denied' in err or 'password' in err.lower()):
                 raise DeployError(NO_PASSWORD.format(host=self.host))
-            raise DeployError(f'ssh {self.host}: {err or "код " + str(r.returncode)}')
+            raise DeployError(f'ssh {self.host}: {err or "code " + str(r.returncode)}')
 
     def rsync_args(self) -> list[str]:
         return ['-e', 'ssh ' + ' '.join(self.opts)] if self.host else []
@@ -97,9 +97,9 @@ class Ssh:
 
 
 def _rsync(args: list[str], say) -> int:
-    """rsync с выводом изменений; → сколько файлов отправлено / удалено."""
+    """rsync printing the changes; → how many files were sent / deleted."""
     if not shutil.which('rsync'):
-        raise DeployError('Нет rsync: поставьте его (brew install rsync / apt install rsync)')
+        raise DeployError('No rsync: install it (brew install rsync / apt install rsync)')
     say('$ ' + ' '.join(a for a in args if not a.startswith('ssh -o')))
     proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     changed = 0
@@ -108,21 +108,21 @@ def _rsync(args: list[str], say) -> int:
         if line[:2] in ('<f', '>f', '*d') or line.startswith('*deleting'):
             changed += 1
             say('  ' + line)
-        elif line and line[:1] not in ('c', '.'):  # сообщения и ошибки самого rsync
+        elif line and line[:1] not in ('c', '.'):  # rsync's own messages and errors
             say('  ' + line)
     if proc.wait():
-        raise DeployError(f'rsync завершился с кодом {proc.returncode}')
+        raise DeployError(f'rsync exited with code {proc.returncode}')
     return changed
 
 
 def deploy(dry: bool = False, say=print, interactive: bool = True) -> dict:
-    """Залить собранный сайт как есть. dry — только показать, что изменится."""
+    """Upload the built site as is. dry — only show what would change."""
     state = site_state()
     if state != 'fresh':
-        why = ('Сайт ещё не собран' if state == 'none' else
-               'Сайт устарел: после сборки менялись озвучка, текст, раскадровка, ассеты, site.json или сцена')
+        why = ('The site is not built yet' if state == 'none' else
+               'The site is stale: narration, text, storyboard, assets, site.json or the stage changed after the build')
         if not dry:
-            raise DeployError(why + '. Сначала соберите: make site, посмотрите (make serve) — и заливайте.')
+            raise DeployError(why + '. Build it first: make site, look at it (make serve) — then upload.')
         say('⚠ ' + why + ' — make site')
     dest = target()
     where = remote(dest)
@@ -131,21 +131,21 @@ def deploy(dry: bool = False, say=print, interactive: bool = True) -> dict:
     ssh = Ssh(where[0] if where else None, interactive)
     try:
         if where:
-            say(f'Подключаемся к {where[0]}' + (' (если спросит пароль — введите его здесь, один раз)' if interactive else ''))
+            say(f'Connecting to {where[0]}' + (' (if it asks for a password, type it here, once)' if interactive else ''))
             ssh.run('mkdir', '-p', where[1])
         elif not dry:
             Path(dest).mkdir(parents=True, exist_ok=True)
         flags = RSYNC + ssh.rsync_args() + (['--dry-run'] if dry else [])
-        # 1) медиа (слои, таймлайны, звук), озвучка, ресурсы — без удаления: старые страницы продолжают работать
+        # 1) media (layers, timelines, sound), narration, resources — no deletion: old pages keep working
         sent['media'] = _rsync(flags + ['--exclude', '*.html', src, f'{dest}/'], say)
-        # 2) страницы; всё, чего больше нет в dist/, удаляется
+        # 2) pages; everything no longer in dist/ is deleted
         sent['pages'] = _rsync(flags + ['--delete', src, f'{dest}/'], say)
     finally:
         ssh.close()
-    say(('Проверка: изменится' if dry else 'Залито') + f" файлов: звук и ресурсы {sent['media']}, страницы {sent['pages']}")
+    say(('Dry run: would change' if dry else 'Uploaded') + f" files: sound and resources {sent['media']}, pages {sent['pages']}")
     url = os.environ.get('SITE_URL') or config.site_config().get('url')
     if not dry and url:
-        say(f'Сайт: {url}')
+        say(f'Site: {url}')
     return sent
 
 
